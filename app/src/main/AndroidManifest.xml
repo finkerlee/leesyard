@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lijiadayuan.lishijituan">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".LauncherActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".YonghuActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ForgetpasswordActivtiy" />
+        <activity android:name=".ResetpasswordActivity" />
+        <activity android:name=".BaseWebActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".MineActivity" />
+        <activity android:name=".NewsActivity" />
+        <activity android:name=".FindActivity" />
+        <activity android:name=".AddressActivity" />
+        <activity android:name=".AddressItemActivity" />
+        <activity android:name=".ShippingAddressActivity" />
+        <activity android:name=".WheelActivity" />
+        <activity android:name=".SharingResourceActivity" />
+        <activity android:name=".CultureActivity" />
+        <activity android:name=".TicketActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".HeadlineActivity" />
+        <activity android:name=".PhotosActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".LawActivity" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".WechatActivity" />
+        <activity android:name=".TwodActivity" />
+        <activity android:name=".MemberActivity" />
+        <activity android:name=".MywelfareActivity" />
+        <activity android:name=".JoinusActivity" />
+        <activity android:name=".MymessageActivity" />
+        <activity android:name=".ZuxunActivity" />
+        <activity android:name=".CelebrityActivity" />
+        <activity android:name=".ZupuActivity" />
+        <activity android:name=".PaintingActivity" />
+        <activity android:name=".ProductBaseActivity" />
+        <activity android:name=".RedenvelopeActivity" />
+        <activity android:name=".ReddenvelopebaseActivity" />
+        <activity android:name=".ArtActivity"></activity>
+    </application>
+
+</manifest>

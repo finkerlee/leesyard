@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lijiadayuan.lishijituan.ArtActivity">
+<include
+    layout="@layout/common_title"
+    android:id="@+id/include13" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="书法作品"
+        android:textSize="18dp"
+        android:layout_below="@+id/include13"
+        android:padding="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView18" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linearLayout4"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_below="@+id/textView18">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:text="New Button"
+        android:id="@+id/button2"
+        android:layout_weight="1"
+        android:layout_below="@+id/textView18"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:text="New Button"
+        android:id="@+id/button3"
+        android:layout_weight="1"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toRightOf="@+id/button2"
+        android:layout_toEndOf="@+id/button2"
+        android:layout_alignBottom="@+id/button2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:text="New Button"
+        android:id="@+id/button4"
+        android:layout_weight="1"
+        android:layout_alignTop="@+id/button3"
+        android:layout_toRightOf="@+id/button3"
+        android:layout_toEndOf="@+id/button3"
+        android:layout_alignBottom="@+id/button3" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout5">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李雨涵"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_below="@+id/textView18"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李翔"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_alignTop="@+id/button2"
+            android:layout_toRightOf="@+id/button2"
+            android:layout_toEndOf="@+id/button2"
+            android:layout_alignBottom="@+id/button2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李国庆"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_alignTop="@+id/button3"
+            android:layout_toRightOf="@+id/button3"
+            android:layout_toEndOf="@+id/button3"
+            android:layout_alignBottom="@+id/button3" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="绘画作品"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView19" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView19"
+        android:id="@+id/linearLayout6">
+        <com.lijiadayuan.lishijituan.view.CircleTextImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            app:citv_border_width="2dp"
+            app:citv_border_color="#00000000"
+            android:src="@drawable/hugh"
+            />
+        <com.lijiadayuan.lishijituan.view.CircleTextImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:citv_border_width="2dp"
+            android:layout_weight="1"
+            app:citv_border_color="#00000000"
+            android:src="@drawable/hugh"
+            />
+        <com.lijiadayuan.lishijituan.view.CircleTextImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:citv_border_width="2dp"
+            android:layout_weight="1"
+            app:citv_border_color="#00ffffff"
+            android:src="@drawable/hugh"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout6"
+        android:id="@+id/linearLayout7">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李雨涵"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_below="@+id/textView18"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李翔"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_alignTop="@+id/button2"
+            android:layout_toRightOf="@+id/button2"
+            android:layout_toEndOf="@+id/button2"
+            android:layout_alignBottom="@+id/button2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李国庆"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_alignTop="@+id/button3"
+            android:layout_toRightOf="@+id/button3"
+            android:layout_toEndOf="@+id/button3"
+            android:layout_alignBottom="@+id/button3" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="New Button"
+        android:id="@+id/button5"
+        android:layout_below="@+id/linearLayout7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp" />
+</RelativeLayout>

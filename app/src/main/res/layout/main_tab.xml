@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.0"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@drawable/dividerline_maintab" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/main_tab_bar_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                style="@style/main_tab_bottom"
+                android:drawableTop="@drawable/main_home"
+                android:tag="radio_button0"
+                android:text="主页"
+                android:textColor="@color/main_tab_btn_pressed"/>
+
+            <RadioButton
+                style="@style/main_tab_bottom"
+                android:drawableTop="@drawable/main_search"
+                android:tag="radio_button1"
+                android:text="发现"
+                android:textColor="@color/main_tab_btn_pressed"/>
+
+            <RadioButton
+                style="@style/main_tab_bottom"
+                android:drawableTop="@drawable/main_house"
+                android:tag="radio_button2"
+                android:text="最新消息"
+                android:textColor="@color/main_tab_btn_pressed"/>
+
+            <TextView
+                android:id="@+id/tv_popNum"
+                style="@style/wrap"
+                android:layout_marginLeft="-30dip"
+                android:layout_marginTop="-10dip"
+                android:background="@drawable/chat_yellow_bg"
+                android:gravity="center"
+                android:paddingBottom="0dip"
+                android:paddingLeft="4dip"
+                android:paddingRight="4dip"
+                android:paddingTop="0dip"
+                android:text="0"
+                android:textColor="@color/color_white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <RadioButton
+                style="@style/main_tab_bottom"
+                android:drawableTop="@drawable/main_more"
+                android:tag="radio_button3"
+                android:text="我的"
+                android:textSize="10sp"
+                android:textColor="@color/main_tab_btn_pressed"/>
+        </RadioGroup>
+    </LinearLayout>
+
+</TabHost>

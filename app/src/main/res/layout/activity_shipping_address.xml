@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lijiadayuan.lishijituan.ShippingAddressActivity">
+<include
+    android:id="@+id/address_titel"
+    layout="@layout/common_title" />
+    <LinearLayout
+        android:id="@+id/iv_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/back"
+        android:layout_below="@id/address_titel">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/color_white"
+        android:text="请务必填写正确的联系方式和地址,防止宝贝丢失,收货失败,如果有问题请即使联系客服"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_hint"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="收货人姓名"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="收货人手机号"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="邮编(非必填)"/>
+        <EditText
+            android:id="@+id/iv_wheel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="选择/省/市/区"
+            android:focusableInTouchMode="false"
+            android:focusable="false"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="详细地址"/>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_button_color"
+        android:layout_marginBottom="50dp"
+        android:text="保存"
+        android:textColor="@color/main_tab_bar_bg"/>
+</RelativeLayout>

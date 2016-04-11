@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- 广告位 -->
+    <declare-styleable name="CircleFlowIndicator">
+        <attr name="activeColor" format="color" />
+        <attr name="inactiveColor" format="color" />
+        <attr name="radius" format="dimension" />
+		<attr name="centered" format="boolean" />
+		<attr name="fadeOut" format="integer" />
+		<attr name="inactiveType">
+			<flag name="stroke" value="0" />
+			<flag name="fill" value="1" />
+		</attr>
+		<attr name="activeType">
+			<flag name="stroke" value="0" />
+			<flag name="fill" value="1" />
+		</attr>
+		<attr name="circleSeparation" format="dimension" />
+		<attr name="activeRadius" format="dimension" />
+    </declare-styleable>
+
+	<!-- 大院头条 -->
+	<declare-styleable name="ViewFlow">
+        <attr name="sidebuffer" format="integer" />
+    </declare-styleable>
+
+	<!-- 圆形头像 -->
+	<declare-styleable name="CircleTextImageView">
+		<attr name="citv_border_width" format="dimension" />
+		<attr name="citv_border_color" format="color" />
+		<attr name="citv_border_overlay" format="boolean" />
+		<attr name="citv_fill_color" format="color" />
+		<attr name="citv_text_text" format="string"/>
+		<attr name="citv_text_color" format="color"/>
+		<attr name="citv_text_size" format="dimension"/>
+		<attr name="citv_text_padding" format="dimension"/>
+	</declare-styleable>
+
+	<declare-styleable name="roundRectimageview">
+		<attr name="round" format="boolean" />
+		<attr name="cornerRadius" format="dimension" />
+		<attr name="topLeftCornerRadius" format="dimension" />
+		<attr name="topRightCornerRadius" format="dimension" />
+		<attr name="bottomLeftCornerRadius" format="dimension" />
+		<attr name="bottomRightCornerRadius" format="dimension" />
+		<attr name="backgroundcolor" format="color" />
+		<attr name="strokeWidth" format="dimension"/>
+		<attr name="strokeColor" format="color"/>
+	</declare-styleable>
+</resources>

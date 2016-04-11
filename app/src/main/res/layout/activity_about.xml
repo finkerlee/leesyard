@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lijiadayuan.lishijituan.AboutActivity">
+    <include
+        layout="@layout/common_title"
+        android:id="@+id/include5" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:layout_below="@+id/include5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:src="@drawable/about"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="  北京李氏大院是北京李氏集团的控股公司,是国内一家集军警装备,国际安保,国际贸易,工业制造,矿产资源,文化产业,农业发展,工程建设,物流管理,旅游开发,电力,通讯,环保,科技,投资等于一体的多元化企业集团.集团是由李氏企业家作为股东创办的,集成化多元复合的现代大型企业实体.众多李氏企业在集团框架下,为达到资源配置合理,优势充分发挥,市场要素自由流动的目的携手,通过整合资源和对资源的合理利用,减低发展成本和代价,形成规模庞大的企业共同体,提升产业互联,产业共生的能力,一综合性,外向型的理念确立在相关领域的领军地位."
+        android:layout_below="@+id/imageView3"
+        android:textSize="16dp"
+        android:layout_marginTop="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+
+</RelativeLayout>

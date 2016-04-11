@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.lijiadayuan.lishijituan.ReddenvelopebaseActivity">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fadingEdge="none"-->
+        <!--android:fadingEdgeLength="0dp"-->
+        <!--android:overScrollMode="never"-->
+        <!--android:scrollbars="none">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout3">
+            <FrameLayout
+                android:id="@+id/framelayout"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:orientation="vertical">
+
+                <com.lijiadayuan.lishijituan.ViewFlow
+                    android:id="@+id/viewflow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:clipToPadding="true"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="#00000000"
+                    android:gravity="center"
+                    android:padding="3dip"></FrameLayout>
+
+                <com.lijiadayuan.lishijituan.CircleFlowIndicator
+                    android:id="@+id/viewflowindic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:padding="2dip"
+                    app:activeColor="#ff0000"
+                    app:activeType="fill"
+                    app:circleSeparation="20dip"
+                    app:inactiveColor="#ffffff"
+                    app:inactiveType="fill"
+                    app:radius="4dip" />
+
+            </FrameLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="拉菲古堡干红葡萄酒"
+                    android:textSize="18dp"
+                    android:id="@+id/textView14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016年12月31日截止"
+                    android:id="@+id/textView16"
+                    android:layout_alignTop="@+id/textView17"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="产品剩余数量:"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/textView8"
+                    android:layout_alignBaseline="@+id/textView9"
+                    android:layout_alignBottom="@+id/textView9"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/textView9"
+                    android:textColor="#ff0000"
+                    android:layout_marginTop="17dp"
+                    android:layout_below="@+id/textView16"
+                    android:layout_toRightOf="@+id/textView8"
+                    android:layout_toEndOf="@+id/textView8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="份"
+                    android:id="@+id/textView10"
+                    android:layout_alignTop="@+id/textView9"
+                    android:layout_toRightOf="@+id/textView9"
+                    android:layout_toEndOf="@+id/textView9" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#b4b4b4"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_below="@+id/textView14"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/textView17" />
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/rounded_button_color"
+                    android:text="申请领取"
+                    android:textColor="@color/color_white"
+                    android:textAlignment="center"
+                    android:layout_marginRight="26dp"
+                    android:layout_marginEnd="26dp"
+                    android:layout_below="@+id/textView17"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/button"
+                    android:layout_marginTop="5dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    <!--</ScrollView>-->
+<include
+    layout="@layout/common_title_no"
+    android:id="@+id/include12" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#b4b4b4"
+        android:layout_gravity="left|center_vertical"
+        android:id="@+id/textView11"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

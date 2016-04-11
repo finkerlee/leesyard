@@ -1,0 +1,21 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="edittext_margin_left">20dp</dimen>
+    <dimen name="edittext_margin_Right">20dp</dimen>
+    <dimen name="edittext_margin_Top">20dp</dimen>
+    <dimen name="btn_height">40dp</dimen>
+    <dimen name="btn_width">50dp</dimen>
+    <dimen name="margin_12">12.0dip</dimen>
+    <dimen name="vi_margin">15.0dip</dimen>
+    <dimen name="margin_8">8dip</dimen>
+    <!-- 土司或者加载对话框字体大小 -->
+    <dimen name="toast_or_process">14.0sp</dimen>
+    <dimen name="bottom_tab_font_size">12.0sp</dimen>
+    <dimen name="bottom_tab_padding_up">4.0dip</dimen>
+    <dimen name="bottom_tab_padding_drawable">1.0dip</dimen>
+    <dimen name="main_tab_bar_height">48.0dip</dimen>
+
+    <dimen name="advertise_height">50.0dip</dimen>
+</resources>

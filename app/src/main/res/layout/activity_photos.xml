@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#66000000"
+    tools:context="com.lijiadayuan.lishijituan.PhotosActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:layout_alignParentBottom="true">
+
+
+        <TextView
+            android:id="@+id/tv_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="相册上传图片"
+            android:textSize="22sp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:padding="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#b4b4b4"/>
+        <TextView
+            android:id="@+id/tv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="拍照"
+            android:textSize="22sp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:padding="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#b4b4b4"/>
+        <TextView
+            android:id="@+id/iv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:textSize="22sp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:padding="20dp" />
+    </LinearLayout>
+</RelativeLayout>

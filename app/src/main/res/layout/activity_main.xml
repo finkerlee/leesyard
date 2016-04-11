@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:fadingEdgeLength="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/framelayout"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:orientation="vertical">
+
+                <com.lijiadayuan.lishijituan.ViewFlow
+                    android:id="@+id/viewflow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:clipToPadding="true"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="#00000000"
+                    android:gravity="center"
+                    android:padding="3dip"></FrameLayout>
+
+                <com.lijiadayuan.lishijituan.CircleFlowIndicator
+                    android:id="@+id/viewflowindic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:padding="2dip"
+                    app:activeColor="#ff0000"
+                    app:activeType="fill"
+                    app:circleSeparation="20dip"
+                    app:inactiveColor="#ffffff"
+                    app:inactiveType="fill"
+                    app:radius="4dip" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/main_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/framelayout"
+                android:layout_marginTop="5dip"/>
+            <!--<Button-->
+            <!--android:id="@+id/button"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="登录"-->
+            <!--android:textColor="#FF4081"-->
+            <!--android:background="#999999"-->
+            <!--android:layout_marginTop="500dp" />-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/main_notice"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="李氏福利社"
+                    android:textColor="@color/main_tab_btn_pressed" />
+
+                <LinearLayout
+                    android:id="@+id/iv_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/product_1"
+                        android:src="@drawable/rounded_image" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/prdouct_2"
+                        android:src="@drawable/rounded_image" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/product_3"
+                        android:src="@drawable/rounded_image" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/iv_shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_image"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp">
+
+                    <ImageButton
+                        android:id="@+id/imageButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/product_4"
+                        android:src="@drawable/rounded_image" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/product_5"
+                        android:src="@drawable/rounded_image" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/product_6"
+                        android:src="@drawable/rounded_image" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/iv_welfare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_shop"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp">
+
+                    <com.lijiadayuan.lishijituan.view.XCRoundRectImageView
+                        android:id="@+id/iv_ticket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"/>
+
+                    <com.lijiadayuan.lishijituan.view.XCRoundRectImageView
+                        android:id="@+id/iv_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/iv_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_welfare">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="常用工具"
+                        android:textColor="@color/main_tab_btn_pressed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_text"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/iv_culture"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_image"
+                        android:layout_marginRight="2dp"
+                        android:padding="15dp">
+
+                        <ImageButton
+                            android:id="@+id/iv_lishi_culture"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/culture"
+                            android:background="#00ffffff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/iv_rescue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_image"
+                        android:layout_marginRight="2dp"
+                        android:padding="15dp">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/rescue"
+                            android:scaleType="centerInside"
+                            android:background="#00ffffff"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/iv_resource"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_image"
+                        android:layout_marginRight="2dp"
+                        android:padding="15dp">
+
+                        <ImageButton
+                            android:id="@+id/iv_sharing_resource"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/resource"
+                            android:background="#00ffffff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/iv_balacklist"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_image"
+                        android:padding="15dp">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/blacklist"
+                            android:background="#00ffffff"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:background="#00ffffff">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/location" />
+
+            <EditText
+                android:id="@+id/index_search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/search_edittext_shape"
+                android:drawableLeft="@drawable/search_icon"
+                android:hint="  搜索李家大院"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/news" />
+        </RelativeLayout>
+
+</RelativeLayout>
