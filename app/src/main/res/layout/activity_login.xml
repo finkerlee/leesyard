@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
         android:weightSum="1">
 
@@ -78,11 +78,12 @@
             android:layout_marginTop="25dp"
             android:background="@drawable/rounded_edittext"
             android:gravity="center_vertical"
-            android:hint="请输入用户名/手机号"
+            android:hint="@string/login_username"
             android:paddingLeft="10dp"
             android:textColor="#999999"
             android:textColorHint="#999999"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:singleLine="true"/>
 
         <EditText
             android:id="@+id/et_password"
@@ -93,12 +94,13 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_edittext"
             android:gravity="center_vertical"
-            android:hint="请输入密码"
+            android:hint="@string/login_password"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:textColor="#999999"
             android:textColorHint="#999999"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:singleLine="true"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

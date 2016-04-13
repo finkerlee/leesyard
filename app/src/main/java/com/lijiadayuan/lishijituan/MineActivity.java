@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.lijiadayuan.lishijituan.view.CircleTextImageView;
+
 public class MineActivity extends Activity implements View.OnClickListener {
     private RelativeLayout address,dimensional,member,welfare,join,mymessage;
     private ImageView setting;
+    private CircleTextImageView avatar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ public class MineActivity extends Activity implements View.OnClickListener {
         member.setOnClickListener(this);
         join.setOnClickListener(this);
         mymessage.setOnClickListener(this);
+        avatar.setOnClickListener(this);
     }
     protected void findViewById() {
         // TODO Auto-generated method stub
@@ -36,7 +40,8 @@ public class MineActivity extends Activity implements View.OnClickListener {
         welfare= (RelativeLayout) findViewById(R.id.iv_welfare);
         join= (RelativeLayout) findViewById(R.id.iv_us);
         mymessage= (RelativeLayout) findViewById(R.id.iv_mymessage);
- }
+        avatar = (CircleTextImageView) findViewById(R.id.iv_avatar);
+    }
 
     @Override
     public void onClick(View v) {
@@ -64,6 +69,9 @@ public class MineActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.iv_mymessage:
                 startActivity(new Intent(MineActivity.this,MymessageActivity.class));
+                break;
+            case R.id.iv_avatar:
+                startActivity(new Intent(MineActivity.this, LoginActivity.class));
                 break;
             default:
                 break;
