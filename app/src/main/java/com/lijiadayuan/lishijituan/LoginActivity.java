@@ -29,7 +29,7 @@ import com.lijiadayuan.lishijituan.http.UrlConstants;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
 
     private TextView register;
@@ -65,8 +65,11 @@ public class LoginActivity extends Activity {
                     Log.v(TAG, "password empty");
                     return;
                 }
-                RequestQueue mQueue = Volley.newRequestQueue(LoginActivity.this);
+                // 创建请求队列
+                RequestQueue mQueue = app.getRequestQueue();
+                // 创建一个字符串请求
                 StringRequest request = new StringRequest(Request.Method.POST, UrlConstants.LOGIN, new Response.Listener<String>() {
+                    /** 重写onResponse,以实现请求响应的操作 **/
                     @Override
                     public void onResponse(String response) {
                         JSONObject json = JSON.parseObject(response);
@@ -77,7 +80,7 @@ public class LoginActivity extends Activity {
                                 Toast.makeText(LoginActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
                             else {
                                 Users user = JSON.parseObject(data.toString(), Users.class);
-                                System.out.println("user: ========" + user);
+                                System.out.println("user: ========" + data.toString());
                                 Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                             }
                         }else{
@@ -90,6 +93,7 @@ public class LoginActivity extends Activity {
 
                     }
                 }){
+                    /** 在StringRequest的匿名内部类中重写getParams方法,用于传递请求参数 **/
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
@@ -98,6 +102,7 @@ public class LoginActivity extends Activity {
                         return params;
                     }
                 };
+                // 将请求添加到请求队列中(即发送请求)
                 mQueue.add(request);
             }
         });

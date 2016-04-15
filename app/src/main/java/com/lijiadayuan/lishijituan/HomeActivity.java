@@ -70,41 +70,24 @@ public class HomeActivity extends TabActivity {
                 .setContent(i_mine));
 
         mTabHost.setCurrentTabByTag(TAB_MAIN);
-        radioMain.setTextColor(0xff2e2e2e);
         mTabButtonGroup
                 .setOnCheckedChangeListener(new OnCheckedChangeListener() {
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch (checkedId) {
                             case R.id.home_tabe_main:
                                 mTabHost.setCurrentTabByTag(TAB_MAIN);
-                                radioMain.setTextColor(0xffea5959);
-                                radioFind.setTextColor(0xff2e2e2e);
-                                radioNews.setTextColor(0xff2e2e2e);
-                                radioMine.setTextColor(0xff2e2e2e);
                                 break;
 
                             case R.id.home_tabe_find:
                                 mTabHost.setCurrentTabByTag(TAB_FIND);
-                                radioMain.setTextColor(0xff2e2e2e);
-                                radioFind.setTextColor(0xffea5959);
-                                radioNews.setTextColor(0xff2e2e2e);
-                                radioMine.setTextColor(0xff2e2e2e);
                                 break;
 
                             case R.id.home_tabe_news:
                                 mTabHost.setCurrentTabByTag(TAB_NEWS);
-                                radioMain.setTextColor(0xff2e2e2e);
-                                radioFind.setTextColor(0xff2e2e2e);
-                                radioNews.setTextColor(0xffea5959);
-                                radioMine.setTextColor(0xff2e2e2e);
                                 break;
 
                             case R.id.home_tabe_mine:
                                 mTabHost.setCurrentTabByTag(TAB_MINE);
-                                radioMain.setTextColor(0xff2e2e2e);
-                                radioFind.setTextColor(0xff2e2e2e);
-                                radioNews.setTextColor(0xff2e2e2e);
-                                radioMine.setTextColor(0xffea5959);
                                 break;
 
 

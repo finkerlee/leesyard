@@ -23,4 +23,6 @@
     <color name="wuse">#00000000</color>
     <color name="header_bar">#df3031</color>
     <color name="province_line_border">#C7C7C7</color>
+    <color name="tab_text_checked">#ffea5959</color>
+    <color name="tab_text_unchecked">#ff2e2e2e</color>
 </resources>

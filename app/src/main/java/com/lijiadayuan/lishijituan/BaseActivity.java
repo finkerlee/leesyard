@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 
 import com.lijiadayuan.model.ProvinceModel;
 
@@ -28,6 +29,15 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 public abstract class BaseActivity extends Activity {
+
+	protected LeeApplication app;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		app = (LeeApplication) getApplication();
+	}
+
 	/**
 	 * 通过类名启动Activity
 	 * 
@@ -51,4 +61,13 @@ public abstract class BaseActivity extends Activity {
 		startActivity(intent);
 	}
 
+	/**
+	 * 获取屏幕宽度
+	 * @return
+	 */
+	public int getWidth(){
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.widthPixels;
+	}
 }

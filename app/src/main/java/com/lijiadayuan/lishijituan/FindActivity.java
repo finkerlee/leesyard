@@ -11,7 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
 
-public class FindActivity extends Activity {
+public class FindActivity extends BaseActivity {
     private GridView gridView;
     private TextView tvTitle;
 
