@@ -1,5 +1,7 @@
 package com.lijiadayuan.lishijituan.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Lee on 2016-03-04.
  * E-mail:johnyylee@163.com
@@ -7,7 +9,7 @@ package com.lijiadayuan.lishijituan.bean;
  * 封装用户信息的类
  *
  */
-public class Users {
+public class Users implements Serializable{
 
     private String userId;          // 用户id，流水号
     private String userNick;        // 用户名（昵称）

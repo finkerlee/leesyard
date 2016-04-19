@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 
 import com.lijiadayuan.model.CityModel;
@@ -31,11 +32,13 @@ import javax.xml.parsers.SAXParserFactory;
 public abstract class BaseActivity extends Activity {
 
 	protected LeeApplication app;
+    protected SharedPreferences mSharedPreferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (LeeApplication) getApplication();
+		mSharedPreferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
 	}
 
 	/**
@@ -70,4 +73,6 @@ public abstract class BaseActivity extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
 	}
+
+
 }
