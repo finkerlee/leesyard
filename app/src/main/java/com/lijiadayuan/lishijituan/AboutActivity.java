@@ -22,7 +22,7 @@ public class AboutActivity extends Activity implements View.OnClickListener {
         imageback = (ImageView) findViewById(R.id.iv_back);
     }
     protected void initView(){
-        tvTitle.setText("关于我们");
+        tvTitle.setText("关于我们le");
         imageback.setOnClickListener(this);
     }
     @Override
