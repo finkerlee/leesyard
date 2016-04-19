@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
  * Created by Lee on 2016-04-13.
@@ -16,6 +17,7 @@ public class LeeApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fresco.initialize(this);
         requestQueue = Volley.newRequestQueue(this);
     }
 

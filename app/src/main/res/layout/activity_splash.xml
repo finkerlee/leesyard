@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="0dp">
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/launcher_logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/launcher"
+        android:background="@drawable/launcher"
         android:layout_margin="0dp"/>
 
 

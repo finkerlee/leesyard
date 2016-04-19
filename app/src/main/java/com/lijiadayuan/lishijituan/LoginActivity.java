@@ -3,6 +3,7 @@ package com.lijiadayuan.lishijituan;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.KeyConstants;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,12 +40,17 @@ public class LoginActivity extends BaseActivity {
     private EditText etUsername;                // 用户名
     private EditText etPassword;                // 密码
     private Button btnLogin;                    // 登录按钮
+
+    //保存到本地的一些用户的信息
+    private SharedPreferences SharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //空白处隐藏软键盘
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
         register =(TextView)findViewById(R.id.et_yonghu);
         forgetpass=(TextView)findViewById(R.id.et_pass);
         etUsername = (EditText) findViewById(R.id.et_username);
@@ -81,6 +88,27 @@ public class LoginActivity extends BaseActivity {
                             else {
                                 Users user = JSON.parseObject(data.toString(), Users.class);
                                 System.out.println("user: ========" + data.toString());
+                                SharedPreferences.Editor editor = SharedPreferences.edit();
+                                editor.putString(KeyConstants.UserInfoKey.userId,user.getUserId());
+                                editor.putString(KeyConstants.UserInfoKey.userName, user.getUserName());
+                                editor.putString(KeyConstants.UserInfoKey.userNick, user.getUserNick());
+                                editor.putString(KeyConstants.UserInfoKey.userPhone, user.getUserPhone());
+                                editor.putString(KeyConstants.UserInfoKey.userHeadImage, user.getUserAvatar());
+                                editor.putBoolean(KeyConstants.UserInfoKey.userIsLogin, true);
+                                editor.commit();
+
+                                Intent intent = new Intent(LoginActivity.this,MineActivity.class);
+                                if (KeyConstants.IntentPageValues.normol.equals(getIntent().getStringExtra(KeyConstants.IntentPageKey.ToLoginPageStyle))){
+                                    intent.putExtra(KeyConstants.UserInfoKey.userInfo,user);
+                                    startActivity(intent);
+                                }else{
+                                    intent.putExtra(KeyConstants.UserInfoKey.userInfo,user);
+                                    setResult(MineActivity.HEAD_IMAGE,intent);
+                                    finish();
+                                }
+
+
+
                                 Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                             }
                         }else{
