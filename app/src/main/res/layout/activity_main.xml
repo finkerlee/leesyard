@@ -75,13 +75,21 @@
                 android:layout_centerVertical="true"
                 android:orientation="horizontal"
                 android:weightSum="1">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:text="李氏福利社"
-                    android:textColor="@color/main_tab_btn_pressed" />
+                    android:textColor="@color/main_tab_btn_pressed"
+                    android:id="@+id/textView20" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/more"
+                    android:layout_alignBottom="@+id/textView20"
+                    android:layout_alignRight="@+id/iv_image"
+                    android:layout_alignEnd="@+id/iv_image"
+                    android:id="@+id/iv_more" />
 
                 <LinearLayout
                     android:id="@+id/iv_image"

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     private ImageButton imagesharing,imageculture,imageproduct;
     private LinearLayout framenotice;
     private Button button;
+    private ImageView ivmore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         imageproduct.setOnClickListener(this);
         ivTicket.setOnClickListener(this);
         ivRed.setOnClickListener(this);
+        ivmore.setOnClickListener(this);
     }
 
     protected void findViewById() {
@@ -117,6 +120,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         imageculture= (ImageButton) findViewById(R.id.iv_lishi_culture);
         imageproduct= (ImageButton) findViewById(R.id.imageButton);
         framenotice= (LinearLayout) findViewById(R.id.homepage_notice_ll);
+        ivmore= (ImageView) findViewById(R.id.iv_more);
 //        drawMain.setBounds(0, 0, 60, 60);
 //        drawNews.setBounds(0, 0, 60, 60);
 //        drawMine.setBounds(0, 0, 60, 60);
@@ -230,6 +234,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 break;
             case R.id.index_search_edit:
                 openActivity(SearchActivity.class);
+                break;
+            case R.id.iv_more:
+                openActivity(FindActivity.class);
                 break;
             default:
                 break;
