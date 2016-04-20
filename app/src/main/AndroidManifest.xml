@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LauncherActivity"
+            android:name=".OrderActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,7 +62,8 @@
         <activity android:name=".ProductBaseActivity" />
         <activity android:name=".RedenvelopeActivity" />
         <activity android:name=".ReddenvelopebaseActivity" />
-        <activity android:name=".ArtActivity"></activity>
+        <activity android:name=".ArtActivity" />
+        <!--<activity android:name=".OrderActivity"/>-->
     </application>
 
 </manifest>
