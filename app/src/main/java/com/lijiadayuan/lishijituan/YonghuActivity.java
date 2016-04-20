@@ -115,7 +115,7 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
                 // 判断手机号是否为空
                 if (TextUtils.isEmpty(etphone.getText()) || null == etphone.getText()){
                     Toast.makeText(YonghuActivity.this, R.string.registration_phonenum, Toast.LENGTH_SHORT).show();
-                    Log.v(TAG, "password empty");
+                    Log.v(TAG, "phonenum empty");
                     return;
                 }
                 // 判断密码是否为空
@@ -127,13 +127,13 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
                 // 判断密码是否为空
                 if (TextUtils.isEmpty(etpass.getText()) || null == etpass.getText()){
                     Toast.makeText(YonghuActivity.this, R.string.registration_password2, Toast.LENGTH_SHORT).show();
-                    Log.v(TAG, "password empty");
+                    Log.v(TAG, "password2 empty");
                     return;
                 }
                 // 判断验证码是否为空
                 if (TextUtils.isEmpty(etpass.getText()) || null == etpass.getText()){
                     Toast.makeText(YonghuActivity.this, R.string.registration_code, Toast.LENGTH_SHORT).show();
-                    Log.v(TAG, "password empty");
+                    Log.v(TAG, "numpass empty");
                     return;
                 }
                 // 创建请求队列

@@ -147,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:button="@drawable/task_type_image_selector"
                 android:layout_marginLeft="@dimen/edittext_margin_left"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:checked="false" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lijiadayuan.lishijituan.OrderActivity">
+
+    <include
+        android:id="@+id/include14"
+        layout="@layout/common_title" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/include14">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/colour_bar" />
+
+        <TextView
+            android:id="@+id/name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="姓名:"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/iv_name"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/name_title"
+            android:text="李国庆"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/nember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/iv_name"
+            android:text="手机号:"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/iv_iphone"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/nember"
+            android:text="1865111111"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="收货地址:"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/iv_address"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_iphone"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/address"
+            android:text="北京市西城区月坛南路69号"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_address"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/colour_bar" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/iv_iphone"
+            android:layout_alignRight="@+id/iv_iphone"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrows" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout2">
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#b4b4b4" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView21"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/byh_1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/imageView9"
+            android:layout_marginTop="10dp"
+            android:background="#b4b4b4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView9"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/imageView9"
+            android:layout_toRightOf="@+id/imageView9"
+            android:text="BELA DESIGN"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView9"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/imageView9"
+            android:layout_toRightOf="@+id/imageView9"
+            android:text="浪漫可旋转的八音盒"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/imageView9"
+            android:layout_toRightOf="@+id/imageView9"
+            android:text="x1" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView9"
+            android:layout_alignLeft="@+id/textView22"
+            android:layout_alignStart="@+id/textView22"
+            android:layout_marginBottom="20dp"
+            android:text="￥168" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout3"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="配送方式"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="快递默认为在线支付"
+            android:textColor="#ea5959"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout8"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="快递费用:"
+            android:textSize="18dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10元"
+            android:textSize="18dp"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout4"
+        android:background="#b4b4b4" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView24"
+        android:layout_marginLeft="20dp"
+        android:text="支付方式"
+        android:textSize="18dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView25"
+        android:id="@+id/relativeLayout5">
+
+        <TextView
+            android:id="@+id/tv_ali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/alipay"
+            android:text="支付宝支付"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ali"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/wechatpay"
+            android:text="微信支付"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            >
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rb_ali"
+                android:background="@drawable/radio"
+                android:button="@null"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:focusable="false"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/rb_ali"
+                android:layout_marginRight="20dp"
+                android:id="@+id/rb_wechat"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_off"
+                android:button="@null"
+                android:layout_alignBaseline="@id/tv_wechat"
+                android:focusable="false"/>
+        </RadioGroup>
+
+        <!--<RadioGroup-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/rb_ali"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:button="@drawable/radio"-->
+                <!--android:checked="false" />-->
+
+            <!--<RadioButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:button="@drawable/radio_off"-->
+                <!--android:checked="false" />-->
+        <!--</RadioGroup>-->
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#b4b4b4"
+        android:layout_below="@+id/relativeLayout5"
+        android:layout_alignRight="@+id/relativeLayout4"
+        android:layout_alignEnd="@+id/relativeLayout4" />
+</RelativeLayout>
