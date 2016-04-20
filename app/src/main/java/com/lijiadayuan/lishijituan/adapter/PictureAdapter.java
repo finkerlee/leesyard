@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.lijiadayuan.lishijituan.R;
 import com.lijiadayuan.lishijituan.view.RoundRectImageView;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
@@ -25,13 +26,11 @@ import java.util.List;
 public class PictureAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Picture> pictures;
-    private Context context;
     private int layoutId;
 
     public PictureAdapter(int[] images, Context context, int layoutId) {
         super();
         pictures = new ArrayList<Picture>();
-        this.context = context;
         this.layoutId = layoutId;
         inflater = LayoutInflater.from(context);
         for (int i = 0; i < images.length; i++) {
@@ -64,21 +63,22 @@ public class PictureAdapter extends BaseAdapter {
         final  ViewHolder viewHolder;
         if (convertView == null) {
             convertView = inflater.inflate(layoutId, null);
+
             viewHolder = new ViewHolder();
-            viewHolder.image = (RoundRectImageView) convertView.findViewById(R.id.itemImage);
+            viewHolder.image = (SimpleDraweeView) convertView.findViewById(R.id.itemImage);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.image.setImageResource(pictures.get(position).getImageId());
+        viewHolder.image.setBackgroundResource(pictures.get(position).getImageId());
         return convertView;
     }
 
 
     class ViewHolder {
-        public RoundRectImageView image;
+        public SimpleDraweeView image;
 
     }
 }

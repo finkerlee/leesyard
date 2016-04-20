@@ -30,6 +30,7 @@ public class FindActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
         gridView = (GridView) findViewById(R.id.gridView);
+
         PictureAdapter adapter = new PictureAdapter(images, this, R.layout.image);
         gridView.setAdapter(adapter);
 

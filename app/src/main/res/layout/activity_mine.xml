@@ -4,6 +4,7 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/parent"
     tools:context=".MineActivity"
     >
     <ScrollView
@@ -366,4 +367,37 @@
             android:background="@drawable/news_gray"
             android:layout_marginRight="20dp" />
     </RelativeLayout>
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="5f000000"-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/select_style"-->
+        <!-->-->
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="从相册选择图片"-->
+            <!--android:id="@+id/button1" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="拍照"-->
+            <!--android:id="@+id/button2" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="取消"-->
+            <!--android:id="@+id/button3" />-->
+    <!--</LinearLayout>-->
 </RelativeLayout>
