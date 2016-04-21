@@ -281,11 +281,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/rb_ali"
-                android:background="@drawable/radio"
+                android:background="@drawable/radio_"
                 android:button="@null"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
+                android:checked="true"
                 android:focusable="false"/>
             <RadioButton
                 android:layout_width="wrap_content"
@@ -296,7 +297,7 @@
                 android:id="@+id/rb_wechat"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/radio_off"
+                android:background="@drawable/radio_"
                 android:button="@null"
                 android:layout_alignBaseline="@id/tv_wechat"
                 android:focusable="false"/>
