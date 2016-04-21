@@ -76,15 +76,13 @@
         android:layout_toEndOf="@+id/linearLayout9" />
 
     <ImageView
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:id="@+id/delete_goods"
         android:src="@drawable/delete"
+        android:layout_marginRight="10dp"
         android:layout_alignBottom="@id/linearLayout9"
-        android:layout_alignParentRight="true"
-        android:layout_toEndOf="@+id/tv_unitprice"
-        android:layout_alignTop="@+id/goods_status"
-        android:layout_toRightOf="@+id/tv_unitprice" />
+        android:layout_alignParentRight="true" />
 
 
 </RelativeLayout>

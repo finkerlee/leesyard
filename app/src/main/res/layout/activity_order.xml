@@ -286,8 +286,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:checked="true"
-                android:focusable="false"/>
+                android:checked="true"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -300,7 +299,7 @@
                 android:background="@drawable/radio_"
                 android:button="@null"
                 android:layout_alignBaseline="@id/tv_wechat"
-                android:focusable="false"/>
+                />
         </RadioGroup>
 
         <!--<RadioGroup-->
