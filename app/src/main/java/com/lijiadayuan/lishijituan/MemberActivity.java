@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.lijiadayuan.lishijituan.view.photoscorrect;
@@ -58,6 +59,9 @@ public class MemberActivity extends Activity implements OnClickListener {
         mShowIV = (ImageView) findViewById(R.id.iv_photos_correct);
         photos2= (ImageView) findViewById(R.id.iv_photos_opposite);
         mshowIV2= (ImageView)findViewById(R.id.iv_photos_opposite);
+        RadioButton rbMan = (RadioButton) findViewById(R.id.rb_man);
+        rbMan.setChecked(true);
+        rbMan.setOnClickListener(this);
     }
 
     protected void initView() {
@@ -216,6 +220,8 @@ public class MemberActivity extends Activity implements OnClickListener {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                 startActivityForResult(intent, OPEN_CAMERA_FLAG);
                 dialog.dismiss();
+                break;
+            case R.id.rb_man:
                 break;
             default:
                 break;

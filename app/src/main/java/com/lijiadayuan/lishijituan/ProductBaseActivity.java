@@ -1,8 +1,10 @@
 package com.lijiadayuan.lishijituan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import com.lijiadayuan.lishijituan.adapter.ImageAdapter;
 
@@ -13,6 +15,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     ArrayList<String> linkUrlArray= new ArrayList<String>();
     private CircleFlowIndicator mFlowIndicator;
     private ArrayList<String> imageUrlList = new ArrayList<String>();
+    private Button mBtnReceive;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     protected void findViewById(){
         mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
+        findViewById(R.id.i_want_receive).setOnClickListener(this);
     }
     private void initBanner(ArrayList<String> imageUrlList) {
 
@@ -56,6 +60,11 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
 
     @Override
     public void onClick(View v) {
-
+       switch (v.getId()){
+           case R.id.i_want_receive:
+               Intent intent = new Intent(this,OrderActivity.class);
+               startActivity(intent);
+           break;
+       }
     }
 }

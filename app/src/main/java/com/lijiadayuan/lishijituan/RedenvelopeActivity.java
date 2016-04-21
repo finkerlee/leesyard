@@ -21,7 +21,7 @@ public class RedenvelopeActivity extends Activity implements OnClickListener {
     //图片ID数组
     private int[] images = new int[]{
             R.drawable.red1, R.drawable.red2,
-            R.drawable.red3, R.drawable.red4, R.drawable.red5,
+            R.drawable.red3, R.drawable.red4
     };
 
     @Override

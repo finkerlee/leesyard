@@ -37,34 +37,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:padding="10dp">
+            android:padding="15dp">
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RadioButton
+                    android:id="@+id/rb_man"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:button="@null"
-                    android:background="@drawable/radio" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="男"
-                    android:textSize="18dp"
-                    android:padding="5dp"/>
+                    android:drawableLeft="@drawable/radio"
+                    android:textSize="20dp"
+                    android:text="男" />
+
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/radio"
-                    android:button="@null" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/radio"
+                    android:layout_marginLeft="10dp"
                     android:text="女"
-                    android:textSize="18dp"
-                    android:padding="5dp"/>
+                    android:textSize="20dp"
+                    android:button="@null" />
             </RadioGroup>
         </LinearLayout>
     </LinearLayout>

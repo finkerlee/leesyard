@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:layout_weight="1"
-                        android:background="@drawable/product_1"
+                        android:background="@drawable/byh_1"
                         android:src="@drawable/rounded_image" />
 
                     <ImageButton
@@ -115,7 +115,7 @@
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="3dp"
                         android:layout_weight="1"
-                        android:background="@drawable/prdouct_2"
+                        android:background="@drawable/hj_2"
                         android:src="@drawable/rounded_image" />
 
                     <ImageButton
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:layout_weight="1"
-                        android:background="@drawable/product_3"
+                        android:background="@drawable/hgq_3"
                         android:src="@drawable/rounded_image" />
                 </LinearLayout>
 
@@ -141,7 +141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:layout_weight="1"
-                        android:background="@drawable/product_4"
+                        android:background="@drawable/sj_4"
                         android:src="@drawable/rounded_image" />
 
                     <ImageButton
@@ -151,7 +151,7 @@
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="3dp"
                         android:layout_weight="1"
-                        android:background="@drawable/product_5"
+                        android:background="@drawable/lsj_5"
                         android:src="@drawable/rounded_image" />
 
                     <ImageButton
@@ -159,7 +159,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:layout_weight="1"
-                        android:background="@drawable/product_6"
+                        android:background="@drawable/nscs_6"
                         android:src="@drawable/rounded_image" />
                 </LinearLayout>
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:paddingLeft="20dp"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:id="@+id/linearLayout9">
+        <com.facebook.drawee.view.SimpleDraweeView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/itemImage"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:background="@drawable/about"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/goods_name"
+        android:text="六龙和磁化活水汽"
+        android:layout_marginLeft="5dp"
+        android:textSize="18sp"
+        android:layout_toRightOf="@+id/linearLayout9"
+        android:layout_toEndOf="@+id/linearLayout9" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="$250"
+        android:id="@+id/goods_price"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="单价："
+        android:layout_below="@+id/goods_name"
+        android:layout_alignLeft="@+id/goods_name"
+        android:layout_marginTop="10dp"
+        android:id="@+id/name_unitprice"
+        />
+    <TextView
+        android:id="@+id/tv_unitprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20元（包含运费35元）"
+        android:layout_alignTop="@+id/name_unitprice"
+        android:layout_toEndOf="@+id/name_unitprice" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*1"
+        android:layout_alignTop="@+id/tv_unitprice"
+        android:layout_toRightOf="@+id/tv_unitprice"
+        android:layout_toEndOf="@+id/tv_unitprice" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已完成"
+        android:id="@+id/goods_status"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/linearLayout9"
+        android:layout_alignBottom="@id/linearLayout9"
+        android:layout_toEndOf="@+id/linearLayout9" />
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:id="@+id/delete_goods"
+        android:src="@drawable/delete"
+        android:layout_alignBottom="@id/linearLayout9"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/tv_unitprice"
+        android:layout_alignTop="@+id/goods_status"
+        android:layout_toRightOf="@+id/tv_unitprice" />
+
+
+</RelativeLayout>

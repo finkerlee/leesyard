@@ -78,7 +78,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         mTvUserName = (TextView) findViewById(R.id.iv_name);
         //mTvUserLevel = (TextView) findViewById(R.id.user_level);
 
-
+        findViewById(R.id.myorder).setOnClickListener(this);
         welfare.setOnClickListener(this);
         address.setOnClickListener(this);
         setting.setOnClickListener(this);
@@ -158,6 +158,10 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.button3:
                 mPopupWindow.dismiss();
+                break;
+            case R.id.myorder:
+                Intent intent = new Intent(this,MyOrderActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
