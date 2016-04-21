@@ -283,6 +283,7 @@
                 android:id="@+id/rb_ali"
                 android:background="@drawable/radio"
                 android:button="@null"
+                android:checked="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"

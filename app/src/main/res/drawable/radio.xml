@@ -3,7 +3,7 @@
     //radio图片
     <item
         android:state_checked="true"
-        android:drawable="@drawable/radio" />
+        android:drawable="@drawable/radio_on" />
     <item
         android:state_checked="false"
         android:drawable="@drawable/radio_off" />
