@@ -44,6 +44,8 @@
         <activity android:name=".SettingActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".LawActivity" />
+        <activity android:name=".MyOrderActivity" />
+
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -63,7 +65,7 @@
         <activity android:name=".RedenvelopeActivity" />
         <activity android:name=".ReddenvelopebaseActivity" />
         <activity android:name=".ArtActivity" />
-        <!--<activity android:name=".OrderActivity"/>-->
+        <activity android:name=".OrderActivity"/>
     </application>
 
 </manifest>

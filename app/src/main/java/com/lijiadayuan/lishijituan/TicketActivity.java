@@ -20,9 +20,8 @@ public class TicketActivity extends Activity implements OnClickListener {
     private PictureAdapter adapter ;
     //图片ID数组
     private int[] images = new int[]{
-            R.drawable.ad, R.drawable.ad1, R.drawable.ad2,
-            R.drawable.ad3, R.drawable.ad4, R.drawable.ad5,
-            R.drawable.ad, R.drawable.ad, R.drawable.ad
+            R.drawable.kp1, R.drawable.kp2, R.drawable.kp3,
+            R.drawable.kp4
     };
 
     @Override

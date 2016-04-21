@@ -17,12 +17,8 @@ public class FindActivity extends BaseActivity {
 
     //图片ID数组
     private int[] images = new int[]{
-            R.drawable.ad, R.drawable.ad, R.drawable.ad,
-            R.drawable.ad, R.drawable.ad, R.drawable.ad,
-            R.drawable.ad, R.drawable.ad, R.drawable.ad,
-            R.drawable.ad, R.drawable.ad, R.drawable.ad,
-            R.drawable.ad, R.drawable.ad, R.drawable.ad,
-            R.drawable.ad, R.drawable.ad, R.drawable.ad
+            R.drawable.fx2, R.drawable.fx3, R.drawable.fx4,
+            R.drawable.fx5
     };
 
     @Override

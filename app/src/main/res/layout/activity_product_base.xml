@@ -146,6 +146,7 @@
         layout="@layout/common_title_no"
         android:id="@+id/include11" />
     <Button
+        android:id="@+id/i_want_receive"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
