@@ -283,10 +283,10 @@
                 android:id="@+id/rb_ali"
                 android:background="@drawable/radio_"
                 android:button="@null"
+                android:checked="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:checked="true"/>
+                android:layout_weight="1"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

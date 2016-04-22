@@ -5,6 +5,111 @@
     android:layout_height="match_parent"
     tools:context="com.lijiadayuan.lishijituan.MemberActivity">
     <include
-        layout="@layout/common_title"/>
+        layout="@layout/common_title"
+        android:id="@+id/include15" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout9"
+        android:layout_below="@+id/include15"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="李"
+                android:textSize="18dp"
+                android:textColor="@color/main_tab_btn_pressed"/>
+            <EditText
+                android:padding="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00ffffff"
+                android:hint="请输入您的名字"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rb_man"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio"
+                    android:textSize="20dp"
+                    android:text="男" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/radio"
+                    android:layout_marginLeft="10dp"
+                    android:text="女"
+                    android:textSize="20dp"
+                    android:button="@null" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="17dp"
+        android:hint="请输入您的手机号码"
+        android:background="@drawable/rounded_edittext"
+        android:layout_below="@+id/linearLayout9"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/editText" />
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="17dp"
+        android:hint="请输入您的身份证号"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/editText"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:layout_marginTop="20dp"
+        android:id="@+id/linearLayout10">
+        <ImageView
+            android:id="@+id/iv_photos_correct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/correct_side"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/iv_photos_opposite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/opposite_side"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_button_color"
+        android:text="验证"
+        android:textColor="@color/color_white"
+        android:layout_below="@+id/linearLayout10"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp" />
 </RelativeLayout>

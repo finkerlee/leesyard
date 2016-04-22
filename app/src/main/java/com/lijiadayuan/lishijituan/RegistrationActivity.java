@@ -20,8 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lijiadayuan.lishijituan.view.PhotosDialog;
-import com.lijiadayuan.lishijituan.view.ProtocolDialog;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

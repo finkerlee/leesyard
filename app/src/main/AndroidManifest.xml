@@ -65,7 +65,8 @@
         <activity android:name=".RedenvelopeActivity" />
         <activity android:name=".ReddenvelopebaseActivity" />
         <activity android:name=".ArtActivity" />
-        <activity android:name=".OrderActivity"/>
+        <activity android:name=".OrderActivity" />
+        <activity android:name=".LishiactivityActivity"></activity>
     </application>
 
 </manifest>
