@@ -62,7 +62,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     public void onClick(View v) {
        switch (v.getId()){
            case R.id.i_want_receive:
-               Intent intent = new Intent(this,OrderActivity.class);
+               Intent intent = new Intent(this,ReceiveActivity.class);
                startActivity(intent);
            break;
        }

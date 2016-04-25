@@ -148,14 +148,14 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
                         if ("success".equals(result)){
                             JSONObject data = json.getJSONObject("response_data");
                             if (data.isEmpty())
-                                Toast.makeText(YonghuActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(YonghuActivity.this, R.string.registration_failure, Toast.LENGTH_SHORT).show();
                             else {
                                 Users user = JSON.parseObject(data.toString(), Users.class);
                                 System.out.println("user: ========" + data.toString());
                                 Toast.makeText(YonghuActivity.this, "login success", Toast.LENGTH_SHORT).show();
                             }
                         }else{
-                            Toast.makeText(YonghuActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(YonghuActivity.this, R.string.registration_failure, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {

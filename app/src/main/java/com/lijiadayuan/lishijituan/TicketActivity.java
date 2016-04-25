@@ -28,7 +28,7 @@ public class TicketActivity extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket);
-        adapter = new PictureAdapter(images, this, R.layout.image);
+        adapter = new PictureAdapter(images, this, R.layout.large_image);
         PictureAdapter adapter = new PictureAdapter(images, this, R.layout.large_image);
         findViewById();
         initView();

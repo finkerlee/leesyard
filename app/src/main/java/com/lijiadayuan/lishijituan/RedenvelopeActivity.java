@@ -28,8 +28,8 @@ public class RedenvelopeActivity extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redenvelope);
-        adapter = new PictureAdapter(images, this, R.layout.image);
-        PictureAdapter adapter = new PictureAdapter(images, this, R.layout.large_image);
+        adapter = new PictureAdapter(images, this, R.layout.redenvelope_image);
+        PictureAdapter adapter = new PictureAdapter(images, this, R.layout.redenvelope_image);
         findViewById();
         initView();
 
