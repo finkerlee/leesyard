@@ -295,40 +295,27 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:id="@+id/rb_ali"
-<<<<<<< HEAD
-                android:background="@drawable/radio"
-                android:checked="true"
-                android:button="@null" />
-=======
                 android:background="@drawable/radio_"
                 android:button="@null"
                 android:checked="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"/>
->>>>>>> c1c83899a0b1531cb14aad18426c990924241d4c
             <RadioButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:id="@+id/rb_wechat"
                 android:layout_marginTop="10dp"
-<<<<<<< HEAD
-                android:background="@drawable/radio"
-                android:button="@null"
-                android:layout_alignBaseline="@id/tv_wechat" />
-=======
                 android:layout_weight="1"
                 android:background="@drawable/radio_"
                 android:button="@null"
                 android:layout_alignBaseline="@id/tv_wechat"
                 />
->>>>>>> c1c83899a0b1531cb14aad18426c990924241d4c
         </RadioGroup>
 
         <!--<RadioGroup-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content">-->
-
             <!--<RadioButton-->
                 <!--android:id="@+id/rb_ali"-->
                 <!--android:layout_width="wrap_content"-->

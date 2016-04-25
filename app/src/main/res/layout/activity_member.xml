@@ -47,14 +47,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@null"
-                    android:drawableLeft="@drawable/radio"
+                    android:drawableLeft="@drawable/radio_"
                     android:textSize="20dp"
                     android:text="男" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/radio"
+                    android:drawableLeft="@drawable/radio_"
                     android:layout_marginLeft="10dp"
                     android:text="女"
                     android:textSize="20dp"

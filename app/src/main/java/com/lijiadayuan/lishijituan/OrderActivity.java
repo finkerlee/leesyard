@@ -13,8 +13,6 @@ public class OrderActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-<<<<<<< HEAD
-=======
         rbAli = (RadioButton) findViewById(R.id.rb_ali);
         rbWechat = (RadioButton) findViewById(R.id.rb_wechat);
 
@@ -43,6 +41,5 @@ public class OrderActivity extends Activity {
 //                }
 //            }
 //        });
->>>>>>> c1c83899a0b1531cb14aad18426c990924241d4c
     }
 }
