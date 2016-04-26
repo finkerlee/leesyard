@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
 
-
 public class SharingResourceActivity extends Activity implements OnClickListener {
     private TextView tvTitle;
     private ImageView imageback;

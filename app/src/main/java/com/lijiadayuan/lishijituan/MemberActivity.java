@@ -30,7 +30,9 @@ import static com.lijiadayuan.lishijituan.R.id.iv_photos_opposite;
 
 public class MemberActivity extends Activity implements OnClickListener {
     private TextView tvTitle;
+
     private ImageView imageback;
+
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private ImageView photos,photos2;
