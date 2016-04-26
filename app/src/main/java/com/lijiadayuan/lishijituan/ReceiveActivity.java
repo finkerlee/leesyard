@@ -1,5 +1,6 @@
 package com.lijiadayuan.lishijituan;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,99 +17,73 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.lijiadayuan.lishijituan.view.photoscorrect;
+import com.lijiadayuan.lishijituan.view.ReceiveDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-import static com.lijiadayuan.lishijituan.R.id.iv_photos_opposite;
-
-public class MemberActivity extends Activity implements OnClickListener {
-    private TextView tvTitle;
-
-    private ImageView imageback;
-
+public class ReceiveActivity extends Activity implements OnClickListener {
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
-    private ImageView photos,photos2;
+    private TextView tvTitle;
+    private ImageView imageback;
+    private ImageView photos;
     InputMethodManager manager;
-    private photoscorrect dialog;
-    private static MemberActivity instance;
-    private ImageView mShowIV,mshowIV2;
+    private ReceiveDialog dialog;
+    private static ReceiveActivity instance;
+    private ImageView mShowIV;
     private String mSaveDir;//拍照存放的文件夹名字
     private String mFileName;//拍照存放的文件的名字
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_member);
-        //空白处隐藏软键盘
+        setContentView(R.layout.activity_receive);
         instance = this;
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         findViewById();
         initView();
     }
-
     protected void findViewById() {
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
-        photos = (ImageView) findViewById(R.id.iv_photos_correct);
-        mShowIV = (ImageView) findViewById(R.id.iv_photos_correct);
-        photos2= (ImageView) findViewById(R.id.iv_photos_opposite);
-        mshowIV2= (ImageView)findViewById(R.id.iv_photos_opposite);
-        RadioButton rbMan = (RadioButton) findViewById(R.id.rb_man);
-        rbMan.setChecked(true);
-        rbMan.setOnClickListener(this);
+        photos= (ImageView) findViewById(R.id.iv_photos);
+        mShowIV = (ImageView) findViewById(R.id.iv_photos);
     }
-
     protected void initView() {
-        tvTitle.setText("认证会员");
-        imageback.setOnClickListener(this);
         photos.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                dialog = new photoscorrect(MemberActivity.this, R.style.protocol_dialog);
+                dialog = new ReceiveDialog(ReceiveActivity.this, R.style.protocol_dialog);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
             }
         });
-        photos2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog = new photoscorrect(MemberActivity.this, R.style.protocol_dialog);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.show();
-            }
-        });
+        tvTitle.setText("申请报名");
+        imageback.setOnClickListener(this);
     }
-
     //空白处隐藏软键盘
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // TODO Auto-generated method stub
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            if (getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){
                 manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
         return super.onTouchEvent(event);
     }
-
-    public static MemberActivity getInstance() {
+    public static ReceiveActivity getInstance() {
         return instance;
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         File file;
-        Bitmap bitmap,bitmap2;
+        Bitmap bitmap;
         OutputStream outputStream;
 
         if (resultCode == RESULT_OK) {
@@ -191,7 +166,6 @@ public class MemberActivity extends Activity implements OnClickListener {
         bitmap = BitmapFactory.decodeFile(path, options);
         return bitmap;
     }
-
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -222,8 +196,6 @@ public class MemberActivity extends Activity implements OnClickListener {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                 startActivityForResult(intent, OPEN_CAMERA_FLAG);
                 dialog.dismiss();
-                break;
-            case R.id.rb_man:
                 break;
             default:
                 break;

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.lijiadayuan.lishijituan.BaseWebActivity;
+import com.lijiadayuan.lishijituan.ProductBaseActivity;
 import com.lijiadayuan.lishijituan.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -111,7 +112,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 
 				bundle.putString("url", url);
 				bundle.putString("title", title);
-				Intent intent = new Intent(context, BaseWebActivity.class);
+				Intent intent = new Intent(context, ProductBaseActivity.class);
 				intent.putExtras(bundle);
 
 				context.startActivity(intent);

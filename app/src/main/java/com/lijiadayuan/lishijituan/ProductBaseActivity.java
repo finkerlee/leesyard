@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.lijiadayuan.lishijituan.adapter.ImageAdapter;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 public class ProductBaseActivity extends BaseActivity implements OnClickListener {
     private ViewFlow mViewFlow;
+    private ImageView iv_back;
     ArrayList<String> linkUrlArray= new ArrayList<String>();
     private CircleFlowIndicator mFlowIndicator;
     private ArrayList<String> imageUrlList = new ArrayList<String>();
@@ -28,20 +30,22 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                 .add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
         imageUrlList
                 .add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
-
         linkUrlArray
-                .add("http://blog.csdn.net/finddreams/article/details/44301359");
+                .add("");
         linkUrlArray
-                .add("http://blog.csdn.net/finddreams/article/details/43486527");
+                .add("");
         linkUrlArray
-                .add("http://blog.csdn.net/finddreams/article/details/44648121");
+                .add("");
         linkUrlArray
-                .add("http://blog.csdn.net/finddreams/article/details/44619589");
+                .add("");
         findViewById();
         initBanner(imageUrlList);
     }
+
     protected void findViewById(){
         mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
+        iv_back = (ImageView)findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(this);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         findViewById(R.id.i_want_receive).setOnClickListener(this);
     }
@@ -61,10 +65,13 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     @Override
     public void onClick(View v) {
        switch (v.getId()){
-           case R.id.i_want_receive:
-               Intent intent = new Intent(this,OrderActivity.class);
-               startActivity(intent);
-           break;
+//           case R.id.i_want_receive:
+//               Intent intent = new Intent(this,ReceiveActivity.class);
+//               startActivity(intent);
+//           break;
+           case R.id.iv_back:
+               finish();
+               break;
        }
     }
 }

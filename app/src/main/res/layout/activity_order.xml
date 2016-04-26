@@ -11,17 +11,26 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:layout_below="@+id/include14">
-
+    <TextView
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:background="#ffff8a"
+        android:id="@+id/textView26" />
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/colour_bar" />
+            android:background="@drawable/colour_bar" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#ffff8a"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/textView26"
+            android:layout_alignEnd="@+id/textView26" />
 
         <TextView
             android:id="@+id/name_title"
@@ -80,12 +89,10 @@
             android:textSize="18dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_address"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/colour_bar" />
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/colour_bar" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -94,6 +101,11 @@
             android:layout_alignRight="@+id/iv_iphone"
             android:layout_centerVertical="true"
             android:src="@drawable/arrows" />
+        <TextView
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="#80d0f2"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -188,6 +200,7 @@
             android:textSize="18dp" />
 
         <TextView
+            android:id="@+id/addresstext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -208,6 +221,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_below="@+id/addresstext"
             android:text="快递费用:"
             android:textSize="18dp"
             android:visibility="visible" />
@@ -278,8 +292,8 @@
             android:orientation="vertical"
             >
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:id="@+id/rb_ali"
                 android:background="@drawable/radio_"
                 android:button="@null"
@@ -288,11 +302,8 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"/>
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/rb_ali"
-                android:layout_marginRight="20dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:id="@+id/rb_wechat"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
@@ -305,7 +316,6 @@
         <!--<RadioGroup-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content">-->
-
             <!--<RadioButton-->
                 <!--android:id="@+id/rb_ali"-->
                 <!--android:layout_width="wrap_content"-->

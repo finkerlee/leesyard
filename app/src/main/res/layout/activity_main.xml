@@ -79,13 +79,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     android:text="李氏福利社"
                     android:textColor="@color/main_tab_btn_pressed"
                     android:id="@+id/textView20" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/more"
+                    android:layout_marginTop="3dp"
                     android:layout_alignBottom="@+id/textView20"
                     android:layout_alignRight="@+id/iv_image"
                     android:layout_alignEnd="@+id/iv_image"
@@ -97,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:orientation="horizontal">
 
                     <ImageButton
@@ -198,6 +202,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:text="常用工具"
                         android:textColor="@color/main_tab_btn_pressed" />
                 </LinearLayout>
@@ -208,7 +213,7 @@
                     android:layout_below="@id/iv_text"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="5dp">
 
                     <LinearLayout
                         android:id="@+id/iv_culture"

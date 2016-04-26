@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.lijiadayuan.lishijituan.RegistrationActivity">
-
-    <include layout="@layout/common_title" />
-
+    tools:context="com.lijiadayuan.lishijituan.ReceiveActivity">
+    <include
+        layout="@layout/common_title"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,26 +16,20 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="性别"
-        android:padding="20dp" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="民族"
-        android:padding="20dp" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:hint="联系方式"
         android:padding="20dp" />
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:text="报名材料上传" />
+        android:hint="收货地址"
+        android:padding="20dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="情况说明"
+        android:padding="20dp" />
 
     <LinearLayout
         android:id="@+id/ll_photo"
@@ -49,16 +42,18 @@
             android:layout_height="wrap_content"
             android:src="@drawable/upload" />
     </LinearLayout>
-    <Button
-        android:id="@+id/i_want_receive"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_button_color"
-        android:text="上传资料"
-        android:textColor="@color/color_white"
-        android:textAlignment="center"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btn_receive"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_button_color"
+            android:text="上传资料"
+            android:textColor="@color/color_white"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 </LinearLayout>

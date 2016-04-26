@@ -12,16 +12,15 @@ import android.widget.Toast;
 
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
 
-
 public class SharingResourceActivity extends Activity implements OnClickListener {
     private TextView tvTitle;
     private ImageView imageback;
     private GridView gridView;
     //图片ID数组
     private int[] images = new int[]{
-            R.drawable.ad, R.drawable.ad, R.drawable.ad,
-            R.drawable.ad, R.drawable.ad, R.drawable.ad,
-            R.drawable.ad, R.drawable.ad, R.drawable.ad};
+            R.mipmap.zy1, R.mipmap.zy2, R.mipmap.zy3,
+            R.mipmap.zy4, R.mipmap.zy5, R.mipmap.zy6,
+            R.mipmap.zy7, R.mipmap.zy8, R.mipmap.zy9,R.mipmap.zy10,R.mipmap.zy12};
     private PictureAdapter adapter ;
 
     @Override

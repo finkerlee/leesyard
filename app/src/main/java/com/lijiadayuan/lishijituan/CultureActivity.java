@@ -29,8 +29,8 @@ public class CultureActivity extends Activity implements OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_culture);
-        adapter = new PictureAdapter(images, this, R.layout.image);
-        PictureAdapter adapter = new PictureAdapter(images, this, R.layout.large_image);
+        adapter = new PictureAdapter(images, this, R.layout.culture_image);
+        PictureAdapter adapter = new PictureAdapter(images, this, R.layout.culture_image);
         findViewById();
         initView();
 
@@ -54,7 +54,7 @@ public class CultureActivity extends Activity implements OnClickListener{
 //                    }
 //                });
                 if (4 == images2)
-                    startActivity(new Intent(CultureActivity.this,RegistrationActivity.class));
+                    startActivity(new Intent(CultureActivity.this,LishiactivityActivity.class));
                 else if(1==images2)
                     startActivity(new Intent(CultureActivity.this,ZuxunActivity.class));
                 else if(2==images2)

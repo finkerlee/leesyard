@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,24 +30,22 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.lijiadayuan.lishijituan.bean.Users;
-import com.lijiadayuan.lishijituan.http.UrlConstants;
-import com.lijiadayuan.lishijituan.utils.CheckSDcard;
-import com.lijiadayuan.lishijituan.utils.ComPressPicUtil;
+import com.lijiadayuan.lishijituan.http.UrlConstants;;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UpLoadImageTask;
 import com.lijiadayuan.lishijituan.utils.UpLoadPicCallBack;
 import com.lijiadayuan.lishijituan.view.photoscorrect;
 
 
-import java.io.DataOutputStream;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MineActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout address,dimensional,member,welfare,join,mymessage,parent;
@@ -333,6 +332,30 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
+    //两次退出
+    private static Boolean isQuit = false;
+    Timer timer = new Timer();
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (isQuit == false) {
+                isQuit = true;
+                Toast.makeText(getBaseContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
+                TimerTask task = null;
+                task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        isQuit = false;
+                    }
+                };
+                timer.schedule(task, 2000);
+            } else {
+                finish();
+                System.exit(0);
+            }
+        }
+        return true;
+    }
 
 }
 

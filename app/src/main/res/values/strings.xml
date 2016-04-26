@@ -12,4 +12,5 @@
     <string name="registration_code">请输入验证码</string>
     <string name="verification_code_no">验证码输入不正确</string>
     <string name="argree_userment">请同意用户协议</string>
+    <string name="registration_failure">注册失败,请重试</string>
 </resources>

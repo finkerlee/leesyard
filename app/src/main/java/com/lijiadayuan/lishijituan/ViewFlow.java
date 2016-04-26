@@ -49,7 +49,6 @@ import com.lijiadayuan.lishijituan.R;
  * @author http://blog.csdn.net/finddreams
  */
 public class ViewFlow extends AdapterView<Adapter> {
-
 	private static final int SNAP_VELOCITY = 1000;
 	private static final int INVALID_SCREEN = -1;
 	private final static int TOUCH_STATE_REST = 0;
