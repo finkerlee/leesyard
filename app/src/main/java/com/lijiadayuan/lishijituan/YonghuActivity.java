@@ -128,36 +128,41 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.getVerfication:
-                new Thread() {
-                    @Override
-                    public void run() {
-                        verificationCode = VerficationUtil.getVerficationCode();
-                        HashMap result = VerficationUtil.get(etphone.getText().toString(), verificationCode);
-                        if (VerficationUtil.OK.equals(result.get("statusCode"))) {
-                            //TODO 正常
-                            Log.i(TAG, "正常");
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    setCountDown();
-                                    Toast.makeText(YonghuActivity.this, "验证码已发送", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        } else {
-                            Log.i(TAG, "异常");
-                            Log.i(TAG, result.get("statusMsg") + "");
-                            //TODO 异常
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(YonghuActivity.this, "验证码发送失败", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                        //getVerfication();
+                if (VerficationUtil.checkMobile(this, etphone.getText().toString())){
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            verificationCode = VerficationUtil.getVerficationCode();
+                            HashMap result = VerficationUtil.get(etphone.getText().toString(), verificationCode);
+                            if (VerficationUtil.OK.equals(result.get("statusCode"))) {
+                                //TODO 正常
+                                Log.i(TAG, "正常");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setCountDown();
+                                        Toast.makeText(YonghuActivity.this, "验证码已发送", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                Log.i(TAG, "异常");
+                                Log.i(TAG, result.get("statusMsg") + "");
+                                //TODO 异常
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(YonghuActivity.this, "验证码发送失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                            //getVerfication();
 
-                    }
-                }.start();
+                        }
+                    }.start();
+                }else{
+                    Toast.makeText(YonghuActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                }
+
 //
 //                Log.i(TAG,"8888888888888");
 //                if (!etphone.getText().toString().isEmpty()){
@@ -223,17 +228,21 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
                             JsonObject json = mJsonParser.parse(response).getAsJsonObject();
                             String result = json.get("response_status").getAsString();
                             if ("success".equals(result)) {
-                                int data = json.get("response_data").getAsInt();
-                                if (data == 0) {
-                                    Toast.makeText(YonghuActivity.this, R.string.register_failure, Toast.LENGTH_SHORT).show();
-                                } else if (data == 1) {
-                                    Toast.makeText(YonghuActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(YonghuActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                } else if (data == -1) {
-                                    Toast.makeText(YonghuActivity.this, "该用户名已存在", Toast.LENGTH_SHORT).show();
-                                } else if (data == -2) {
-                                    Toast.makeText(YonghuActivity.this, "手机号不可用", Toast.LENGTH_SHORT).show();
+                                if (json.get("response_data").isJsonNull()){
+                                    Toast.makeText(YonghuActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    int data = json.get("response_data").getAsInt();
+                                    if (data == 0) {
+                                        Toast.makeText(YonghuActivity.this, R.string.register_failure, Toast.LENGTH_SHORT).show();
+                                    } else if (data == 1) {
+                                        Toast.makeText(YonghuActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(YonghuActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+                                    } else if (data == -1) {
+                                        Toast.makeText(YonghuActivity.this, "该用户名已存在", Toast.LENGTH_SHORT).show();
+                                    } else if (data == -2) {
+                                        Toast.makeText(YonghuActivity.this, "手机号不可用", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }else{
 

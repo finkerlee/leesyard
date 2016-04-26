@@ -92,6 +92,7 @@ public class LoginActivity extends BaseActivity {
                                 Users user = mGson.fromJson(data,Users.class);
                                 System.out.println("user: ========" + data.toString());
                                 SharedPreferences.Editor editor = SharedPreferences.edit();
+                                editor.clear();
                                 editor.putString(KeyConstants.UserInfoKey.userId,user.getUserId());
                                 editor.putString(KeyConstants.UserInfoKey.userName, user.getUserName());
                                 editor.putString(KeyConstants.UserInfoKey.userNick, user.getUserNick());
@@ -106,6 +107,7 @@ public class LoginActivity extends BaseActivity {
                                     intent.putExtra(KeyConstants.UserInfoKey.userInfo,user);
                                     startActivity(intent);
                                 }else{
+                                    setResult(MineActivity.HEAD_IMAGE);
                                     finish();
                                 }
 
