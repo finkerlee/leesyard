@@ -197,7 +197,7 @@ public class MemberActivity extends Activity implements OnClickListener {
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.iv_cancel:
+            case R.id.tv_cancel:
                 dialog.dismiss();
                 break;
             case R.id.tv_gallery://相册获取

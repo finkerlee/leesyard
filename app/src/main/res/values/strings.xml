@@ -3,9 +3,13 @@
     <string name="login_username">请输入用户名/手机号</string>
     <string name="login_password">请输入密码</string>
     <string name="login_failure">登录失败,请重试</string>
+    <string name="register_failure">注册失败,请重试</string>
     <string name="registration_username">请输入用户名</string>
     <string name="registration_phonenum">请输入手机号</string>
     <string name="registration_password">请输入密码</string>
     <string name="registration_password2">请再次输入密码</string>
+    <string name="twice_password_no">俩次密码输入不一致</string>
     <string name="registration_code">请输入验证码</string>
+    <string name="verification_code_no">验证码输入不正确</string>
+    <string name="argree_userment">请同意用户协议</string>
 </resources>

@@ -72,7 +72,7 @@
                     android:text="用户等级LV."
                     />
                 <TextView
-                    android:id="@+id/user_level"
+                    android:id="@+id/tv_user_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="13"/>

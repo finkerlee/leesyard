@@ -36,7 +36,7 @@ public class PhotosDialog extends Dialog {
                 WindowManager.LayoutParams.WRAP_CONTENT);
         tvGallery = (TextView) findViewById(R.id.tv_gallery);
         tvPhoto = (TextView) findViewById(R.id.tv_photo);
-        tvCancel = (TextView) findViewById(R.id.iv_cancel);
+        tvCancel = (TextView) findViewById(R.id.tv_cancel);
         tvGallery.setOnClickListener(RegistrationActivity.getInstance());
         tvPhoto.setOnClickListener(RegistrationActivity.getInstance());
         tvCancel.setOnClickListener(RegistrationActivity.getInstance());

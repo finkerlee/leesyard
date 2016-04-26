@@ -15,8 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,6 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
@@ -79,20 +80,23 @@ public class LoginActivity extends BaseActivity {
                     /** 重写onResponse,以实现请求响应的操作 **/
                     @Override
                     public void onResponse(String response) {
-                        JSONObject json = JSON.parseObject(response);
-                        String result = json.getString("response_status");
+                        JsonParser mJsonParser = new JsonParser();
+                        JsonObject json = mJsonParser.parse(response).getAsJsonObject();
+                        String result = json.get("response_status").getAsString();
                         if ("success".equals(result)){
-                            JSONObject data = json.getJSONObject("response_data");
-                            if (data.isEmpty())
+                            JsonObject data = json.get("response_data").getAsJsonObject();
+                            if (data.isJsonNull())
                                 Toast.makeText(LoginActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
                             else {
-                                Users user = JSON.parseObject(data.toString(), Users.class);
+                                Gson mGson = new Gson();
+                                Users user = mGson.fromJson(data,Users.class);
                                 System.out.println("user: ========" + data.toString());
                                 SharedPreferences.Editor editor = SharedPreferences.edit();
                                 editor.putString(KeyConstants.UserInfoKey.userId,user.getUserId());
                                 editor.putString(KeyConstants.UserInfoKey.userName, user.getUserName());
                                 editor.putString(KeyConstants.UserInfoKey.userNick, user.getUserNick());
                                 editor.putString(KeyConstants.UserInfoKey.userPhone, user.getUserPhone());
+                                editor.putString(KeyConstants.UserInfoKey.userPassword, user.getUserPassword());
                                 editor.putString(KeyConstants.UserInfoKey.userHeadImage, user.getUserAvatar());
                                 editor.putBoolean(KeyConstants.UserInfoKey.userIsLogin, true);
                                 editor.commit();
@@ -102,8 +106,6 @@ public class LoginActivity extends BaseActivity {
                                     intent.putExtra(KeyConstants.UserInfoKey.userInfo,user);
                                     startActivity(intent);
                                 }else{
-                                    intent.putExtra(KeyConstants.UserInfoKey.userInfo,user);
-                                    setResult(MineActivity.HEAD_IMAGE,intent);
                                     finish();
                                 }
 

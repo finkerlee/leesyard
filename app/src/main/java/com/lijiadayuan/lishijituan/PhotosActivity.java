@@ -20,7 +20,7 @@ public class PhotosActivity extends Activity implements OnClickListener {
     }
     protected void findViewById() {
 
-        text = (TextView) findViewById(R.id.iv_cancel);
+        text = (TextView) findViewById(R.id.tv_cancel);
     }
     protected void initView() {
         text.setOnClickListener(this);
@@ -29,7 +29,7 @@ public class PhotosActivity extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_cancel:
+            case R.id.tv_cancel:
                 finish();
                 break;
             default:

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -16,11 +17,12 @@ import com.lijiadayuan.lishijituan.R;
  */
 public class photoscorrect extends Dialog {
     private TextView tvGallery, tvPhoto, tvCancel;
-
+    private View.OnClickListener mListener;
 
     public photoscorrect(Context context, int theme) {
         super(context,theme);
         Window window = this.getWindow();
+        mListener = (View.OnClickListener) context;
         window.setGravity(Gravity.BOTTOM);
     }
 
@@ -34,9 +36,9 @@ public class photoscorrect extends Dialog {
                 WindowManager.LayoutParams.WRAP_CONTENT);
         tvGallery = (TextView) findViewById(R.id.tv_gallery);
         tvPhoto = (TextView) findViewById(R.id.tv_photo);
-        tvCancel = (TextView) findViewById(R.id.iv_cancel);
-        tvGallery.setOnClickListener(MemberActivity.getInstance());
-        tvPhoto.setOnClickListener(MemberActivity.getInstance());
-        tvCancel.setOnClickListener(MemberActivity.getInstance());
+        tvCancel = (TextView) findViewById(R.id.tv_cancel);
+        tvGallery.setOnClickListener(mListener);
+        tvPhoto.setOnClickListener(mListener);
+        tvCancel.setOnClickListener(mListener);
     }
 }

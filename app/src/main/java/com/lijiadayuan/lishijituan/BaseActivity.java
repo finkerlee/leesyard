@@ -32,13 +32,11 @@ import javax.xml.parsers.SAXParserFactory;
 public abstract class BaseActivity extends Activity {
 
 	protected LeeApplication app;
-    protected SharedPreferences mSharedPreferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (LeeApplication) getApplication();
-		mSharedPreferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
 	}
 
 	/**

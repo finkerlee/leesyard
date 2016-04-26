@@ -2,6 +2,7 @@ package com.lijiadayuan.lishijituan;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,24 +16,37 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.lijiadayuan.lishijituan.bean.Users;
+import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.CheckSDcard;
 import com.lijiadayuan.lishijituan.utils.ComPressPicUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
-import com.lijiadayuan.lishijituan.view.CircleTextImageView;
+import com.lijiadayuan.lishijituan.utils.UpLoadImageTask;
+import com.lijiadayuan.lishijituan.utils.UpLoadPicCallBack;
+import com.lijiadayuan.lishijituan.view.photoscorrect;
 
+
+import java.io.DataOutputStream;
 import java.io.File;
-import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MineActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout address,dimensional,member,welfare,join,mymessage,parent;
@@ -42,6 +56,10 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     private Boolean isLogin;
     private TextView mTvUserName,mTvUserLevel;
     private PopupWindow mPopupWindow;
+    private photoscorrect dialog;
+
+    protected SharedPreferences mSharedPreferences;
+
 
     public static final int HEAD_IMAGE = 100;
 
@@ -53,6 +71,10 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     private static final int REQUESTCODE_CROP = 3;
 
     private static final String IMAGE_FILE_NAME = "lishijituan";
+
+    /* 头像名称 */
+    private static final String PHOTO_FILE_NAME = "temp_photo.jpg";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +82,14 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 //        if (getIntent() != null){
 //            mUsers = (Users) getIntent().getExtras().get(KeyConstants.UserInfoKey.userInfo);
 //        }
+        mSharedPreferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
         isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin, false);
         initView();
 
     }
 
     protected void initView() {
+        dialog = new photoscorrect(this, R.style.protocol_dialog);
         parent = (RelativeLayout) findViewById(R.id.parent);
         address = (RelativeLayout)findViewById(R.id.ship_address);
         setting = (ImageView) findViewById(R.id.iv_setting);
@@ -76,7 +100,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         mymessage= (RelativeLayout) findViewById(R.id.iv_mymessage);
         headImage = (SimpleDraweeView) findViewById(R.id.iv_avatar);
         mTvUserName = (TextView) findViewById(R.id.iv_name);
-        //mTvUserLevel = (TextView) findViewById(R.id.user_level);
+        mTvUserLevel = (TextView) findViewById(R.id.tv_user_level);
 
         findViewById(R.id.myorder).setOnClickListener(this);
         welfare.setOnClickListener(this);
@@ -89,6 +113,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         headImage.setOnClickListener(this);
 
         if (isLogin){
+            setViewByData();
             String headImagePath = mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage, "");
             Log.i("main",headImagePath);
             if ("".equals(headImagePath)){
@@ -131,9 +156,10 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
             case R.id.iv_avatar:
                 if (isLogin){
                     //修改头像
-                    Toast.makeText(MineActivity.this, "修改头像", Toast.LENGTH_SHORT).show();
-                    showPopWindow();
-
+//                    Toast.makeText(MineActivity.this, "修改头像", Toast.LENGTH_SHORT).show();
+//                    showPopWindow();
+                    dialog.show();
+//                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 }else{
                     //跳转到登陆页面
                     Toast.makeText(MineActivity.this, "跳转到登陆页面", Toast.LENGTH_SHORT).show();
@@ -143,25 +169,33 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 }
                 break;
 
-            case R.id.button1:
+            case R.id.tv_gallery:
                 Intent pickIntent = new Intent(Intent.ACTION_PICK, null);
                 // 如果朋友们要限制上传到服务器的图片类型时可以直接写如：image/jpeg 、 image/png等的类型
                 pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 				startActivityForResult(pickIntent, REQUESTCODE_PICK);
+                dialog.dismiss();
                 break;
-            case R.id.button2:
+            case R.id.tv_photo:
                 Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //下面这句指定调用相机拍照后的照片存储的路径
                 takeIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME)));
+                        Uri.fromFile(new File(Environment.getExternalStorageDirectory(), PHOTO_FILE_NAME)));
                 startActivityForResult(takeIntent, REQUESTCODE_TAKE);
+                dialog.dismiss();
                 break;
-            case R.id.button3:
-                mPopupWindow.dismiss();
+            case R.id.tv_cancel:
+                dialog.dismiss();
                 break;
             case R.id.myorder:
                 Intent intent = new Intent(this,MyOrderActivity.class);
                 startActivity(intent);
+
+//                Intent takeIntent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                //下面这句指定调用相机拍照后的照片存储的路径
+//                takeIntent1.putExtra(MediaStore.EXTRA_OUTPUT,
+//                        Uri.fromFile(new File(Environment.getExternalStorageDirectory(), PHOTO_FILE_NAME)));
+//                startActivityForResult(takeIntent1, REQUESTCODE_TAKE);
                 break;
             default:
                 break;
@@ -172,12 +206,11 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("main",requestCode+"");
+        Log.i("main", requestCode + "");
         if (requestCode == HEAD_IMAGE){
             if (resultCode == HEAD_IMAGE){
                 isLogin = true;
-                mUsers = (Users) data.getExtras().get(KeyConstants.UserInfoKey.userInfo);
-                setViewByData(mUsers);
+                setViewByData();
             }
         }
         //相册
@@ -187,7 +220,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         }
         //相机
         if (requestCode == REQUESTCODE_TAKE){
-            File temp = new File(Environment.getExternalStorageDirectory() + "/" + IMAGE_FILE_NAME);
+            File temp = new File(Environment.getExternalStorageDirectory() + "/" + PHOTO_FILE_NAME);
             startPhotoZoom(Uri.fromFile(temp));
         }
         //裁减
@@ -197,26 +230,15 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void setViewByData(Users mUsers) {
-        mTvUserName.setText(mUsers.getUserName());
-        //mTvUserLevel.setText(mUsers.getUserLevel());
-        if (!"".equals(mUsers.getUserAvatar())){
-            headImage.setImageURI(Uri.parse(mUsers.getUserAvatar()));
+    private void setViewByData() {
+        mTvUserName.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userNick,"默认"));
+        mTvUserLevel.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userLevel,"1"));
+        String mHeadImage = mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage,"");
+        if (!"".equals(mHeadImage)){
+            headImage.setImageURI(Uri.parse(mHeadImage));
         }else{
             headImage.setBackgroundResource(R.drawable.user_normol_head_image);
         }
-    }
-
-    private void showPopWindow(){
-        View view = View.inflate(this,R.layout.layout_select_pic_style,null);
-        mPopupWindow = new PopupWindow();
-        mPopupWindow.setContentView(view);
-        mPopupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        mPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
-        view.findViewById(R.id.button1).setOnClickListener(this);
-        view.findViewById(R.id.button2).setOnClickListener(this);
-        view.findViewById(R.id.button3).setOnClickListener(this);
     }
 
 
@@ -245,23 +267,70 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
      */
     private void setPicToView(Intent picdata) {
         Bundle extras = picdata.getExtras();
+        String imagePath = Environment.getExternalStorageDirectory() + "/" + PHOTO_FILE_NAME;
+//        final File file = new File(imagePath);
         if (extras != null) {
             // 取得SDCard图片路径做显示
-            Bitmap photo = extras.getParcelable("data");
-//            //将bitmap进行压缩转换成输入流的形式
-//            InputStream inputStream = ComPressPicUtil.Bitmap2IS(ComPressPicUtil.compressImageByLength(photo));
-//
-//          //TODO 创建请求队列  上传照片
-//            RequestQueue mQueue = app.getRequestQueue();
-            Drawable drawable = new BitmapDrawable(photo);
-            headImage.setBackground(drawable);
-            RoundingParams roundingParams = RoundingParams.fromCornersRadius(90f);
-            roundingParams.setOverlayColor(Color.WHITE);
-            headImage.getHierarchy().setRoundingParams(roundingParams);
+            final Bitmap photo = extras.getParcelable("data");
+            UpLoadImageTask mTask = (UpLoadImageTask) new UpLoadImageTask(this,photo) .execute(UrlConstants.UPLOAD_AVATAR);
+            mTask.setCallBACK(new UpLoadPicCallBack() {
+                @Override
+                public void setCompleteImage(String iamgePic) {
+                    headImage.setImageURI(Uri.parse(iamgePic));
+                    Log.i("main", mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage, ""));
+                    SharedPreferences.Editor mEditor =mSharedPreferences.edit();
+                    mEditor.putString(KeyConstants.UserInfoKey.userHeadImage, iamgePic);
+                    mEditor.commit();
+                    Log.i("main", mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage, ""));
 
+                    UpDataHeadImage(iamgePic);
 
+                }
+            });
 
         }
+    }
+
+    /**
+     * 修改头像
+     */
+    private void UpDataHeadImage(final String iamgePic) {
+        // 创建请求队列
+        RequestQueue mQueue = app.getRequestQueue();
+        // 创建一个字符串请求
+        StringRequest request = new StringRequest(Request.Method.POST, UrlConstants.AVATAR, new Response.Listener<String>() {
+            /** 重写onResponse,以实现请求响应的操作 **/
+            @Override
+            public void onResponse(String response) {
+                JsonParser mJsonParser = new JsonParser();
+                JsonObject json = mJsonParser.parse(response).getAsJsonObject();
+                String result = json.get("response_status").getAsString();
+                if ("success".equals(result)){
+                    if ("1".equals(json.get("response_data").getAsString())){
+                        Toast.makeText(MineActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            /** 在StringRequest的匿名内部类中重写getParams方法,用于传递请求参数 **/
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("userId",mSharedPreferences.getString(KeyConstants.UserInfoKey.userId,""));
+                params.put("userAvatar", iamgePic);
+                return params;
+            }
+        };
+        // 将请求添加到请求队列中(即发送请求)
+        mQueue.add(request);
+
     }
 
 
