@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="李"
+                android:layout_marginLeft="10dp"
                 android:textSize="18dp"
                 android:textColor="@color/main_tab_btn_pressed"/>
             <EditText
@@ -31,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00ffffff"
+                android:maxLength="3"
                 android:hint="请输入您的名字"/>
         </LinearLayout>
         <LinearLayout
@@ -67,6 +69,7 @@
         android:layout_height="wrap_content"
         android:padding="17dp"
         android:hint="请输入您的手机号码"
+        android:maxLength="11"
         android:background="@drawable/rounded_edittext"
         android:layout_below="@+id/linearLayout9"
         android:layout_marginTop="20dp"
@@ -79,6 +82,7 @@
         android:layout_height="wrap_content"
         android:padding="17dp"
         android:hint="请输入您的身份证号"
+        android:maxLength="18"
         android:background="@drawable/rounded_edittext"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/editText"

@@ -52,7 +52,7 @@ public class MemberActivity extends Activity implements OnClickListener {
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         findViewById();
         initView();
-    }
+    }   
 
     protected void findViewById() {
         tvTitle = (TextView) findViewById(R.id.text_title);
