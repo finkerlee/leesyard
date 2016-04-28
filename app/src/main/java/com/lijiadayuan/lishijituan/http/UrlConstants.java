@@ -18,4 +18,9 @@ public interface UrlConstants {
     String MODIFY_PASSWORD = USER_BASE + "modifyPassword";              // 修改密码
     String FORGET_PASSWORD=USER_BASE+"forgetPassword";                  // 忘记密码
 
+    //福利商品
+    String WELFARE = BASE_URL + "benefit/all";
+    //商品详情URL
+    String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
+    String  CERTIFICATION   = BASE_URL+"verify/"+"apply";                         //认证连接
 }

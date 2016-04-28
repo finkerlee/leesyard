@@ -79,8 +79,7 @@ public class UpLoadImageTask extends AsyncTask<String, Integer, String>{
 //     * @param uploadFile
 //     * @return
 //     */
-    private static String uploadFile(String uploadUrl, String newName,
-                                     Bitmap bitmap) {
+    private static String uploadFile(String uploadUrl, String newName, Bitmap bitmap) {
         String end = "\r\n";
         String twoHyphens = "--";
         String boundary = "*****";
@@ -141,7 +140,7 @@ public class UpLoadImageTask extends AsyncTask<String, Integer, String>{
         return null;
     }
 
-    public void setCallBACK(UpLoadPicCallBack mCallback){
+    public void setCallBACK(UpLoadPicCallBack mCallback)    {
         this.mCallback = mCallback;
     }
 

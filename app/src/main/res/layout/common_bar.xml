@@ -8,11 +8,12 @@
     android:layout_marginTop="5dp">
 
     <ImageView
+        android:id="@+id/iv_address"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/location_red"
+        android:src="@drawable/location_red"
         android:layout_marginLeft="20dp" />
     <TextView
         android:id="@+id/tv_title"
@@ -26,6 +27,7 @@
         android:background="#b4b4b4"
         android:layout_alignParentBottom="true"/>
     <ImageView
+        android:id="@+id/iv_messsage"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerVertical="true"

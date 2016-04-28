@@ -201,8 +201,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("main", requestCode + "");
@@ -215,7 +213,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         //相册
         if (requestCode == REQUESTCODE_PICK){
             startPhotoZoom(data.getData());
-
         }
         //相机
         if (requestCode == REQUESTCODE_TAKE){
@@ -239,7 +236,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
             headImage.setBackgroundResource(R.drawable.user_normol_head_image);
         }
     }
-
 
     /**
      * 裁剪图片方法实现
@@ -266,8 +262,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
      */
     private void setPicToView(Intent picdata) {
         Bundle extras = picdata.getExtras();
-        String imagePath = Environment.getExternalStorageDirectory() + "/" + PHOTO_FILE_NAME;
-//        final File file = new File(imagePath);
         if (extras != null) {
             // 取得SDCard图片路径做显示
             final Bitmap photo = extras.getParcelable("data");
@@ -276,12 +270,9 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 @Override
                 public void setCompleteImage(String iamgePic) {
                     headImage.setImageURI(Uri.parse(iamgePic));
-                    Log.i("main", mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage, ""));
                     SharedPreferences.Editor mEditor =mSharedPreferences.edit();
                     mEditor.putString(KeyConstants.UserInfoKey.userHeadImage, iamgePic);
                     mEditor.commit();
-                    Log.i("main", mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage, ""));
-
                     UpDataHeadImage(iamgePic);
 
                 }
@@ -293,6 +284,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 修改头像
      */
+
     private void UpDataHeadImage(final String iamgePic) {
         // 创建请求队列
         RequestQueue mQueue = app.getRequestQueue();
@@ -331,31 +323,5 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         mQueue.add(request);
 
     }
-
-    //两次退出
-    private static Boolean isQuit = false;
-    Timer timer = new Timer();
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (isQuit == false) {
-                isQuit = true;
-                Toast.makeText(getBaseContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
-                TimerTask task = null;
-                task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        isQuit = false;
-                    }
-                };
-                timer.schedule(task, 2000);
-            } else {
-                finish();
-                System.exit(0);
-            }
-        }
-        return true;
-    }
-
 }
 

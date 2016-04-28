@@ -16,6 +16,7 @@ public class PaintingActivity extends Activity implements View.OnClickListener{
         findViewById();
         initView();
     }
+
     protected void findViewById(){
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);

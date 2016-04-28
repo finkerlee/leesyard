@@ -4,16 +4,35 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lijiadayuan.lishijituan.adapter.ImageAdapter;
+import com.lijiadayuan.lishijituan.bean.ProductViewBean;
+import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
+import com.lijiadayuan.lishijituan.utils.KeyConstants;
 
 import java.util.ArrayList;
 
 public class ProductBaseActivity extends BaseActivity implements OnClickListener {
+    //购买页面
+    public static final int BUY_GOODS = 1;
+    //赠品页面
+    public static final int GIFT_GOODS = 0;
+    //视图bean
+    private ProductViewBean mProductViewBean;
+
     private ViewFlow mViewFlow;
     private ImageView iv_back;
+    private WebView mWbGoodsInfo;
+    private TextView mTvGoodsName,mTvGoodsNum,mTvGoodsPrice,mTvGoodsSpec;
+
+
+
+
+
     ArrayList<String> linkUrlArray= new ArrayList<String>();
     private CircleFlowIndicator mFlowIndicator;
     private ArrayList<String> imageUrlList = new ArrayList<String>();
@@ -22,6 +41,8 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_base);
+        mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
+
         imageUrlList
                 .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
         imageUrlList
@@ -38,16 +59,45 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                 .add("");
         linkUrlArray
                 .add("");
-        findViewById();
+        initView();
+        //加载轮播图
         initBanner(imageUrlList);
+        //将数据加载到视图
+        setViewByData();
     }
 
-    protected void findViewById(){
+    /**
+     * 将数据加载到视图
+     */
+    private void setViewByData() {
+        mWbGoodsInfo.loadUrl(mProductViewBean.getGoodsInfoUrl());
+        mTvGoodsName.setText(mProductViewBean.getGoodsName());
+        mTvGoodsNum.setText(mProductViewBean.getGoodsNum());
+        mTvGoodsPrice.setText(mProductViewBean.getGoodsPrice());
+        mTvGoodsSpec.setText(mProductViewBean.getGoodsSpec());
+
+    }
+
+    protected void initView(){
         mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
         iv_back = (ImageView)findViewById(R.id.iv_back);
-        iv_back.setOnClickListener(this);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
-        findViewById(R.id.i_want_receive).setOnClickListener(this);
+
+        mWbGoodsInfo = (WebView) findViewById(R.id.WebView);
+        mTvGoodsName = (TextView) findViewById(R.id.tv_goods_name);
+        mTvGoodsNum = (TextView) findViewById(R.id.tv_goods_num);
+        mTvGoodsPrice = (TextView) findViewById(R.id.tv_goods_price);
+        mTvGoodsSpec = (TextView) findViewById(R.id.tv_goods_spec);
+        mBtnReceive = (Button) findViewById(R.id.i_want_receive);
+
+        mBtnReceive.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
+
+        if (mProductViewBean.getGoodsType() == BUY_GOODS) {
+            mBtnReceive.setText("我要购买");
+        }else{
+            mBtnReceive.setText("我要领取");
+        }
     }
     private void initBanner(ArrayList<String> imageUrlList) {
 
@@ -65,10 +115,10 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     @Override
     public void onClick(View v) {
        switch (v.getId()){
-//           case R.id.i_want_receive:
-//               Intent intent = new Intent(this,ReceiveActivity.class);
-//               startActivity(intent);
-//           break;
+           case R.id.i_want_receive:
+               Intent intent = new Intent(this,ReceiveActivity.class);
+               startActivity(intent);
+           break;
            case R.id.iv_back:
                finish();
                break;
