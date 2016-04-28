@@ -11,35 +11,34 @@ public class OrderActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
-        rbAli = (RadioButton) findViewById(R.id.rb_ali);
-        rbWechat = (RadioButton) findViewById(R.id.rb_wechat);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_order);
+            rbAli = (RadioButton) findViewById(R.id.rb_ali);
+            rbWechat = (RadioButton) findViewById(R.id.rb_wechat);
 
-//        rbAli.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked){
-//                    rbAli.setButtonDrawable(R.drawable.radio_);
-//                    rbWechat.setButtonDrawable(R.drawable.radio_off);
-//                } else{
-//                    rbAli.setButtonDrawable(R.drawable.radio_off);
-//                    rbWechat.setButtonDrawable(R.drawable.radio_);
-//                }
-//            }
-//        });
-//
-//        rbWechat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked){
-//                    rbWechat.setButtonDrawable(R.drawable.radio_);
-//                    rbAli.setButtonDrawable(R.drawable.radio_off);
-//                } else{
-//                    rbWechat.setButtonDrawable(R.drawable.radio_off);
-//                    rbAli.setButtonDrawable(R.drawable.radio_);
-//                }
-//            }
-//        });
+    //        rbAli.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    //            @Override
+    //            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    //                if (isChecked){
+    //                    rbAli.setButtonDrawable(R.drawable.radio_);
+    //                    rbWechat.setButtonDrawable(R.drawable.radio_off);
+    //                } else{
+    //                    rbAli.setButtonDrawable(R.drawable.radio_off);
+    //                    rbWechat.setButtonDrawable(R.drawable.radio_);
+    //                }
+    //            }
+    //        });
+    //        rbWechat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    //            @Override
+    //            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    //                if (isChecked){
+    //                    rbWechat.setButtonDrawable(R.drawable.radio_);
+    //                    rbAli.setButtonDrawable(R.drawable.radio_off);
+    //                } else{
+    //                    rbWechat.setButtonDrawable(R.drawable.radio_off);
+    //                    rbAli.setButtonDrawable(R.drawable.radio_);
+    //                }
+    //            }
+    //        });
     }
 }

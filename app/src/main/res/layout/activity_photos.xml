@@ -12,7 +12,6 @@
         android:background="#ffffff"
         android:layout_alignParentBottom="true">
 
-
         <TextView
             android:id="@+id/tv_gallery"
             android:layout_width="match_parent"

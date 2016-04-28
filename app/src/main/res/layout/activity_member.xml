@@ -27,7 +27,9 @@
                 android:layout_marginLeft="10dp"
                 android:textSize="18dp"
                 android:textColor="@color/main_tab_btn_pressed"/>
+
             <EditText
+                android:id="@+id/et_name"
                 android:padding="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,9 +77,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:id="@+id/editText" />
+        android:id="@+id/et_phoneNum" />
     <EditText
-        android:id="@+id/text"
+        android:id="@+id/et_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="17dp"
@@ -85,25 +87,27 @@
         android:maxLength="18"
         android:background="@drawable/rounded_edittext"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/et_phoneNum"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text"
+        android:layout_below="@+id/et_id"
         android:layout_marginTop="20dp"
         android:id="@+id/linearLayout10">
+
         <ImageView
             android:id="@+id/iv_photos_correct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@drawable/correct_side"
             android:layout_weight="1"/>
+
         <ImageView
             android:id="@+id/iv_photos_opposite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@drawable/opposite_side"
             android:layout_weight="1"/>
     </LinearLayout>

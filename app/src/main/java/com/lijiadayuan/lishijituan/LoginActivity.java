@@ -110,9 +110,6 @@ public class LoginActivity extends BaseActivity {
                                     setResult(MineActivity.HEAD_IMAGE);
                                     finish();
                                 }
-
-
-
                                 Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                             }
                         }else{

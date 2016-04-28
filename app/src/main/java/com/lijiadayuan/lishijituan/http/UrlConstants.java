@@ -17,4 +17,5 @@ public interface UrlConstants {
     String AVATAR = USER_BASE + "avatar";                               // 修改头像
     String MODIFY_PASSWORD = USER_BASE + "modifyPassword";              // 修改/忘记密码
 
+    String  CERTIFICATION   = BASE_URL+"verify/"+"apply";                         //认证连接
 }
