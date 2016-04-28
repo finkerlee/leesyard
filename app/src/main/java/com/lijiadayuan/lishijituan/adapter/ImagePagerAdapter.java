@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.lijiadayuan.lishijituan.BaseWebActivity;
 import com.lijiadayuan.lishijituan.ProductBaseActivity;
 import com.lijiadayuan.lishijituan.R;
+import com.lijiadayuan.lishijituan.bean.ProductViewBean;
+import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -116,8 +118,16 @@ public class ImagePagerAdapter extends BaseAdapter {
 //				intent.putExtras(bundle);
 //
 //				context.startActivity(intent);
-				Toast.makeText(context, "点击了第" + getPosition(position) + "美女", Toast.LENGTH_SHORT).show();
 
+				ProductViewBean mProductViewBean = new ProductViewBean();
+				mProductViewBean.setGoodsPrice("222");
+				mProductViewBean.setGoodsNum("10");
+				mProductViewBean.setGoodsName("浪漫八音盒");
+				mProductViewBean.setGoodsInfoUrl("www.baidu.com");
+				Intent mIntent = new Intent(context,ProductBaseActivity.class);
+				mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.BUY_GOODS);
+				mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
+				context.startActivity(mIntent);
 			}
 		});
 

@@ -34,6 +34,8 @@ import java.util.Map;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
+    public static final int LOGIN = 99;
+
 
     private TextView register;
     private TextView forgetpass;
@@ -85,7 +87,7 @@ public class LoginActivity extends BaseActivity {
                         String result = json.get("response_status").getAsString();
                         if ("success".equals(result)){
                             JsonObject data = json.get("response_data").getAsJsonObject();
-                            if (data.isJsonNull())
+                            if (data.isJsonNull()||!data.has("userAvatar"))
                                 Toast.makeText(LoginActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
                             else {
                                 Gson mGson = new Gson();
@@ -99,6 +101,7 @@ public class LoginActivity extends BaseActivity {
                                 editor.putString(KeyConstants.UserInfoKey.userPhone, user.getUserPhone());
                                 editor.putString(KeyConstants.UserInfoKey.userPassword, user.getUserPassword());
                                 editor.putString(KeyConstants.UserInfoKey.userHeadImage, user.getUserAvatar());
+                                editor.putBoolean(KeyConstants.UserInfoKey.userIfLee, user.getUserIfLee() == 1 ? true:false);
                                 editor.putBoolean(KeyConstants.UserInfoKey.userIsLogin, true);
                                 editor.commit();
 
@@ -107,7 +110,8 @@ public class LoginActivity extends BaseActivity {
                                     intent.putExtra(KeyConstants.UserInfoKey.userInfo,user);
                                     startActivity(intent);
                                 }else{
-                                    setResult(MineActivity.HEAD_IMAGE);
+                                    intent.putExtra(KeyConstants.UserInfoKey.userIsLogin,true);
+                                    setResult(LOGIN,intent);
                                     finish();
                                 }
                                 Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
@@ -119,6 +123,7 @@ public class LoginActivity extends BaseActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.i("main",error.toString());
 
                     }
                 }){

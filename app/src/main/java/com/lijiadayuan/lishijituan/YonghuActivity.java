@@ -220,7 +220,7 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
                     // 创建请求队列
                     RequestQueue mQueue = app.getRequestQueue();
                     // 创建一个字符串请求
-                    StringRequest request = new StringRequest(Request.Method.POST, UrlConstants.LOGIN, new Response.Listener<String>() {
+                    StringRequest request = new StringRequest(Request.Method.POST, UrlConstants.REGISTER, new Response.Listener<String>() {
                         /** 重写onResponse,以实现请求响应的操作 **/
                         @Override
                         public void onResponse(String response) {

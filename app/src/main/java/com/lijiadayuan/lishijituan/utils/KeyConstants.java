@@ -47,6 +47,8 @@ public class KeyConstants {
         //跳转到登陆页面时 是怎么样启动的 startActivity startActivityForResult
         public static final String normol = "normol";
         public static final String forResult = "forResult";
+
+
         public static final String productViewBeanType = "productViewBean";
     }
 
