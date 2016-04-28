@@ -7,11 +7,10 @@
     <include
         layout="@layout/common_title"
         android:id="@+id/include16" />
-    <include
-        layout="@layout/culture_gridview"
+    <ListView
+        android:id="@+id/mListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/include16"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        />
 </RelativeLayout>

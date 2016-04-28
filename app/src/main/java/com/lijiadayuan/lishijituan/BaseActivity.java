@@ -19,12 +19,16 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.lijiadayuan.model.ProvinceModel;
 
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -71,6 +75,31 @@ public abstract class BaseActivity extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
 	}
+
+//	//两次退出
+//	private static Boolean isQuit = false;
+//	Timer timer = new Timer();
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		if (keyCode == KeyEvent.KEYCODE_BACK) {
+//			if (isQuit == false) {
+//				isQuit = true;
+//				Toast.makeText(getBaseContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
+//				TimerTask task = null;
+//				task = new TimerTask() {
+//					@Override
+//					public void run() {
+//						isQuit = false;
+//					}
+//				};
+//				timer.schedule(task, 2000);
+//			} else {
+//				finish();
+//				System.exit(0);
+//			}
+//		}
+//		return true;
+//	}
 
 
 }

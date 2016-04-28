@@ -25,6 +25,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile project(':volley')
+    compile project(':adapter')
     //compile 'com.alibaba:fastjson:1.2.0'
     compile 'com.facebook.fresco:fresco:0.5.2'
     compile files('libs/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar')

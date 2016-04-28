@@ -25,4 +25,9 @@ public interface UrlConstants {
     String  LEEVERIFICATION   = BASE_URL+"verify/";
     String  CERTIFICATION   = LEEVERIFICATION + "apply";                //提交认证申请
     String  UPLOAD_IDENTIFY = LEEVERIFICATION + "upload";               //上传身份证照片
+
+    //李氏活动
+    String LEEACTIVITY = BASE_URL + "activity/";
+    String GET_ALL_ACTIVITY = LEEACTIVITY + "all";
+
 }
