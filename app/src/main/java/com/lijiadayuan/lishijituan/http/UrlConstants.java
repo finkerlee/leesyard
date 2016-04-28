@@ -17,4 +17,10 @@ public interface UrlConstants {
     String AVATAR = USER_BASE + "avatar";                               // 修改头像
     String MODIFY_PASSWORD = USER_BASE + "modifyPassword";              // 修改/忘记密码
 
+    //福利商品
+    String WELFARE = BASE_URL + "benefit/all";
+    //商品详情URL
+    String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
+
+
 }

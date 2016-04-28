@@ -42,7 +42,7 @@
                     android:id="@+id/viewflowindic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_gravity="right|bottom"
                     android:padding="2dip"
                     app:activeColor="#ff0000"
                     app:activeType="fill"
@@ -107,7 +107,7 @@
                     <ImageButton
                         android:id="@+id/imageButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/byh_1"
                         android:src="@drawable/rounded_image" />
@@ -115,19 +115,19 @@
                     <ImageButton
                         android:id="@+id/imageButton2"
                         android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="3dp"
                         android:layout_weight="1"
-                        android:background="@drawable/hj_2"
+                        android:background="@drawable/rick_cooker"
                         android:src="@drawable/rounded_image" />
 
                     <ImageButton
                         android:id="@+id/imageButton3"
                         android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/hgq_3"
+                        android:background="@drawable/bodybuilding"
                         android:src="@drawable/rounded_image" />
                 </LinearLayout>
 
@@ -143,7 +143,7 @@
                     <ImageButton
                         android:id="@+id/imageButton4"
                         android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/sj_4"
                         android:src="@drawable/rounded_image" />
@@ -151,7 +151,7 @@
                     <ImageButton
                         android:id="@+id/imageButton5"
                         android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="3dp"
                         android:layout_weight="1"
@@ -161,7 +161,7 @@
                     <ImageButton
                         android:id="@+id/imageButton6"
                         android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/nscs_6"
                         android:src="@drawable/rounded_image" />

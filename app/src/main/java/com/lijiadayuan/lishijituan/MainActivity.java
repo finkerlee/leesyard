@@ -213,7 +213,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 openActivity(SearchActivity.class);
                 break;
             case R.id.iv_more:
-                openActivity(FindActivity.class);
+                openActivity(MoreActivity.class);
                 break;
             default:
                 break;

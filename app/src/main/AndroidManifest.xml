@@ -46,6 +46,8 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".LawActivity" />
         <activity android:name=".MyOrderActivity" />
+        <activity android:name=".MoreActivity" />
+
 
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for

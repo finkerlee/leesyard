@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -39,7 +40,6 @@ public class FindActivity extends BaseActivity {
                 Toast.makeText(FindActivity.this, "pic" + (position + 1), Toast.LENGTH_SHORT).show();
             }
         });
-
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvTitle.setText("发现");
     }

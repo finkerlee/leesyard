@@ -45,7 +45,7 @@
                     android:id="@+id/viewflowindic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_gravity="right|bottom"
                     android:padding="2dip"
                     app:activeColor="#ff0000"
                     app:activeType="fill"
@@ -63,31 +63,33 @@
                     android:layout_height="wrap_content"
                     android:text="拉菲古堡干红葡萄酒"
                     android:textSize="18dp"
-                    android:id="@+id/textView14" />
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/tv_goods_name" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="产品剩余数量:"
                         android:layout_gravity="center_horizontal"
                         android:id="@+id/textView8"
-                        android:layout_alignTop="@+id/textView15"
-                        android:layout_toLeftOf="@+id/textView9"
-                        android:layout_toStartOf="@+id/textView9" />
+                        android:layout_alignTop="@+id/tv_goods_spec"
+                        android:layout_toLeftOf="@+id/tv_goods_num"
+                        android:layout_toStartOf="@+id/tv_goods_num" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="一级庄 1982年份 正牌"
-                        android:layout_below="@+id/textView14"
+                        android:layout_below="@+id/tv_goods_name"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:id="@+id/textView15" />
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_goods_spec" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="份"
-                        android:layout_alignTop="@+id/textView9"
+                        android:layout_alignTop="@+id/tv_goods_num"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginRight="53dp"
@@ -99,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:text="100"
                         android:layout_gravity="center_horizontal"
-                        android:id="@+id/textView9"
+                        android:id="@+id/tv_goods_num"
                         android:layout_alignTop="@+id/textView8"
                         android:layout_toLeftOf="@+id/textView10"
                         android:layout_toStartOf="@+id/textView10"
@@ -118,20 +120,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="￥"
-                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="10dp"
                         android:id="@+id/textView12"
-                        android:layout_alignTop="@+id/textView13"
+                        android:layout_alignTop="@+id/tv_goods_price"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_marginLeft="17dp"
-                        android:layout_marginStart="17dp" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="36800.00"
                         android:textColor="#ff0000"
                         android:padding="10dp"
-                        android:id="@+id/textView13"
+                        android:id="@+id/tv_goods_price"
                         android:layout_alignTop="@+id/textView11"
                         android:layout_toRightOf="@+id/textView12"
                         android:layout_toEndOf="@+id/textView12" />
@@ -144,22 +147,36 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
                 </RelativeLayout>
+                <WebView
+                    android:id="@+id/WebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
         </LinearLayout>
     </ScrollView>
     <include
         layout="@layout/common_title_no"
         android:id="@+id/include11" />
-    <Button
-        android:id="@+id/i_want_receive"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_button_color"
-        android:text="我要领取"
-        android:textColor="@color/color_white"
-        android:textAlignment="center"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+        android:gravity="center_horizontal"
+        android:background="#ffffff"
+        android:alpha="90"
+        >
+        <Button
+            android:id="@+id/i_want_receive"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_button_color"
+            android:text="我要领取"
+            android:textColor="@color/color_white"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
 
 </RelativeLayout>

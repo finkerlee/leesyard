@@ -108,14 +108,14 @@ public class ImagePagerAdapter extends BaseAdapter {
 				 * if (TextUtils.isEmpty(url)) {
 				 * holder.imageView.setEnabled(false); return; }
 				 */
-				Bundle bundle = new Bundle();
-
-				bundle.putString("url", url);
-				bundle.putString("title", title);
-				Intent intent = new Intent(context, ProductBaseActivity.class);
-				intent.putExtras(bundle);
-
-				context.startActivity(intent);
+//				Bundle bundle = new Bundle();
+//
+//				bundle.putString("url", url);
+//				bundle.putString("title", title);
+//				Intent intent = new Intent(context, ProductBaseActivity.class);
+//				intent.putExtras(bundle);
+//
+//				context.startActivity(intent);
 				Toast.makeText(context, "点击了第" + getPosition(position) + "美女", Toast.LENGTH_SHORT).show();
 
 			}
