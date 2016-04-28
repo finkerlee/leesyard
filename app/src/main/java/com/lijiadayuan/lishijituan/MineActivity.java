@@ -201,8 +201,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("main", requestCode + "");
@@ -215,7 +213,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         //相册
         if (requestCode == REQUESTCODE_PICK){
             startPhotoZoom(data.getData());
-
         }
         //相机
         if (requestCode == REQUESTCODE_TAKE){
@@ -239,7 +236,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
             headImage.setBackgroundResource(R.drawable.user_normol_head_image);
         }
     }
-
 
     /**
      * 裁剪图片方法实现
@@ -288,6 +284,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 修改头像
      */
+
     private void UpDataHeadImage(final String iamgePic) {
         // 创建请求队列
         RequestQueue mQueue = app.getRequestQueue();
@@ -326,6 +323,9 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         mQueue.add(request);
 
     }
+
+
+
 
     //两次退出
     private static Boolean isQuit = false;

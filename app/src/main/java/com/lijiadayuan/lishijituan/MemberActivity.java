@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -30,11 +31,16 @@ import static com.lijiadayuan.lishijituan.R.id.iv_photos_opposite;
 
 public class MemberActivity extends Activity implements OnClickListener {
     private TextView tvTitle;
+    private  EditText name;//同户名
+    private  EditText phoneNum;//手机号
+    private  EditText id;//身份证
 
     private ImageView imageback;
 
-    private final int OPEN_ALBUM_FLAG = 1023;
-    private final int OPEN_CAMERA_FLAG = 1024;
+    private final int OPEN_ALBUM_FLAG = 1023;//第一张相册打开
+    private final int OPEN_CAMERA_FLAG = 1024;//第一张拍照
+    private final int TAKING_ALBUM_FLAG = 1025;//第二张相册打开
+    private final int TAKING_CAMERA_FLAG = 1026;//第二张拍照
     private ImageView photos,photos2;
     InputMethodManager manager;
     private photoscorrect dialog;
@@ -43,6 +49,7 @@ public class MemberActivity extends Activity implements OnClickListener {
     private String mSaveDir;//拍照存放的文件夹名字
     private String mFileName;//拍照存放的文件的名字
 
+    private int photoFlag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +69,9 @@ public class MemberActivity extends Activity implements OnClickListener {
         photos2= (ImageView) findViewById(R.id.iv_photos_opposite);
         mshowIV2= (ImageView)findViewById(R.id.iv_photos_opposite);
         RadioButton rbMan = (RadioButton) findViewById(R.id.rb_man);
+        name = (EditText)findViewById(R.id.et_name);//名字
+        phoneNum =(EditText)findViewById(R.id.et_phoneNum);//手机号
+        id = (EditText) findViewById(R.id.et_id);//身份证
         rbMan.setChecked(true);
         rbMan.setOnClickListener(this);
     }
@@ -73,6 +83,7 @@ public class MemberActivity extends Activity implements OnClickListener {
 
             @Override
             public void onClick(View v) {
+                photoFlag = 1;
                 dialog = new photoscorrect(MemberActivity.this, R.style.protocol_dialog);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
@@ -82,7 +93,8 @@ public class MemberActivity extends Activity implements OnClickListener {
 
             @Override
             public void onClick(View v) {
-                dialog = new photoscorrect(MemberActivity.this, R.style.protocol_dialog);
+                photoFlag = 2;
+                dialog = new photoscorrect(MemberActivity.this, R.style.protocol_dialog2);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
             }
@@ -108,58 +120,110 @@ public class MemberActivity extends Activity implements OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         File file;
-        Bitmap bitmap,bitmap2;
         OutputStream outputStream;
+        Bitmap bitmap;
 
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case OPEN_ALBUM_FLAG://从相册获取回调
-                    Uri originUri = data.getData();
-                    String[] proj = {MediaStore.Images.Media.DATA};
-                    Cursor cursor = managedQuery(originUri, proj, null, null, null);
-                    int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    cursor.moveToFirst();
-                    String path = cursor.getString(columnIndex);
-                    bitmap = getCompressBitmap(path);
-                    mShowIV.setImageBitmap(bitmap);//将选中的图片展示出来
+                    if (1 == photoFlag){
+                        // 给第一个赋值
+                        Uri originUri = data.getData();
+                        String[] proj = {MediaStore.Images.Media.DATA};
+                        Cursor cursor = managedQuery(originUri, proj, null, null, null);
+                        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                        cursor.moveToFirst();
+                        String path = cursor.getString(columnIndex);
+                        bitmap = getCompressBitmap(path);
+                        mShowIV.setImageBitmap(bitmap);//将选中的图片展示出来
                 /* 创建一个新的文件，存放压缩过的bitmap，用于发送给服务器 */
-                    String saveDir = Environment.getExternalStorageDirectory() + "/wyk_dir/";
-                    File dir = new File(saveDir);
-                    if (!dir.exists()) {
-                        dir.mkdir();
-                    }
-                    //指定拍取照片的名字(以时间戳命名，避免重复)
-                    String fileName = "tmp.jpg";
-                    file = new File(saveDir, fileName);
-                    if (file.exists()) {
-                        file.delete();
-                    }
-                    try {
-                        file.createNewFile();
-                        outputStream = new FileOutputStream(file);
-                        //将bitmap写入file
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                        System.out.println("file size:" + file.length());
+                        String saveDir = Environment.getExternalStorageDirectory() + "/wyk_dir/";
+                        File dir = new File(saveDir);
+                        if (!dir.exists()){
+                            dir.mkdir();
+                        }
+                        //指定拍取照片的名字(以时间戳命名，避免重复)
+                        String fileName = "tmp.jpg";
+                        file = new File(saveDir, fileName);
+                        if (file.exists()) {
+                            file.delete();
+                        }
+                        try {
+                            file.createNewFile();
+                            outputStream = new FileOutputStream(file);
+                            //将bitmap写入file
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                            System.out.println("file size:" + file.length());
                     /* 到这里已经成功将bitmap写入file了，此时可以将file或者流发送给服务器了 */
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }else if(2 == photoFlag){
+                        Uri originUri = data.getData();
+                        String[] proj = {MediaStore.Images.Media.DATA};
+                        Cursor cursor = managedQuery(originUri, proj, null, null, null);
+                        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                        cursor.moveToFirst();
+                        String path = cursor.getString(columnIndex);
+                        bitmap = getCompressBitmap(path);
+                        mshowIV2.setImageBitmap(bitmap);//将选中的图片展示出来
+                /* 创建一个新的文件，存放压缩过的bitmap，用于发送给服务器 */
+                        String saveDir = Environment.getExternalStorageDirectory() + "/wyk_dir/";
+                        File dir = new File(saveDir);
+                        if (!dir.exists()){
+                            dir.mkdir();
+                        }
+                        //指定拍取照片的名字(以时间戳命名，避免重复)
+                        String fileName = "tmp.jpg";
+                        file = new File(saveDir, fileName);
+                        if (file.exists()) {
+                            file.delete();
+                        }
+                        try {
+                            file.createNewFile();
+                            outputStream = new FileOutputStream(file);
+                            //将bitmap写入file
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                            System.out.println("file size:" + file.length());
+                    /* 到这里已经成功将bitmap写入file了，此时可以将file或者流发送给服务器了 */
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     break;
                 case OPEN_CAMERA_FLAG://拍照获取的回调
-                    file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
-                    bitmap = getCompressBitmap(mSaveDir + mFileName);
-                    mShowIV.setImageBitmap(bitmap);//让拍照的照片显示在控件上
-                    try {
-                        outputStream = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                        System.out.println("file size:" + file.length());
+                    if(1 == photoFlag){
+                        file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
+                        bitmap = getCompressBitmap(mSaveDir + mFileName);
+                        mShowIV.setImageBitmap(bitmap);//让拍照的照片显示在控件上
+                        try {
+                            outputStream = new FileOutputStream(file);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                            System.out.println("file size:" + file.length());
                     /* 到这里已经成功将bitmap写入file了，此时可以将file或者流发送给服务器了 */
-                        break;
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                            break;
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }else if(2 == photoFlag){
+                        file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
+                        bitmap = getCompressBitmap(mSaveDir + mFileName);
+                        mshowIV2.setImageBitmap(bitmap);//让拍照的照片显示在控件上
+                        try {
+                            outputStream = new FileOutputStream(file);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                            System.out.println("file size:" + file.length());
+                    /* 到这里已经成功将bitmap写入file了，此时可以将file或者流发送给服务器了 */
+                            break;
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
+
                     break;
+
                 default:
                     break;
             }
@@ -203,11 +267,13 @@ public class MemberActivity extends Activity implements OnClickListener {
                 dialog.dismiss();
                 break;
             case R.id.tv_gallery://相册获取
+
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
-                startActivityForResult(intent, OPEN_ALBUM_FLAG);
+                startActivityForResult(intent, OPEN_ALBUM_FLAG);//
                 dialog.dismiss();
                 break;
+
             case R.id.tv_photo://拍照获取
                 //指定拍照后的输出路径
                 mSaveDir = Environment.getExternalStorageDirectory() + "/wyk_dir/";
@@ -226,6 +292,7 @@ public class MemberActivity extends Activity implements OnClickListener {
             case R.id.rb_man:
                 break;
             default:
+
                 break;
         }
     }

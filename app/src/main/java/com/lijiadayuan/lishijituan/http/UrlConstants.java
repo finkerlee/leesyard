@@ -21,6 +21,5 @@ public interface UrlConstants {
     String WELFARE = BASE_URL + "benefit/all";
     //商品详情URL
     String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
-
-
+    String  CERTIFICATION   = BASE_URL+"verify/"+"apply";                         //认证连接
 }
