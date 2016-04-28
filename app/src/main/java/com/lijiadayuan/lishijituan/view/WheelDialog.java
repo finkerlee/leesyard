@@ -73,7 +73,7 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
             @Override
             public void onClick(View v) {
                 dismiss();
-                iRefreshUI.refresh(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
+                iRefreshUI.refresh(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName, areaId);
             }
         });
     }
@@ -83,7 +83,7 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
      */
     public interface IRefreshUI{
 
-        public void refresh(String info);
+        public void refresh(String info, String areaId);
     }
 
     private IRefreshUI iRefreshUI;
@@ -101,19 +101,38 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
      */
     protected Map<String, String[]> mDistrictDatasMap = new HashMap<String, String[]>();
 
+    protected Map<String, String> mCityIdMap = new HashMap<>();
+
     /**
      * key - 区 values - 邮编
      */
     protected Map<String, String> mZipcodeDatasMap = new HashMap<String, String>();
 
     /**
+     * 当前省份id
+     */
+    protected String proId;
+
+    /**
      * 当前省的名称
      */
     protected String mCurrentProviceName;
+
+    /**
+     * 当前城市id
+     */
+    protected String cityId;
+
     /**
      * 当前市的名称
      */
     protected String mCurrentCityName;
+
+    /**
+     * 当前区id
+     */
+    protected String areaId;
+
     /**
      * 当前区的名称
      */
@@ -124,15 +143,20 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
      */
     protected String mCurrentZipCode ="";
 
+
+    private List<ProvinceModel> provinceList = null;
+    private List<CityModel> cityList = null;
+    private List<DistrictModel> districtList = null;
+
     /**
      * 解析省市区的XML数据
      */
 
     protected void initProvinceDatas()
     {
-        List<ProvinceModel> provinceList = null;
+
         try {
-            InputStream input = asset.open("province_data.xml");
+            InputStream input = asset.open("pca.xml");
             // 创建一个解析xml的工厂对象
             SAXParserFactory spf = SAXParserFactory.newInstance();
             // 解析xml
@@ -145,41 +169,42 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
             //*/ 初始化默认选中的省、市、区
             if (provinceList!= null && !provinceList.isEmpty()) {
                 mCurrentProviceName = provinceList.get(0).getName();
+                proId = provinceList.get(0).getId();
                 List<CityModel> cityList = provinceList.get(0).getCityList();
                 if (cityList!= null && !cityList.isEmpty()) {
                     mCurrentCityName = cityList.get(0).getName();
+                    cityId = cityList.get(0).getId();
                     List<DistrictModel> districtList = cityList.get(0).getDistrictList();
+                    areaId = districtList.get(0).getId();
                     mCurrentDistrictName = districtList.get(0).getName();
-                    mCurrentZipCode = districtList.get(0).getZipcode();
                 }
             }
             //*/
-            mProvinceDatas = new String[provinceList.size()];
-            for (int i=0; i< provinceList.size(); i++) {
-                // 遍历所有省的数据
-                mProvinceDatas[i] = provinceList.get(i).getName();
-                List<CityModel> cityList = provinceList.get(i).getCityList();
-                String[] cityNames = new String[cityList.size()];
-                for (int j=0; j< cityList.size(); j++) {
-                    // 遍历省下面的所有市的数据
-                    cityNames[j] = cityList.get(j).getName();
-                    List<DistrictModel> districtList = cityList.get(j).getDistrictList();
-                    String[] distrinctNameArray = new String[districtList.size()];
-                    DistrictModel[] distrinctArray = new DistrictModel[districtList.size()];
-                    for (int k=0; k<districtList.size(); k++) {
-                        // 遍历市下面所有区/县的数据
-                        DistrictModel districtModel = new DistrictModel(districtList.get(k).getName(), districtList.get(k).getZipcode());
-                        // 区/县对于的邮编，保存到mZipcodeDatasMap
-                        mZipcodeDatasMap.put(districtList.get(k).getName(), districtList.get(k).getZipcode());
-                        distrinctArray[k] = districtModel;
-                        distrinctNameArray[k] = districtModel.getName();
-                    }
-                    // 市-区/县的数据，保存到mDistrictDatasMap
-                    mDistrictDatasMap.put(cityNames[j], distrinctNameArray);
-                }
-                // 省-市的数据，保存到mCitisDatasMap
-                mCitisDatasMap.put(provinceList.get(i).getName(), cityNames);
-            }
+//            mProvinceDatas = new String[provinceList.size()];
+//            for (int i=0; i< provinceList.size(); i++) {
+//                // 遍历所有省的数据
+//                mProvinceDatas[i] = provinceList.get(i).getName();
+//                List<CityModel> cityList = provinceList.get(i).getCityList();
+//                String[] cityNames = new String[cityList.size()];
+//                for (int j=0; j< cityList.size(); j++) {
+//                    // 遍历省下面的所有市的数据
+//                    cityNames[j] = cityList.get(j).getName();
+//                    List<DistrictModel> districtList = cityList.get(j).getDistrictList();
+//                    String[] distrinctNameArray = new String[districtList.size()];
+//                    mCityIdMap.put(cityList.get(j).getName(),cityList.get(j).getId());
+//                    for (int k=0; k<districtList.size(); k++) {
+//                        // 遍历市下面所有区/县的数据
+//                        DistrictModel districtModel = new DistrictModel(districtList.get(k).getId(), districtList.get(k).getName());
+//                        // 区/县对于的邮编，保存到mZipcodeDatasMap
+//                        mZipcodeDatasMap.put(districtList.get(k).getName(), districtList.get(k).getId());
+//                        distrinctNameArray[k] = districtModel.getName();
+//                    }
+//                    // 市-区/县的数据，保存到mDistrictDatasMap
+//                    mDistrictDatasMap.put(cityList.get(j).getId(), distrinctNameArray);
+//                }
+//                // 省-市的数据，保存到mCitisDatasMap
+//                mCitisDatasMap.put(provinceList.get(i).getName(), cityNames);
+//            }
         } catch (Throwable e) {
             e.printStackTrace();
         } finally {
@@ -196,21 +221,26 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
         } else if (wheel == mViewCity) {
             updateAreas();
         } else if (wheel == mViewDistrict) {
-            mCurrentDistrictName = mDistrictDatasMap.get(mCurrentCityName)[newValue];
-            mCurrentZipCode = mZipcodeDatasMap.get(mCurrentDistrictName);
+            mCurrentDistrictName = districtList.get(newValue).getName();
+            areaId = districtList.get(newValue).getId();
         }
     }
     private void updateAreas() {
         int pCurrent = mViewCity.getCurrentItem();
-        mCurrentCityName = mCitisDatasMap.get(mCurrentProviceName)[pCurrent];
-        String[] areas = mDistrictDatasMap.get(mCurrentCityName);
-
-        if (areas == null) {
-            areas = new String[] { "" };
-        }
-        mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(context, areas));
+//        String test = mCitisDatasMap.get(mCurrentProviceName)[pCurrent];
+//        mCurrentCityName = mCityIdMap.get(test);
+//        String[] areas = mDistrictDatasMap.get(mCurrentCityName);
+//        if (areas == null) {
+//            areas = new String[] { "" };
+//        }
+//        mViewDistrict.setViewAdapter(new ArrayWheelAdapter(context, areas));
+//        mViewDistrict.setCurrentItem(0);
+//        mCurrentDistrictName = areas[0];
+        mCurrentCityName = cityList.get(pCurrent).getName();
+        districtList = cityList.get(pCurrent).getDistrictList();
+        mViewDistrict.setViewAdapter(new ArrayWheelAdapter(context, districtList));
         mViewDistrict.setCurrentItem(0);
-        mCurrentDistrictName = areas[0];
+
     }
 
     /**
@@ -218,12 +248,17 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
      */
     private void updateCities() {
         int pCurrent = mViewProvince.getCurrentItem();
-        mCurrentProviceName = mProvinceDatas[pCurrent];
-        String[] cities = mCitisDatasMap.get(mCurrentProviceName);
-        if (cities == null) {
-            cities = new String[] { "" };
-        }
-        mViewCity.setViewAdapter(new ArrayWheelAdapter<String>(context, cities));
+//        mCurrentProviceName = mProvinceDatas[pCurrent];
+//        String[] cities = mCitisDatasMap.get(mCurrentProviceName);
+//        if (cities == null) {
+//            cities = new String[] { "" };
+//        }
+//        mViewCity.setViewAdapter(new ArrayWheelAdapter<String>(context, cities));
+//        mViewCity.setCurrentItem(0);
+//        updateAreas();
+        mCurrentProviceName = provinceList.get(pCurrent).getName();
+        cityList = provinceList.get(pCurrent).getCityList();
+        mViewCity.setViewAdapter(new ArrayWheelAdapter(context, cityList));
         mViewCity.setCurrentItem(0);
         updateAreas();
     }
@@ -250,7 +285,7 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
 
     private void setUpData() {
         initProvinceDatas();
-        mViewProvince.setViewAdapter(new ArrayWheelAdapter<String>(context, mProvinceDatas));
+        mViewProvince.setViewAdapter(new ArrayWheelAdapter(context, provinceList));
         // 设置可见条目数量
         mViewProvince.setVisibleItems(7);
         mViewCity.setVisibleItems(7);

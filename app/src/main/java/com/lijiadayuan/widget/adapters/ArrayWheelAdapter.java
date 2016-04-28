@@ -17,41 +17,37 @@ package com.lijiadayuan.widget.adapters;
 
 import android.content.Context;
 
+
+import java.util.List;
+
 /**
  * The simple Array wheel adapter
  * @param <T> the element type
  */
-public class ArrayWheelAdapter<T> extends AbstractWheelTextAdapter {
+public class ArrayWheelAdapter extends AbstractWheelTextAdapter {
     
-    // items
-    private T items[];
+    private List data;
 
     /**
      * Constructor
      * @param context the current context
      * @param items the items
      */
-    public ArrayWheelAdapter(Context context, T items[]) {
+    public ArrayWheelAdapter(Context context, List data) {
         super(context);
-        
-        //setEmptyItemResource(TEXT_VIEW_ITEM_RESOURCE);
-        this.items = items;
+        this.data = data;
     }
     
     @Override
     public CharSequence getItemText(int index) {
-        if (index >= 0 && index < items.length) {
-            T item = items[index];
-            if (item instanceof CharSequence) {
-                return (CharSequence) item;
-            }
-            return item.toString();
+        if (index >= 0 && index < data.size()) {
+           return data.get(index).toString();
         }
         return null;
     }
 
     @Override
     public int getItemsCount() {
-        return items.length;
+        return data.size();
     }
 }

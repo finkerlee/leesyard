@@ -22,6 +22,11 @@ public class ShippingAddressActivity extends Activity implements OnClickListener
     private TextView tvTitle;
     private ImageView imageback;
 
+    /**
+     * 定义存放省市区id的变量,用于添加收货地址
+     */
+    private String proId, cityId, areaId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +36,16 @@ public class ShippingAddressActivity extends Activity implements OnClickListener
         //空白处隐藏软键盘
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         editText=(EditText)findViewById(R.id.iv_wheel);
-        editText.setOnClickListener(new View.OnClickListener() {
+        editText.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 dialog = new WheelDialog(ShippingAddressActivity.this, R.style.protocol_dialog, getAssets(), new WheelDialog.IRefreshUI() {
                     @Override
-                    public void refresh(String info) {
+                    public void refresh(String info, String areaId) {
                         editText.setText(info);
+                        ShippingAddressActivity.this.areaId = areaId;
+                        System.out.println("areaId: "+ShippingAddressActivity.this.areaId);
                     }
                 });
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

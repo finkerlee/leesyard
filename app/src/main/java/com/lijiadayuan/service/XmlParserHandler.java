@@ -12,6 +12,8 @@ import com.lijiadayuan.model.ProvinceModel;
 
 public class XmlParserHandler extends DefaultHandler {
 
+	private String currentTag = "";
+
 	/**
 	 * 存储所有的解析对象
 	 */
@@ -37,19 +39,28 @@ public class XmlParserHandler extends DefaultHandler {
 	@Override
 	public void startElement(String uri, String localName, String qName,
 							 Attributes attributes) throws SAXException {
+
+		System.out.println("localName:    "+localName);
+		System.out.println("qName:      "+qName);
+
 		// 当遇到开始标记的时候，调用这个方法
-		if (qName.equals("province")) {
+		if (qName.equals("Province")) {
+			currentTag = "Province";
 			provinceModel = new ProvinceModel();
-			provinceModel.setName(attributes.getValue(0));
+			provinceModel.setId(attributes.getValue(0));
+			provinceModel.setName(attributes.getValue(1));
 			provinceModel.setCityList(new ArrayList<CityModel>());
-		} else if (qName.equals("city")) {
+		} else if (qName.equals("City")) {
+			currentTag = "City";
 			cityModel = new CityModel();
-			cityModel.setName(attributes.getValue(0));
+			cityModel.setId(attributes.getValue(0));
+			cityModel.setName(attributes.getValue(1));
 			cityModel.setDistrictList(new ArrayList<DistrictModel>());
-		} else if (qName.equals("district")) {
+		} else if (qName.equals("Area")) {
+			System.out.println("start");
+			currentTag = "Area";
 			districtModel = new DistrictModel();
-			districtModel.setName(attributes.getValue(0));
-			districtModel.setZipcode(attributes.getValue(1));
+			districtModel.setId(attributes.getValue(0));
 		}
 	}
 
@@ -57,11 +68,12 @@ public class XmlParserHandler extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
 		// 遇到结束标记的时候，会调用这个方法
-		if (qName.equals("district")) {
+		if (qName.equals("Area")) {
+			System.out.println("end");
 			cityModel.getDistrictList().add(districtModel);
-		} else if (qName.equals("city")) {
+		} else if (qName.equals("City")) {
 			provinceModel.getCityList().add(cityModel);
-		} else if (qName.equals("province")) {
+		} else if (qName.equals("Province")) {
 			provinceList.add(provinceModel);
 		}
 	}
@@ -69,6 +81,14 @@ public class XmlParserHandler extends DefaultHandler {
 	@Override
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
+		if (!"".equals(currentTag)) {
+			if ("Area".equals(currentTag)) {
+				System.out.println("reading");
+				String data = new String(ch, start, length);
+				if (!("".equals(data.trim()) || null == data))
+					districtModel.setName(data);
+			}
+		}
 	}
 
 }
