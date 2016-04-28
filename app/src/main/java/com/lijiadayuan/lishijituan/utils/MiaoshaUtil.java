@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by yepeng on 14-3-10.
+ * Created by zhaoyi on 16-4-26.
  */
 public class MiaoshaUtil{
 

@@ -262,8 +262,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
      */
     private void setPicToView(Intent picdata) {
         Bundle extras = picdata.getExtras();
-        String imagePath = Environment.getExternalStorageDirectory() + "/" + PHOTO_FILE_NAME;
-//        final File file = new File(imagePath);
         if (extras != null) {
             // 取得SDCard图片路径做显示
             final Bitmap photo = extras.getParcelable("data");
@@ -272,12 +270,9 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 @Override
                 public void setCompleteImage(String iamgePic) {
                     headImage.setImageURI(Uri.parse(iamgePic));
-                    Log.i("main", mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage, ""));
                     SharedPreferences.Editor mEditor =mSharedPreferences.edit();
                     mEditor.putString(KeyConstants.UserInfoKey.userHeadImage, iamgePic);
                     mEditor.commit();
-                    Log.i("main", mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage, ""));
-
                     UpDataHeadImage(iamgePic);
 
                 }
