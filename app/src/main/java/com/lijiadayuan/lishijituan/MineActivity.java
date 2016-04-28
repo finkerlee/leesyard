@@ -328,34 +328,5 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         mQueue.add(request);
 
     }
-
-
-
-
-    //两次退出
-    private static Boolean isQuit = false;
-    Timer timer = new Timer();
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (isQuit == false) {
-                isQuit = true;
-                Toast.makeText(getBaseContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
-                TimerTask task = null;
-                task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        isQuit = false;
-                    }
-                };
-                timer.schedule(task, 2000);
-            } else {
-                finish();
-                System.exit(0);
-            }
-        }
-        return true;
-    }
-
 }
 
