@@ -143,7 +143,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                     @Override
                     public void run() {
                         moveNext();
-                        Log.d("Task", "下一个");
+                        //Log.d("Task", "下一个");
                     }
                 });
 
