@@ -22,5 +22,13 @@ public interface UrlConstants {
     String WELFARE = BASE_URL + "benefit/all";
     //商品详情URL
     String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
-    String  CERTIFICATION   = BASE_URL+"verify/"+"apply";                         //认证连接
+    //李氏认证
+    String  LEEVERIFICATION   = BASE_URL+"verify/";
+    String  CERTIFICATION   = LEEVERIFICATION + "apply";                //提交认证申请
+    String  UPLOAD_IDENTIFY = LEEVERIFICATION + "upload";               //上传身份证照片
+
+    //李氏活动
+    String LEEACTIVITY = BASE_URL + "activity/";
+    String GET_ALL_ACTIVITY = LEEACTIVITY + "all";
+
 }

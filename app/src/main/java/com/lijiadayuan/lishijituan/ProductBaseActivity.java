@@ -1,6 +1,8 @@
 package com.lijiadayuan.lishijituan;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -8,9 +10,11 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lijiadayuan.lishijituan.adapter.ImageAdapter;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
+import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 
@@ -23,11 +27,19 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     public static final int GIFT_GOODS = 0;
     //视图bean
     private ProductViewBean mProductViewBean;
+    //
+    private Boolean isLogin;
+
+    private static final int LOGIN = 100;
+    private static final int RENZHENG = 101;
+    private static final int ORDEROK = 102;
 
     private ViewFlow mViewFlow;
     private ImageView iv_back;
     private WebView mWbGoodsInfo;
     private TextView mTvGoodsName,mTvGoodsNum,mTvGoodsPrice,mTvGoodsSpec;
+
+    private SharedPreferences mSharedPreferences;
 
 
 
@@ -41,8 +53,10 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_base);
-        mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
+        mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
 
+        isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false);
+        mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
         imageUrlList
                 .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
         imageUrlList
@@ -113,11 +127,49 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK){
+            switch (requestCode){
+                case LOGIN:
+                    isLogin = data.getBooleanExtra(KeyConstants.UserInfoKey.userIsLogin,false);
+                    break;
+                case RENZHENG:
+                    Toast.makeText(this,"认证成功,请耐心等待",Toast.LENGTH_LONG).show();
+                    break;
+                case ORDEROK:
+                    Toast.makeText(this,"下单成功",Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onClick(View v) {
        switch (v.getId()){
            case R.id.i_want_receive:
-               Intent intent = new Intent(this,ReceiveActivity.class);
-               startActivity(intent);
+               if("我要购买".equals(mBtnReceive.getText())){
+                   Intent intent = new Intent(this,OrderActivity.class);
+                   startActivity(intent);
+               }else{
+                   //如果已经登陆
+                   if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false)){
+                       if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIfLee,false)){
+                           Intent intent = new Intent(this,OrderActivity.class);
+                           startActivityForResult(intent,ORDEROK);
+                       }else{
+                           Intent intent = new Intent(this,MemberActivity.class);
+                           intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
+                           startActivityForResult(intent,RENZHENG);
+                       }
+                   }else{
+                       Intent intent = new Intent(this,LoginActivity.class);
+                       startActivityForResult(intent,LOGIN);
+                   }
+
+
+               }
+
            break;
            case R.id.iv_back:
                finish();

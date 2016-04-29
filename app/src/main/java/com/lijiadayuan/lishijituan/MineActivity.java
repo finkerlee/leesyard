@@ -42,6 +42,7 @@ import com.lijiadayuan.lishijituan.view.photoscorrect;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -205,7 +206,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("main", requestCode + "");
         if (requestCode == HEAD_IMAGE){
-            if (resultCode == HEAD_IMAGE){
+            if (resultCode == LoginActivity.LOGIN){
                 isLogin = true;
                 setViewByData();
             }
@@ -265,16 +266,17 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         if (extras != null) {
             // 取得SDCard图片路径做显示
             final Bitmap photo = extras.getParcelable("data");
+
             UpLoadImageTask mTask = (UpLoadImageTask) new UpLoadImageTask(this,photo) .execute(UrlConstants.UPLOAD_AVATAR);
             mTask.setCallBACK(new UpLoadPicCallBack() {
                 @Override
-                public void setCompleteImage(String iamgePic) {
-                    headImage.setImageURI(Uri.parse(iamgePic));
-                    SharedPreferences.Editor mEditor =mSharedPreferences.edit();
-                    mEditor.putString(KeyConstants.UserInfoKey.userHeadImage, iamgePic);
-                    mEditor.commit();
-                    UpDataHeadImage(iamgePic);
+                public void setCompleteImage(ArrayList<String> iamgePicList) {
 
+                    headImage.setImageURI(Uri.parse(iamgePicList.get(0)));
+                    SharedPreferences.Editor mEditor =mSharedPreferences.edit();
+                    mEditor.putString(KeyConstants.UserInfoKey.userHeadImage, iamgePicList.get(0));
+                    mEditor.commit();
+                    UpDataHeadImage(iamgePicList.get(0));
                 }
             });
 

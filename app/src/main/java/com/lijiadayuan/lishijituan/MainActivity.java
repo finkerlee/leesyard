@@ -24,6 +24,8 @@ import android.widget.ViewFlipper;
 
 
 import com.lijiadayuan.lishijituan.adapter.ImagePagerAdapter;
+import com.lijiadayuan.lishijituan.bean.ProductViewBean;
+import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
 
 public class MainActivity extends BaseActivity implements OnClickListener{
@@ -108,6 +110,11 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         imagesharing= (ImageButton) findViewById(R.id.iv_sharing_resource);
         imageculture= (ImageButton) findViewById(R.id.iv_lishi_culture);
         imageproduct= (ImageButton) findViewById(R.id.imageButton);
+        findViewById(R.id.imageButton2).setOnClickListener(this);
+        findViewById(R.id.imageButton3).setOnClickListener(this);
+        findViewById(R.id.imageButton4).setOnClickListener(this);
+        findViewById(R.id.imageButton5).setOnClickListener(this);
+
         framenotice= (LinearLayout) findViewById(R.id.homepage_notice_ll);
         ivmore= (ImageView) findViewById(R.id.iv_more);
 //        drawMain.setBounds(0, 0, 60, 60);
@@ -206,15 +213,37 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             case R.id.iv_sharing_resource:
                 startActivity(new Intent(this,SharingResourceActivity.class));
                 break;
-            case R.id.imageButton:
-                startActivity(new Intent(this,ProductBaseActivity.class));
-                break;
             case R.id.index_search_edit:
                 openActivity(SearchActivity.class);
                 break;
             case R.id.iv_more:
                 openActivity(MoreActivity.class);
                 break;
+            case R.id.imageButton:
+                startProductBaseActivity();
+                //startActivity(new Intent(this,ProductBaseActivity.class));
+                break;
+            case R.id.imageButton2:
+                startProductBaseActivity();
+                //startActivity(new Intent(this,ProductBaseActivity.class));
+                break;
+            case R.id.imageButton3:
+                startProductBaseActivity();
+                //startActivity(new Intent(this,ProductBaseActivity.class));
+                break;
+            case R.id.imageButton4:
+                startProductBaseActivity();
+                //startActivity(new Intent(this,ProductBaseActivity.class));
+                break;
+            case R.id.imageButton5:
+                startProductBaseActivity();
+                //startActivity(new Intent(this,ProductBaseActivity.class));
+                break;
+            case R.id.imageButton6:
+                startProductBaseActivity();
+                //startActivity(new Intent(this,ProductBaseActivity.class));
+                break;
+
             default:
                 break;
         }
@@ -245,6 +274,18 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         params.height = (dm.widthPixels - 36) / 4;
+    }
+    private void startProductBaseActivity(){
+        ProductViewBean mProductViewBean = new ProductViewBean();
+        mProductViewBean.setGoodsPrice("222");
+        mProductViewBean.setGoodsNum("10");
+        mProductViewBean.setGoodsName("浪漫八音盒");
+        mProductViewBean.setGoodsInfoUrl("www.baidu.com");
+        Intent mIntent = new Intent(this,ProductBaseActivity.class);
+        mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.GIFT_GOODS);
+        mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
+        startActivity(mIntent);
+
     }
 //
 ////两次退出
