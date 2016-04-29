@@ -68,11 +68,11 @@ public class ForgetpasswordActivtiy extends BaseActivity implements View.OnClick
                 }
                 //判断验证码是否为空 是否正确
                 if (TextUtils.isEmpty(etcode.getText())) {
-                    Toast.makeText(ForgetpasswordActivtiy.this, R.string.forgetpass_phonenum, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgetpasswordActivtiy.this, R.string.forgetpass_code, Toast.LENGTH_SHORT).show();
                     Log.v(TAG, "code empty");
                     return;
                 } else if (!verificationCode.equals(etcode.getText().toString())) {
-                    Toast.makeText(ForgetpasswordActivtiy.this, R.string.verification_code_no, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgetpasswordActivtiy.this, R.string.forgetpass_code_no, Toast.LENGTH_SHORT).show();
                     return;
                 }else {
                     Intent intent =new Intent(this,ResetpasswordActivity.class);
