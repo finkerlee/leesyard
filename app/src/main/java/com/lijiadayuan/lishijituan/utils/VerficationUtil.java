@@ -28,13 +28,13 @@ public class VerficationUtil {
      * @param phoneNumber  手机号
      * @return
      */
-    public static HashMap get(String phoneNumber,String code){
+    public static HashMap get(String phoneNumber,String code,String StencilTypeCode){
         CCPRestSmsSDK restAPI = new CCPRestSmsSDK();
         HashMap result = null;
         restAPI.init("app.cloopen.com", "8883");
         restAPI.setAccount(SID, TOKEN);
         restAPI.setAppId(APPID);
-        result = restAPI.sendTemplateSMS(phoneNumber, "80276", new String[]{code, "2"});
+        result = restAPI.sendTemplateSMS(phoneNumber, StencilTypeCode, new String[]{code, "2"});
         restAPI = null;
         Log.i("YonghuActivity", result.toString());
         return result;

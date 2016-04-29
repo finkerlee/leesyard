@@ -2,7 +2,8 @@ package com.lijiadayuan.model;
 
 import java.util.List;
 
-public class ProvinceModel {
+public class ProvinceModel{
+	private String id;
 	private String name;
 	private List<CityModel> cityList;
 	
@@ -12,6 +13,12 @@ public class ProvinceModel {
 
 	public ProvinceModel(String name, List<CityModel> cityList) {
 		super();
+		this.name = name;
+		this.cityList = cityList;
+	}
+
+	public ProvinceModel(String id, String name, List<CityModel> cityList) {
+		this.id = id;
 		this.name = name;
 		this.cityList = cityList;
 	}
@@ -32,9 +39,16 @@ public class ProvinceModel {
 		this.cityList = cityList;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "ProvinceModel [name=" + name + ", cityList=" + cityList + "]";
+		return name;
 	}
-	
 }

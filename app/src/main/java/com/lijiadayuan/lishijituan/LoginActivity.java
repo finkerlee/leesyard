@@ -3,12 +3,12 @@ package com.lijiadayuan.lishijituan;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +21,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -32,13 +31,12 @@ import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
     public static final int LOGIN = 99;
 
 
     private TextView register;
-    private TextView forgetpass;
     private InputMethodManager manager;
     private EditText etUsername;                // 用户名
     private EditText etPassword;                // 密码
@@ -55,10 +53,11 @@ public class LoginActivity extends BaseActivity {
 
         SharedPreferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
         register =(TextView)findViewById(R.id.et_yonghu);
-        forgetpass=(TextView)findViewById(R.id.et_pass);
-        etUsername = (EditText) findViewById(R.id.et_username);
-        etPassword = (EditText) findViewById(R.id.et_password);
+        findViewById(R.id.et_pass).setOnClickListener(this);
+        etUsername = (EditText) findViewById(R.id.et_login_username);
+        etPassword = (EditText) findViewById(R.id.et_login_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
+        register.setOnClickListener(this);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,21 +139,6 @@ public class LoginActivity extends BaseActivity {
                 mQueue.add(request);
             }
         });
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.et_yonghu:
-                        startActivity(new Intent(LoginActivity.this, YonghuActivity.class));
-                        break;
-                    case R.id.et_pass:
-                        startActivity(new Intent(LoginActivity.this, ForgetpasswordActivtiy.class));
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
 //        forgetpass=(TextView)findViewById(R.id.et_pass);
 //        forgetpass.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -184,5 +168,19 @@ public class LoginActivity extends BaseActivity {
             }
         }
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.et_yonghu:
+                startActivity(new Intent(LoginActivity.this, YonghuActivity.class));
+                break;
+            case R.id.et_pass:
+                startActivity(new Intent(LoginActivity.this, ForgetpasswordActivtiy.class));
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -15,7 +15,8 @@ public interface UrlConstants {
     String REGISTER = USER_BASE + "register";                           // 注册
     String UPLOAD_AVATAR = USER_BASE + "uploadAvatar";                  // 上传头像图片
     String AVATAR = USER_BASE + "avatar";                               // 修改头像
-    String MODIFY_PASSWORD = USER_BASE + "modifyPassword";              // 修改/忘记密码
+    String MODIFY_PASSWORD = USER_BASE + "modifyPassword";              // 修改密码
+    String FORGET_PASSWORD=USER_BASE+"forgetPassword";                  // 忘记密码
 
     //福利商品
     String WELFARE = BASE_URL + "benefit/all";
