@@ -17,9 +17,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.joanzapata.android.BaseAdapterHelper;
-import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
@@ -58,18 +55,18 @@ public class LishiactivityActivity extends BaseActivity implements OnClickListen
             public void onResponse(String response) {
                 if (JsonParseUtil.isSuccess(JsonParseUtil.getJsonByString(response).getAsJsonObject())){
                     //TODO 获得数据 展示到listview
-                    ArrayList<Integer> mList = new ArrayList<>();
-                    for (int i = 0;i<images.length;i++){
-                        mList.add(images[i]);
-                    }
-
-                    QuickAdapter<Integer> mAdpter = new QuickAdapter<Integer>(LishiactivityActivity.this,R.layout.image_ativity,mList) {
-                        @Override
-                        protected void convert(BaseAdapterHelper helper, Integer item) {
-                            helper.setBackgroundRes(R.id.itemImage,item);
-                        }
-                    };
-                    mLvActivity.setAdapter(mAdpter);
+//                    ArrayList<Integer> mList = new ArrayList<>();
+//                    for (int i = 0;i<images.length;i++){
+//                        mList.add(images[i]);
+//                    }
+//
+//                    QuickAdapter<Integer> mAdpter = new QuickAdapter<Integer>(LishiactivityActivity.this,R.layout.image_ativity,mList) {
+//                        @Override
+//                        protected void convert(BaseAdapterHelper helper, Integer item) {
+//                            helper.setBackgroundRes(R.id.itemImage,item);
+//                        }
+//                    };
+//                    mLvActivity.setAdapter(mAdpter);
 
 
                 }else{
@@ -92,18 +89,18 @@ public class LishiactivityActivity extends BaseActivity implements OnClickListen
         imageback = (ImageView) findViewById(R.id.iv_back);
         tvTitle.setText("李氏活动");
 
-        ArrayList<Integer> mList = new ArrayList<>();
-        for (int i = 0;i<images.length;i++){
-            mList.add(images[i]);
-        }
-
-        QuickAdapter<Integer> mAdpter = new QuickAdapter<Integer>(LishiactivityActivity.this,R.layout.image_ativity,mList) {
-            @Override
-            protected void convert(BaseAdapterHelper helper, Integer item) {
-                helper.setBackgroundRes(R.id.itemImage,item);
-            }
-        };
-        mLvActivity.setAdapter(mAdpter);
+//        ArrayList<Integer> mList = new ArrayList<>();
+//        for (int i = 0;i<images.length;i++){
+//            mList.add(images[i]);
+//        }
+//
+//        QuickAdapter<Integer> mAdpter = new QuickAdapter<Integer>(LishiactivityActivity.this,R.layout.image_ativity,mList) {
+//            @Override
+//            protected void convert(BaseAdapterHelper helper, Integer item) {
+//                helper.setBackgroundRes(R.id.itemImage,item);
+//            }
+//        };
+//        mLvActivity.setAdapter(mAdpter);
 //        mLvActivity.setOnClickListener(this);
 //        mLvActivity.setAdapter(adapter);
 //        mLvActivity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
