@@ -30,5 +30,9 @@ public interface UrlConstants {
     //李氏活动
     String LEEACTIVITY = BASE_URL + "activity/";
     String GET_ALL_ACTIVITY = LEEACTIVITY + "all";
+    //共享资源
+    String SHARING_RESOURCE = BASE_URL + "resource/all";
+    //共享资源公司简介URL
+    String RESOURCE_DETAIL = BASE_URL + "resource/detail?resId=";
 
 }

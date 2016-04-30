@@ -96,7 +96,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
         iv_back = (ImageView)findViewById(R.id.iv_back);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
-
         mWbGoodsInfo = (WebView) findViewById(R.id.WebView);
         mTvGoodsName = (TextView) findViewById(R.id.tv_goods_name);
         mTvGoodsNum = (TextView) findViewById(R.id.tv_goods_num);
@@ -143,7 +142,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
     @Override
     public void onClick(View v) {
        switch (v.getId()){
@@ -166,10 +164,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                        Intent intent = new Intent(this,LoginActivity.class);
                        startActivityForResult(intent,LOGIN);
                    }
-
-
                }
-
            break;
            case R.id.iv_back:
                finish();

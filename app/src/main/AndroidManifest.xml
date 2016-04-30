@@ -48,7 +48,6 @@
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".MoreActivity" />
 
-
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -71,7 +70,8 @@
         <activity android:name=".OrderActivity" />
         <activity android:name=".LishiactivityActivity" />
         <activity android:name=".EventdetailsActivity" />
-        <activity android:name=".ReceiveActivity"></activity>
+        <activity android:name=".ReceiveActivity" />
+        <activity android:name=".CompanyProfileActivity"></activity>
     </application>
 
 </manifest>

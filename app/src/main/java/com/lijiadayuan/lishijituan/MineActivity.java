@@ -137,6 +137,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.ship_address:
                 startActivity(new Intent(MineActivity.this,AddressActivity.class));
+                Intent mintent=new Intent();
                 break;
             case R.id.iv_2D:
                 startActivity(new Intent(MineActivity.this,TwodActivity.class));

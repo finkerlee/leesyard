@@ -115,7 +115,6 @@ public class ProductViewBean implements Parcelable{
         parcel.writeString(goodsPrice);
         parcel.writeInt(goodsType);
         parcel.writeString(goodsInfoUrl);
-
     }
 
 

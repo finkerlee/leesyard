@@ -1,12 +1,11 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.lijiadayuan.lishijituan"
-        minSdkVersion 15
+        minSdkVersion 18
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -22,10 +21,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
-    compile project(':volley')
-    //compile 'com.alibaba:fastjson:1.2.0'
-    compile 'com.facebook.fresco:fresco:0.5.2'
-    compile files('libs/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar')
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.facebook.fresco:fresco:0.9.0+'
 }

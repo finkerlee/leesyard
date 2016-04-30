@@ -12,15 +12,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
-
-import com.lijiadayuan.lishijituan.bean.Address;
+import com.lijiadayuan.lishijituan.bean.Addresses;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class AddressActivity extends Activity implements OnClickListener {
     private ListView catergory_listview;
-    private List<Address> addressList;
+    private List<Addresses> addressList;
     private Button button;
     private TextView tvTitle;
     private ImageView imageback;
@@ -40,17 +40,17 @@ public class AddressActivity extends Activity implements OnClickListener {
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
         catergory_listview = (ListView) this.findViewById(R.id.address_listview);
-        addressList = new ArrayList<Address>();
+        addressList = new ArrayList<Addresses>();
 
-        addressList.add(new Address(
-                "001", "张志强强", "13112345678", 1, 1, 1, "月坛南街", 1, 0, "000001"
-        ));
-        addressList.add(new Address(
-                "002", "张志强强", "13112345678", 1, 1, 1, "月坛南街", 1, 0, "000001"
-        ));
-        addressList.add(new Address(
-                "003", "张志强强", "13112345678", 1, 1, 1, "月坛南街", 1, 0, "000001"
-        ));
+//        addressList.add(new Addresses(
+//                "001", "张志强强", "13112345678", 1, 1, 1, "月坛南街", 1, 0, "000001"
+//        ));
+//        addressList.add(new Addresses(
+//                "002", "张志强强", "13112345678", 1, 1, 1, "月坛南街", 1, 0, "000001"
+//        ));
+//        addressList.add(new Addresses(
+//                "003", "张志强强", "13112345678", 1, 1, 1, "月坛南街", 1, 0, "000001"
+//        ));
 
         catergory_listview.setAdapter(new AddressAdapter(addressList));
     }
@@ -64,10 +64,10 @@ public class AddressActivity extends Activity implements OnClickListener {
 
     private class AddressAdapter extends BaseAdapter {
 
-        private List<Address> addresses;
+        private List<Addresses> addresses;
         private LayoutInflater layoutInflater;
 
-        public AddressAdapter(List<Address> addresses) {
+        public AddressAdapter(List<Addresses> addresses) {
 
             this.addresses = addresses;
         }
@@ -109,7 +109,7 @@ public class AddressActivity extends Activity implements OnClickListener {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            Address address = addresses.get(i);
+            Addresses address = addresses.get(i);
             holder.name.setText(address.getAddName());
             holder.iphone.setText(address.getAddPhone());
             holder.address.setText(address.getAddProvince() + address.getAddCity() + address.getAddArea() + address.getAddDetail());
@@ -121,16 +121,6 @@ public class AddressActivity extends Activity implements OnClickListener {
 
 
     }
-
-
-//    // 适配显示的图片数组
-//    private String[] mTitlename = {};
-//    //给照片添加文字显示(Title)
-//    private Integer[] mTitleiphone = { 111111111, 222222222, 333333333, 444444444, 5555555,
-//            666666666, 77777777, 88888888 };
-//
-//    private String[] mTitleaddress={"北京市西城区月坛南路69号", "北京市西城区月坛南路69号","北京市西城区月坛南路69号", "北京市西城区月坛南路69号", "摄影摄像/数码配件",
-//            "北京市西城区月坛南路69号", "北京市西城区月坛南路69号", "北京市西城区月坛南路69号"};
 
 
     public static class ViewHolder {
