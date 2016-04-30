@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -23,10 +24,15 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.lijiadayuan.lishijituan.adapter.ImagePagerAdapter;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
+
+import org.apache.log4j.chainsaw.Main;
 
 public class MainActivity extends BaseActivity implements OnClickListener{
     private ViewFlow mViewFlow;
@@ -47,7 +53,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     private LinearLayout framenotice;
     private Button button;
     private ImageView ivmore;
-
+    private LocationService locationService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +120,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         findViewById(R.id.imageButton3).setOnClickListener(this);
         findViewById(R.id.imageButton4).setOnClickListener(this);
         findViewById(R.id.imageButton5).setOnClickListener(this);
+        findViewById(R.id.iv_address).setOnClickListener(this);
 
         framenotice= (LinearLayout) findViewById(R.id.homepage_notice_ll);
         ivmore= (ImageView) findViewById(R.id.iv_more);
@@ -143,7 +150,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                     @Override
                     public void run() {
                         moveNext();
-                        Log.d("Task", "下一个");
+                        //Log.d("Task", "下一个");
                     }
                 });
 
@@ -192,6 +199,36 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         mViewFlow.startAutoFlowTimer(); // 启动自动播放
     }
 
+    private BDLocationListener mListener = new BDLocationListener() {
+        @Override
+        public void onReceiveLocation(BDLocation bdLocation) {
+            if (bdLocation.hasAddr()){
+                Log.i("main",bdLocation.getAddrStr());
+            }
+        }
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        locationService = ((LeeApplication) getApplication()).locationService;
+        locationService.registerListener(mListener);
+        //注册监听
+        int type = getIntent().getIntExtra("from", 0);
+        if (type == 0) {
+            locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+        } else if (type == 1) {
+            locationService.setLocationOption(locationService.getOption());
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        locationService.unregisterListener(mListener); //注销掉监听
+        locationService.stop(); //停止定位服务
+        super.onStop();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -220,7 +257,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 openActivity(MoreActivity.class);
                 break;
             case R.id.imageButton:
-                startProductBaseActivity();
+                //startProductBaseActivity();
+                Log.i("main","222");
+                locationService.start();
                 //startActivity(new Intent(this,ProductBaseActivity.class));
                 break;
             case R.id.imageButton2:
@@ -242,6 +281,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             case R.id.imageButton6:
                 startProductBaseActivity();
                 //startActivity(new Intent(this,ProductBaseActivity.class));
+                break;
+            case R.id.iv_address:
+                //startProductBaseActivity();
+
                 break;
 
             default:
@@ -312,4 +355,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 //        }
 //        return true;
 //    }
+
+
 }

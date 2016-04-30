@@ -58,7 +58,7 @@
             android:layout_width="143dp"
             android:layout_height="143dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo" />
+            android:src="@drawable/ic_launcher" />
 
         <TextView
             android:layout_width="wrap_content"
