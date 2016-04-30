@@ -15,12 +15,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="vertical">
 
             <FrameLayout
                 android:id="@+id/framelayout"
                 android:layout_width="match_parent"
                 android:layout_height="200dip"
+
                 android:orientation="vertical">
 
                 <com.lijiadayuan.lishijituan.ViewFlow
@@ -300,6 +302,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
@@ -307,13 +310,14 @@
             android:background="#00ffffff">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:id="@+id/iv_address"
                 android:src="@drawable/location" />
 
             <EditText
