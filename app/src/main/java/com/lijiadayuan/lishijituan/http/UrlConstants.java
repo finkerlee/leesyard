@@ -46,6 +46,10 @@ public interface UrlConstants {
     String TICAPPLY_CERTIFICATION = TICAPPLY + "apply";                 //申请领取卡票
     String UPLOAD_TICAPPLY = TICAPPLY + "upload";                       //上传认证
     String RECEIVE_TICAPPLY = TICAPPLY + "receive";                     //领取卡票
-    //
-
+    //管理收货地址
+    String ADDRESS = BASE_URL + "address/";
+    String USER_ADDRESS = ADDRESS + "user";                             //查询用户收货地址
+    String DELETE_ADDRESS = ADDRESS + "delete";                         //删除地址
+    String MODIFY_ADDRESS = ADDRESS + "modify";                         //编辑地址
+    String ADD_ADDRESS = ADDRESS + "add";                               //添加地址
 }
