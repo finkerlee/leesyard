@@ -190,7 +190,13 @@
         </receiver>
 
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="518f6acc731be8f9c1ddd870" /> <!-- </>值来自开发者平台取得的AppKey-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="518f6acc731be8f9c1ddd870" />
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- </>值来自开发者平台取得的AppKey-->
 >>>>>>> 499da8afebe653128bab4fa544b6d209f76db97e
     </application>
 

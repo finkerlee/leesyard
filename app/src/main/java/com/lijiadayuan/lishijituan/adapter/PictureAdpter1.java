@@ -2,6 +2,7 @@ package com.lijiadayuan.lishijituan.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -56,6 +57,7 @@ public class PictureAdpter1 extends BaseAdapter{
         }else{
             mHolder = (ViewHolder) view.getTag();
         }
+
         mHolder.mImageView.setImageURI(Uri.parse(mlist[i]));
         return view;
     }
