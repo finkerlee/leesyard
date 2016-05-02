@@ -33,6 +33,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+
+
 public class FindActivity extends BaseActivity {
     private GridView gridView;//image
     private TextView tvTitle;
