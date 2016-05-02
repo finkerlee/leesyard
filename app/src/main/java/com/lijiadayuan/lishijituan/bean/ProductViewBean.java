@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by zhaoyi on 16/4/27.
  */
+
 public class ProductViewBean implements Parcelable{
     private ArrayList<String> picList;
     private String goodsName;
@@ -122,14 +123,25 @@ public class ProductViewBean implements Parcelable{
         ProductViewBean  mProductViewBean = new ProductViewBean();
         mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mWelfareGoodsBean.getBenId());
         mProductViewBean.setGoodsName(mWelfareGoodsBean.getBenName());
-        mProductViewBean.setGoodsNum(mWelfareGoodsBean.getBenStock()+"");
+        mProductViewBean.setGoodsNum(mWelfareGoodsBean.getBenStock() + "");
         mProductViewBean.setGoodsSpec(mWelfareGoodsBean.getBenSpec());
-        mProductViewBean.setGoodsPrice(mWelfareGoodsBean.getBenPrice()+"");
+        mProductViewBean.setGoodsPrice(mWelfareGoodsBean.getBenPrice() + "");
         mProductViewBean.setGoodsType(type);
         //mProductViewBean.setPicList();
         return mProductViewBean;
+    }
 
-
+    public static ProductViewBean getProductViewBeanList(Product mProduct,int type){
+        ProductViewBean  mProductViewBean = new ProductViewBean();
+        mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mProduct.getProId());
+        mProductViewBean.setGoodsName(mProduct.getProName());
+        mProductViewBean.setGoodsNum(mProduct.getProStock() + "");
+        mProductViewBean.setGoodsSpec(mProduct.getProSpec());
+        mProductViewBean.setGoodsPrice(mProduct.getProPrice() + "");
+//        mProductViewBean.setPicList(mProduct.getp() + "");
+        mProductViewBean.setGoodsType(type);
+        //mProductViewBean.setPicList();
+        return mProductViewBean;
     }
 
 }

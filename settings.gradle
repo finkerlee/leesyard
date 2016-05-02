@@ -1,4 +1,4 @@
+include ':adapter'
 include ':app'
 include ':volley'
-include ':adapter'
 include ':pickerview'
