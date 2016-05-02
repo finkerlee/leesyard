@@ -11,21 +11,39 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View.OnClickListener;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.UpLoadImageTask;
+import com.lijiadayuan.lishijituan.utils.UpLoadImageTask1;
+import com.lijiadayuan.lishijituan.utils.UpLoadPicCallBack;
+import com.lijiadayuan.lishijituan.utils.VerficationUtil;
 import com.lijiadayuan.lishijituan.view.PhotosDialog;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class RegistrationActivity extends Activity implements OnClickListener {
+public class RegistrationActivity extends BaseActivity implements OnClickListener {
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
@@ -35,8 +53,11 @@ public class RegistrationActivity extends Activity implements OnClickListener {
     private PhotosDialog dialog;
     private static RegistrationActivity instance;
     private ImageView mShowIV;
+    private EditText mEtName,mEtSex,mEtNation,mEtPhoneNum;
     private String mSaveDir;//拍照存放的文件夹名字
     private String mFileName;//拍照存放的文件的名字
+    private Bitmap[] bitmaps = new Bitmap[]{};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +65,19 @@ public class RegistrationActivity extends Activity implements OnClickListener {
         //空白处隐藏软键盘
         instance = this;
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        findViewById();
         initView();
     }
-    protected void findViewById() {
+    private void initView() {
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
         photos= (ImageView) findViewById(R.id.iv_photos);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
-    }
-    protected void initView() {
+        mEtName = (EditText) findViewById(R.id.name);
+        mEtSex = (EditText) findViewById(R.id.sex);
+        mEtNation = (EditText) findViewById(R.id.nation);
+        mEtPhoneNum = (EditText) findViewById(R.id.phone_num);
+
+
         photos.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -196,6 +220,64 @@ public class RegistrationActivity extends Activity implements OnClickListener {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                 startActivityForResult(intent, OPEN_CAMERA_FLAG);
                 dialog.dismiss();
+                break;
+
+            case R.id.i_want_receive:
+                // 判断名字是否为空
+                if (TextUtils.isEmpty(mEtName.getText())) {
+                    Toast.makeText(RegistrationActivity.this, R.string.registration_username, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // 判断性别是否为空
+                if (TextUtils.isEmpty(mEtSex.getText())) {
+                    Toast.makeText(RegistrationActivity.this,"请输入性别", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // 判断民族是否为空
+                if (TextUtils.isEmpty(mEtNation.getText())) {
+                    Toast.makeText(RegistrationActivity.this,"请输入民族", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // 判断手机号是否为空  是否正确
+                if (!VerficationUtil.checkMobile(this, mEtPhoneNum.getText().toString())) {
+                    return;
+                }
+                if (bitmaps.length == 0){
+                    Toast.makeText(RegistrationActivity.this,"请上传资料", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                UpLoadImageTask1 mUpLoadImageTask1 = (UpLoadImageTask1) new UpLoadImageTask1(RegistrationActivity.this,bitmaps).execute(UrlConstants.UP_LOAD_DATA);
+                mUpLoadImageTask1.setCallBACK(new UpLoadPicCallBack() {
+                    @Override
+                    public void setCompleteImage(ArrayList<String> iamgePicList) {
+                        if (iamgePicList.size()!=0){
+                            RequestQueue mRequestQueue = app.getRequestQueue();
+                            StringRequest mStringRequest = new StringRequest(Request.Method.POST, UrlConstants.GET_ALL_ACTIVITY, new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                }
+                            }){
+                                @Override
+                                protected Map<String, String> getParams() throws AuthFailureError {
+                                    Map<String, String> params = new HashMap<String, String>();
+                                    //params.put("actId",)
+                                    return super.getParams();
+                                }
+                            };
+                        }
+                    }
+                });
+
+
+
+
+
                 break;
             default:
                 break;

@@ -32,6 +32,8 @@ public class JsonParseUtil {
         }
     }
 
+
+
     //将jsonarray转换成list集合
     public static <T> ArrayList<T> toListByJson(JsonArray mJsonArray,Class<T> mClass){
         Gson mGson = new Gson();

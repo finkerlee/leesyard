@@ -41,6 +41,7 @@ public class KeyConstants {
         public static final String ToLoginPageStyle = "LoginPageStyle";
         //跳转到商品详情页面时  判断当前页面的类型
         public static final String GoodsPageType = "GoodsPageType";
+
     }
 
     public static class IntentPageValues{
@@ -50,6 +51,9 @@ public class KeyConstants {
 
 
         public static final String productViewBeanType = "productViewBean";
+
+        //活动的key
+        public static final String Actvites = "Actvites";
     }
 
 }

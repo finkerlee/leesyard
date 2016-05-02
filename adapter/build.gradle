@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //facebook图片内存管理
+    compile 'com.facebook.fresco:fresco:0.5.2'
+}
+
+android {
+
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+    }
+//
+//    compileOptions {
+//        sourceCompatibility rootProject.ext.sourceCompatibility
+//        targetCompatibility rootProject.ext.targetCompatibility
+//    }
+}

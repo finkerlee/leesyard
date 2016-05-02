@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     tools:context="com.lijiadayuan.lishijituan.EventdetailsActivity">
     <include
+        android:id="@+id/title"
         layout="@layout/common_title"/>
+
+    <WebView
+        android:id="@+id/activity_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
