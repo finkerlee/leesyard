@@ -266,7 +266,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                                 @Override
                                 protected Map<String, String> getParams() throws AuthFailureError {
                                     Map<String, String> params = new HashMap<String, String>();
-                                    params.put("actId",)
+                                    //params.put("actId",)
                                     return super.getParams();
                                 }
                             };
