@@ -34,5 +34,13 @@ public interface UrlConstants {
     String SHARING_RESOURCE = BASE_URL + "resource/all";
     //共享资源公司简介URL
     String RESOURCE_DETAIL = BASE_URL + "resource/detail?resId=";
+    //卡票
+    String TICKET = BASE_URL + "ticket/all";                            //查询全部卡票
+    //申请卡票认证
+    String TICAPPLY = BASE_URL + "ticapply/";
+    String TICAPPLY_CERTIFICATION = TICAPPLY + "apply";                 //申请领取卡票
+    String UPLOAD_TICAPPLY = TICAPPLY + "upload";                       //上传认证
+    String RECEIVE_TICAPPLY = TICAPPLY + "receive";                     //领取卡票
+    //
 
 }
