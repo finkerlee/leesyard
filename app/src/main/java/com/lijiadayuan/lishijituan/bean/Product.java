@@ -3,7 +3,6 @@ package com.lijiadayuan.lishijituan.bean;
 /**
  * Created by Lee on 2016-03-08.
  * E-mail:johnyylee@163.com
- *
  * 封装products表数据的类
  */
 public class Product {
