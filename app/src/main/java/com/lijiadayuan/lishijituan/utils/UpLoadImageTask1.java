@@ -31,11 +31,12 @@ public class UpLoadImageTask1 extends AsyncTask<String, Integer, String[]> {
 
     private UpLoadPicCallBack mCallback;
 
-    private String[] mPic = new String[]{};
+    private String[] mPic;
 
     public UpLoadImageTask1(Context mContext, Bitmap[] mList) {
         this.mContext = mContext;
         this.mList = mList;
+        mPic = new String[mList.length];
 
     }
 

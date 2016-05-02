@@ -10,8 +10,9 @@
         layout="@layout/common_title" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
+        android:id="@+id/rl_order_addresslayout"
         android:layout_width="match_parent"
+        android:clickable="true"
         android:layout_height="80dp"
         android:layout_below="@+id/include14">
     <TextView
@@ -47,7 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/name_title"
-            android:text="李国庆"
             android:textSize="18dp" />
 
         <TextView
@@ -65,7 +65,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/nember"
-            android:text="1865111111"
             android:textSize="18dp" />
 
         <TextView
@@ -79,13 +78,12 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/iv_address"
+            android:id="@+id/tv_address"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_iphone"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/address"
-            android:text="北京市西城区月坛南路69号"
             android:textSize="18dp" />
 
         <ImageView
@@ -114,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/relativeLayout2">
+        android:layout_below="@+id/rl_order_addresslayout">
 
         <TextView
             android:id="@+id/textView21"
@@ -124,7 +122,7 @@
             android:background="#b4b4b4" />
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/iv_order_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView21"
@@ -135,28 +133,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/imageView9"
+            android:layout_below="@id/iv_order_img"
             android:layout_marginTop="10dp"
             android:background="#b4b4b4" />
 
         <TextView
+            android:id="@+id/tv_order_bela"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView9"
+            android:layout_alignTop="@+id/iv_order_img"
             android:layout_marginLeft="10dp"
-            android:layout_toEndOf="@+id/imageView9"
-            android:layout_toRightOf="@+id/imageView9"
+            android:layout_toEndOf="@id/iv_order_img"
+            android:layout_toRightOf="@id/iv_order_img"
             android:text="BELA DESIGN"
             android:textSize="18dp" />
 
         <TextView
+            android:id="@+id/tv_order_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView9"
+            android:layout_alignTop="@+id/iv_order_img"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/imageView9"
-            android:layout_toRightOf="@+id/imageView9"
+            android:layout_toEndOf="@+id/iv_order_img"
+            android:layout_toRightOf="@+id/iv_order_img"
             android:text="浪漫可旋转的八音盒"
             android:textSize="18dp" />
 
@@ -166,15 +166,15 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toEndOf="@+id/imageView9"
-            android:layout_toRightOf="@+id/imageView9"
+            android:layout_toEndOf="@+id/iv_order_img"
+            android:layout_toRightOf="@+id/iv_order_img"
             android:text="x1" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/tv_order_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView9"
+            android:layout_alignBottom="@+id/iv_order_img"
             android:layout_alignLeft="@+id/textView22"
             android:layout_alignStart="@+id/textView22"
             android:layout_marginBottom="20dp"

@@ -4,6 +4,7 @@ package com.lijiadayuan.lishijituan;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,7 +21,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +33,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bigkoo.pickerview.OptionsPickerView;
+import com.bigkoo.pickerview.utils.PickerViewAnimateUtil;
+import com.lijiadayuan.lishijituan.bean.Activites;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.ArchivesUtils;
+import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
+import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UpLoadImageTask;
 import com.lijiadayuan.lishijituan.utils.UpLoadImageTask1;
 import com.lijiadayuan.lishijituan.utils.UpLoadPicCallBack;
@@ -42,6 +52,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class RegistrationActivity extends BaseActivity implements OnClickListener {
     private final int OPEN_ALBUM_FLAG = 1023;
@@ -56,28 +67,142 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
     private EditText mEtName,mEtSex,mEtNation,mEtPhoneNum;
     private String mSaveDir;//拍照存放的文件夹名字
     private String mFileName;//拍照存放的文件的名字
-    private Bitmap[] bitmaps = new Bitmap[]{};
+    private Bitmap[] bitmaps = new Bitmap[1];
+
+    private Activites mActivites;
+    private String strUserAge = "";
+
+    private SharedPreferences mSp;
+    //初始化选择器
+    private OptionsPickerView pickerView;
+
+    private GridView mGvPicData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        mSp = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
+        mActivites = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.Actvites);
         //空白处隐藏软键盘
         instance = this;
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         initView();
+        setListener();
     }
+
+    private void setListener() {
+        mEtSex.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                pickerView.setTitle("选择性别");
+                pickerView.setPicker(ArchivesUtils.getAge());
+                pickerView.setCyclic(false);
+                if(!TextUtils.isEmpty(strUserAge)){
+                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+                }
+                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3) {
+                        mEtSex.setText(ArchivesUtils.getAge().get(options1));
+//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+//                        refreshMenuView();
+                    }
+                });
+                if(!pickerView.isShowing()){
+                    pickerView.show();
+                }
+            }
+        });
+        mEtSex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.hasFocus()){
+                    //显示自己界面
+                    pickerView.setTitle("选择性别");
+                    pickerView.setPicker(ArchivesUtils.getAge());
+                    pickerView.setCyclic(false);
+                    if(!TextUtils.isEmpty(strUserAge)){
+                        pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+                    }
+                    pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                        @Override
+                        public void onOptionsSelect(int options1, int option2, int options3) {
+                            mEtSex.setText(ArchivesUtils.getAge().get(options1));
+//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+//                        refreshMenuView();
+                        }
+                    });
+                    if(!pickerView.isShowing()){
+                        pickerView.show();
+                    }
+                }
+            }
+        });
+
+        mEtNation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                pickerView.setTitle("选择民族");
+                pickerView.setPicker(ArchivesUtils.getNation());
+                pickerView.setCyclic(false);
+                if(!TextUtils.isEmpty(strUserAge)){
+                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+                }
+                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3) {
+                        mEtNation.setText(ArchivesUtils.getNation().get(options1));
+//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+//                        refreshMenuView();
+                    }
+                });
+                if(!pickerView.isShowing()){
+                    pickerView.show();
+                }
+            }
+        });
+        mEtNation.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickerView.setTitle("选择民族");
+                pickerView.setPicker(ArchivesUtils.getNation());
+                pickerView.setCyclic(false);
+                if(!TextUtils.isEmpty(strUserAge)){
+                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+                }
+                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3) {
+                        mEtNation.setText(ArchivesUtils.getNation().get(options1));
+//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+//                        refreshMenuView();
+                    }
+                });
+                if(!pickerView.isShowing()){
+                    pickerView.show();
+                }
+            }
+        });
+    }
+
     private void initView() {
+        pickerView = new OptionsPickerView(this);
+        pickerView = new OptionsPickerView(this);
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
         photos= (ImageView) findViewById(R.id.iv_photos);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
         mEtName = (EditText) findViewById(R.id.name);
         mEtSex = (EditText) findViewById(R.id.sex);
+        mEtSex.setInputType(InputType.TYPE_NULL);
         mEtNation = (EditText) findViewById(R.id.nation);
+        mEtNation.setInputType(InputType.TYPE_NULL);
         mEtPhoneNum = (EditText) findViewById(R.id.phone_num);
-
-
+        //w = (GridView) findViewById(R.id.mGridView);
+        findViewById(R.id.i_want_receive).setOnClickListener(this);
+        mEtNation.setOnClickListener(this);
+        mEtSex.setOnClickListener(this);
         photos.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -120,6 +245,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                     cursor.moveToFirst();
                     String path = cursor.getString(columnIndex);
                     bitmap = getCompressBitmap(path);
+                    bitmaps[0] = bitmap;
                     mShowIV.setImageBitmap(bitmap);//将选中的图片展示出来
                 /* 创建一个新的文件，存放压缩过的bitmap，用于发送给服务器 */
                     String saveDir = Environment.getExternalStorageDirectory() + "/wyk_dir/";
@@ -148,6 +274,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                 case OPEN_CAMERA_FLAG://拍照获取的回调
                     file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
                     bitmap = getCompressBitmap(mSaveDir + mFileName);
+                    bitmaps[0] = bitmap;
                     mShowIV.setImageBitmap(bitmap);//让拍照的照片显示在控件上
                     try {
                         outputStream = new FileOutputStream(file);
@@ -249,12 +376,15 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                 UpLoadImageTask1 mUpLoadImageTask1 = (UpLoadImageTask1) new UpLoadImageTask1(RegistrationActivity.this,bitmaps).execute(UrlConstants.UP_LOAD_DATA);
                 mUpLoadImageTask1.setCallBACK(new UpLoadPicCallBack() {
                     @Override
-                    public void setCompleteImage(ArrayList<String> iamgePicList) {
+                    public void setCompleteImage(final ArrayList<String> iamgePicList) {
                         if (iamgePicList.size()!=0){
                             RequestQueue mRequestQueue = app.getRequestQueue();
                             StringRequest mStringRequest = new StringRequest(Request.Method.POST, UrlConstants.GET_ALL_ACTIVITY, new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
+                                    if (JsonParseUtil.isSuccess(JsonParseUtil.getJsonByString(response).getAsJsonObject())){
+                                        Toast.makeText(RegistrationActivity.this,"报名成功",Toast.LENGTH_LONG).show();
+                                    }
 
                                 }
                             }, new Response.ErrorListener() {
@@ -266,18 +396,23 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                                 @Override
                                 protected Map<String, String> getParams() throws AuthFailureError {
                                     Map<String, String> params = new HashMap<String, String>();
-                                    //params.put("actId",)
-                                    return super.getParams();
+                                    params.put("actId",mActivites.getActId()+"");
+                                    params.put("userId",mSp.getString(KeyConstants.UserInfoKey.userId,""));
+                                    params.put("acaName",mEtName.getText().toString().trim());
+                                    params.put("acaGender",mEtSex.getText().toString().trim());
+                                    params.put("acaNation",mEtNation.getText().toString().trim());
+                                    params.put("acaPhone",mEtPhoneNum.getText().toString().trim());
+                                    for (int i = 0;i<iamgePicList.size();i++){
+                                        params.put("acaImg"+i+1+"",iamgePicList.get(0));
+                                    }
+
+                                    return params;
                                 }
                             };
+                            mRequestQueue.add(mStringRequest);
                         }
                     }
                 });
-
-
-
-
-
                 break;
             default:
                 break;

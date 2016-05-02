@@ -41,10 +41,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
 
     private SharedPreferences mSharedPreferences;
 
-
-
-
-
     ArrayList<String> linkUrlArray= new ArrayList<String>();
     private CircleFlowIndicator mFlowIndicator;
     private ArrayList<String> imageUrlList = new ArrayList<String>();
@@ -57,6 +53,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
 
         isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false);
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
+//        imageUrlList = mProductViewBean.getPicList();
         imageUrlList
                 .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
         imageUrlList
@@ -148,13 +145,15 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
            case R.id.i_want_receive:
                if("我要购买".equals(mBtnReceive.getText())){
                    Intent intent = new Intent(this,OrderActivity.class);
+                   intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                    startActivity(intent);
                }else{
                    //如果已经登陆
                    if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false)){
                        if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIfLee,false)){
                            Intent intent = new Intent(this,OrderActivity.class);
-                           startActivityForResult(intent,ORDEROK);
+                           intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
+                           startActivityForResult(intent, ORDEROK);
                        }else{
                            Intent intent = new Intent(this,MemberActivity.class);
                            intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
