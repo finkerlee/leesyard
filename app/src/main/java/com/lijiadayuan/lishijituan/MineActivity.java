@@ -88,6 +88,13 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin, false);
+        setViewByStatus();
+    }
+
     protected void initView() {
         dialog = new photoscorrect(this, R.style.protocol_dialog);
         parent = (RelativeLayout) findViewById(R.id.parent);
@@ -112,17 +119,18 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         mymessage.setOnClickListener(this);
         headImage.setOnClickListener(this);
 
-        if (isLogin){
-            setViewByData();
-            String headImagePath = mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage, "");
-            Log.i("main",headImagePath);
-            if ("".equals(headImagePath)){
-                headImage.setBackgroundResource(R.drawable.user_normol_head_image);
-            }else{
-                headImage.setImageURI(Uri.parse(headImagePath));
-            }
+        setViewByStatus();
+    }
+    //根据登陆状态去设置view
+    private  void setViewByStatus() {
+        mTvUserName.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userNick,"默认"));
+        mTvUserLevel.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userLevel,"1"));
+        String mHeadImage = mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage,"");
+        if (!"".equals(mHeadImage)){
+            headImage.setImageURI(Uri.parse(mHeadImage));
         }else{
-            headImage.setBackgroundResource(R.drawable.user_normol_head_image);
+            Uri uri = Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image);
+            headImage.setImageURI(uri);
         }
     }
 

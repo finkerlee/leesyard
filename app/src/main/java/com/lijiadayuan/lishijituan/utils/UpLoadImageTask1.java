@@ -31,7 +31,7 @@ public class UpLoadImageTask1 extends AsyncTask<String, Integer, String[]> {
 
     private UpLoadPicCallBack mCallback;
 
-    private String[] mPic = new String[2];
+    private String[] mPic = new String[]{};
 
     public UpLoadImageTask1(Context mContext, Bitmap[] mList) {
         this.mContext = mContext;
@@ -51,9 +51,9 @@ public class UpLoadImageTask1 extends AsyncTask<String, Integer, String[]> {
     protected void onPostExecute(String[] result) {
         super.onPostExecute(result);
         //dialog.dismiss();
-        if (result.length != 2) {
-            Toast.makeText(mContext, "上传照片失败", Toast.LENGTH_LONG).show();
-        }
+//        if (result.length != 2) {
+//            Toast.makeText(mContext, "上传照片失败", Toast.LENGTH_LONG).show();
+//        }
         ArrayList<String> mList = new ArrayList<>();
         for (int i = 0; i < result.length; i++) {
             if (!TextUtils.isEmpty(result[i])) {

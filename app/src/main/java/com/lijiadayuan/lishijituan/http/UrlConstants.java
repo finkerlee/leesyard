@@ -29,7 +29,12 @@ public interface UrlConstants {
 
     //李氏活动
     String LEEACTIVITY = BASE_URL + "activity/";
+    //活动列表
     String GET_ALL_ACTIVITY = LEEACTIVITY + "all";
+    //活动报名
+    String SIGN_UP_ACTIVITY = BASE_URL + "actapply/apply";
+    //上传认证资料图片
+    String UP_LOAD_DATA = BASE_URL + "actapply/upload";
     //共享资源
     String SHARING_RESOURCE = BASE_URL + "resource/all";
     //共享资源公司简介URL

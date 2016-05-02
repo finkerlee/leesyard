@@ -191,7 +191,19 @@
 
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <meta-data android:name="JPUSH_APPKEY" android:value="518f6acc731be8f9c1ddd870" /> <!-- </>值来自开发者平台取得的AppKey-->
->>>>>>> 499da8afebe653128bab4fa544b6d209f76db97e
+        <!-- 百度地图-->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="kXOR02KaxgtvrGDzTxlx1a4IUOWofAyb" />
     </application>
 
 </manifest>

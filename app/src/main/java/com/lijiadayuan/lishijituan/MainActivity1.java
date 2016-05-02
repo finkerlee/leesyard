@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,9 @@ import com.lijiadayuan.lishijituan.adapter.PictureAdpter2;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.LocationService;
+import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
+import com.lijiadayuan.lishijituan.view.photoscorrect;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -51,6 +54,10 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
     private ImageView mIvTicket,mIvRed;
     //李氏文化，陆空救援，共享资源，李氏黑名单
     private ImageView mIvLeeCulture,mIvLuKongRescus,mIvShareRescous,mIvLeeBlackList;
+    //保存当前地址
+    private String mCurrentAddress;
+
+    private AddressDialog dialog;
 
 
 
@@ -201,7 +208,15 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             if (bdLocation.hasAddr()){
-                Toast.makeText(MainActivity1.this,bdLocation.getAddrStr(),Toast.LENGTH_LONG).show();
+                mCurrentAddress = bdLocation.getAddrStr();
+                Log.i("main",bdLocation.getAddrStr());
+                locationService.unregisterListener(mListener); //注销掉监听
+                locationService.stop(); //停止定位服务
+
+                dialog = new AddressDialog(MainActivity1.this, R.style.protocol_dialog,mCurrentAddress);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
+
             }
         }
     };
@@ -209,21 +224,10 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
     @Override
     protected void onStart() {
         super.onStart();
-        locationService = ((LeeApplication) getApplication()).locationService;
-        locationService.registerListener(mListener);
-        //注册监听
-        int type = getIntent().getIntExtra("from", 0);
-        if (type == 0) {
-            locationService.setLocationOption(locationService.getDefaultLocationClientOption());
-        } else if (type == 1) {
-            locationService.setLocationOption(locationService.getOption());
-        }
     }
 
     @Override
     protected void onStop() {
-        locationService.unregisterListener(mListener); //注销掉监听
-        locationService.stop(); //停止定位服务
         super.onStop();
     }
 
@@ -260,6 +264,15 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
                 break;
 
             case R.id.iv_address:
+                locationService = ((LeeApplication) getApplication()).locationService;
+                locationService.registerListener(mListener);
+                //注册监听
+                int type = getIntent().getIntExtra("from", 0);
+                if (type == 0) {
+                    locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+                } else if (type == 1) {
+                    locationService.setLocationOption(locationService.getOption());
+                }
                 locationService.start();
                 break;
 
