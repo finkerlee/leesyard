@@ -65,6 +65,7 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
 
             @Override
             public void onClick(View v) {
+                Log.i("main","3333");
                 dialog = new WheelDialog(ShippingAddressActivity.this, R.style.protocol_dialog, getAssets(), new WheelDialog.IRefreshUI() {
                     @Override
                     public void refresh(String info, String areaId) {
@@ -88,9 +89,9 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
         editTextname= (EditText) findViewById(R.id.et_name_address);
         editTextphone= (EditText) findViewById(R.id.et_phone_address);
         editTextdetailed= (EditText) findViewById(R.id.et_detailed_address);
-        proId=findViewById(R.id.id_province);
-        cityId=findViewById(R.id.id_city);
-        areaId=findViewById(R.id.id_district);
+//        proId=findViewById(R.id.id_province);
+//        cityId=findViewById(R.id.id_city);
+//        areaId=findViewById(R.id.id_district);
     }
     protected void initView(){
         tvTitle.setText("收货地址");
@@ -122,18 +123,22 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
               //判断收货人是否为空
               if(TextUtils.isEmpty(editTextname.getText())){
                   Toast.makeText(ShippingAddressActivity.this, R.string.address_name,Toast.LENGTH_SHORT).show();
+                  return;
               }
               //判断收货人手机号是否为空
               if(TextUtils.isEmpty(editTextphone.getText())){
                   Toast.makeText(ShippingAddressActivity.this, R.string.address_phone,Toast.LENGTH_SHORT).show();
+                  return;
               }
               //判断收货人地址是否为空
               if(TextUtils.isEmpty(editTextaddress.getText())){
                   Toast.makeText(ShippingAddressActivity.this, R.string.address_add,Toast.LENGTH_SHORT).show();
+                  return;
               }
               //判断详细地址是否为空
               if(TextUtils.isEmpty(editTextdetailed.getText())){
                   Toast.makeText(ShippingAddressActivity.this, R.string.address_detailed,Toast.LENGTH_SHORT).show();
+                  return;
               }
               // 创建请求队列
               RequestQueue mQueue = app.getRequestQueue();
@@ -176,7 +181,7 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                       params.put("addId", "");
                       params.put("addName", editTextname.getText().toString().trim());
                       params.put("addPhone", editTextphone.getText().toString().trim());
-                      params.put("addProvince", proId.toString().trim());
+ //                     params.put("addProvince", vv);
                       params.put("addCity",cityId.toString().trim());
                       params.put("addArea",areaId.toString().trim());
                       params.put("addDetail ",editTextdetailed.getText().toString().trim());

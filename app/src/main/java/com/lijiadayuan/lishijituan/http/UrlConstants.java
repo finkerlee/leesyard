@@ -5,7 +5,7 @@ package com.lijiadayuan.lishijituan.http;
  * E-mail:johnyylee@163.com
  */
 public interface UrlConstants {
-    String BASE_URL = "http://192.168.0.101:8080/";                     // 测试地址
+    String BASE_URL = "http://192.168.0.103:8080/";                     // 测试地址
     /** 用户部分 **/
     String USER_BASE = BASE_URL + "user/";
     String LOGIN = USER_BASE + "login";                                 // 登录
@@ -22,10 +22,7 @@ public interface UrlConstants {
     //发现
     String FIND = BASE_URL+"product/all";
     // 地址
-    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址
-    String DELETE_ADDRESS = BASE_URL + "address/delete";                    // 删除收货地址
-    String MODIFY_ADDRESS = BASE_URL + "address/modify";                    // 修改收货地址
-    String ADD_ADDRESS = BASE_URL + "address/add";                           // 添加收货地址
+    String GET_ADDRESS = BASE_URL + "address/user?userId=";                          // 查询某一用户的全部收货地址
     //商品详情URL
     String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
     //李氏认证
@@ -58,4 +55,10 @@ public interface UrlConstants {
     String DELETE_ADDRESS = ADDRESS + "delete";                         //删除地址
     String MODIFY_ADDRESS = ADDRESS + "modify";                         //编辑地址
     String ADD_ADDRESS = ADDRESS + "add";                               //添加地址
+    //李氏名人
+    String CELEBRITIES = BASE_URL + "celebrities/";
+    String ALL_CELEBRITIES = CELEBRITIES + "all";                       //查询全部名人
+    //李氏名人URL详情
+    String CELEBRITIEW_DETAILS = CELEBRITIES + "detail/?celeId=";
+
 }

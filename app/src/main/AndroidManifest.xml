@@ -119,7 +119,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
         <!-- Required SDK 核心功能 -->
         <!-- option since 2.0.5 可配置PushService，DaemonService,PushReceiver,AlarmReceiver的android:process参数 将JPush相关组件设置为一个独立进程 -->
         <!-- 如：android:process=":remote" -->
@@ -195,24 +195,30 @@
             </intent-filter>
         </receiver>
 
-        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="518f6acc731be8f9c1ddd870" />
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="518f6acc731be8f9c1ddd870" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <!-- </>值来自开发者平台取得的AppKey-->
-        <!-- 百度地图-->
+        <!-- </>值来自开发者平台取得的AppKey -->
+        <!-- 百度地图 -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" >
+            android:process=":remote">
             <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2" >
-                </action>
+                <action android:name="com.baidu.location.service_v2.2"></action>
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="kXOR02KaxgtvrGDzTxlx1a4IUOWofAyb" />
@@ -223,7 +229,8 @@
             android:name="JPUSH_APPKEY"
             android:value="518f6acc731be8f9c1ddd870" />
         <!-- </>值来自开发者平台取得的AppKey -->
-        <activity android:name=".TicketTicapplyActivity"></activity>
+        <activity android:name=".TicketTicapplyActivity" />
+        <activity android:name=".CelebrityDetailsActivity"></activity>
     </application>
 
 </manifest>

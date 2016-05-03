@@ -1,6 +1,7 @@
 package com.lijiadayuan.lishijituan;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.os.Bundle;
@@ -14,8 +15,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonObject;
-import com.lijiadayuan.lishijituan.adapter.PictureAdpter1;
+import com.joanzapata.android.BaseAdapterHelper;
+import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.bean.Resources;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
@@ -28,7 +31,6 @@ public class SharingResourceActivity extends BaseActivity implements OnClickList
     private GridView gridView;
     ArrayList<Resources> mList;
     //图片ID数组
-    private String[] images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +63,14 @@ public class SharingResourceActivity extends BaseActivity implements OnClickList
                 if (JsonParseUtil.isSuccess(mJsonObject)){
                     mList =  JsonParseUtil.toListByJson(mJsonObject.get("response_data")
                             .getAsJsonArray(),Resources.class);
-                    if (mList.size() > 0){
-                        images = new String[mList.size()];
-                        for (int i = 0;i < mList.size(); i++){
-                            images[i] = mList.get(i).getResImg();
-                        }
-                    }
 
-                    PictureAdpter1 adapter = new PictureAdpter1(SharingResourceActivity.this,images,R.layout.more_item);
+                    QuickAdapter<Resources> adapter= new QuickAdapter<Resources>(SharingResourceActivity.this, R.layout.more_item,mList) {
+                        @Override
+                        protected void convert(BaseAdapterHelper helper, Resources item) {
+                            SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
+                            mPic.setImageURI(Uri.parse(item.getResImg()));
+                        }
+                    };
                     gridView.setAdapter(adapter);
 
                     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,7 +78,7 @@ public class SharingResourceActivity extends BaseActivity implements OnClickList
                             Intent mIntent = new Intent(SharingResourceActivity.this,CompanyProfileActivity.class);
                             Resources resource = mList.get(position);
                             mIntent.putExtra("resName", resource.getResName());
-                            mIntent.putExtra("resUrl",resource.getResId());
+                            mIntent.putExtra("resId",resource.getResId());
                             startActivity(mIntent);
                         }
                     });
