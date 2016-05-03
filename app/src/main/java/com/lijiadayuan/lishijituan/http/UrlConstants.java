@@ -21,11 +21,7 @@ public interface UrlConstants {
 
     //发现
     String FIND = BASE_URL+"product/all";
-    // 地址
-    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址
-    String DELETE_ADDRESS = BASE_URL + "address/delete";                    // 删除收货地址
-    String MODIFY_ADDRESS = BASE_URL + "address/modify";                    // 修改收货地址
-    String ADD_ADDRESS = BASE_URL + "address/add";                           // 添加收货地址
+
     //商品详情URL
     String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
     //李氏认证
@@ -67,4 +63,16 @@ public interface UrlConstants {
     //查询某用户某状态的所有商品订单信息
     String QUERY_ALL_GOODS_INFO_BY_USERSTATE = ORDER + "status";
 
+    //管理收货地址
+    String ADDRESS = BASE_URL + "address/";
+    String USER_ADDRESS = ADDRESS + "user";                             //查询用户收货地址
+    String DELETE_ADDRESS = ADDRESS + "delete";                         //删除地址
+    String MODIFY_ADDRESS = ADDRESS + "modify";                         //编辑地址
+    String ADD_ADDRESS = ADDRESS + "add";
+
+//    // 地址
+//    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址
+//    String DELETE_ADDRESS = BASE_URL + "address/delete";                    // 删除收货地址
+//    String MODIFY_ADDRESS = BASE_URL + "address/modify";                    // 修改收货地址
+//    String ADD_ADDRESS = BASE_URL + "address/add";                           // 添加收货地址//添加地址
 }

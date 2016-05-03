@@ -175,7 +175,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         params.put("userId", userId + "");
 
         // 创建一个字符串请求
-        StringRequest request = new StringRequest(Request.Method.GET, getUrl(UrlConstants.GET_ADDRESS,params), new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, getUrl(UrlConstants.USER_ADDRESS,params), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 

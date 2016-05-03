@@ -29,18 +29,20 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="收货人姓名"/>
+            android:hint="收货人姓名"
+            android:id="@+id/et_name_address" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="收货人手机号"/>
+            android:hint="收货人手机号"
+            android:id="@+id/et_phone_address" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="邮编(非必填)"/>
         <EditText
-            android:id="@+id/iv_wheel"
+            android:id="@+id/et_address_wheel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="选择/省/市/区"
@@ -49,7 +51,8 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="详细地址"/>
+            android:hint="详细地址"
+            android:id="@+id/et_detailed_address" />
 
     </LinearLayout>
     <Button
@@ -60,5 +63,6 @@
         android:background="@drawable/rounded_button_color"
         android:layout_marginBottom="50dp"
         android:text="保存"
-        android:textColor="@color/main_tab_bar_bg"/>
+        android:textColor="@color/main_tab_bar_bg"
+        android:id="@+id/btn_save" />
 </RelativeLayout>
