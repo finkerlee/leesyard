@@ -13,25 +13,59 @@ import java.util.ArrayList;
 
 public class ProductViewBean implements Parcelable{
     private ArrayList<String> picList;
+    //当前商品名称
     private String goodsName;
+    //当前商品数量
     private String goodsNum;
+    //当前商品规格
     private String goodsSpec;
+    //当前商品价格
     private String goodsPrice;
+    //当前商品别名
+    private String goodsOtherName;
+    //当前商品的类型
     private int goodsType;
+    //商品详情的url
     private String goodsInfoUrl;
+    //商品展示的图片
+    private String goodsPic;
+    //商品的最大购买数量
+    private int goodsStock;
+    //商品id
+    private String goodsId;
+
 
     public ProductViewBean(){
 
     }
 
-    protected ProductViewBean(Parcel in) {
-        picList = in.createStringArrayList();
-        goodsName = in.readString();
-        goodsNum = in.readString();
-        goodsSpec = in.readString();
-        goodsPrice = in.readString();
-        goodsType = in.readInt();
-        goodsInfoUrl = in.readString();
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringList(picList);
+        dest.writeString(goodsName);
+        dest.writeString(goodsNum);
+        dest.writeString(goodsSpec);
+        dest.writeString(goodsPrice);
+        dest.writeString(goodsOtherName);
+        dest.writeInt(goodsType);
+        dest.writeString(goodsInfoUrl);
+        dest.writeString(goodsPic);
+        dest.writeInt(goodsStock);
+        dest.writeString(goodsId);
+    }
+
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ProductViewBean> CREATOR = new Creator<ProductViewBean>() {
@@ -45,6 +79,40 @@ public class ProductViewBean implements Parcelable{
             return new ProductViewBean[size];
         }
     };
+
+    public int getGoodsStock() {
+        return goodsStock;
+    }
+
+    public void setGoodsStock(int goodsStock) {
+        this.goodsStock = goodsStock;
+    }
+
+    public String getGoodsOtherName() {
+        return goodsOtherName;
+    }
+
+    public void setGoodsOtherName(String goodsOtherName) {
+        this.goodsOtherName = goodsOtherName;
+    }
+
+    public String getGoodsPic() {
+        return goodsPic;
+    }
+
+    public void setGoodsPic(String goodsPic) {
+        this.goodsPic = goodsPic;
+    }
+
+    protected ProductViewBean(Parcel in) {
+        picList = in.createStringArrayList();
+        goodsName = in.readString();
+        goodsNum = in.readString();
+        goodsSpec = in.readString();
+        goodsPrice = in.readString();
+        goodsType = in.readInt();
+        goodsInfoUrl = in.readString();
+    }
 
     public void setPicList(ArrayList<String> picList) {
         this.picList = picList;
@@ -102,21 +170,7 @@ public class ProductViewBean implements Parcelable{
         this.goodsType = goodsType;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeList(picList);
-        parcel.writeString(goodsName);
-        parcel.writeString(goodsNum);
-        parcel.writeString(goodsSpec);
-        parcel.writeString(goodsPrice);
-        parcel.writeInt(goodsType);
-        parcel.writeString(goodsInfoUrl);
-    }
 
 
     public static ProductViewBean getProductViewBeanList(WelfareGoodsBean mWelfareGoodsBean,int type){
@@ -138,8 +192,12 @@ public class ProductViewBean implements Parcelable{
         mProductViewBean.setGoodsNum(mProduct.getProStock() + "");
         mProductViewBean.setGoodsSpec(mProduct.getProSpec());
         mProductViewBean.setGoodsPrice(mProduct.getProPrice() + "");
+        mProductViewBean.setGoodsPic(mProduct.getProThumb());
+        mProductViewBean.setGoodsOtherName(mProduct.getProSubtitle());
 //        mProductViewBean.setPicList(mProduct.getp() + "");
         mProductViewBean.setGoodsType(type);
+        mProductViewBean.setGoodsStock(mProduct.getProStock());
+        mProductViewBean.setGoodsId(mProduct.getProId());
         //mProductViewBean.setPicList();
         return mProductViewBean;
     }

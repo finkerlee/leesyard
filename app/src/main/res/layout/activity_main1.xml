@@ -56,13 +56,12 @@
                 android:layout_height="60dp"
                 android:background="#ffffff"
                 >
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/notice_icon1"
+                    android:layout_height="30dp"
                     android:id="@+id/imageView"
-                    android:background="@color/color_white"
-                    android:foregroundGravity="center"
+                    android:background="@drawable/notice_icon1"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp" />
                 <TextView

@@ -5,7 +5,7 @@ package com.lijiadayuan.lishijituan.http;
  * E-mail:johnyylee@163.com
  */
 public interface UrlConstants {
-    String BASE_URL = "http://192.168.0.101:8080/";                     // 测试地址
+    String BASE_URL = "http://192.168.0.103:8080/";                     // 测试地址
     /** 用户部分 **/
     String USER_BASE = BASE_URL + "user/";
     String LOGIN = USER_BASE + "login";                                 // 登录
@@ -53,5 +53,18 @@ public interface UrlConstants {
     String UPLOAD_TICAPPLY = TICAPPLY + "upload";                       //上传认证
     String RECEIVE_TICAPPLY = TICAPPLY + "receive";                     //领取卡票
     //
+    //大院头条
+    String HEAD_LINE = BASE_URL+ "topic/"+"all";
+
+    //商品订单
+    String ORDER = BASE_URL + "po/";
+    //下单
+    String ORDERS = ORDER + "add";
+    //添加支付／完成日期
+    String UPDATA_ORDERS_STATE = ORDER + "upstatus";
+    //查询某用户所有商品订单信息
+    String QUERY_ALL_GOODS_INFO = ORDER + "all";
+    //查询某用户某状态的所有商品订单信息
+    String QUERY_ALL_GOODS_INFO_BY_USERSTATE = ORDER + "status";
 
 }
