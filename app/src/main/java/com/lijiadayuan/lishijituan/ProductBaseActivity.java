@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
@@ -50,9 +51,9 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_base);
         mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
-
         isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false);
-        mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
+        mProductViewBean = getIntent().getExtras().getParcelable(KeyConstants.IntentPageValues.productViewBeanType);
+        Log.i("main",mProductViewBean.getGoodsType()+"");
 //        imageUrlList = mProductViewBean.getPicList();
         imageUrlList
                 .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
@@ -143,13 +144,13 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     public void onClick(View v) {
        switch (v.getId()){
            case R.id.i_want_receive:
-               if("我要购买".equals(mBtnReceive.getText())){
-                   Intent intent = new Intent(this,OrderActivity.class);
-                   intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
-                   startActivity(intent);
-               }else{
-                   //如果已经登陆
-                   if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false)){
+               //如果已经登陆
+               if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false)){
+                   if("我要购买".equals(mBtnReceive.getText())){
+                       Intent intent = new Intent(this,OrderActivity.class);
+                       intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
+                       startActivity(intent);
+                   }else{
                        if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIfLee,false)){
                            Intent intent = new Intent(this,OrderActivity.class);
                            intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
@@ -159,10 +160,10 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                            intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
                            startActivityForResult(intent,RENZHENG);
                        }
-                   }else{
-                       Intent intent = new Intent(this,LoginActivity.class);
-                       startActivityForResult(intent,LOGIN);
                    }
+               }else{
+                   Intent intent = new Intent(this,LoginActivity.class);
+                   startActivityForResult(intent,LOGIN);
                }
            break;
            case R.id.iv_back:

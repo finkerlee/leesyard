@@ -144,23 +144,40 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(MineActivity.this,SettingActivity.class));
                 break;
             case R.id.ship_address:
-                startActivity(new Intent(MineActivity.this,AddressActivity.class));
-                Intent mintent=new Intent();
+                if (isLogin){
+                    startActivity(new Intent(MineActivity.this,AddressActivity.class));
+                    Intent mintent=new Intent();
+                }else{
+                    goLogin();
+                }
                 break;
             case R.id.iv_2D:
                 startActivity(new Intent(MineActivity.this,TwodActivity.class));
                 break;
             case R.id.iv_member:
-                startActivity(new Intent(MineActivity.this,MemberActivity.class));
+                if (isLogin){
+                    startActivity(new Intent(MineActivity.this,MemberActivity.class));
+                }else {
+                    goLogin();
+                }
                 break;
             case  R.id.iv_welfare:
-                startActivity(new Intent(MineActivity.this,MywelfareActivity.class));
+                if (isLogin){
+                    startActivity(new Intent(MineActivity.this,MywelfareActivity.class));
+
+                }else {
+                    goLogin();
+                }
                 break;
             case R.id.iv_us:
                 startActivity(new Intent(MineActivity.this,JoinusActivity.class));
                 break;
             case R.id.iv_mymessage:
-                startActivity(new Intent(MineActivity.this,MymessageActivity.class));
+                if (isLogin){
+                    startActivity(new Intent(MineActivity.this,MymessageActivity.class));
+                }else{
+                    goLogin();
+                }
                 break;
             case R.id.iv_avatar:
                 if (isLogin){
@@ -171,10 +188,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 //                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 }else{
                     //跳转到登陆页面
-                    Toast.makeText(MineActivity.this, "跳转到登陆页面", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MineActivity.this, LoginActivity.class);
-                    intent.putExtra(KeyConstants.IntentPageKey.ToLoginPageStyle,KeyConstants.IntentPageValues.forResult);
-                    startActivityForResult(new Intent(MineActivity.this, LoginActivity.class), HEAD_IMAGE);
+                    goLogin();
                 }
                 break;
 
@@ -197,8 +211,12 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 dialog.dismiss();
                 break;
             case R.id.myorder:
-                Intent intent = new Intent(this,MyOrderActivity.class);
-                startActivity(intent);
+                if (isLogin){
+                    Intent intent = new Intent(this,MyOrderActivity.class);
+                    startActivity(intent);
+                }else{
+                    goLogin();
+                }
 
 //                Intent takeIntent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                //下面这句指定调用相机拍照后的照片存储的路径
@@ -333,6 +351,12 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         // 将请求添加到请求队列中(即发送请求)
         mQueue.add(request);
 
+    }
+
+    private void goLogin(){
+        Intent intent = new Intent(MineActivity.this, LoginActivity.class);
+        intent.putExtra(KeyConstants.IntentPageKey.ToLoginPageStyle,KeyConstants.IntentPageValues.forResult);
+        startActivityForResult(new Intent(MineActivity.this, LoginActivity.class), HEAD_IMAGE);
     }
 }
 

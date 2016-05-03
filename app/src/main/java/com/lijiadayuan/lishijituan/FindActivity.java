@@ -77,8 +77,9 @@ public class FindActivity extends BaseActivity {
                     gridView.setOnItemClickListener(new OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             Intent mIntent = new Intent(FindActivity.this,ProductBaseActivity.class);
-                          mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.BUY_GOODS);
-                          mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, ProductViewBean.getProductViewBeanList(mList.get(position), ProductBaseActivity.BUY_GOODS));
+                            ProductViewBean mProductViewBean = ProductViewBean.getProductViewBeanList(mList.get(position), ProductBaseActivity.BUY_GOODS);
+                            Log.i("main",mProductViewBean.getGoodsType()+"");
+                          mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                             startActivity(mIntent);
                         }
                     });

@@ -39,6 +39,21 @@ public class ProductViewBean implements Parcelable{
 
     }
 
+
+    protected ProductViewBean(Parcel in) {
+        picList = in.createStringArrayList();
+        goodsName = in.readString();
+        goodsNum = in.readString();
+        goodsSpec = in.readString();
+        goodsPrice = in.readString();
+        goodsOtherName = in.readString();
+        goodsType = in.readInt();
+        goodsInfoUrl = in.readString();
+        goodsPic = in.readString();
+        goodsStock = in.readInt();
+        goodsId = in.readString();
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeStringList(picList);
@@ -52,15 +67,6 @@ public class ProductViewBean implements Parcelable{
         dest.writeString(goodsPic);
         dest.writeInt(goodsStock);
         dest.writeString(goodsId);
-    }
-
-
-    public String getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(String goodsId) {
-        this.goodsId = goodsId;
     }
 
     @Override
@@ -79,6 +85,15 @@ public class ProductViewBean implements Parcelable{
             return new ProductViewBean[size];
         }
     };
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
+    }
+
 
     public int getGoodsStock() {
         return goodsStock;
@@ -104,15 +119,6 @@ public class ProductViewBean implements Parcelable{
         this.goodsPic = goodsPic;
     }
 
-    protected ProductViewBean(Parcel in) {
-        picList = in.createStringArrayList();
-        goodsName = in.readString();
-        goodsNum = in.readString();
-        goodsSpec = in.readString();
-        goodsPrice = in.readString();
-        goodsType = in.readInt();
-        goodsInfoUrl = in.readString();
-    }
 
     public void setPicList(ArrayList<String> picList) {
         this.picList = picList;
