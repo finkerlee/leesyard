@@ -32,7 +32,7 @@ public class KeyConstants {
         //用户是否可以领取福利
         public static final String userIfReceive = "userIfReceive";
         //用户是否登陆
-        public static final String userIsLogin = "";
+        public static final String userIsLogin = "userIsLogin";
 
     }
     //存放跳转需要用到的一些key
@@ -41,6 +41,8 @@ public class KeyConstants {
         public static final String ToLoginPageStyle = "LoginPageStyle";
         //跳转到商品详情页面时  判断当前页面的类型
         public static final String GoodsPageType = "GoodsPageType";
+        //跳转到结算页面时  判断当前页面的类型
+        public static final String OrderPageType = "OrderPageType";
 
     }
 

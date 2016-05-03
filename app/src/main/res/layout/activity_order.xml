@@ -121,14 +121,15 @@
             android:layout_marginTop="10dp"
             android:background="#b4b4b4" />
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_order_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView21"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/byh_1" />
+            android:background="@drawable/byh_1"
+             />
 
         <TextView
             android:layout_width="match_parent"

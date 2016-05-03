@@ -144,8 +144,14 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(MineActivity.this,SettingActivity.class));
                 break;
             case R.id.ship_address:
-                startActivity(new Intent(MineActivity.this,AddressActivity.class));
-                Intent mintent=new Intent();
+                Intent intent;
+                //如果已经登陆
+                if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false)){
+                        intent = new Intent(this,AddressActivity.class);
+                }else{
+                        intent = new Intent(this,LoginActivity.class);
+                }
+                startActivity(intent);
                 break;
             case R.id.iv_2D:
                 startActivity(new Intent(MineActivity.this,TwodActivity.class));

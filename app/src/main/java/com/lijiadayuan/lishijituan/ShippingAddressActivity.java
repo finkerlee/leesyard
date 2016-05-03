@@ -48,9 +48,6 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
     /**
      * 定义存放省市区id的变量,用于添加收货地址
      */
-    private String proId;
-    private String cityId;
-    private String areaId;
 
 
     @Override
@@ -70,8 +67,6 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                     @Override
                     public void refresh(String info, String areaId) {
                         editTextaddress.setText(info);
-                        ShippingAddressActivity.this.areaId = areaId;
-                        System.out.println("areaId: "+ShippingAddressActivity.this.areaId);
                     }
                 });
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -89,9 +84,6 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
         editTextname= (EditText) findViewById(R.id.et_name_address);
         editTextphone= (EditText) findViewById(R.id.et_phone_address);
         editTextdetailed= (EditText) findViewById(R.id.et_detailed_address);
-//        proId=findViewById(R.id.id_province);
-//        cityId=findViewById(R.id.id_city);
-//        areaId=findViewById(R.id.id_district);
     }
     protected void initView(){
         tvTitle.setText("收货地址");
@@ -181,9 +173,9 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                       params.put("addId", "");
                       params.put("addName", editTextname.getText().toString().trim());
                       params.put("addPhone", editTextphone.getText().toString().trim());
- //                     params.put("addProvince", vv);
-                      params.put("addCity",cityId.toString().trim());
-                      params.put("addArea",areaId.toString().trim());
+                      params.put("addProvince", "");
+                      params.put("addCity","");
+                      params.put("addArea","");
                       params.put("addDetail ",editTextdetailed.getText().toString().trim());
                       params.put("userId", mSp.getString(KeyConstants.UserInfoKey.userId, ""));
                       return params;
