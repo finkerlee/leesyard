@@ -15,6 +15,7 @@
         android:layout_centerVertical="true"
         android:src="@drawable/location_red"
         android:layout_marginLeft="20dp" />
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"

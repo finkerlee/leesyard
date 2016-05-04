@@ -10,54 +10,92 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.JsonObject;
+import com.lijiadayuan.lishijituan.adapter.FindAdpter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
+import com.lijiadayuan.lishijituan.adapter.RedAdpter;
+import com.lijiadayuan.lishijituan.bean.Product;
+import com.lijiadayuan.lishijituan.bean.ProductViewBean;
+import com.lijiadayuan.lishijituan.bean.Reds;
+import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
+import com.lijiadayuan.lishijituan.utils.KeyConstants;
 
-public class RedenvelopeActivity extends Activity implements OnClickListener {
+import java.util.ArrayList;
+
+public class RedenvelopeActivity extends BaseActivity implements OnClickListener {
 
     private GridView gridView;
     private TextView tvTitle;
     private ImageView imageback;
-    private PictureAdapter adapter ;
-    //图片ID数组
-    private int[] images = new int[]{
-            R.drawable.red1, R.drawable.red2,
-            R.drawable.red3, R.drawable.red4
-    };
+    private String[] images;
+    private ArrayList<Reds> mList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redenvelope);
-        adapter = new PictureAdapter(images, this, R.layout.redenvelope_image);
-        PictureAdapter adapter = new PictureAdapter(images, this, R.layout.redenvelope_image);
-        findViewById();
-        initView();
-
-
-    }
-    protected void findViewById() {
         gridView = (GridView) findViewById(R.id.culture_gridView);
-        tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
+
+        tvTitle = (TextView) findViewById(R.id.text_title);
+//        tvTitle.setText("红包");
+        initData();
+
     }
-    protected void initView() {
-        tvTitle.setText("红包");
-        imageback.setOnClickListener(this);
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> images0, View images1, int images2, long images3) {
-//                images0.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        startActivity(new Intent(CultureActivity.this,RegistrationActivity.class));
-//                    }
-//                });
-                if (0 == images2)
-                    startActivity(new Intent(RedenvelopeActivity.this,ReddenvelopebaseActivity.class));
+
+    //加载数据
+    private void initData() {
+        // 创建请求队列
+        RequestQueue mQueue = app.getRequestQueue();
+        // 创建一个字符串请求
+        StringRequest request = new StringRequest(Request.Method.GET, UrlConstants.RED, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
+                if (JsonParseUtil.isSuccess(mJsonObject)){
+                    mList =  JsonParseUtil.toListByJson(mJsonObject.get("response_data")
+                            .getAsJsonArray(),Reds.class);
+                    if (mList.size() > 0){
+                        images = new String[mList.size()];
+                        for (int i = 0;i < mList.size(); i++){
+                            images[i] = mList.get(i).getRedImg();
+                        }
+                    }
+
+                    RedAdpter adapter = new RedAdpter (RedenvelopeActivity.this,images,R.layout.redenvelope_image);
+                    gridView.setAdapter(adapter);
+
+                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                            Intent mIntent = new Intent(RedenvelopeActivity.this,ReddenvelopebaseActivity.class);
+                            mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.GIFT_GOODS);
+                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, ProductViewBean.getRedsViewBeanList(mList.get(position), ProductBaseActivity.GIFT_GOODS));
+                            startActivity(mIntent);
+                        }
+                    });
+                }
+            }
+
+        },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
             }
         });
+        // 将请求添加到请求队列中(即发送请求)
+        mQueue.add(request);
+
     }
+
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

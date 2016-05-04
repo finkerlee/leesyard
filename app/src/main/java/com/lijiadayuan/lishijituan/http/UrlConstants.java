@@ -22,11 +22,24 @@ public interface UrlConstants {
     //福利商品
     String WELFARE = BASE_URL + "benefit/all";
 
+
+    //红包
+    String RED = BASE_URL+"red/all";
+
     //发现
     String FIND = BASE_URL+"product/all";
 
+    // 地址
+    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址
+
     //商品详情URL
     String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
+
+    //发现详情URL
+    String FINDSHOPPING_INFO = BASE_URL + "product/detail?proId=";
+
+    //增加商品浏览次数URL
+    String SHOPPINGINCREASE = BASE_URL + "product/click?proId=";
     //李氏认证
     String  LEEVERIFICATION   = BASE_URL+"verify/";
     String  CERTIFICATION   = LEEVERIFICATION + "apply";                //提交认证申请
