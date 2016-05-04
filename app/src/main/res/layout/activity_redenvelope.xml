@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lijiadayuan.lishijituan.RedenvelopeActivity">
+
     <include
         layout="@layout/common_title"
         android:id="@+id/include2" />
@@ -11,5 +12,5 @@
         layout="@layout/culture_gridview"
         android:layout_below="@+id/include2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

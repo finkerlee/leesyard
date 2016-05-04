@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.lijiadayuan.lishijituan.adapter.FindAdpter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdpter1;
+import com.lijiadayuan.lishijituan.bean.Addresses;
 import com.lijiadayuan.lishijituan.bean.Product;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
@@ -83,6 +84,7 @@ public class FindActivity extends BaseActivity {
                         }
                     });
                 }
+
             }
 
         },new Response.ErrorListener(){
@@ -96,4 +98,8 @@ public class FindActivity extends BaseActivity {
 
     }
 
+
+
+
 }
+

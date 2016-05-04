@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
@@ -12,12 +13,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.lijiadayuan.lishijituan.adapter.ImageAdapter;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ProductBaseActivity extends BaseActivity implements OnClickListener {
@@ -29,6 +36,10 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private ProductViewBean mProductViewBean;
     //
     private Boolean isLogin;
+
+    //浏览商品次数  "http://192.168.0.103:8080/product/click?proId=LPRO000000001"
+    private String proId ;
+
 
     private static final int LOGIN = 100;
     private static final int RENZHENG = 101;
@@ -51,15 +62,12 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         setContentView(R.layout.activity_product_base);
         mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
 
-        isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false);
+        isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin, false);
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
-//        imageUrlList = mProductViewBean.getPicList();
-        imageUrlList
-                .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-        imageUrlList
-                .add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-        imageUrlList
-                .add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
+//        imageUrlList = mProductViewBean.getPicList();//放真实数据
+        imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
+        imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
+        imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
         imageUrlList
                 .add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
         linkUrlArray
@@ -75,18 +83,51 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         initBanner(imageUrlList);
         //将数据加载到视图
         setViewByData();
+
+        initIncrease();
+    }
+
+    private void initIncrease() {
+
+
+
     }
 
     /**
      * 将数据加载到视图
      */
+
     private void setViewByData() {
+
         mWbGoodsInfo.loadUrl(mProductViewBean.getGoodsInfoUrl());
         mTvGoodsName.setText(mProductViewBean.getGoodsName());
         mTvGoodsNum.setText(mProductViewBean.getGoodsNum());
         mTvGoodsPrice.setText(mProductViewBean.getGoodsPrice());
         mTvGoodsSpec.setText(mProductViewBean.getGoodsSpec());
 
+        proId = (String) mProductViewBean.getGoodsInfoUrl().subSequence(47,60);
+        String increaseUrl = "http://192.168.0.103:8080/product/click?proId=" + proId;
+
+        Log.e("Log", "proId === " + proId);
+
+        // 创建请求队列
+        RequestQueue rq = app.getRequestQueue();
+        // 创建一个字符串请求
+        StringRequest sr = new StringRequest(Request.Method.POST, increaseUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Log","response ============ " + response);
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+
+        // 将请求添加到请求队列中(即发送请求)
+        rq.add(sr);
     }
 
     protected void initView(){
@@ -109,6 +150,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
             mBtnReceive.setText("我要领取");
         }
     }
+
     private void initBanner(ArrayList<String> imageUrlList) {
 
         mViewFlow.setAdapter(new ImageAdapter(this, imageUrlList,
@@ -170,4 +212,8 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                break;
        }
     }
+
+
+
+
 }
