@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.lijiadayuan.lishijituan.MainActivity;
 import com.lijiadayuan.lishijituan.MainActivity1;
 
 import org.json.JSONException;

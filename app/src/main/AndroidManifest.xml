@@ -224,6 +224,21 @@
             android:value="518f6acc731be8f9c1ddd870" />
         <!-- </>值来自开发者平台取得的AppKey -->
         <activity android:name=".TicketTicapplyActivity"></activity>
+
+
+        <!--支付宝 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
     </application>
 
 </manifest>

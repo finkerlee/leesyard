@@ -124,7 +124,7 @@
             <com.lijiadayuan.lishijituan.view.MyGrideView
                 android:id="@+id/mGridView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:numColumns="3"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"

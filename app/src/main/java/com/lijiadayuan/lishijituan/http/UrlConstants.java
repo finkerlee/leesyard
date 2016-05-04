@@ -6,6 +6,9 @@ package com.lijiadayuan.lishijituan.http;
  */
 public interface UrlConstants {
     String BASE_URL = "http://192.168.0.103:8080/";                     // 测试地址
+    //首页的数据
+    String MAIN_PAGE_URL = BASE_URL + "main/index";
+
     /** 用户部分 **/
     String USER_BASE = BASE_URL + "user/";
     String LOGIN = USER_BASE + "login";                                 // 登录

@@ -1,7 +1,9 @@
 package com.lijiadayuan.lishijituan;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,19 +23,38 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.joanzapata.android.BaseAdapterHelper;
+import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.ImagePagerAdapter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdpter2;
+import com.lijiadayuan.lishijituan.bean.AdvView;
+import com.lijiadayuan.lishijituan.bean.Benefits;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
+import com.lijiadayuan.lishijituan.bean.Topics;
+import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
 import com.lijiadayuan.lishijituan.view.photoscorrect;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -72,41 +93,110 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
     private ImageView ivmore;
     private LocationService locationService;
 
+    //首页轮播图的数据
+    private ArrayList<AdvView> mAdvViewData;
+    //头条数据
+    private List<Topics> mTopicsData;
+    //首页福利商品的数据
+    private List<Benefits> mBenefitsData;
 
+    private SharedPreferences mSp;
 
+    private ProductViewBean mProductViewBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main1);
         initView();
-        //初始化轮播图数据
-        imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-        imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-        imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
-        imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
-        //轮播图
-        initBanner(imageUrlList);
+        //初始化数据
+        initData();
 
-        //初始化福利商品数据
-        PictureAdpter2 mAdpter = new PictureAdpter2(MainActivity1.this,mGiftGoodslist,R.layout.item_giftgoods);
-        mGvGoods.setAdapter(mAdpter);
+//        //初始化轮播图数据
+//        imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
+//        imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
+//        imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
+//        imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
+//
+//
+//        //初始化福利商品数据
+//        PictureAdpter2 mAdpter = new PictureAdpter2(MainActivity1.this,mGiftGoodslist,R.layout.item_giftgoods);
+//        mGvGoods.setAdapter(mAdpter);
+//
+//
+//
+//        linkUrlArray.add("");
+//        linkUrlArray.add("");
+//        linkUrlArray.add("");
+//        linkUrlArray.add("");
+//
+//        titleList.add("常见Android进阶笔试题");
+//        titleList.add("GridView之仿支付宝钱包首页");
+//        titleList.add("仿手机QQ网络状态条的显示与消失 ");
+//        titleList.add("Android循环滚动广告条的完美实现 ");
 
-
-
-        linkUrlArray.add("");
-        linkUrlArray.add("");
-        linkUrlArray.add("");
-        linkUrlArray.add("");
-
-        titleList.add("常见Android进阶笔试题");
-        titleList.add("GridView之仿支付宝钱包首页");
-        titleList.add("仿手机QQ网络状态条的显示与消失 ");
-        titleList.add("Android循环滚动广告条的完美实现 ");
-        //大院头条
-        initRollNotice();
         
         setListener();
+    }
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        RequestQueue mRequestQueue = app.getRequestQueue();
+        StringRequest mRequest = new StringRequest(Request.Method.POST, UrlConstants.MAIN_PAGE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JsonObject mJson = JsonParseUtil.getJsonByString(response).getAsJsonObject();
+                if (JsonParseUtil.isSuccess(mJson)){
+                    JsonArray mJsonAdvArray = mJson.get("adv").getAsJsonArray();
+                    if (mJsonAdvArray.size()>0){
+                        mAdvViewData = JsonParseUtil.toListByJson(mJsonAdvArray,AdvView.class);
+                        //轮播图
+                        initBanner(mAdvViewData);
+                    }
+                    JsonArray mJsonTopArray = mJson.get("topic").getAsJsonArray();
+                    if (mJsonAdvArray.size()>0){
+                        mTopicsData = JsonParseUtil.toListByJson(mJsonTopArray,Topics.class);
+                        for (Topics mTopics :mTopicsData){
+                            titleList.add(mTopics.getTopTitle());
+                        }
+                        //大院头条
+                        initRollNotice();
+                    }
+                    JsonArray mJsonBenefitArray = mJson.get("benefit").getAsJsonArray();
+                    if (mJsonAdvArray.size()>0){
+                        mBenefitsData = JsonParseUtil.toListByJson(mJsonBenefitArray,Benefits.class);
+                        Log.i("main",mBenefitsData.size()+"");
+                        QuickAdapter<Benefits> mAdpter = new QuickAdapter<Benefits>(MainActivity1.this,R.layout.item_giftgoods,mBenefitsData) {
+                            @Override
+                            protected void convert(BaseAdapterHelper helper, Benefits item) {
+                                SimpleDraweeView mSimpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
+                                mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
+                                //Log.i("main",item.getBenThumb());
+                            }
+                        };
+                        mGvGoods.setAdapter(mAdpter);
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("advNum",5+"");
+                params.put("topNum",10+"");
+                params.put("benNum",6+"");
+                params.put("userId","");
+                return params;
+            }
+        };
+        mRequestQueue.add(mRequest);
     }
 
     private void setListener() {
@@ -114,7 +204,24 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //跳商品详情
-                startProductBaseActivity();
+                mProductViewBean = new ProductViewBean();
+                mProductViewBean.setGoodsId(mBenefitsData.get(i).getBenId());
+                mProductViewBean.setGoodsPrice(mBenefitsData.get(i).getBenPrice()+"");
+                mProductViewBean.setGoodsName(mBenefitsData.get(i).getBenName());
+                mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO+ mBenefitsData.get(i).getBenId());
+                mProductViewBean.setGoodsSpec(mBenefitsData.get(i).getBenSpec());
+                String [] mBenData = mBenefitsData.get(i).getBenImg().split(",");
+                ArrayList<String> mlist = new ArrayList<String>();
+                for (String s : mBenData){
+                    mlist.add(s);
+                }
+                mProductViewBean.setPicList(mlist);
+                mProductViewBean.setGoodsNum(1+"");
+                Intent mIntent = new Intent(MainActivity1.this,ProductBaseActivity.class);
+                mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.GIFT_GOODS);
+                mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
+                startActivity(mIntent);
+
             }
         });
     }
@@ -192,9 +299,9 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
 
     }
     //初始化轮播图
-    private void initBanner(ArrayList<String> imageUrlList) {
-        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList,
-                linkUrlArray, titleList).setInfiniteLoop(true));
+    private void initBanner(ArrayList<AdvView> imageUrlList) {
+        mViewFlow.setAdapter(new ImagePagerAdapter(this,imageUrlList)
+                .setInfiniteLoop(false));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
         mViewFlow.setFlowIndicator(mFlowIndicator);

@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:gravity="center"
     android:paddingBottom="10dp"
     >
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/itemImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_weight="1"
-        android:background="@drawable/byh_1"
-        android:src="@drawable/rounded_image"
+        fresco:roundedCornerRadius="5dp"
+        fresco:roundingBorderWidth="1dp"
+        fresco:roundingBorderColor="#b9b9b9"
+
         />
     <!--fresco:roundingBorderWidth="1dp"-->
 
