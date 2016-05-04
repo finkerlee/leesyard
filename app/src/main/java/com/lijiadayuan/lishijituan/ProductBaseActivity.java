@@ -102,29 +102,29 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         mTvGoodsPrice.setText(mProductViewBean.getGoodsPrice());
         mTvGoodsSpec.setText(mProductViewBean.getGoodsSpec());
 
-        proId = (String) mProductViewBean.getGoodsInfoUrl().subSequence(47,60);
-        String increaseUrl = "http://192.168.0.103:8080/product/click?proId=" + proId;
-
-        Log.e("Log", "proId === " + proId);
-
-        // 创建请求队列
-        RequestQueue rq = app.getRequestQueue();
-        // 创建一个字符串请求
-        StringRequest sr = new StringRequest(Request.Method.POST, increaseUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("Log","response ============ " + response);
-
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-
-        // 将请求添加到请求队列中(即发送请求)
-        rq.add(sr);
+//        proId = (String) mProductViewBean.getGoodsInfoUrl().subSequence(47,60);
+//        String increaseUrl = "http://192.168.0.103:8080/product/click?proId=" + proId;
+//
+//        Log.e("Log", "proId === " + proId);
+//
+//        // 创建请求队列
+//        RequestQueue rq = app.getRequestQueue();
+//        // 创建一个字符串请求
+//        StringRequest sr = new StringRequest(Request.Method.POST, increaseUrl, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.e("Log","response ============ " + response);
+//
+//            }
+//
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//            }
+//        });
+//
+//        // 将请求添加到请求队列中(即发送请求)
+//        rq.add(sr);
     }
 
     protected void initView(){
