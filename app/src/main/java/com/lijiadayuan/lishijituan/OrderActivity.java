@@ -236,6 +236,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     /**
      * 设置商品视图
      */
+
     private void setProductView() {
         if (mProductViewBean == null) {
             Toast.makeText(this, "获取商品数据失败！", Toast.LENGTH_SHORT).show();

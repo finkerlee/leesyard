@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public static final int LOGIN = 99;
 
 
-    private TextView register;
+    private TextView register,tvback;
     private InputMethodManager manager;
     private EditText etUsername;                // 用户名
     private EditText etPassword;                // 密码
@@ -50,7 +50,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+//        tvback= (TextView) findViewById(R.id.iv_back);
+//        tvback.setOnClickListener(this);
         SharedPreferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
         register =(TextView)findViewById(R.id.et_yonghu);
         findViewById(R.id.et_pass).setOnClickListener(this);
@@ -178,6 +179,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.et_pass:
                 startActivity(new Intent(LoginActivity.this, ForgetpasswordActivtiy.class));
+                break;
+            case R.id.tv_back:
+//                finish();
                 break;
             default:
                 break;

@@ -204,8 +204,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
             case R.id.tv_photo:
                 Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //下面这句指定调用相机拍照后的照片存储的路径
-                takeIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(new File(Environment.getExternalStorageDirectory(), PHOTO_FILE_NAME)));
+                takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), PHOTO_FILE_NAME)));
                 startActivityForResult(takeIntent, REQUESTCODE_TAKE);
                 dialog.dismiss();
                 break;
@@ -290,6 +289,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
      * 保存裁剪之后的图片数据  并且上传
      * @param picdata
      */
+
     private void setPicToView(Intent picdata) {
         Bundle extras = picdata.getExtras();
         if (extras != null) {
@@ -332,7 +332,6 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                         Toast.makeText(MineActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
                     }
                 }else{
-
                 }
             }
         }, new Response.ErrorListener() {

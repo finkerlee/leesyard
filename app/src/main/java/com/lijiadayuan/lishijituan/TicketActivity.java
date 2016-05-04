@@ -111,7 +111,6 @@ public class TicketActivity extends BaseActivity implements OnClickListener {
         });
         // 将请求添加到请求队列中(即发送请求)
         mQueue.add(request);
-
     }
 
     protected void findViewById() {
@@ -119,6 +118,7 @@ public class TicketActivity extends BaseActivity implements OnClickListener {
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
     }
+
     protected void initView() {
         tvTitle.setText("卡票");
         imageback.setOnClickListener(this);
