@@ -8,18 +8,23 @@ import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.baidu.mapapi.map.Text;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -34,18 +39,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OrderActivity extends BaseActivity implements View.OnClickListener {
+public class OrderActivity extends BaseActivity implements View.OnClickListener{
 
-    private RadioButton rbAli, rbWechat;
+    //联系人信息
     private TextView mNameTV; // 收货人姓名
     private TextView mPhoneTV; // 手机号
     private TextView mAddressTV; // 收货地址
 
-    private ImageView iv_order_img;//商品图片
-    private TextView tv_order_name;//商品名字
-    private TextView tv_order_price;//商品价钱
-    private TextView tv_order_bela;//
-    private RelativeLayout rl_order_addresslayout; // 地址信息的布局
+    //商品图片的显示
+    private SimpleDraweeView mIvPic;
+    //购买的布局
+    private LinearLayout mLayoutBuy;
+    private TextView mTvBuyGoodsName;
+    private TextView mTvBuyGoodsOtherName;
+    private TextView mTvBuyGoodsPrice;
+    private TextView mTvBuyGoodsNum;
+    private TextView mTvAdd,mTvReduce;
+    //赠送的布局
+    private LinearLayout mLayoutGive;
+    private TextView mTvGiveGoodsName;
+    private TextView mTvGiveGoodsOtherName;
+    private TextView mTvGiveGoodsNum;
+    private TextView mTvGiveGoodsPrice;
+    //配送方式布局
+    private TextView mTvExpressStyle;
+    private TextView mTvExPressPrice;
+    //支付方式
+    private RadioButton mRbWeiXin,mRbAli;
+
+    private Button mBtnCancle,mBtnSure;
+
+    // 创建请求队列
+    private RequestQueue mQueue;
+    //商品数量
+    private int mGoodsNum = 1;
+    //商品总价
+    private double mPrice = 0.00;
 
     //视图bean
     private ProductViewBean mProductViewBean; // 从上一个界面得到的商品数据
@@ -65,53 +94,76 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
-        rbAli = (RadioButton) findViewById(R.id.rb_ali);
-        rbWechat = (RadioButton) findViewById(R.id.rb_wechat);
-        mNameTV = (TextView) findViewById(R.id.iv_name);
-        mPhoneTV = (TextView) findViewById(R.id.iv_iphone);
-        mAddressTV = (TextView) findViewById(R.id.tv_address);
-
-        iv_order_img = (ImageView) findViewById(R.id.iv_order_img);
-        tv_order_name = (TextView) findViewById(R.id.tv_order_name);
-        tv_order_price = (TextView) findViewById(R.id.tv_order_price);
-        tv_order_bela = (TextView) findViewById(R.id.tv_order_bela);
-        rl_order_addresslayout = (RelativeLayout) findViewById(R.id.rl_order_addresslayout);
+        setContentView(R.layout.activity_order1);
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
         SharedPreferences mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
         userId = mSharedPreferences.getString(KeyConstants.UserInfoKey.userId, "");
+        //初始化布局
+        initView();
+        //初始化数据
+        initData();
 
-        rl_order_addresslayout.setOnClickListener(this);
 
-        getAddressViewBean();
 
-                rbAli.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-                            rbAli.setBackgroundResource(R.drawable.radio_);
-                            rbWechat.setBackgroundResource(R.drawable.radio_off);
-                        } else{
-                            rbAli.setBackgroundResource(R.drawable.radio_off);
-                            rbWechat.setBackgroundResource(R.drawable.radio_);
-                        }
-                    }
-                });
-                rbWechat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-                            rbWechat.setBackgroundResource(R.drawable.radio_);
-                            rbAli.setBackgroundResource(R.drawable.radio_off);
-                        } else{
-                            rbWechat.setBackgroundResource(R.drawable.radio_off);
-                            rbAli.setBackgroundResource(R.drawable.radio_);
-                        }
-                    }
-                });
+
+
+
+
+
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        //1，加载地址列表数据
+        getAddressViewBean();
+        //2,根据前面穿过来的数据去加载view
+        setProductView();
+
+    }
+
+    private void initView() {
+        //联系人信息
+        mNameTV = (TextView) findViewById(R.id.tv_name);
+        mPhoneTV = (TextView) findViewById(R.id.iv_phone_num);
+        mAddressTV = (TextView) findViewById(R.id.tv_address);
+        mIvPic = (SimpleDraweeView) findViewById(R.id.goods_pic);
+
+        //购买的布局
+        mLayoutBuy = (LinearLayout) findViewById(R.id.buy_layout);
+        mTvBuyGoodsName = (TextView) findViewById(R.id.buy_goods_name);
+        mTvBuyGoodsOtherName = (TextView) findViewById(R.id.buy_english_name);
+        mTvBuyGoodsPrice = (TextView) findViewById(R.id.buy_goods_price);
+        mTvBuyGoodsNum = (TextView) findViewById(R.id.buy_goods_num);
+        mTvAdd = (TextView) findViewById(R.id.jia);
+        mTvReduce = (TextView) findViewById(R.id.jian);
+
+        //赠送的布局
+        mLayoutGive = (LinearLayout) findViewById(R.id.give_layout);
+        mTvGiveGoodsName = (TextView) findViewById(R.id.give_goods_name);
+        mTvGiveGoodsOtherName = (TextView) findViewById(R.id.give_english_name);
+        mTvGiveGoodsNum = (TextView) findViewById(R.id.give_goods_num);
+        mTvGiveGoodsPrice = (TextView) findViewById(R.id.give_goods_price);
+        //配送的布局
+        mTvExpressStyle = (TextView) findViewById(R.id.express_style);
+        mTvExPressPrice = (TextView) findViewById(R.id.express_price);
+        //支付方式
+        mRbWeiXin = (RadioButton) findViewById(R.id.rb_wechat);
+        mRbAli = (RadioButton) findViewById(R.id.rb_ali);
+
+        mBtnCancle = (Button) findViewById(R.id.cancle);
+        mBtnSure = (Button) findViewById(R.id.be_sure);
+
+        mBtnCancle.setOnClickListener(this);
+        mBtnSure.setOnClickListener(this);
+        mTvAdd.setOnClickListener(this);
+        mTvReduce.setOnClickListener(this);
+        findViewById(R.id.rl_order_addresslayout).setOnClickListener(this);
     }
 
     /**
@@ -119,13 +171,13 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
      */
     private void getAddressViewBean() {
         // 创建请求队列
-        RequestQueue mQueue = app.getRequestQueue();
+        mQueue = app.getRequestQueue();
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("userId", userId + "");
 
         // 创建一个字符串请求
-        StringRequest request = new StringRequest(Request.Method.GET, getUrl(UrlConstants.GET_ADDRESS,params), new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, getUrl(UrlConstants.USER_ADDRESS,params), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -178,7 +230,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
             mPhoneTV.setText(mAddress.getAddPhone());
             mAddressTV.setText(mAddress.getAddProvince() + mAddress.getAddCity() + mAddress.getAddArea() + mAddress.getAddDetail());
         }
-        setProductView();
+
     }
 
     /**
@@ -190,11 +242,33 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
             Toast.makeText(this, "获取商品数据失败！", Toast.LENGTH_SHORT).show();
             return;
         }
+        //设置商品图片
+        if ("".equals(mProductViewBean.getGoodsPic())){
+            mIvPic.setImageURI(Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image));
+        }else{
+            mIvPic.setImageURI(Uri.parse(mProductViewBean.getGoodsPic()));
+        }
+        //根据当前的模式 设置商品信息
+        if (mProductViewBean.getGoodsType() == ProductBaseActivity.GIFT_GOODS){
+            mLayoutBuy.setVisibility(View.GONE);
+            mLayoutGive.setVisibility(View.VISIBLE);
+            mTvGiveGoodsName.setText(mProductViewBean.getGoodsName());
+            mTvGiveGoodsOtherName.setText(mProductViewBean.getGoodsOtherName());
+            mTvGiveGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
+            mTvExpressStyle.setText("快递默认为在线支付");
 
-        iv_order_img.setImageURI(Uri.parse(mProductViewBean.getGoodsInfoUrl()));
-        tv_order_name.setText(mProductViewBean.getGoodsName());
-        tv_order_price.setText(mProductViewBean.getGoodsPrice());
-        tv_order_bela.setText(mProductViewBean.getGoodsSpec());//???
+        }else if(mProductViewBean.getGoodsType() == ProductBaseActivity.BUY_GOODS){
+            mLayoutBuy.setVisibility(View.VISIBLE);
+            mLayoutGive.setVisibility(View.GONE);
+            mTvBuyGoodsName.setText(mProductViewBean.getGoodsName());
+            mTvBuyGoodsOtherName.setText(mProductViewBean.getGoodsOtherName());
+            mTvBuyGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
+            mTvExpressStyle.setText("快递默认为货到付款");
+        }
+
+
+
+
     }
 
 
@@ -239,13 +313,78 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.rl_order_addresslayout:
-                Intent intent = new Intent(this, AddressActivity.class);
-                startActivity(intent);
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.cancle:
+                finish();
                 break;
-            default:
+            case R.id.be_sure:
+                account();
+                break;
+            case R.id.jia:
+                if (mGoodsNum < mProductViewBean.getGoodsStock()){
+                    mGoodsNum++;
+                    mTvBuyGoodsNum.setText(mGoodsNum+"");
+                }
+                break;
+            case R.id.jian:
+                if (mGoodsNum > 1){
+                    mGoodsNum--;
+                    mTvBuyGoodsNum.setText(mGoodsNum +"");
+                }
+                break;
+            case R.id.rl_order_addresslayout:
+                break;
         }
+    }
+
+    /**
+     * 1,请求后台服务  下单
+     * 2,当下单请求回来后 调用三方结算sdk
+     * 3,当sdk请求结束后调用  添加支付／完成日期 接口
+     */
+    private void account() {
+        if (mProductViewBean.getGoodsType() == ProductBaseActivity.GIFT_GOODS){
+            //当前商品是赠品的时候，只需要出运费,数量只能为1
+            mGoodsNum =  1;
+            mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice());
+
+        }else if(mProductViewBean.getGoodsType() == ProductBaseActivity.BUY_GOODS){
+            //当前商品是购买的时候，运费到付，在线支付商品的价格，数量能变
+            mGoodsNum = Integer.parseInt(mTvBuyGoodsNum.getText().toString());
+            mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice())*mGoodsNum;
+        }
+        StringRequest mAccountRequest = new StringRequest(Request.Method.POST, UrlConstants.ORDERS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
+                        if (JsonParseUtil.isSuccess(mJsonObject)){
+                           if ("1".equals(mJsonObject.get("response_data").getAsString())){
+                               //TODO 调用三方sdk 请求支付
+                           }
+                        }else {
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("proId",mProductViewBean.getGoodsId());
+                params.put("userId",userId);
+                params.put("addId",mAddress.getAddId());
+                params.put("count",mGoodsNum+"");
+                params.put("amount",mPrice+"");
+                return params;
+            }
+        };
+        mQueue.add(mAccountRequest);
     }
 }

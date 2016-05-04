@@ -28,9 +28,7 @@ public interface UrlConstants {
 
     // 地址
     String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址
-    String DELETE_ADDRESS = BASE_URL + "address/delete";                    // 删除收货地址
-    String MODIFY_ADDRESS = BASE_URL + "address/modify";                    // 修改收货地址
-    String ADD_ADDRESS = BASE_URL + "address/add";                           // 添加收货地址
+
     //商品详情URL
     String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
 
@@ -64,5 +62,30 @@ public interface UrlConstants {
     String UPLOAD_TICAPPLY = TICAPPLY + "upload";                       //上传认证
     String RECEIVE_TICAPPLY = TICAPPLY + "receive";                     //领取卡票
     //
+    //大院头条
+    String HEAD_LINE = BASE_URL+ "topic/"+"all";
 
+    //商品订单
+    String ORDER = BASE_URL + "po/";
+    //下单
+    String ORDERS = ORDER + "add";
+    //添加支付／完成日期
+    String UPDATA_ORDERS_STATE = ORDER + "upstatus";
+    //查询某用户所有商品订单信息
+    String QUERY_ALL_GOODS_INFO = ORDER + "all";
+    //查询某用户某状态的所有商品订单信息
+    String QUERY_ALL_GOODS_INFO_BY_USERSTATE = ORDER + "status";
+
+    //管理收货地址
+    String ADDRESS = BASE_URL + "address/";
+    String USER_ADDRESS = ADDRESS + "user";                             //查询用户收货地址
+    String DELETE_ADDRESS = ADDRESS + "delete";                         //删除地址
+    String MODIFY_ADDRESS = ADDRESS + "modify";                         //编辑地址
+    String ADD_ADDRESS = ADDRESS + "add";
+
+//    // 地址
+//    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址
+//    String DELETE_ADDRESS = BASE_URL + "address/delete";                    // 删除收货地址
+//    String MODIFY_ADDRESS = BASE_URL + "address/modify";                    // 修改收货地址
+//    String ADD_ADDRESS = BASE_URL + "address/add";                           // 添加收货地址//添加地址
 }

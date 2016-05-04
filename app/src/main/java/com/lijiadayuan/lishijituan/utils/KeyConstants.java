@@ -41,6 +41,8 @@ public class KeyConstants {
         public static final String ToLoginPageStyle = "LoginPageStyle";
         //跳转到商品详情页面时  判断当前页面的类型
         public static final String GoodsPageType = "GoodsPageType";
+        //跳转到结算页面时  判断当前页面的类型
+        public static final String OrderPageType = "OrderPageType";
 
     }
 

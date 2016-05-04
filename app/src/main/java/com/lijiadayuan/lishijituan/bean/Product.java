@@ -1,11 +1,14 @@
 package com.lijiadayuan.lishijituan.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Lee on 2016-03-08.
  * E-mail:johnyylee@163.com
  * 封装products表数据的类
  */
-public class Product {
+public class Product implements Parcelable{
 
     private String proId;               // 商品编号,流水号
     private String proName;             // 商品名称
@@ -44,6 +47,60 @@ public class Product {
         this.proClick = proClick;
         this.proSort = proSort;
     }
+
+    protected Product(Parcel in) {
+        proId = in.readString();
+        proName = in.readString();
+        proSubtitle = in.readString();
+        proPrice = in.readDouble();
+        proSpec = in.readString();
+        proStock = in.readInt();
+        proThumb = in.readString();
+        proImg = in.readString();
+        proIntro = in.readString();
+        proRemark = in.readString();
+        proShow = in.readInt();
+        proPosition = in.readInt();
+        proDate = in.readLong();
+        proClick = in.readInt();
+        proSort = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(proId);
+        dest.writeString(proName);
+        dest.writeString(proSubtitle);
+        dest.writeDouble(proPrice);
+        dest.writeString(proSpec);
+        dest.writeInt(proStock);
+        dest.writeString(proThumb);
+        dest.writeString(proImg);
+        dest.writeString(proIntro);
+        dest.writeString(proRemark);
+        dest.writeInt(proShow);
+        dest.writeInt(proPosition);
+        dest.writeLong(proDate);
+        dest.writeInt(proClick);
+        dest.writeInt(proSort);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     public String getProId() {
         return proId;

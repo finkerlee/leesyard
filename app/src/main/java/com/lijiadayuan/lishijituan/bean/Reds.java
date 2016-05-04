@@ -7,7 +7,7 @@ package com.lijiadayuan.lishijituan.bean;
  * 封装reds表数据的类
  */
 public class Reds {
-    
+
     private String redId;                           // 主键,流水号
     private String redName;                         // 红包名称
     private int redSort;                            // 红包分类,外键
