@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
@@ -103,7 +105,11 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
                     helper.setText(R.id.goods_status,"已完成");
                 }
                 SimpleDraweeView simpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
-                simpleDraweeView.setImageURI(Uri.parse(item.getProThumb()));
+                if (item.getProThumb() == null){
+                    simpleDraweeView.setImageURI(Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image));
+                }else{
+                    simpleDraweeView.setImageURI(Uri.parse(item.getProThumb()));
+                }
                 helper.getView().findViewById(R.id.delete_goods).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -119,7 +125,6 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
         Map<String,String> params;
-        String url = "";
         switch (view.getId()){
             case R.id.rb_all:
                 params = new HashMap<>();
@@ -161,22 +166,20 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
             public void onResponse(String response) {
                 JsonObject mJsonObj = JsonParseUtil.getJsonByString(response).getAsJsonObject();
                 if (JsonParseUtil.isSuccess(mJsonObj)){
-                    for (int i = 0 ; i < 10; i++){
-                        ProductOrdersView mProductOrdersView = new ProductOrdersView();
-                        mProductOrdersView.setAddArea("shanxi");
-                        mProductOrdersView.setAddCity("晋城");
-                        mProductOrdersView.setAddName("圣诞节");
-                        mProductOrdersView.setPoStatus(STATE_FINISHED);
-                        mProductOrdersView.setProPrice(12.33);
-                        mProductOrdersView.setPoAmount(33.44);
-                        mProductOrdersView.setProThumb("http://banbao.chazidian.com/uploadfile/2016-01-25/s145368924044608.jpg");
-                        mOrdersData.add(mProductOrdersView);
+                    JsonArray mJsonArray = mJsonObj.get("response_data").getAsJsonArray();
+                    if (mJsonArray.size() ==0){
+                        Toast.makeText(MyOrderActivity.this,"暂无商品订单",Toast.LENGTH_LONG).show();
+                        mAdpter.clear();
+                        mAdpter.notifyDataSetChanged();
+                    }else{
+                        mOrdersData =  JsonParseUtil.toListByJson(mJsonArray,ProductOrdersView.class);
+                        mAdpter.clear();
+                        mAdpter.addAll(mOrdersData);
+                        //mAdpter.addAll(JsonParseUtil.toListByJson(mJsonObj.get("response_data").getAsJsonArray(), ProductOrdersView.class));
+                        mAdpter.notifyDataSetChanged();
                     }
 
-                    mAdpter.clear();
-                    mAdpter.addAll(mOrdersData);
-                    //mAdpter.addAll(JsonParseUtil.toListByJson(mJsonObj.get("response_data").getAsJsonArray(), ProductOrdersView.class));
-                    mAdpter.notifyDataSetChanged();
+
                 }
             }
         }, new Response.ErrorListener() {

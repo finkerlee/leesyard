@@ -21,6 +21,7 @@ import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.bean.Topics;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.DateTimeUtil;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 
 import java.util.ArrayList;
@@ -61,7 +62,8 @@ public class HeadlineActivity extends BaseActivity {
                          @Override
                          protected void convert(BaseAdapterHelper helper, Topics item) {
                //              helper.setText(R.id.tv_title,item.getTopTitle());
-                             helper.setText(R.id.tv_headline_date,item.getTopDate()+"");
+                             helper.setText(R.id.tv_title,item.getTopTitle()+"");
+                             helper.setText(R.id.tv_headline_date,DateTimeUtil.getTargetDate( item.getTopDate()*1000));
                              SimpleDraweeView mIvPic = (SimpleDraweeView) helper.getView().findViewById(R.id.head_image_pic);
                              mIvPic.setImageURI(Uri.parse(item.getTopImg()));
                          }

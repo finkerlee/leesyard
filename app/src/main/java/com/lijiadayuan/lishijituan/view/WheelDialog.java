@@ -161,7 +161,7 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
             SAXParserFactory spf = SAXParserFactory.newInstance();
             // 解析xml
             SAXParser parser = spf.newSAXParser();
-            XmlParserHandler handler = new XmlParserHandler();
+            XmlParserHandler handler = XmlParserHandler.getInstance();
             parser.parse(input, handler);
             input.close();
             // 获取解析出来的数据

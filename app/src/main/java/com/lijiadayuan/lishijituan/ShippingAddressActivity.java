@@ -22,17 +22,15 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.lijiadayuan.lishijituan.bean.Resources;
+import com.lijiadayuan.lishijituan.bean.Addresses;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.view.WheelDialog;
 
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,8 +46,6 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
     /**
      * 定义存放省市区id的变量,用于添加收货地址
      */
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +53,10 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
         mSp = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
         //空白处隐藏软键盘
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        Intent intent=getIntent();
+        Addresses address = intent.getParcelableExtra("address");
         editTextaddress=(EditText)findViewById(R.id.et_address_wheel);
         editTextaddress.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Log.i("main","3333");
@@ -75,8 +72,14 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
         });
         findViewById();
         initView();
+        setViewByData(address);
     }
-
+    private void setViewByData(Addresses address) {
+        editTextaddress.setText(address.getAddArea());
+        editTextname.setText(address.getAddName());
+        editTextphone.setText(address.getAddPhone());
+        editTextdetailed.setText(address.getAddDetail());
+    }
     protected void findViewById() {
         tvTitle= (TextView) findViewById(R.id.text_title);
         imageback= (ImageView) findViewById(R.id.iv_back);
@@ -89,11 +92,9 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
         tvTitle.setText("收货地址");
         imageback.setOnClickListener(this);
         btnsave.setOnClickListener(this);
-        editTextaddress.setOnClickListener(this);
         editTextphone.setOnClickListener(this);
         editTextdetailed.setOnClickListener(this);
     }
-
     //空白处隐藏软键盘
     @Override
     public boolean onTouchEvent(MotionEvent event) {

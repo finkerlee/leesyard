@@ -12,15 +12,30 @@ import com.lijiadayuan.model.ProvinceModel;
 
 public class XmlParserHandler extends DefaultHandler {
 
-	private String currentTag = "";
+	private static String currentTag = "";
+
+	private static XmlParserHandler xmlParserHandler;
 
 	/**
 	 * 存储所有的解析对象
 	 */
 	private List<ProvinceModel> provinceList = new ArrayList<ProvinceModel>();
 
-	public XmlParserHandler() {
+	/**
+	 * 私有化构造函数
+	 */
+	private XmlParserHandler() {
 
+	}
+
+	/**
+	 * 获取当前唯一的实例
+	 * @return
+	 */
+	public static XmlParserHandler getInstance(){
+		if (null == xmlParserHandler)
+			xmlParserHandler = new XmlParserHandler();
+		return xmlParserHandler;
 	}
 
 	public List<ProvinceModel> getDataList() {

@@ -130,7 +130,7 @@
             android:orientation="vertical"
             android:layout_toRightOf="@id/goods_pic"
             android:layout_marginLeft="10dp"
-            android:visibility="visible"
+            android:visibility="gone"
             >
             <TextView
                 android:id="@+id/give_english_name"
@@ -175,7 +175,7 @@
             android:layout_toRightOf="@id/goods_pic"
             android:layout_marginLeft="10dp"
             android:paddingTop="10dp"
-            android:visibility="gone"
+            android:visibility="visible"
             >
             <TextView
                 android:id="@+id/buy_english_name"
@@ -199,7 +199,7 @@
                 android:layout_marginTop="20dp"
                 >
                 <TextView
-                    android:id="@+id/jia"
+                    android:id="@+id/jian"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:text="-"
@@ -216,7 +216,7 @@
                     android:background="@drawable/goods_num_btn_bg"
                     />
                 <TextView
-                    android:id="@+id/jian"
+                    android:id="@+id/jia"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:text="＋"

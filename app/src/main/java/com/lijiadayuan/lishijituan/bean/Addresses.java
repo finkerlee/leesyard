@@ -1,12 +1,16 @@
 package com.lijiadayuan.lishijituan.bean;
 
+import android.location.Address;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Lee on 2016-03-17.
  * E-mail:johnyylee@163.com
  *
  * 封装addresses表数据的类
  */
-public class Addresses {
+public class Addresses implements Parcelable{
 
     private String addId;                        // 主键,流水号
     private String addName;                      // 收货人姓名
@@ -36,6 +40,31 @@ public class Addresses {
         this.addShopped = addShopped;
         this.addUser = addUser;
     }
+
+    protected Addresses(Parcel in) {
+        addId = in.readString();
+        addName = in.readString();
+        addPhone = in.readString();
+        addProvince = in.readString();
+        addCity = in.readString();
+        addArea = in.readString();
+        addDetail = in.readString();
+        addShow = in.readInt();
+        addShopped = in.readInt();
+        addUser = in.readString();
+    }
+
+    public static final Creator<Addresses> CREATOR = new Creator<Addresses>() {
+        @Override
+        public Addresses createFromParcel(Parcel in) {
+            return new Addresses(in);
+        }
+
+        @Override
+        public Addresses[] newArray(int size) {
+            return new Addresses[size];
+        }
+    };
 
     public String getAddId() {
         return addId;
@@ -115,5 +144,24 @@ public class Addresses {
 
     public void setAddShopped(int addShopped) {
         this.addShopped = addShopped;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(addId);
+        dest.writeString(addName);
+        dest.writeString(addPhone);
+        dest.writeString(addProvince);
+        dest.writeString(addCity);
+        dest.writeString(addArea);
+        dest.writeString(addDetail);
+        dest.writeInt(addShow);
+        dest.writeInt(addShopped);
+        dest.writeString(addUser);
     }
 }

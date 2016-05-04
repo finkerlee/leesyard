@@ -79,7 +79,7 @@ public class CelebrityActivity extends BaseActivity implements View.OnClickListe
                             Intent mIntent = new Intent(CelebrityActivity.this,CelebrityDetailsActivity.class);
                             Celebrities celebrities = mList.get(position);
                             mIntent.putExtra("celeName", celebrities.getCeleName());
-                            mIntent.putExtra("celeUrl",celebrities.getCeleId());
+                            mIntent.putExtra("celeId",celebrities.getCeleId());
                             startActivity(mIntent);
                         }
                     });

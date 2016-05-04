@@ -22,7 +22,7 @@ public class CelebrityDetailsActivity extends Activity implements OnClickListene
         findView();
         initView();
         Intent intent = getIntent();
-        setViewByData(intent.getStringExtra("celeName"), intent.getIntExtra("celeUrl",0));
+        setViewByData(intent.getStringExtra("celeName"), intent.getIntExtra("celeId",0));
     }
     private void findView(){
         Texttitle= (TextView) findViewById(R.id.text_title);

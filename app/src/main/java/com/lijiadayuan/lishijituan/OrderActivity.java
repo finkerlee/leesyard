@@ -130,8 +130,10 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     private void initView() {
         //联系人信息
         mNameTV = (TextView) findViewById(R.id.tv_name);
-        mPhoneTV = (TextView) findViewById(R.id.tv_name);
-        mAddressTV = (TextView) findViewById(R.id.tv_name);
+        mPhoneTV = (TextView) findViewById(R.id.iv_phone_num);
+        mAddressTV = (TextView) findViewById(R.id.tv_address);
+        mIvPic = (SimpleDraweeView) findViewById(R.id.goods_pic);
+
         //购买的布局
         mLayoutBuy = (LinearLayout) findViewById(R.id.buy_layout);
         mTvBuyGoodsName = (TextView) findViewById(R.id.buy_goods_name);
@@ -252,7 +254,6 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mTvGiveGoodsName.setText(mProductViewBean.getGoodsName());
             mTvGiveGoodsOtherName.setText(mProductViewBean.getGoodsOtherName());
             mTvGiveGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
-            mTvGiveGoodsNum.setText(mProductViewBean.getGoodsNum());
             mTvExpressStyle.setText("快递默认为在线支付");
 
         }else if(mProductViewBean.getGoodsType() == ProductBaseActivity.BUY_GOODS){
@@ -261,7 +262,6 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mTvBuyGoodsName.setText(mProductViewBean.getGoodsName());
             mTvBuyGoodsOtherName.setText(mProductViewBean.getGoodsOtherName());
             mTvBuyGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
-            mTvBuyGoodsNum.setText(mProductViewBean.getGoodsNum());
             mTvExpressStyle.setText("快递默认为货到付款");
         }
 
@@ -322,12 +322,14 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.jia:
                 if (mGoodsNum < mProductViewBean.getGoodsStock()){
-                    mTvBuyGoodsNum.setText(mGoodsNum++);
+                    mGoodsNum++;
+                    mTvBuyGoodsNum.setText(mGoodsNum+"");
                 }
                 break;
             case R.id.jian:
                 if (mGoodsNum > 1){
-                    mTvBuyGoodsNum.setText(mGoodsNum--);
+                    mGoodsNum--;
+                    mTvBuyGoodsNum.setText(mGoodsNum +"");
                 }
                 break;
             case R.id.rl_order_addresslayout:
@@ -357,6 +359,10 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                     public void onResponse(String response) {
                         JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
                         if (JsonParseUtil.isSuccess(mJsonObject)){
+                           if ("1".equals(mJsonObject.get("response_data").getAsString())){
+                               //TODO 调用三方sdk 请求支付
+                           }
+                        }else {
 
                         }
 
