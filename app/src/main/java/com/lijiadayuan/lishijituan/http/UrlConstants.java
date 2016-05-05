@@ -23,6 +23,8 @@ public interface UrlConstants {
     //红包
     String RED = BASE_URL+"red/all";
 
+
+    
     //发现
     String FIND = BASE_URL+"product/all";
 

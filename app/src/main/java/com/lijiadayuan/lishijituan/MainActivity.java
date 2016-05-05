@@ -54,6 +54,11 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     private Button button;
     private ImageView ivmore;
     private LocationService locationService;
+
+    private int[] images = new int[]{
+            R.drawable.aa
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +66,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
         findViewById();
         initView();
-
         imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
         imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
         imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");

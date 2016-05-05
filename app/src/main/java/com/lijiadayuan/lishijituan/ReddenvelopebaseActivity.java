@@ -74,6 +74,9 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
         reds_name.setText(mProductViewBean.getGoodsName());
         reds_price.setText("¥"+mProductViewBean.getGoodsPrice());
         reds_num.setText(mProductViewBean.getGoodsNum()+"个");
+        reds_spec.setText(mProductViewBean.getGoodsIntro());
+
+
         String text = mProductViewBean.getGoodsSpec();//领取规则
         String[] one = text.split(";");
         res_get_conditions1.setText(one[0]);
