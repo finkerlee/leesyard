@@ -19,23 +19,23 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#b4b4b4"/>
-    <TextView
-        android:id="@+id/iv_law"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2.法律声明"
-        android:textSize="20dp"
-        android:padding="20dp"
-        android:gravity="left"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#b4b4b4"/>
+    <!--<TextView-->
+        <!--android:id="@+id/iv_law"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="2.法律声明"-->
+        <!--android:textSize="20dp"-->
+        <!--android:padding="20dp"-->
+        <!--android:gravity="left"/>-->
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="#b4b4b4"/>-->
     <TextView
         android:id="@+id/iv_wechat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="3.微信客服"
+        android:text="2.微信客服"
         android:textSize="20dp"
         android:padding="20dp"
         android:gravity="left"/>
@@ -46,7 +46,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="4.分享给朋友"
+        android:text="3.分享给朋友"
         android:textSize="20dp"
         android:padding="20dp"
         android:gravity="left"/>
@@ -57,7 +57,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="5.清除缓存"
+        android:text="4.清除缓存"
         android:textSize="20dp"
         android:padding="20dp"
         android:gravity="left"/>

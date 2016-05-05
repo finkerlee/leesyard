@@ -133,9 +133,9 @@
             android:gravity="center_vertical"
             android:layout_marginRight="20dp">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/mymine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mymine"
                 android:layout_alignParentLeft="true"
                 android:id="@+id/iv_mymine"
                 android:layout_centerVertical="true"/>
@@ -168,8 +168,8 @@
             android:gravity="center_vertical"
             android:layout_marginRight="20dp">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/mywelfare"
                 android:layout_alignParentLeft="true"
                 android:id="@+id/iv_mywelfare"
@@ -203,8 +203,8 @@
             android:gravity="center_vertical"
             android:layout_marginRight="20dp">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/verifiedmember"
                 android:id="@+id/iv_verifiedmember"
                 android:layout_alignParentLeft="true"
@@ -239,8 +239,8 @@
             android:gravity="center_vertical"
             android:layout_marginRight="20dp">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/qr"
                 android:id="@+id/iv_qr"
                 android:layout_alignParentLeft="true"
@@ -274,8 +274,8 @@
             android:gravity="center_vertical"
             android:layout_marginRight="20dp">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/shipingaddress"
                 android:id="@+id/iv_shipingaddress"
                 android:layout_alignParentLeft="true"

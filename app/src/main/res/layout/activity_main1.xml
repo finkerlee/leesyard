@@ -57,11 +57,12 @@
                 android:background="#ffffff"
                 >
                 <com.facebook.drawee.view.SimpleDraweeView
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageView"
                     android:background="@drawable/notice_icon1"
                     android:layout_gravity="center_vertical"
+
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp" />
                 <TextView
@@ -124,8 +125,9 @@
             <com.lijiadayuan.lishijituan.view.MyGrideView
                 android:id="@+id/mGridView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:numColumns="3"
+                android:columnWidth="1dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 />
@@ -139,18 +141,18 @@
                 <ImageView
                     android:id="@+id/iv_ticket"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/ticket"
                     android:layout_weight="1"
                     />
                 <View
-                    android:layout_width="3dp"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     />
                 <ImageView
                     android:id="@+id/iv_red"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/red_packet"
                     android:layout_weight="1"
                     />
@@ -188,7 +190,7 @@
                 <!--app:roundingBorderWidth="1dp"-->
                 <!--app:roundingBorderColor="#747474"-->
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="10dp"
                     android:layout_height="1dp"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
@@ -203,7 +205,7 @@
                     app:roundingBorderColor="#747474"
                     />
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="10dp"
                     android:layout_height="1dp"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
@@ -218,7 +220,7 @@
                     app:roundingBorderColor="#747474"
                     />
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="10dp"
                     android:layout_height="1dp"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
