@@ -28,14 +28,14 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
     protected void initView() {
         tvTitle = (TextView) findViewById(R.id.text_title);
         about = (TextView) findViewById(R.id.iv_about);
-        law = (TextView) findViewById(R.id.iv_law);
+        //law = (TextView) findViewById(R.id.iv_law);
         wechat= (TextView) findViewById(R.id.iv_wechat);
         imageback = (ImageView) findViewById(R.id.iv_back);
         findViewById(R.id.cancle).setOnClickListener(this);
 
         tvTitle.setText("设置");
         about.setOnClickListener(this);
-        law.setOnClickListener(this);
+        //law.setOnClickListener(this);
         wechat.setOnClickListener(this);
         imageback.setOnClickListener(this);
     }
@@ -46,9 +46,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
             case R.id.iv_about:
                 startActivity(new Intent(SettingActivity.this, AboutActivity.class));
                 break;
-            case R.id.iv_law:
-                startActivity(new Intent(SettingActivity.this, LawActivity.class));
-                break;
+//            case R.id.iv_law:
+//                startActivity(new Intent(SettingActivity.this, LawActivity.class));
+//                break;
             case R.id.iv_wechat:
                 startActivity(new Intent(SettingActivity.this, WechatActivity.class));
                 break;

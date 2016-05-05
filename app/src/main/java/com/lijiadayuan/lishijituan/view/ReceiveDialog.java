@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -17,10 +18,11 @@ import com.lijiadayuan.lishijituan.RegistrationActivity;
  */
 public class ReceiveDialog extends Dialog{
     private TextView tvGallery, tvPhoto, tvCancel;
-
+    private Context mContext;
 
     public ReceiveDialog(Context context,int theme) {
         super(context,theme);
+        this.mContext = context;
         Window window = this.getWindow();
         window.setGravity(Gravity.BOTTOM);
     }
@@ -36,8 +38,8 @@ public class ReceiveDialog extends Dialog{
         tvGallery = (TextView) findViewById(R.id.tv_gallery);
         tvPhoto = (TextView) findViewById(R.id.tv_photo);
         tvCancel = (TextView) findViewById(R.id.tv_cancel);
-        tvGallery.setOnClickListener(ReceiveActivity.getInstance());
-        tvPhoto.setOnClickListener(ReceiveActivity.getInstance());
-        tvCancel.setOnClickListener(ReceiveActivity.getInstance());
+        tvGallery.setOnClickListener((View.OnClickListener) mContext);
+        tvPhoto.setOnClickListener((View.OnClickListener) mContext);
+        tvCancel.setOnClickListener((View.OnClickListener) mContext);
     }
 }

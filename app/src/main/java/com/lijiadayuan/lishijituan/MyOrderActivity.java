@@ -65,7 +65,8 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
     private void initData() {
         //默认加载全部的商品订单信息
         Map<String,String> params = new HashMap<>();
-        getDataByParams(params,UrlConstants.GET_ALL_ACTIVITY);
+        params.put("userId",msp.getString(KeyConstants.UserInfoKey.userId,""));
+        getDataByParams(params,UrlConstants.QUERY_ALL_GOODS_INFO);
 
     }
 

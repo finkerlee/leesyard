@@ -49,7 +49,7 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".YonghuActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity1" />
         <activity android:name=".ForgetpasswordActivtiy" />
         <activity android:name=".ResetpasswordActivity" />
         <activity android:name=".BaseWebActivity" />
@@ -99,6 +99,8 @@
         <activity android:name=".EventdetailsActivity" />
         <activity android:name=".ReceiveActivity" />
         <activity android:name=".CompanyProfileActivity" />
+        <activity android:name=".SubmitDataActivity" />
+
 
         <!-- jpush -->
         <!-- Required SDK核心功能 -->
@@ -231,6 +233,22 @@
         <!-- </>值来自开发者平台取得的AppKey -->
         <activity android:name=".TicketTicapplyActivity" />
         <activity android:name=".CelebrityDetailsActivity"></activity>
+
+
+        <!--支付宝 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+>>>>>>> 37514bb9eaf151516e93b4ec23c9384b0ac24c98
     </application>
 
 </manifest>

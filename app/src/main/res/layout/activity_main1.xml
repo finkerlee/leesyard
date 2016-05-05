@@ -53,7 +53,7 @@
             <LinearLayout
                 android:id="@+id/head_message"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="36dp"
                 android:background="#ffffff"
                 >
                 <com.facebook.drawee.view.SimpleDraweeView
@@ -69,13 +69,11 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="#b4b4b4"/>
-                <TextView
+                <ImageView
                     android:layout_width="68dp"
                     android:layout_height="26dp"
                     android:layout_marginLeft="5dp"
-                    android:text="李氏福利"
-                    android:background="@drawable/rounded_edittext_red"
-                    android:textColor="#ea5959"
+                    android:src="@drawable/li_welfare"
                     android:id="@+id/imageView2"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center_vertical"
@@ -124,7 +122,7 @@
             </LinearLayout>
             <com.lijiadayuan.lishijituan.view.MyGrideView
                 android:id="@+id/mGridView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numColumns="3"
                 android:columnWidth="1dp"
@@ -183,7 +181,7 @@
                     android:background="@drawable/culture"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
-                    app:roundingBorderColor="#747474"
+                    app:roundingBorderColor="#999999"
                     />
 
                 <!--app:roundedCornerRadius="5dp"-->
@@ -202,7 +200,7 @@
                     android:background="@drawable/rescue"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
-                    app:roundingBorderColor="#747474"
+                    app:roundingBorderColor="#999999"
                     />
                 <View
                     android:layout_width="10dp"
@@ -217,7 +215,7 @@
                     android:background="@drawable/resource"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
-                    app:roundingBorderColor="#747474"
+                    app:roundingBorderColor="#999999"
                     />
                 <View
                     android:layout_width="10dp"
@@ -232,7 +230,7 @@
                     android:background="@drawable/blacklist"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
-                    app:roundingBorderColor="#747474"
+                    app:roundingBorderColor="#999999"
                     />
 
 
