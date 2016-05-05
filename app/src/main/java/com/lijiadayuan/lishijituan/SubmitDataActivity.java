@@ -17,12 +17,25 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.JsonObject;
 import com.lijiadayuan.lishijituan.adapter.UpLoadPicAdapter;
+import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
+import com.lijiadayuan.lishijituan.utils.UpLoadImageTask1;
+import com.lijiadayuan.lishijituan.utils.UpLoadPicCallBack;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.ReceiveDialog;
 
 import java.io.File;
@@ -30,8 +43,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class SubmitDataActivity extends Activity implements OnClickListener {
+public class SubmitDataActivity extends BaseActivity implements OnClickListener {
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
@@ -41,18 +56,25 @@ public class SubmitDataActivity extends Activity implements OnClickListener {
     private static SubmitDataActivity instance;
     private GridView mGridView;
     private ImageView mShowIV;
+    private EditText mEtName,mEtPhone,mEtAddress,mEtSituation;
 
     private String mSaveDir;//拍照存放的文件夹名字
     private String mFileName;//拍照存放的文件的名字
 
     private UpLoadPicAdapter mAdpter;
     private ArrayList<Bitmap> mBitmaps;
+    private Bitmap[] bitmaps;
+    //商品id
+    private String shoppingId;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_data);
         instance = this;
+        shoppingId = getIntent().getStringExtra("shoppingId");
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         initView();
         setListener();
@@ -81,6 +103,11 @@ public class SubmitDataActivity extends Activity implements OnClickListener {
         imageback = (ImageView) findViewById(R.id.iv_back);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
         mGridView = (GridView) findViewById(R.id.up_load_pic);
+        mEtName = (EditText) findViewById(R.id.name);
+        mEtPhone = (EditText) findViewById(R.id.phone);
+        mEtAddress = (EditText) findViewById(R.id.address);
+        mEtSituation = (EditText) findViewById(R.id.situation);
+        findViewById(R.id.btn_receive).setOnClickListener(this);
         tvTitle.setText("申请报名");
         imageback.setOnClickListener(this);
         mBitmaps = new ArrayList<>();
@@ -154,6 +181,7 @@ public class SubmitDataActivity extends Activity implements OnClickListener {
                 case OPEN_CAMERA_FLAG://拍照获取的回调
                     file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
                     bitmap = getCompressBitmap(mSaveDir + mFileName);
+                    mBitmaps.add(0, bitmap);
                     mShowIV.setImageBitmap(bitmap);//让拍照的照片显示在控件上
                     try {
                         outputStream = new FileOutputStream(file);
@@ -227,6 +255,70 @@ public class SubmitDataActivity extends Activity implements OnClickListener {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                 startActivityForResult(intent, OPEN_CAMERA_FLAG);
                 dialog.dismiss();
+                break;
+            case R.id.btn_receive:
+                if (mEtName.getText().toString().isEmpty()){
+                    Toast.makeText(SubmitDataActivity.this,"请填写申请人姓名",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (mEtPhone.getText().toString().isEmpty()){
+                    Toast.makeText(SubmitDataActivity.this,"请填写联系方式",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (mEtAddress.getText().toString().isEmpty()){
+                    Toast.makeText(SubmitDataActivity.this,"请填写收货地址",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (mEtSituation.getText().toString().isEmpty()){
+                    Toast.makeText(SubmitDataActivity.this,"请填写情况说明",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (mBitmaps.size() == 1){
+                    Toast.makeText(SubmitDataActivity.this,"请上传图片",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                bitmaps = new Bitmap[mBitmaps.size()-1];
+                for (int i = 0; i<mBitmaps.size()-1; i++){
+                    bitmaps[i] = mBitmaps.get(i);
+                }
+                UpLoadImageTask1 mUpLoadImageTask1 = (UpLoadImageTask1) new UpLoadImageTask1(SubmitDataActivity.this,bitmaps).execute(UrlConstants.UP_LOAD_PIC);
+                mUpLoadImageTask1.setCallBACK(new UpLoadPicCallBack() {
+                    @Override
+                    public void setCompleteImage(final ArrayList<String> iamgePicList) {
+                        if (iamgePicList.size()>0){
+                            RequestQueue mRequestQueue = app.getRequestQueue();
+                            StringRequest mStringRequest = new StringRequest(Request.Method.POST, UrlConstants.APPLY, new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    JsonObject mJsonObj = JsonParseUtil.getJsonByString(response).getAsJsonObject();
+                                    if (JsonParseUtil.isSuccess(mJsonObj)){
+                                        Toast.makeText(SubmitDataActivity.this,"ok",Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(SubmitDataActivity.this,"faile",Toast.LENGTH_LONG).show();
+                                }
+                            }){
+                                @Override
+                                protected Map<String, String> getParams() throws AuthFailureError {
+                                    Map<String, String> params = new HashMap<String, String>();
+                                    params.put("benId",shoppingId);
+                                    params.put("userId", UsersUtil.getUserId(SubmitDataActivity.this));
+                                    if (iamgePicList.size()>0){
+                                        for (int i = 0;i<iamgePicList.size();i++){
+                                            params.put("baImg"+(i+1),iamgePicList.get(i));
+                                        }
+                                    }
+                                    params.put("addId","010101010101");
+                                    return params;
+                                }
+                            };
+                            mRequestQueue.add(mStringRequest);
+                        }
+                    }
+                });
                 break;
             default:
                 break;
