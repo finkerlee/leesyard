@@ -106,9 +106,10 @@ public class ImagePagerAdapter extends BaseAdapter {
 				mlist.add(mAdvViewList.get(position).getAdvImg());
 				mProductViewBean.setPicList(mlist);
 				mProductViewBean.setGoodsNum(1+"");
+				mProductViewBean.setGoodsPic(mAdvViewList.get(position).getProThumb());
+				mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
 
 				Intent mIntent = new Intent(context,ProductBaseActivity.class);
-				mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.BUY_GOODS);
 				mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
 				context.startActivity(mIntent);
 			}

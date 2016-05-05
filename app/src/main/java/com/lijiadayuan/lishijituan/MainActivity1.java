@@ -67,14 +67,8 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
     private ViewFlipper notice_vf;
     //李氏福利社商品
     private GridView mGvGoods;
-    //李氏福利商品数据
-    private int[] mGiftGoodslist = {R.drawable.byh_1,R.drawable.rick_cooker,
-            R.drawable.bodybuilding,R.drawable.sj_4,R.drawable.lsj_5,R.drawable.nscs_6};
-    private ArrayList<Integer> mGiftGoodsList;
     //卡票和红包
     private ImageView mIvTicket,mIvRed;
-    //李氏文化，陆空救援，共享资源，李氏黑名单
-    private ImageView mIvLeeCulture,mIvLuKongRescus,mIvShareRescous,mIvLeeBlackList;
     //保存当前地址
     private String mCurrentAddress;
 
@@ -211,10 +205,12 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
                 mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO+ mBenefitsData.get(i).getBenId());
                 mProductViewBean.setGoodsSpec(mBenefitsData.get(i).getBenSpec());
                 String [] mBenData = mBenefitsData.get(i).getBenImg().split(",");
+
                 ArrayList<String> mlist = new ArrayList<String>();
                 for (String s : mBenData){
                     mlist.add(s);
                 }
+                mProductViewBean.setGoodsVerify(mBenefitsData.get(i).getBenVerify());
                 mProductViewBean.setPicList(mlist);
                 mProductViewBean.setGoodsNum(1+"");
                 Intent mIntent = new Intent(MainActivity1.this,ProductBaseActivity.class);

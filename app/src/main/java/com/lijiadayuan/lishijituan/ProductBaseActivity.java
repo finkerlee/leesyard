@@ -23,6 +23,7 @@ import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -189,14 +190,26 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                        intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                        startActivity(intent);
                    }else{
-                       if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIfLee,false)){
-                           Intent intent = new Intent(this,OrderActivity.class);
-                           intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
-                           startActivityForResult(intent, ORDEROK);
+                       //判断是否认证为姓李
+                       if (UsersUtil.isLee(ProductBaseActivity.this)){
+                           //判断是否需要提交认证资料
+                           if (mProductViewBean.getGoodsVerify() == 0){
+
+                               Intent intent = new Intent(this,OrderActivity.class);
+                               intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
+                               startActivityForResult(intent, ORDEROK);
+                           }else{
+                               Intent intent = new Intent(this,SubmitDataActivity.class);
+                               startActivityForResult(intent, ORDEROK);
+                           }
                        }else{
-                           Intent intent = new Intent(this,MemberActivity.class);
-                           intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
-                           startActivityForResult(intent,RENZHENG);
+
+                           Intent intent = new Intent(this,SubmitDataActivity.class);
+                           startActivityForResult(intent, ORDEROK);
+
+//                           Intent intent = new Intent(this,MemberActivity.class);
+//                           intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
+//                           startActivityForResult(intent,RENZHENG);
                        }
                    }
                }else{

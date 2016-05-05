@@ -260,7 +260,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             return;
         }
         //设置商品图片
-        if ("".equals(mProductViewBean.getGoodsPic())){
+        if (mProductViewBean.getGoodsPic().isEmpty()){
             mIvPic.setImageURI(Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image));
         }else{
             mIvPic.setImageURI(Uri.parse(mProductViewBean.getGoodsPic()));
