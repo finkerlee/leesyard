@@ -95,6 +95,13 @@ public interface UrlConstants {
     String CELEBRITIEW_DETAILS = CELEBRITIES + "detail/?celeId=";
 
 
+    //福利申请
+    String BA = BASE_URL + "ba/";
+    //福利申请图片上传
+    String UP_LOAD_PIC = BA + "upload";
+    //申请领取福利商品
+    String APPLY = BA + "apply";
+
 //    // 地址
 //    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址
 //    String DELETE_ADDRESS = BASE_URL + "address/delete";                    // 删除收货地址

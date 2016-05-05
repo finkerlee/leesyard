@@ -184,6 +184,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                        }else{
 
                            Intent intent = new Intent(this,SubmitDataActivity.class);
+                           intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
                            startActivityForResult(intent, ORDEROK);
 
 //                           Intent intent = new Intent(this,MemberActivity.class);

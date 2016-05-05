@@ -17,4 +17,15 @@ public class UsersUtil {
         SharedPreferences mSp = mContext.getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
         return mSp.getBoolean(KeyConstants.UserInfoKey.userIfLee,false);
     }
+
+    /**
+     * 获取用户id
+     * @param mContext
+     * @return
+     */
+    public static String getUserId(Context mContext){
+        SharedPreferences mSp = mContext.getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
+        return mSp.getString(KeyConstants.UserInfoKey.userId,"");
+    }
+
 }
