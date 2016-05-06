@@ -34,7 +34,7 @@ import java.util.TimerTask;
 
 public class MoreActivity extends BaseActivity {
     private GridView gridView;
-    private TextView tvTitle;
+    private TextView tvTitle,tvTitleback;
 
     //图片ID数组
     private String[] images;
@@ -100,6 +100,8 @@ public class MoreActivity extends BaseActivity {
         ImageView mIv = (ImageView) findViewById(R.id.iv_address);
         mIv.setImageResource(R.drawable.return_back);
         findViewById(R.id.iv_messsage).setVisibility(View.GONE);
+        tvTitleback= (TextView) findViewById(R.id.title_back);
+        tvTitleback.setText("返回");
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvTitle.setText("更多");
     }

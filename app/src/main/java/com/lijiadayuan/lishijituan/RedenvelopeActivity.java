@@ -44,7 +44,7 @@ public class RedenvelopeActivity extends BaseActivity implements OnClickListener
         imageback = (ImageView) findViewById(R.id.iv_back);
 
         tvTitle = (TextView) findViewById(R.id.text_title);
-//        tvTitle.setText("红包");
+        tvTitle.setText("红包");
         initData();
 
     }

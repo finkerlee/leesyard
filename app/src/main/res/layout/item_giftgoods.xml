@@ -2,21 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="123dp"
     android:gravity="center"
     android:paddingBottom="10dp"
     >
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/itemImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="123dp"
+        android:layout_height="123dp"
         android:layout_weight="1"
         fresco:roundedCornerRadius="5dp"
         fresco:roundingBorderWidth="1dp"
-        fresco:roundingBorderColor="#999999"
-
+        fresco:roundingBorderColor="#cccccc"
         />
     <!--fresco:roundingBorderWidth="1dp"-->
 

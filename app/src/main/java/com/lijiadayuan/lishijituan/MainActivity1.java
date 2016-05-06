@@ -48,9 +48,7 @@ import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
-import com.lijiadayuan.lishijituan.view.photoscorrect;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +56,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity1 extends BaseActivity implements OnClickListener{
+public class MainActivity1 extends BaseActivity  implements OnClickListener{
     //轮播图
     private ViewFlow mViewFlow;
     //红点
@@ -167,6 +165,7 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
                             protected void convert(BaseAdapterHelper helper, Benefits item) {
                                 SimpleDraweeView mSimpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
                                 mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
+                                mSimpleDraweeView.setAspectRatio(1.33f);
                                 //Log.i("main",item.getBenThumb());
                             }
                         };

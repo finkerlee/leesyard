@@ -22,7 +22,6 @@ import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
-import com.lijiadayuan.model.ProvinceModel;
 
 import java.io.InputStream;
 import java.util.HashMap;

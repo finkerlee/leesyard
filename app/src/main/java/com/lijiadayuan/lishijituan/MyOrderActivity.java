@@ -82,7 +82,7 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.rb_complete).setOnClickListener(this);
         mTvTitle = (TextView) findViewById(R.id.text_title);
         mTvBack = (TextView) findViewById(R.id.text_title);
-
+        mTvTitle.setText("二维码");
         //初始化适配器
         mOrdersData = new ArrayList<>();
         mAdpter = new QuickAdapter<ProductOrdersView>(MyOrderActivity.this,R.layout.item_order,mOrdersData) {

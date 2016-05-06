@@ -44,7 +44,7 @@ public class SharingResourceActivity extends BaseActivity implements OnClickList
     protected void findViewById() {
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
-        gridView = (GridView) findViewById(R.id.gridView);
+        gridView = (GridView) findViewById(R.id.mGridView);
     }
 
     protected void initView() {
@@ -69,6 +69,7 @@ public class SharingResourceActivity extends BaseActivity implements OnClickList
                         protected void convert(BaseAdapterHelper helper, Resources item) {
                             SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
                             mPic.setImageURI(Uri.parse(item.getResImg()));
+                            mPic.setAspectRatio(1.33f);
                         }
                     };
                     gridView.setAdapter(adapter);
