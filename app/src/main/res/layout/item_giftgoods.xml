@@ -10,11 +10,11 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/itemImage"
-        android:layout_width="123dp"
-        android:layout_height="123dp"
+        android:layout_width="300px"
+        android:layout_height="300px"
         android:layout_weight="1"
-        fresco:roundedCornerRadius="5dp"
-        fresco:roundingBorderWidth="1dp"
+        fresco:roundedCornerRadius="20px"
+        fresco:roundingBorderWidth="1px"
         fresco:roundingBorderColor="#cccccc"
         />
     <!--fresco:roundingBorderWidth="1dp"-->
