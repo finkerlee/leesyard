@@ -6,72 +6,43 @@ import android.os.Parcelable;
 /**
  * Created by zhaoyi on 16/5/2.
  */
-public class Activites implements Parcelable{
+public class Activites {
 
-    private int actId;                      // 主键,自动增长
+    private String actId;                      // 主键,自动增长
     private String actName;                 // 活动名称
     private String actLocation;             // 活动地点
     private String actScale;                // 活动规模
     private long actDate;                   // 活动日期
     private String actIntro;                // 活动说明
-    private int actShow;                    // 是否显示,0:不显示,1:显示 默认1
+    private int actShow;     //               // 是否显示,0:不显示,1:显示 默认1
     private int actPosition;                // 排列顺序
-    private int actStatus;                  // 判断当前用户是否已经报名的标识,申请状态，0:未报名, 1:未审核，2:审核通过，-1:审核失败，3:报名成功。默认1
-    private int pic;
+    private int actStatus;     //             // 判断当前用户是否已经报名的标识,申请状态，0:未报名, 1:未审核，2:审核通过，-1:审核失败，3:报名成功。默认1
+    private String actImg;
+
 
     public Activites() {
-
     }
 
-    protected Activites(Parcel in) {
-        actId = in.readInt();
-        actName = in.readString();
-        actLocation = in.readString();
-        actScale = in.readString();
-        actDate = in.readLong();
-        actIntro = in.readString();
-        actShow = in.readInt();
-        actPosition = in.readInt();
-        actStatus = in.readInt();
-        pic = in.readInt();
+    public Activites(String actId, String actName, String actLocation, String actScale, long actDate, String actIntro, int actShow, int actPosition, int actStatus, String actImg) {
+        this.actId = actId;
+        this.actName = actName;
+        this.actLocation = actLocation;
+        this.actScale = actScale;
+        this.actDate = actDate;
+        this.actIntro = actIntro;
+        this.actShow = actShow;
+        this.actPosition = actPosition;
+        this.actStatus = actStatus;
+        this.actImg = actImg;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    public static final Creator<Activites> CREATOR = new Creator<Activites>() {
-        @Override
-        public Activites createFromParcel(Parcel in) {
-            return new Activites(in);
-        }
 
-        @Override
-        public Activites[] newArray(int size) {
-            return new Activites[size];
-        }
-    };
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(actId);
-        dest.writeString(actName);
-        dest.writeString(actLocation);
-        dest.writeString(actScale);
-        dest.writeLong(actDate);
-        dest.writeString(actIntro);
-        dest.writeInt(actShow);
-        dest.writeInt(actPosition);
-        dest.writeInt(actStatus);
-        dest.writeInt(pic);
-    }
-
-    public int getActId() {
+    public String getActId() {
         return actId;
     }
 
-    public void setActId(int actId) {
+    public void setActId(String actId) {
         this.actId = actId;
     }
 
@@ -139,11 +110,13 @@ public class Activites implements Parcelable{
         this.actStatus = actStatus;
     }
 
-    public int getPic() {
-        return pic;
+    public String getActImg() {
+        return actImg;
     }
 
-    public void setPic(int pic) {
-        this.pic = pic;
+    public void setActImg(String actImg) {
+        this.actImg = actImg;
     }
+
+
 }

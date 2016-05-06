@@ -49,7 +49,6 @@ public class EventdetailsActivity extends Activity implements OnClickListener {
                 break;
             case R.id.btn_enroll:
                 Intent mIntent = new Intent(this,RegistrationActivity.class);
-                mIntent.putExtra(KeyConstants.IntentPageValues.Actvites,mActivites);
                 startActivity(mIntent);
             default:
                 break;

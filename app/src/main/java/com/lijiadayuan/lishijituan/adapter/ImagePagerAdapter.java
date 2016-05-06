@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.lijiadayuan.lishijituan.BaseWebActivity;
+import com.lijiadayuan.lishijituan.MainActivity;
 import com.lijiadayuan.lishijituan.ProductBaseActivity;
 import com.lijiadayuan.lishijituan.R;
 import com.lijiadayuan.lishijituan.bean.AdvView;
@@ -57,6 +58,9 @@ public class ImagePagerAdapter extends BaseAdapter {
 				.cacheOnDisc(true) // 设置下载的图片是否缓存在SD卡中
 				.build();
 
+	}
+
+	public ImagePagerAdapter(MainActivity mainActivity, ArrayList<String> imageUrlList, ArrayList<String> linkUrlArray, ArrayList<String> titleList) {
 	}
 
 	@Override

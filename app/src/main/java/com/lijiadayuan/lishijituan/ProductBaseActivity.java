@@ -76,7 +76,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         //加载轮播图
         if(null == mProductViewBean.getPicList()){
             ArrayList<String> mlist =new ArrayList<>();
-            mlist.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
+            mlist.add(mProductViewBean.getGoodsPic());
             mProductViewBean.setPicList(mlist);
         }
         initBanner(mProductViewBean.getPicList());

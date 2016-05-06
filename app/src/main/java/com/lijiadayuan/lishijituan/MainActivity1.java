@@ -59,6 +59,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity1 extends BaseActivity implements OnClickListener{
+
     //轮播图
     private ViewFlow mViewFlow;
     //红点
