@@ -12,9 +12,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -56,7 +53,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity1 extends BaseActivity  implements OnClickListener{
+public class MainActivity1 extends BaseActivity implements OnClickListener{
+
     //轮播图
     private ViewFlow mViewFlow;
     //红点

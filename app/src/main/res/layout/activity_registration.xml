@@ -26,6 +26,7 @@
         android:layout_centerInParent="true"
         android:hint="性别" />
 
+
     <EditText
         android:id="@+id/nation"
         android:layout_width="match_parent"
@@ -38,10 +39,12 @@
         android:id="@+id/phone_num"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:paddingLeft="20dp"
+        android:padding="20dp"
         android:layout_centerInParent="true"
-        android:hint="联系方式"
-        android:inputType="phone" />
+        android:hint="填写手机号"
+        android:inputType="phone"
+        android:maxLength="11"/>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -49,33 +52,24 @@
         android:padding="20dp"
         android:text="报名材料上传" />
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/ll_photo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <!--<GridView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:numColumns="3"-->
-            <!--android:id="@+id/mGridView"-->
-            <!--/>-->
-        <ImageView
-            android:id="@+id/iv_photos"
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/upload" />
-
+        android:layout_height="match_parent">
+        <GridView
+            android:id="@+id/up_load_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="3"/>
         <Button
-            android:id="@+id/i_want_receive"
+            android:id="@+id/btn_receive"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:background="@drawable/rounded_button_color"
             android:text="上传资料"
             android:textColor="@color/color_white"
-            android:layout_below="@+id/iv_photos"
+            android:layout_marginBottom="40dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="57dp" />
-    </RelativeLayout>
-
+            android:layout_gravity="center_horizontal|bottom" />
+    </FrameLayout>
 </LinearLayout>

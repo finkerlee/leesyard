@@ -2,6 +2,7 @@ package com.lijiadayuan.lishijituan;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View.OnClickListener;
 import android.os.Bundle;
@@ -18,143 +19,98 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.JsonObject;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
+import com.lijiadayuan.lishijituan.adapter.LishiactivityAdpter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
+import com.lijiadayuan.lishijituan.adapter.PictureAdpter1;
 import com.lijiadayuan.lishijituan.bean.Activites;
 import com.lijiadayuan.lishijituan.bean.Activites;
+import com.lijiadayuan.lishijituan.bean.ProductViewBean;
+import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.util.ArrayList;
 
 public class LishiactivityActivity extends BaseActivity implements OnClickListener {
-    private ListView mLvActivity;
     private TextView tvTitle;
     private ImageView imageback;
-    private PictureAdapter adapter ;
-    //活动列表数据
-    private ArrayList<Activites> mActivitesList;
+    private GridView gridView;
+
     //图片ID数组
-    private int[] images = new int[]{
-            R.drawable.activity1, R.drawable.activity2,
-    };
+    private String[] images;
+
+    //活动列表数据
+    private ArrayList<Activites> mList;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lishiactivity);
+    protected void onCreate(Bundle savedInstanceState)         {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_lishiactivity);
 
-        //初始化view
-        initView();
-        //初始化数据
-        initData();
-        setListener();
-
-//        adapter = new PictureAdapter(images, this, R.layout.image_ativity);
-//        PictureAdapter adapter = new PictureAdapter(images, this, R.layout.image_ativity);
-//        initView();
-    }
-
-    private void setListener() {
-                mLvActivity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> images0, View images1, int images2, long images3) {
-//                images0.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        startActivity(new Intent(CultureActivity.this,RegistrationActivity.class));
-//                    }
-//                });
-                Intent mIntent = new Intent(LishiactivityActivity.this, EventdetailsActivity.class);
-                mIntent.putExtra(KeyConstants.IntentPageValues.Actvites,mActivitesList.get(images2));
-                startActivity(mIntent);
-            }
-        });
-    }
-
-    private void initData() {
-        mActivitesList = new ArrayList<>();
-        for (int i = 0;i < 5;i++){
-            Activites mActivites = new Activites();
-            mActivites.setActId(1111);
-            mActivites.setActName("李氏活动");
-            mActivites.setActLocation("北京市朝阳区");
-            mActivites.setActScale("1000");
-            mActivites.setActStatus(1);
-            mActivites.setActShow(1);
-            mActivites.setPic(R.drawable.activity1);
-            mActivitesList.add(mActivites);
+            //初始化view
+            initView();
+            //初始化数据
+            initData();
 
         }
 
-
-
-
-        //创建请求队列
+    //加载数据
+    private void initData() {
+        // 创建请求队列
         RequestQueue mQueue = app.getRequestQueue();
-        StringRequest mStringRequest = new StringRequest(Request.Method.GET, UrlConstants.GET_ALL_ACTIVITY, new Response.Listener<String>() {
+        // 创建一个字符串请求
+        StringRequest request = new StringRequest(Request.Method.GET, UrlConstants.GET_ALL_ACTIVITY, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (JsonParseUtil.isSuccess(JsonParseUtil.getJsonByString(response).getAsJsonObject())){
-                    QuickAdapter<Activites>  mQuickAdapter = new QuickAdapter<Activites>(LishiactivityActivity.this,R.layout.image_ativity,mActivitesList) {
-                        @Override
-                        protected void convert(BaseAdapterHelper helper, Activites item) {
-                            helper.setBackgroundRes(R.id.itemImage,item.getPic());
+                JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
+                if (JsonParseUtil.isSuccess(mJsonObject)){
+                    mList =  JsonParseUtil.toListByJson(mJsonObject.get("response_data")
+                            .getAsJsonArray(),Activites.class);
+                    if (mList.size() > 0){
+                        images = new String[mList.size()];
+                        for (int i = 0;i < mList.size(); i++){
+                            images[i] = mList.get(i).getActImg();
                         }
-                    };
-                    mLvActivity.setAdapter(mQuickAdapter);
-                    //TODO 获得数据 展示到listview
-                }else{
-                    Toast.makeText(LishiactivityActivity.this,"获取数据失败",Toast.LENGTH_LONG).show();
+                    }
+
+                    LishiactivityAdpter adapter = new LishiactivityAdpter(LishiactivityActivity.this,images,R.layout.redenvelope_image);
+                    gridView.setAdapter(adapter);
+
+                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                            Intent mIntent = new Intent(LishiactivityActivity.this,RegistrationActivity.class);
+                            mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,RegistrationActivity.GIFT_GOODS);
+                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, ProductViewBean.getProductViewBeanList(mList.get(position), RegistrationActivity.GIFT_GOODS));
+                            startActivity(mIntent);
+                        }
+                    });
                 }
             }
-        }, new Response.ErrorListener() {
+
+        },new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("main",error.getMessage());
+
             }
         });
-        mQueue.add(mStringRequest);
+        // 将请求添加到请求队列中(即发送请求)
+        mQueue.add(request);
     }
 
     protected void initView() {
-
-        mLvActivity = (ListView) findViewById(R.id.mListView);
+        gridView = (GridView) findViewById(R.id.culture_gridView);
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
+        imageback.setOnClickListener(this);
         tvTitle.setText("李氏活动");
-
-//        ArrayList<Integer> mList = new ArrayList<>();
-//        for (int i = 0;i<images.length;i++){
-//            mList.add(images[i]);
-//        }
-//
-//        QuickAdapter<Integer> mAdpter = new QuickAdapter<Integer>(LishiactivityActivity.this,R.layout.image_ativity,mList) {
-//            @Override
-//            protected void convert(BaseAdapterHelper helper, Integer item) {
-//                helper.setBackgroundRes(R.id.itemImage,item);
-//            }
-//        };
-//        mLvActivity.setAdapter(mAdpter);
-//        mLvActivity.setOnClickListener(this);
-//        mLvActivity.setAdapter(adapter);
-//        mLvActivity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> images0, View images1, int images2, long images3) {
-////                images0.setOnClickListener(new OnClickListener() {
-////                    @Override
-////                    public void onClick(View v) {
-////                        startActivity(new Intent(CultureActivity.this,RegistrationActivity.class));
-////                    }
-////                });
-//                if (1 == images2)
-//                    startActivity(new Intent(LishiactivityActivity.this, EventdetailsActivity.class));
-//                else if (0 == images2)
-//                    startActivity(new Intent(LishiactivityActivity.this, EventdetailsActivity.class));
-//            }
-//        });
     }
-
-    @Override
+        @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_back:

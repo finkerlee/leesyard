@@ -4,7 +4,6 @@ package com.lijiadayuan.lishijituan;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,18 +11,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.InputType;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View.OnClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,18 +30,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bigkoo.pickerview.OptionsPickerView;
-import com.bigkoo.pickerview.utils.PickerViewAnimateUtil;
-import com.lijiadayuan.lishijituan.bean.Activites;
+import com.google.gson.JsonObject;
+import com.lijiadayuan.lishijituan.adapter.UpLoadPicAdapter;
+import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
-import com.lijiadayuan.lishijituan.utils.ArchivesUtils;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
-import com.lijiadayuan.lishijituan.utils.UpLoadImageTask;
 import com.lijiadayuan.lishijituan.utils.UpLoadImageTask1;
 import com.lijiadayuan.lishijituan.utils.UpLoadPicCallBack;
-import com.lijiadayuan.lishijituan.utils.VerficationUtil;
-import com.lijiadayuan.lishijituan.view.PhotosDialog;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
+import com.lijiadayuan.lishijituan.view.ReceiveDialog;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -52,183 +48,113 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class RegistrationActivity extends BaseActivity implements OnClickListener {
+
+    //购买页面
+    public static final int BUY_GOODS = 1;
+    //赠品页面
+    public static final int GIFT_GOODS = 0;
+    //视图bean
+    private ProductViewBean mProductViewBean;
+
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
     private ImageView imageback;
-    private ImageView photos;
     InputMethodManager manager;
-    private PhotosDialog dialog;
+    private ReceiveDialog dialog;
     private static RegistrationActivity instance;
+    private GridView mGridView;
     private ImageView mShowIV;
-    private EditText mEtName,mEtSex,mEtNation,mEtPhoneNum;
+    private EditText mEtName,mEtsEX,mEtNation,mEtPhoneNum;
+
+    private int gender ;  // 0:女，1:男 整型
+
     private String mSaveDir;//拍照存放的文件夹名字
     private String mFileName;//拍照存放的文件的名字
-    private Bitmap[] bitmaps = new Bitmap[1];
+    private String sex;
 
-    private Activites mActivites;
-    private String strUserAge = "";
-
-    private SharedPreferences mSp;
-    //初始化选择器
-    private OptionsPickerView pickerView;
-
-    private GridView mGvPicData;
+    private UpLoadPicAdapter mAdpter;
+    private ArrayList<Bitmap> mBitmaps;
+    private Bitmap[] bitmaps;
+    //商品id
+    private String shoppingId;
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        mSp = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
-        mActivites = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.Actvites);
-        //空白处隐藏软键盘
         instance = this;
+        shoppingId = getIntent().getStringExtra("shoppingId");
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
+        String actId = mProductViewBean.getGoodsActivityId();
+        Log.e("Log","actId===="+actId);
+
         initView();
         setListener();
     }
 
     private void setListener() {
-        mEtSex.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                pickerView.setTitle("选择性别");
-                pickerView.setPicker(ArchivesUtils.getAge());
-                pickerView.setCyclic(false);
-                if(!TextUtils.isEmpty(strUserAge)){
-                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
-                }
-                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int option2, int options3) {
-                        mEtSex.setText(ArchivesUtils.getAge().get(options1));
-//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
-//                        refreshMenuView();
-                    }
-                });
-                if(!pickerView.isShowing()){
-                    pickerView.show();
-                }
-            }
-        });
-        mEtSex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v.hasFocus()){
-                    //显示自己界面
-                    pickerView.setTitle("选择性别");
-                    pickerView.setPicker(ArchivesUtils.getAge());
-                    pickerView.setCyclic(false);
-                    if(!TextUtils.isEmpty(strUserAge)){
-                        pickerView.setSelectOptions(Integer.valueOf(strUserAge));
-                    }
-                    pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                        @Override
-                        public void onOptionsSelect(int options1, int option2, int options3) {
-                            mEtSex.setText(ArchivesUtils.getAge().get(options1));
-//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
-//                        refreshMenuView();
-                        }
-                    });
-                    if(!pickerView.isShowing()){
-                        pickerView.show();
-                    }
-                }
-            }
-        });
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 4) {
+                    return;
+                } else if (i + 1 == mBitmaps.size()) {
+                    dialog = new ReceiveDialog(RegistrationActivity.this, R.style.protocol_dialog);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.show();
+                } else {
 
-        mEtNation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                pickerView.setTitle("选择民族");
-                pickerView.setPicker(ArchivesUtils.getNation());
-                pickerView.setCyclic(false);
-                if(!TextUtils.isEmpty(strUserAge)){
-                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
-                }
-                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int option2, int options3) {
-                        mEtNation.setText(ArchivesUtils.getNation().get(options1));
-//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
-//                        refreshMenuView();
-                    }
-                });
-                if(!pickerView.isShowing()){
-                    pickerView.show();
-                }
-            }
-        });
-        mEtNation.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickerView.setTitle("选择民族");
-                pickerView.setPicker(ArchivesUtils.getNation());
-                pickerView.setCyclic(false);
-                if(!TextUtils.isEmpty(strUserAge)){
-                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
-                }
-                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int option2, int options3) {
-                        mEtNation.setText(ArchivesUtils.getNation().get(options1));
-//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
-//                        refreshMenuView();
-                    }
-                });
-                if(!pickerView.isShowing()){
-                    pickerView.show();
                 }
             }
         });
     }
 
-    private void initView() {
-        pickerView = new OptionsPickerView(this);
-        pickerView = new OptionsPickerView(this);
+    protected void initView() {
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
-        photos= (ImageView) findViewById(R.id.iv_photos);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
+        mGridView = (GridView) findViewById(R.id.up_load_pic);
         mEtName = (EditText) findViewById(R.id.name);
-        mEtSex = (EditText) findViewById(R.id.sex);
-        mEtSex.setInputType(InputType.TYPE_NULL);
-        mEtNation = (EditText) findViewById(R.id.nation);
-        mEtNation.setInputType(InputType.TYPE_NULL);
-        mEtPhoneNum = (EditText) findViewById(R.id.phone_num);
-        //w = (GridView) findViewById(R.id.mGridView);
-        findViewById(R.id.i_want_receive).setOnClickListener(this);
-        mEtNation.setOnClickListener(this);
-        mEtSex.setOnClickListener(this);
-        photos.setOnClickListener(new View.OnClickListener() {
+        mEtsEX = (EditText) findViewById(R.id.sex);
 
-            @Override
-            public void onClick(View v) {
-                dialog = new PhotosDialog(RegistrationActivity.this, R.style.protocol_dialog);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.show();
-            }
-        });
-        tvTitle.setText("申请报名");
+
+
+
+        mEtNation = (EditText) findViewById(R.id.nation);//
+        mEtPhoneNum = (EditText) findViewById(R.id.phone_num);
+
+        findViewById(R.id.btn_receive).setOnClickListener(this);
+        tvTitle.setText("活动申请报名");
         imageback.setOnClickListener(this);
-        }
+        mBitmaps = new ArrayList<>();
+        Bitmap defaultPic = BitmapFactory.decodeResource(getResources(), R.drawable.upload);
+        mBitmaps.add(defaultPic);
+        mAdpter = new UpLoadPicAdapter(this, mBitmaps);
+        mGridView.setAdapter(mAdpter);
+
+    }
+
     //空白处隐藏软键盘
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // TODO Auto-generated method stub
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
-            if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
                 manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
         return super.onTouchEvent(event);
     }
+
     public static RegistrationActivity getInstance() {
         return instance;
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         File file;
@@ -245,8 +171,9 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                     cursor.moveToFirst();
                     String path = cursor.getString(columnIndex);
                     bitmap = getCompressBitmap(path);
-                    bitmaps[0] = bitmap;
-                    mShowIV.setImageBitmap(bitmap);//将选中的图片展示出来
+                    mBitmaps.add(0, bitmap);
+                    mAdpter.UpDataView(mBitmaps);
+                    //将选中的图片展示出来
                 /* 创建一个新的文件，存放压缩过的bitmap，用于发送给服务器 */
                     String saveDir = Environment.getExternalStorageDirectory() + "/wyk_dir/";
                     File dir = new File(saveDir);
@@ -274,7 +201,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                 case OPEN_CAMERA_FLAG://拍照获取的回调
                     file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
                     bitmap = getCompressBitmap(mSaveDir + mFileName);
-                    bitmaps[0] = bitmap;
+                    mBitmaps.add(0, bitmap);
                     mShowIV.setImageBitmap(bitmap);//让拍照的照片显示在控件上
                     try {
                         outputStream = new FileOutputStream(file);
@@ -317,6 +244,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
         bitmap = BitmapFactory.decodeFile(path, options);
         return bitmap;
     }
+
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -348,64 +276,83 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                 startActivityForResult(intent, OPEN_CAMERA_FLAG);
                 dialog.dismiss();
                 break;
+            case R.id.btn_receive:
 
-            case R.id.i_want_receive:
-                // 判断名字是否为空
-                if (TextUtils.isEmpty(mEtName.getText())) {
-                    Toast.makeText(RegistrationActivity.this, R.string.registration_username, Toast.LENGTH_SHORT).show();
+
+                ;
+                sex = mEtsEX.getText().toString();
+                if("女".equals(sex)  ){
+                    gender = 0;
+                }else if ("男".equals(sex)){
+                    gender = 1;
+                }else{
+                    Toast.makeText(RegistrationActivity.this,"性别填写有误",Toast.LENGTH_SHORT).show();
+                }
+                Log.e("Log", "sex  =======" + sex);
+
+
+
+                if (mEtName.getText().toString().isEmpty()){
+                    Toast.makeText(RegistrationActivity.this,"请填写申请人姓名",Toast.LENGTH_LONG).show();
                     return;
                 }
-                // 判断性别是否为空
-                if (TextUtils.isEmpty(mEtSex.getText())) {
-                    Toast.makeText(RegistrationActivity.this,"请输入性别", Toast.LENGTH_SHORT).show();
+                if (mEtsEX.getText().toString().isEmpty()){
+
+                    Toast.makeText(RegistrationActivity.this,"请填写性别",Toast.LENGTH_LONG).show();
                     return;
                 }
-                // 判断民族是否为空
-                if (TextUtils.isEmpty(mEtNation.getText())) {
-                    Toast.makeText(RegistrationActivity.this,"请输入民族", Toast.LENGTH_SHORT).show();
+                if (mEtNation.getText().toString().isEmpty()){
+                    Toast.makeText(RegistrationActivity.this,"请填写民族",Toast.LENGTH_LONG).show();
                     return;
                 }
-                // 判断手机号是否为空  是否正确
-                if (!VerficationUtil.checkMobile(this, mEtPhoneNum.getText().toString())) {
+                if (mEtPhoneNum.getText().toString().isEmpty()){
+                    Toast.makeText(RegistrationActivity.this,"请填写手机号",Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (bitmaps.length == 0){
-                    Toast.makeText(RegistrationActivity.this,"请上传资料", Toast.LENGTH_SHORT).show();
+                if (mBitmaps.size() == 1){
+                    Toast.makeText(RegistrationActivity.this,"请上传图片",Toast.LENGTH_LONG).show();
                     return;
                 }
-                UpLoadImageTask1 mUpLoadImageTask1 = (UpLoadImageTask1) new UpLoadImageTask1(RegistrationActivity.this,bitmaps).execute(UrlConstants.UP_LOAD_DATA);
+                bitmaps = new Bitmap[mBitmaps.size()-1];
+                for (int i = 0; i<mBitmaps.size()-1; i++){
+                    bitmaps[i] = mBitmaps.get(i);
+                }
+                UpLoadImageTask1 mUpLoadImageTask1 = (UpLoadImageTask1) new UpLoadImageTask1(RegistrationActivity.this,bitmaps).execute(UrlConstants.UP_LOAD_PIC);
                 mUpLoadImageTask1.setCallBACK(new UpLoadPicCallBack() {
                     @Override
                     public void setCompleteImage(final ArrayList<String> iamgePicList) {
-                        if (iamgePicList.size()!=0){
+                        if (iamgePicList.size()>0){
                             RequestQueue mRequestQueue = app.getRequestQueue();
-                            StringRequest mStringRequest = new StringRequest(Request.Method.POST, UrlConstants.GET_ALL_ACTIVITY, new Response.Listener<String>() {
+                            StringRequest mStringRequest = new StringRequest(Request.Method.POST, UrlConstants.ACTIVITY, new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    if (JsonParseUtil.isSuccess(JsonParseUtil.getJsonByString(response).getAsJsonObject())){
-                                        Toast.makeText(RegistrationActivity.this,"报名成功",Toast.LENGTH_LONG).show();
+                                    Log.e("log","response === " + response);
+                                    JsonObject mJsonObj = JsonParseUtil.getJsonByString(response).getAsJsonObject();
+                                    if (JsonParseUtil.isSuccess(mJsonObj)){
+                                        Toast.makeText(RegistrationActivity.this,"ok",Toast.LENGTH_LONG).show();
                                     }
-
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-
+                                    Log.e("log","error === " + error);
+                                    Toast.makeText(RegistrationActivity.this,"faile",Toast.LENGTH_LONG).show();
                                 }
                             }){
                                 @Override
                                 protected Map<String, String> getParams() throws AuthFailureError {
                                     Map<String, String> params = new HashMap<String, String>();
-                                    params.put("actId",mActivites.getActId()+"");
-                                    params.put("userId",mSp.getString(KeyConstants.UserInfoKey.userId,""));
-                                    params.put("acaName",mEtName.getText().toString().trim());
-                                    params.put("acaGender",mEtSex.getText().toString().trim());
-                                    params.put("acaNation",mEtNation.getText().toString().trim());
-                                    params.put("acaPhone",mEtPhoneNum.getText().toString().trim());
-                                    for (int i = 0;i<iamgePicList.size();i++){
-                                        params.put("acaImg"+i+1+"",iamgePicList.get(0));
+                                    params.put("actId", "1");//活动id
+                                    params.put("userId",UsersUtil.getUserId(RegistrationActivity.this));//用户id
+                                    params.put("acaName",mEtName.getText().toString());//姓名
+                                    params.put("acaGender",gender + "");//性别 1
+                                    params.put("acaNation",mEtNation.getText().toString());//民族
+                                    params.put("acaPhone",mEtPhoneNum.getText().toString() );//手机号
+                                    if (iamgePicList.size()>0){
+                                        for (int i = 0;i<iamgePicList.size();i++){
+                                            params.put("acaImg"+(i+1),iamgePicList.get(i));
+                                        }
                                     }
-
                                     return params;
                                 }
                             };
@@ -417,6 +364,5 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
             default:
                 break;
         }
-
     }
 }

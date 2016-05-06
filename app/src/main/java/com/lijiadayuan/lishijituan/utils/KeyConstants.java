@@ -44,6 +44,9 @@ public class KeyConstants {
         //跳转到结算页面时  判断当前页面的类型
         public static final String OrderPageType = "OrderPageType";
 
+        //跳转到intentService时，判断当前service需要做的任务
+        public static final String ServiceKey = "ServiceKey";
+
     }
 
     public static class IntentPageValues{

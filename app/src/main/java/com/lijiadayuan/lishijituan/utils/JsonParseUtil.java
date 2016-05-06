@@ -32,6 +32,17 @@ public class JsonParseUtil {
         }
     }
 
+    //将json转换成对象
+    public static <T> T toBeanByJson(JsonObject mJsonObject,Class<T> mClass){
+        Gson mGson = new Gson();
+        if (!mJsonObject.isJsonNull()){
+            T mT = (T) mGson.fromJson(mJsonObject,mClass);
+            return mT;
+
+        }
+        return null;
+    }
+
 
 
     //将jsonarray转换成list集合

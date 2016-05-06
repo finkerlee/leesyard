@@ -67,8 +67,6 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
     //商品id
     private String shoppingId;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +105,7 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
         mEtPhone = (EditText) findViewById(R.id.phone);
         mEtAddress = (EditText) findViewById(R.id.address);
         mEtSituation = (EditText) findViewById(R.id.situation);
+
         findViewById(R.id.btn_receive).setOnClickListener(this);
         tvTitle.setText("申请报名");
         imageback.setOnClickListener(this);

@@ -29,20 +29,36 @@ import com.google.gson.JsonParser;
 import com.lijiadayuan.lishijituan.bean.Addresses;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.WheelDialog;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * 该类为编辑和添加新地址
+ * 编辑 ＝1；
+ * 添加 ＝ 0；
+ *
+ */
 public class ShippingAddressActivity extends BaseActivity implements OnClickListener{
+    public static final int ADD_ADDRESS = 0;
+    public static final int UPDATA_ADDRESS = 1;
+
+    private int currentType;
+    private String url;
+
     InputMethodManager manager;
     private EditText editTextaddress,editTextname,editTextphone,editTextdetailed;
     private WheelDialog dialog;
     private TextView tvTitle;
     private ImageView imageback;
     private Button btnsave;
-    private SharedPreferences mSp;
+    private Addresses address;
+    private String mAddId;
+
+
+    private String pageTypeText = "";
     /**
      * 定义存放省市区id的变量,用于添加收货地址
      */
@@ -50,11 +66,9 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipping_address);
-        mSp = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
         //空白处隐藏软键盘
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        Intent intent=getIntent();
-        Addresses address = intent.getParcelableExtra("address");
+        currentType = getIntent().getIntExtra("addressType",ADD_ADDRESS);
         editTextaddress=(EditText)findViewById(R.id.et_address_wheel);
         editTextaddress.setOnClickListener(new OnClickListener() {
             @Override
@@ -64,15 +78,15 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                     @Override
                     public void refresh(String info, String areaId) {
                         editTextaddress.setText(info);
+                        mAddId = areaId;
                     }
                 });
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
             }
         });
-        findViewById();
         initView();
-        setViewByData(address);
+
     }
     private void setViewByData(Addresses address) {
         editTextaddress.setText(address.getAddArea());
@@ -80,20 +94,31 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
         editTextphone.setText(address.getAddPhone());
         editTextdetailed.setText(address.getAddDetail());
     }
-    protected void findViewById() {
+    protected void initView(){
         tvTitle= (TextView) findViewById(R.id.text_title);
         imageback= (ImageView) findViewById(R.id.iv_back);
         btnsave= (Button) findViewById(R.id.btn_save);
         editTextname= (EditText) findViewById(R.id.et_name_address);
         editTextphone= (EditText) findViewById(R.id.et_phone_address);
         editTextdetailed= (EditText) findViewById(R.id.et_detailed_address);
-    }
-    protected void initView(){
+
         tvTitle.setText("收货地址");
         imageback.setOnClickListener(this);
         btnsave.setOnClickListener(this);
         editTextphone.setOnClickListener(this);
         editTextdetailed.setOnClickListener(this);
+
+        if (currentType == UPDATA_ADDRESS){
+            address = getIntent().getParcelableExtra("address");
+            mAddId = address.getAddArea();
+            setViewByData(address);
+            url = UrlConstants.MODIFY_ADDRESS;
+            pageTypeText = "修改";
+        }else{
+            mAddId = "";
+            url = UrlConstants.ADD_ADDRESS;
+            pageTypeText = "添加";
+        }
     }
     //空白处隐藏软键盘
     @Override
@@ -136,7 +161,7 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
               // 创建请求队列
               RequestQueue mQueue = app.getRequestQueue();
               // 创建一个字符串请求
-              StringRequest request = new StringRequest(Request.Method.POST, UrlConstants.ADD_ADDRESS, new Response.Listener<String>() {
+              StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                   /** 重写onResponse,以实现请求响应的操作 **/
                   @Override
                   public void onResponse(String response) {
@@ -145,15 +170,15 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                       String result = json.get("response_status").getAsString();
                       if ("success".equals(result)) {
                           if (json.get("response_data").isJsonNull()){
-                              Toast.makeText(ShippingAddressActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                              Toast.makeText(ShippingAddressActivity.this, pageTypeText + "失败", Toast.LENGTH_SHORT).show();
                           }else{
                               int data = json.get("response_data").getAsInt();
                               if (data == 0) {
-                                  Toast.makeText(ShippingAddressActivity.this, "添加地址失败", Toast.LENGTH_SHORT).show();
+                                  Toast.makeText(ShippingAddressActivity.this, pageTypeText +"地址失败", Toast.LENGTH_SHORT).show();
                               } else if (data == 1) {
-                                  Toast.makeText(ShippingAddressActivity.this, "添加地址成功", Toast.LENGTH_SHORT).show();
-                                  Intent intent = new Intent(ShippingAddressActivity.this, LoginActivity.class);
-                                  startActivity(intent);
+                                  Toast.makeText(ShippingAddressActivity.this, pageTypeText +"地址成功", Toast.LENGTH_SHORT).show();
+                                  setResult(RESULT_OK);
+                                  finish();
                               }
                           }
                       }else{
@@ -171,14 +196,16 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                   @Override
                   protected Map<String, String> getParams() throws AuthFailureError {
                       Map<String, String> params = new HashMap<>();
-                      params.put("addId", "");
+                      params.put("addId",mAddId);
                       params.put("addName", editTextname.getText().toString().trim());
                       params.put("addPhone", editTextphone.getText().toString().trim());
-                      params.put("addProvince", "");
-                      params.put("addCity","");
-                      params.put("addArea","");
-                      params.put("addDetail ",editTextdetailed.getText().toString().trim());
-                      params.put("userId", mSp.getString(KeyConstants.UserInfoKey.userId, ""));
+                      params.put("addProvince", mAddId.substring(0,2));
+                      params.put("addCity",mAddId.substring(0,4));
+                      params.put("addArea",mAddId);
+                      params.put("addDetail",editTextdetailed.getText().toString().trim());
+                      if (currentType == ADD_ADDRESS){
+                          params.put("userId", UsersUtil.getUserId(ShippingAddressActivity.this));
+                      }
                       return params;
                   }
               };

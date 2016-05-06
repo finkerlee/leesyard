@@ -2,6 +2,7 @@ package com.lijiadayuan.lishijituan;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,9 +55,7 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
         //红包信息
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
 
-        imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-        imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-        imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
+        imageUrlList.add(mProductViewBean.getGoodsPic());
 
         linkUrlArray.add("");
         linkUrlArray.add("");
@@ -74,6 +73,11 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
         reds_name.setText(mProductViewBean.getGoodsName());
         reds_price.setText("¥"+mProductViewBean.getGoodsPrice());
         reds_num.setText(mProductViewBean.getGoodsNum()+"个");
+        reds_spec.setText(mProductViewBean.getGoodsIntro());
+
+        Log.e("Log","RedId(); ===  "+mProductViewBean.getGoodsId());
+
+
         String text = mProductViewBean.getGoodsSpec();//领取规则
         String[] one = text.split(";");
         res_get_conditions1.setText(one[0]);
@@ -89,7 +93,6 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
         reds_name = (TextView) findViewById(R.id.reds_name);
         reds_price = (TextView) findViewById(R.id.reds_price);
         reds_num = (TextView) findViewById(R.id.reds_num);
-        reds_AsOfTime = (TextView) findViewById(R.id.reds_AsOfTime);
         reds_spec = (TextView) findViewById(R.id.reds_spec);
         res_get_conditions1 = (TextView) findViewById(R.id.res_get_conditions1);
         res_get_conditions2 = (TextView) findViewById(R.id.res_get_conditions2);
@@ -120,7 +123,8 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
     @Override
     public void onClick(View v) {
         Toast.makeText(ReddenvelopebaseActivity.this, "申请领取", Toast.LENGTH_SHORT).show();
-
+        Intent intent = new Intent(ReddenvelopebaseActivity.this,ApplyFor.class);
+        startActivity(intent);
     }
 
 }

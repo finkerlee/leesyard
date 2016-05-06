@@ -2,28 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.lijiadayuan.lishijituan.NewsdataActivity">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:id="@+id/layout"
+    >
+
     <TextView
-        android:id="@+id/iv_date"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="123"
-        android:textSize="18dp"/>
+        android:textStyle="bold"
+        android:textSize="18sp"/>
     <TextView
-        android:id="@+id/iv_text"
-        android:layout_below="@id/iv_date"
+        android:id="@+id/tv_time"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="123"
-        android:textSize="18dp"/>
-    </RelativeLayout>
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="123"
+        android:textSize="15sp"/>
 
 </LinearLayout>

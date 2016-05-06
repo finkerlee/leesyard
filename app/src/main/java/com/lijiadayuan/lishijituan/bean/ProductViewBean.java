@@ -2,6 +2,7 @@ package com.lijiadayuan.lishijituan.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 
@@ -20,19 +21,16 @@ public class ProductViewBean implements Parcelable{
     private String goodsIntro;//红包领取说明
     private int goodsVerify;   // 是否需要上传认证   redVerify
     private int goodsType;
+    private String goodsDetail;//// 具体详情
     private String goodsInfoUrl;//商品详情 webview
     private String goodsInfoIncrease;//商品浏览次数自增
     private String goodsThumb;//轮播图地址
     private long goodsLimit;//红包截止时间
-    //当前商品别名
-    private String goodsOtherName;
-    //商品展示的图片
-    private String goodsPic;
-    //商品的最大购买数量
-    private int goodsStock;
-    //商品id
-    private String goodsId;
-
+    private String goodsOtherName;//当前商品别名
+    private String goodsPic; //商品展示的图片
+    private int goodsStock; //商品的最大购买数量
+    private String goodsId; //商品id
+    private String goodsActivityId;//活动id
 
     public ProductViewBean(){
 
@@ -85,6 +83,11 @@ public class ProductViewBean implements Parcelable{
         }
     };
 
+    public void setGoodsActivityId(String goodsActivityId) {
+
+        this.goodsActivityId = goodsActivityId;
+    }
+
     public String getGoodsId() {
         return goodsId;
     }
@@ -93,6 +96,9 @@ public class ProductViewBean implements Parcelable{
         this.goodsId = goodsId;
     }
 
+    public String getGoodsDetail() {
+        return goodsDetail;
+    }
 
     public int getGoodsStock() {
         return goodsStock;
@@ -141,6 +147,10 @@ public class ProductViewBean implements Parcelable{
 
     public void setGoodsInfoIncrease(String goodsInfoIncrease) {
         this.goodsInfoIncrease = goodsInfoIncrease;
+    }
+
+    public void setGoodsDetail(String goodsDetail) {
+        this.goodsDetail = goodsDetail;
     }
 
     public void setGoodsThumb(String goodsThumb) {
@@ -207,6 +217,10 @@ public class ProductViewBean implements Parcelable{
         return goodsThumb;
     }
 
+    public String getGoodsActivityId() {
+        return goodsActivityId;
+    }
+
     public long getGoodsLimit() {
         return goodsLimit;
     }
@@ -241,7 +255,6 @@ public class ProductViewBean implements Parcelable{
         mProductViewBean.setGoodsSpec(mProduct.getProSpec());
         mProductViewBean.setGoodsPrice(mProduct.getProPrice() + "");
         mProductViewBean.setGoodsThumb(mProduct.getProThumb());//轮播图地址
-        mProductViewBean.setGoodsPic(mProduct.getProThumb());
         mProductViewBean.setGoodsOtherName(mProduct.getProSubtitle());
 //        mProductViewBean.setPicList(mProduct.getp() + "");
         mProductViewBean.setGoodsType(type);
@@ -256,11 +269,33 @@ public class ProductViewBean implements Parcelable{
         mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mReds.getRedId());
         mProductViewBean.setGoodsName(mReds.getRedName());//名称
         mProductViewBean.setGoodsNum(mReds.getRedStock() + "");//红包数量
-        mProductViewBean.setGoodsSpec(mReds.getRedDetail());//红包详情介绍
+        mProductViewBean.setGoodsSpec(mReds.getRedDetail());//红包领取说明
         mProductViewBean.setGoodsPrice(mReds.getRedAmount() + "");//红包金额
-        mProductViewBean.setGoodsIntro(mReds.getRedIntro() + "");//红包领取说明
+        mProductViewBean.setGoodsIntro(mReds.getRedIntro() + "");//红包详情介绍
         mProductViewBean.setGoodsLimit(mReds.getRedLimit());//红包截止日期
+        mProductViewBean.setGoodsPic(mReds.getRedImg());
+        mProductViewBean.setGoodsId(mReds.getRedId());//红包id
         mProductViewBean.setGoodsVerify(mReds.getRedVerify());//是否需要认证
+        mProductViewBean.setGoodsType(type);
+        return mProductViewBean;
+    }
+
+    public static ProductViewBean getTicketViewBeanList(Tickets mTickets, int type) {
+        ProductViewBean  mProductViewBean = new ProductViewBean();
+        mProductViewBean.setGoodsName(mTickets.getTktName());//名称
+        mProductViewBean.setGoodsNum(mTickets.getTktStock() + "");//红包数量
+        mProductViewBean.setGoodsPrice(mTickets.getTktAmount() + "");//红包金额
+        mProductViewBean.setGoodsSpec(mTickets.getTktDetail());//红包领取说明
+        mProductViewBean.setGoodsPic(mTickets.getTktImg());//轮播图
+        mProductViewBean.setGoodsIntro(mTickets.getTktIntro() + "");//红包详情介绍
+        mProductViewBean.setGoodsType(type);
+        return mProductViewBean;
+    }
+
+    public static ProductViewBean getProductViewBeanList(Activites mActivites, int type) {
+        ProductViewBean  mProductViewBean = new ProductViewBean();
+        mProductViewBean.setGoodsActivityId(mActivites.getActId());//活动id
+        mProductViewBean.setGoodsPic(mActivites.getActImg());
         mProductViewBean.setGoodsType(type);
         return mProductViewBean;
     }

@@ -26,6 +26,8 @@ public interface UrlConstants {
     //红包
     String RED = BASE_URL+"red/all";
 
+
+    
     //发现
     String FIND = BASE_URL+"product/all";
     // 地址
@@ -101,6 +103,8 @@ public interface UrlConstants {
     String UP_LOAD_PIC = BA + "upload";
     //申请领取福利商品
     String APPLY = BA + "apply";
+    //活动申请报名
+    String ACTIVITY =BASE_URL  + "actapply/apply";
 
 //    // 地址
 //    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址

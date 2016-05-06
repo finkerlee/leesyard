@@ -41,7 +41,7 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
     private TextView medtConfirm, tvClose;
     private Context context;
 
-    public WheelDialog(Context mContext,int resId, AssetManager assetManager, IRefreshUI iRefreshUI) {
+    public WheelDialog(Context mContext, int resId, AssetManager assetManager, IRefreshUI iRefreshUI) {
         super(mContext, resId);
 //        setCancelable(false);
         this.context = mContext;
@@ -52,6 +52,7 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
 //        window.setWindowAnimations(R.style.selected);
 //        this.clickListener = clickListener;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -81,7 +82,7 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
     /**
      * 定义接口,用于activity实现回调方法更新UI
      */
-    public interface IRefreshUI{
+    public interface IRefreshUI {
 
         public void refresh(String info, String areaId);
     }
@@ -136,12 +137,12 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
     /**
      * 当前区的名称
      */
-    protected String mCurrentDistrictName ="";
+    protected String mCurrentDistrictName = "";
 
     /**
      * 当前区的邮政编码
      */
-    protected String mCurrentZipCode ="";
+    protected String mCurrentZipCode = "";
 
 
     private List<ProvinceModel> provinceList = null;
@@ -152,34 +153,25 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
      * 解析省市区的XML数据
      */
 
-    protected void initProvinceDatas()
-    {
+    protected void initProvinceDatas() {
 
-        try {
-            InputStream input = asset.open("pca.xml");
-            // 创建一个解析xml的工厂对象
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            // 解析xml
-            SAXParser parser = spf.newSAXParser();
-            XmlParserHandler handler = XmlParserHandler.getInstance();
-            parser.parse(input, handler);
-            input.close();
-            // 获取解析出来的数据
-            provinceList = handler.getDataList();
-            //*/ 初始化默认选中的省、市、区
-            if (provinceList!= null && !provinceList.isEmpty()) {
-                mCurrentProviceName = provinceList.get(0).getName();
-                proId = provinceList.get(0).getId();
-                List<CityModel> cityList = provinceList.get(0).getCityList();
-                if (cityList!= null && !cityList.isEmpty()) {
-                    mCurrentCityName = cityList.get(0).getName();
-                    cityId = cityList.get(0).getId();
-                    List<DistrictModel> districtList = cityList.get(0).getDistrictList();
-                    areaId = districtList.get(0).getId();
-                    mCurrentDistrictName = districtList.get(0).getName();
-                }
+
+        // 获取解析出来的数据
+        provinceList = XmlParserHandler.getInstance().getDataList();
+        //*/ 初始化默认选中的省、市、区
+        if (provinceList != null && !provinceList.isEmpty()) {
+            mCurrentProviceName = provinceList.get(0).getName();
+            proId = provinceList.get(0).getId();
+            List<CityModel> cityList = provinceList.get(0).getCityList();
+            if (cityList != null && !cityList.isEmpty()) {
+                mCurrentCityName = cityList.get(0).getName();
+                cityId = cityList.get(0).getId();
+                List<DistrictModel> districtList = cityList.get(0).getDistrictList();
+                areaId = districtList.get(0).getId();
+                mCurrentDistrictName = districtList.get(0).getName();
             }
-            //*/
+        }
+        //*/
 //            mProvinceDatas = new String[provinceList.size()];
 //            for (int i=0; i< provinceList.size(); i++) {
 //                // 遍历所有省的数据
@@ -205,11 +197,6 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
 //                // 省-市的数据，保存到mCitisDatasMap
 //                mCitisDatasMap.put(provinceList.get(i).getName(), cityNames);
 //            }
-        } catch (Throwable e) {
-            e.printStackTrace();
-        } finally {
-
-        }
     }
 
 
@@ -225,6 +212,7 @@ public class WheelDialog extends Dialog implements OnWheelChangedListener {
             areaId = districtList.get(newValue).getId();
         }
     }
+
     private void updateAreas() {
         int pCurrent = mViewCity.getCurrentItem();
 //        String test = mCitisDatasMap.get(mCurrentProviceName)[pCurrent];

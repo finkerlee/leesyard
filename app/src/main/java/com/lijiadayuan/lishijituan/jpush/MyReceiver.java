@@ -6,12 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.lijiadayuan.lishijituan.LeeApplication;
 import com.lijiadayuan.lishijituan.MainActivity1;
+import com.lijiadayuan.lishijituan.bean.MyMessage;
+import com.lijiadayuan.lishijituan.bean.NewMessage;
+import com.lijiadayuan.lishijituan.utils.LocalUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -27,9 +31,10 @@ public class MyReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-        Bundle bundle = intent.getExtras();
+        final Bundle bundle = intent.getExtras();
 		Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
-		
+
+		Log.d(TAG,"我的消息呢？");
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
             String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
             Log.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
@@ -57,6 +62,20 @@ public class MyReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..
+			Intent activityIntent = new Intent(context, MainActivity1.class);
+			//  要想在Service中启动Activity，必须设置如下标志
+			activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(activityIntent);
+
+//			String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+//			NewMessage mNewMessage = JsonParseUtil.toBeanByJson(JsonParseUtil.getJsonByString(extra).getAsJsonObject(), NewMessage.class);
+//            Log.i("main",mNewMessage.getTime());
+//			new Thread(){
+//				@Override
+//				public void run() {
+//
+//				}
+//			}.start();
         	
         } else if(JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
         	boolean connected = intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false);
@@ -82,13 +101,35 @@ public class MyReceiver extends BroadcastReceiver {
 
 				try {
 					JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
-					Iterator<String> it =  json.keys();
-
-					while (it.hasNext()) {
-						String myKey = it.next().toString();
-						sb.append("\nkey:" + key + ", value: [" +
-								myKey + " - " +json.optString(myKey) + "]");
+					if (json.has("type")){
+						if ("1".equals(json.getString("type"))){
+							NewMessage mNewMessage = new NewMessage();
+							mNewMessage.setContent(json.getString("content"));
+							mNewMessage.setSee(false);
+							mNewMessage.setTime(json.getString("time"));
+							mNewMessage.setTitle(json.getString("title"));
+							LocalUtils LocalUtils = new LocalUtils(LeeApplication.newMessagePath);
+							ArrayList<NewMessage> mList = (ArrayList<NewMessage>) LocalUtils.read();
+							mList.add(mNewMessage);
+							LocalUtils.put(mList);
+						}else if ("2".equals(json.getString("type"))){
+							MyMessage mMyMessage = new MyMessage();
+							mMyMessage.setTime(json.getString("time"));
+							mMyMessage.setContent(json.getString("content"));
+							LocalUtils LocalUtils = new LocalUtils(LeeApplication.myMessagePath);
+							ArrayList<MyMessage> mList = (ArrayList<MyMessage>) LocalUtils.read();
+							mList.add(mMyMessage);
+							LocalUtils.put(mList);
+						}
 					}
+
+
+//					while (it.hasNext()) {
+//						String myKey = it.next().toString();
+//
+//						sb.append("\nkey:" + key + ", value: [" +
+//								myKey + " - " +json.optString(myKey) + "]");
+//					}
 				} catch (JSONException e) {
 					Log.e(TAG, "Get message extra JSON error!");
 				}
