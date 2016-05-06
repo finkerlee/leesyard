@@ -22,12 +22,12 @@ public class CompanyProfileActivity extends Activity implements OnClickListener{
         findView();
         initView();
         Intent intent = getIntent();
-        setViewByData(intent.getStringExtra("resName"), intent.getIntExtra("resUrl", 0));
+        setViewByData(intent.getStringExtra("resName"), intent.getIntExtra("resId", 0));
     }
     protected void findView(){
         Texttitle= (TextView) findViewById(R.id.text_title);
         Webcompany = (WebView) findViewById(R.id.WebView);
-        iv_back = (ImageView)findViewById(R.id.iv_back);
+        iv_back = (ImageView) findViewById(R.id.iv_back);
     }
     protected void initView(){
         iv_back.setOnClickListener(this);

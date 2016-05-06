@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lijiadayuan.lishijituan.LishiactivityActivity">
+    tools:context="com.lijiadayuan.lishijituan.RedenvelopeActivity">
+
     <include
         layout="@layout/common_title"
-        android:id="@+id/include16" />
-    <ListView
-        android:id="@+id/mListView"
+        android:id="@+id/include2" />
+    <include
+        layout="@layout/culture_gridview"
+        android:layout_below="@+id/include2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/include16"
-        />
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

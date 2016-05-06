@@ -23,6 +23,7 @@ import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -54,20 +55,15 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
 
     ArrayList<String> linkUrlArray= new ArrayList<String>();
     private CircleFlowIndicator mFlowIndicator;
-    private ArrayList<String> imageUrlList = new ArrayList<String>();
     private Button mBtnReceive;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_base);
-        mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
 
+        mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
         isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin, false);
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
-//        imageUrlList = mProductViewBean.getPicList();//放真实数据
-        imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-        imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-        imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
         linkUrlArray
                 .add("");
         linkUrlArray
@@ -78,7 +74,12 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                 .add("");
         initView();
         //加载轮播图
-        initBanner(imageUrlList);
+        if(null == mProductViewBean.getPicList()){
+            ArrayList<String> mlist =new ArrayList<>();
+            mlist.add(mProductViewBean.getGoodsPic());
+            mProductViewBean.setPicList(mlist);
+        }
+        initBanner(mProductViewBean.getPicList());
         //将数据加载到视图
         setViewByData();
 
@@ -103,29 +104,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         mTvGoodsPrice.setText(mProductViewBean.getGoodsPrice());
         mTvGoodsSpec.setText(mProductViewBean.getGoodsSpec());
 
-        proId = (String) mProductViewBean.getGoodsInfoUrl().subSequence(47,60);
-        String increaseUrl = "http://192.168.0.103:8080/product/click?proId=" + proId;
 
-        Log.e("Log", "proId === " + proId);
-
-        // 创建请求队列
-        RequestQueue rq = app.getRequestQueue();
-        // 创建一个字符串请求
-        StringRequest sr = new StringRequest(Request.Method.POST, increaseUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("Log","response ============ " + response);
-
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-
-        // 将请求添加到请求队列中(即发送请求)
-        rq.add(sr);
     }
 
     protected void initView(){
@@ -190,14 +169,27 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                        intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                        startActivity(intent);
                    }else{
-                       if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIfLee,false)){
-                           Intent intent = new Intent(this,OrderActivity.class);
-                           intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
-                           startActivityForResult(intent, ORDEROK);
+                       //判断是否认证为姓李
+                       if (UsersUtil.isLee(ProductBaseActivity.this)){
+                           //判断是否需要提交认证资料
+                           if (mProductViewBean.getGoodsVerify() == 0){
+
+                               Intent intent = new Intent(this,OrderActivity.class);
+                               intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
+                               startActivityForResult(intent, ORDEROK);
+                           }else{
+                               Intent intent = new Intent(this,SubmitDataActivity.class);
+                               startActivityForResult(intent, ORDEROK);
+                           }
                        }else{
-                           Intent intent = new Intent(this,MemberActivity.class);
-                           intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
-                           startActivityForResult(intent,RENZHENG);
+
+                           Intent intent = new Intent(this,SubmitDataActivity.class);
+                           intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
+                           startActivityForResult(intent, ORDEROK);
+
+//                           Intent intent = new Intent(this,MemberActivity.class);
+//                           intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
+//                           startActivityForResult(intent,RENZHENG);
                        }
                    }
                }else{

@@ -151,11 +151,12 @@
                     android:id="@+id/WebView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+
                     />
         </LinearLayout>
     </ScrollView>
     <include
-        layout="@layout/common_title_no"
+        layout="@layout/common_title_back"
         android:id="@+id/include11" />
 
     <LinearLayout

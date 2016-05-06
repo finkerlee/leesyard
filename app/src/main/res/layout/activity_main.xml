@@ -250,7 +250,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="0dp"
                             android:layout_weight="1"
-                            android:src="@drawable/rescue"
+                            android:src="@drawable/culture"
                             android:scaleType="centerInside"
                             android:background="#00ffffff"/>
                     </LinearLayout>
@@ -271,7 +271,7 @@
                             android:layout_margin="0dp"
                             android:layout_weight="1"
                             android:scaleType="centerInside"
-                            android:src="@drawable/resource"
+                            android:src="@drawable/culture"
                             android:background="#00ffffff" />
                     </LinearLayout>
 
@@ -289,7 +289,7 @@
                             android:layout_margin="0dp"
                             android:layout_weight="1"
                             android:scaleType="centerInside"
-                            android:src="@drawable/blacklist"
+                            android:src="@drawable/culture"
                             android:background="#00ffffff"/>
                     </LinearLayout>
                 </LinearLayout>

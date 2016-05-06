@@ -56,9 +56,7 @@ public class TicketTicapplyActivity extends Activity implements View.OnClickList
         //红包信息
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
 
-        imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-        imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-        imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
+        imageUrlList.add(mProductViewBean.getGoodsPic());
 
         linkUrlArray.add("");
         linkUrlArray.add("");
@@ -96,7 +94,6 @@ public class TicketTicapplyActivity extends Activity implements View.OnClickList
         reds_name = (TextView) findViewById(R.id.reds_name);
         reds_price = (TextView) findViewById(R.id.reds_price);
         reds_num = (TextView) findViewById(R.id.reds_num);
-        reds_AsOfTime = (TextView) findViewById(R.id.reds_AsOfTime);
         reds_spec = (TextView) findViewById(R.id.reds_spec);
         res_get_conditions1 = (TextView) findViewById(R.id.res_get_conditions1);
         res_get_conditions2 = (TextView) findViewById(R.id.res_get_conditions2);

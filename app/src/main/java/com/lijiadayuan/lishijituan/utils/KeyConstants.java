@@ -32,7 +32,7 @@ public class KeyConstants {
         //用户是否可以领取福利
         public static final String userIfReceive = "userIfReceive";
         //用户是否登陆
-        public static final String userIsLogin = "";
+        public static final String userIsLogin = "userIsLogin";
 
     }
     //存放跳转需要用到的一些key

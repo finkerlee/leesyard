@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,12 +37,15 @@ import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.PayUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class OrderActivity extends BaseActivity implements View.OnClickListener{
+
+    private static final int SDK_PAY_FLAG = 1;
 
     //联系人信息
     private TextView mNameTV; // 收货人姓名
@@ -82,6 +88,11 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     private Addresses mAddress; // 当前收货地址
     private String userId;
 
+
+    private Handler mHandler;
+
+
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -95,6 +106,12 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order1);
+        mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+        };
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
         SharedPreferences mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
         userId = mSharedPreferences.getString(KeyConstants.UserInfoKey.userId, "");
@@ -243,7 +260,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             return;
         }
         //设置商品图片
-        if ("".equals(mProductViewBean.getGoodsPic())){
+        if (mProductViewBean.getGoodsPic().isEmpty()){
             mIvPic.setImageURI(Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image));
         }else{
             mIvPic.setImageURI(Uri.parse(mProductViewBean.getGoodsPic()));
@@ -362,6 +379,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                         if (JsonParseUtil.isSuccess(mJsonObject)){
                            if ("1".equals(mJsonObject.get("response_data").getAsString())){
                                //TODO 调用三方sdk 请求支付
+                               //String payInfo =
+                               //aliPay();
                            }
                         }else {
 
@@ -387,4 +406,28 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         };
         mQueue.add(mAccountRequest);
     }
+
+    /**
+     * 支付宝支付
+     */
+    private void aliPay(final String info){
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(OrderActivity.this);
+                String result = alipay.pay(info,true);
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+            }
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+
 }

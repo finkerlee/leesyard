@@ -189,7 +189,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         }
         notice_vf.addView(noticeView, notice_vf.getChildCount());
         mCurrPos = next;
-
     }
     private void initBanner(ArrayList<String> imageUrlList) {
         mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList,

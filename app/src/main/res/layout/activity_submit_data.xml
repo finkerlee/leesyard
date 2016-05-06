@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lijiadayuan.lishijituan.ReceiveActivity">
+    <include
+        layout="@layout/common_title"/>
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="申请人姓名"
+        android:padding="20dp" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="联系方式"
+        android:padding="20dp" />
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="收货地址"
+        android:padding="20dp" />
+
+    <EditText
+        android:id="@+id/situation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="情况说明"
+        android:padding="20dp" />
+
+    <FrameLayout
+        android:id="@+id/ll_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <GridView
+            android:id="@+id/up_load_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="3"
+            />
+        <Button
+            android:id="@+id/btn_receive"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_button_color"
+            android:text="上传资料"
+            android:textColor="@color/color_white"
+            android:layout_marginBottom="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|bottom" />
+    </FrameLayout>
+
+</LinearLayout>

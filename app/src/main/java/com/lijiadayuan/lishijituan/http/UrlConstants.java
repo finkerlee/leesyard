@@ -6,6 +6,9 @@ package com.lijiadayuan.lishijituan.http;
  */
 public interface UrlConstants {
     String BASE_URL = "http://192.168.0.103:8080/";                     // 测试地址
+    //首页的数据
+    String MAIN_PAGE_URL = BASE_URL + "main/index";
+
     /** 用户部分 **/
     String USER_BASE = BASE_URL + "user/";
     String LOGIN = USER_BASE + "login";                                 // 登录
@@ -27,9 +30,10 @@ public interface UrlConstants {
     
     //发现
     String FIND = BASE_URL+"product/all";
-
     // 地址
-    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址
+
+    String GET_ADDRESS = BASE_URL + "address/user?userId=";                          // 查询某一用户的全部收货地址
+
 
     //商品详情URL
     String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
@@ -83,7 +87,24 @@ public interface UrlConstants {
     String USER_ADDRESS = ADDRESS + "user";                             //查询用户收货地址
     String DELETE_ADDRESS = ADDRESS + "delete";                         //删除地址
     String MODIFY_ADDRESS = ADDRESS + "modify";                         //编辑地址
-    String ADD_ADDRESS = ADDRESS + "add";
+    String ADD_ADDRESS = ADDRESS + "add";                               //添加地址
+
+
+    //李氏名人
+    String CELEBRITIES = BASE_URL + "celebrities/";
+    String ALL_CELEBRITIES = CELEBRITIES + "all";                       //查询全部名人
+    //李氏名人URL详情
+    String CELEBRITIEW_DETAILS = CELEBRITIES + "detail/?celeId=";
+
+
+    //福利申请
+    String BA = BASE_URL + "ba/";
+    //福利申请图片上传
+    String UP_LOAD_PIC = BA + "upload";
+    //申请领取福利商品
+    String APPLY = BA + "apply";
+    //活动申请报名
+    String ACTIVITY =BASE_URL  + "actapply/apply";
 
 //    // 地址
 //    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址

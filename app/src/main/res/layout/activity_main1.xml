@@ -53,28 +53,27 @@
             <LinearLayout
                 android:id="@+id/head_message"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="36dp"
                 android:background="#ffffff"
                 >
                 <com.facebook.drawee.view.SimpleDraweeView
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageView"
                     android:background="@drawable/notice_icon1"
                     android:layout_gravity="center_vertical"
+
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp" />
                 <TextView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="#b4b4b4"/>
-                <TextView
+                <ImageView
                     android:layout_width="68dp"
                     android:layout_height="26dp"
                     android:layout_marginLeft="5dp"
-                    android:text="李氏福利"
-                    android:background="@drawable/rounded_edittext_red"
-                    android:textColor="#ea5959"
+                    android:src="@drawable/li_welfare"
                     android:id="@+id/imageView2"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center_vertical"
@@ -123,9 +122,10 @@
             </LinearLayout>
             <com.lijiadayuan.lishijituan.view.MyGrideView
                 android:id="@+id/mGridView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:numColumns="3"
+                android:columnWidth="1dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 />
@@ -139,18 +139,18 @@
                 <ImageView
                     android:id="@+id/iv_ticket"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/ticket"
                     android:layout_weight="1"
                     />
                 <View
-                    android:layout_width="3dp"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     />
                 <ImageView
                     android:id="@+id/iv_red"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/red_packet"
                     android:layout_weight="1"
                     />
@@ -181,14 +181,14 @@
                     android:background="@drawable/culture"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
-                    app:roundingBorderColor="#747474"
+                    app:roundingBorderColor="#999999"
                     />
 
                 <!--app:roundedCornerRadius="5dp"-->
                 <!--app:roundingBorderWidth="1dp"-->
                 <!--app:roundingBorderColor="#747474"-->
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="10dp"
                     android:layout_height="1dp"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
@@ -200,10 +200,10 @@
                     android:background="@drawable/rescue"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
-                    app:roundingBorderColor="#747474"
+                    app:roundingBorderColor="#999999"
                     />
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="10dp"
                     android:layout_height="1dp"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
@@ -215,10 +215,10 @@
                     android:background="@drawable/resource"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
-                    app:roundingBorderColor="#747474"
+                    app:roundingBorderColor="#999999"
                     />
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="10dp"
                     android:layout_height="1dp"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
@@ -230,7 +230,7 @@
                     android:background="@drawable/blacklist"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
-                    app:roundingBorderColor="#747474"
+                    app:roundingBorderColor="#999999"
                     />
 
 

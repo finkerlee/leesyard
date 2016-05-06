@@ -20,11 +20,11 @@ public class CultureActivity extends Activity implements OnClickListener{
     private ImageView imageback;
     private PictureAdapter adapter ;
     //图片ID数组
-    private int[] images = new int[]{
-            R.drawable.ad1, R.drawable.ad2,
-            R.drawable.ad3, R.drawable.ad4, R.drawable.ad5,
+    private int[] images = new int[]{R.drawable.ad5,
     };
 
+    //R.drawable.ad1, R.drawable.ad2,
+    //R.drawable.ad3, R.drawable.ad4,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +53,13 @@ public class CultureActivity extends Activity implements OnClickListener{
 //                        startActivity(new Intent(CultureActivity.this,RegistrationActivity.class));
 //                    }
 //                });
-                if (4 == images2)
+                if (0 == images2)
                     startActivity(new Intent(CultureActivity.this,LishiactivityActivity.class));
                 else if(1==images2)
                     startActivity(new Intent(CultureActivity.this,ZuxunActivity.class));
                 else if(2==images2)
                     startActivity(new Intent(CultureActivity.this,CelebrityActivity.class));
-                else if(0==images2)
+                else if(4==images2)
                     startActivity(new Intent(CultureActivity.this,ZupuActivity.class));
                 else if(3==images2)
                     startActivity(new Intent(CultureActivity.this,ArtActivity.class));

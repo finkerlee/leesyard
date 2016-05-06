@@ -5,6 +5,7 @@
  */
 package com.lijiadayuan.lishijituan.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -18,9 +19,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.lijiadayuan.lishijituan.BaseWebActivity;
+import com.lijiadayuan.lishijituan.MainActivity;
 import com.lijiadayuan.lishijituan.ProductBaseActivity;
 import com.lijiadayuan.lishijituan.R;
+import com.lijiadayuan.lishijituan.bean.AdvView;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
+import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,23 +37,15 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class ImagePagerAdapter extends BaseAdapter {
 
 	private Context context;
-	private List<String> imageIdList;
-	private List<String> linkUrlArray;
-	private List<String> urlTitlesList;
+	private List<AdvView> mAdvViewList;
 	private int size;
 	private boolean isInfiniteLoop;
 	private ImageLoader imageLoader;
 	private DisplayImageOptions options;
 
-	public ImagePagerAdapter(Context context, List<String> imageIdList,
-			List<String> urllist, List<String> urlTitlesList) {
+	public ImagePagerAdapter(Context context, List<AdvView> mAdvViewList) {
 		this.context = context;
-		this.imageIdList = imageIdList;
-		if (imageIdList != null) {
-			this.size = imageIdList.size();
-		}
-		this.linkUrlArray = urllist;
-		this.urlTitlesList = urlTitlesList;
+		this.mAdvViewList = mAdvViewList;
 		isInfiniteLoop = false;
 		// 初始化imageLoader 否则会报错
 		imageLoader = ImageLoader.getInstance();
@@ -64,10 +60,13 @@ public class ImagePagerAdapter extends BaseAdapter {
 
 	}
 
+	public ImagePagerAdapter(MainActivity mainActivity, ArrayList<String> imageUrlList, ArrayList<String> linkUrlArray, ArrayList<String> titleList) {
+	}
+
 	@Override
 	public int getCount() {
 		// Infinite loop
-		return isInfiniteLoop ? Integer.MAX_VALUE : imageIdList.size();
+		return isInfiniteLoop ? Integer.MAX_VALUE : mAdvViewList.size();
 	}
 
 	/**
@@ -95,37 +94,26 @@ public class ImagePagerAdapter extends BaseAdapter {
 		}
 
 		imageLoader.displayImage(
-				(String) this.imageIdList.get(getPosition(position)),
+				mAdvViewList.get(position).getAdvImg(),
 				holder.imageView, options);
 
 		holder.imageView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				String url = linkUrlArray.get(ImagePagerAdapter.this
-						.getPosition(position));
-				String title = urlTitlesList.get(ImagePagerAdapter.this
-						.getPosition(position));
-				/*
-				 * if (TextUtils.isEmpty(url)) {
-				 * holder.imageView.setEnabled(false); return; }
-				 */
-//				Bundle bundle = new Bundle();
-//
-//				bundle.putString("url", url);
-//				bundle.putString("title", title);
-//				Intent intent = new Intent(context, ProductBaseActivity.class);
-//				intent.putExtras(bundle);
-//
-//				context.startActivity(intent);
-
 				ProductViewBean mProductViewBean = new ProductViewBean();
-				mProductViewBean.setGoodsPrice("222");
-				mProductViewBean.setGoodsNum("10");
-				mProductViewBean.setGoodsName("浪漫八音盒");
-				mProductViewBean.setGoodsInfoUrl("www.baidu.com");
+				mProductViewBean.setGoodsPrice(mAdvViewList.get(position).getProPrice()+"");
+				mProductViewBean.setGoodsName(mAdvViewList.get(position).getProName());
+				mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mAdvViewList.get(position).getProId());
+				mProductViewBean.setGoodsSpec(mAdvViewList.get(position).getProSpec());
+				ArrayList<String> mlist= new ArrayList<String>();
+				mlist.add(mAdvViewList.get(position).getAdvImg());
+				mProductViewBean.setPicList(mlist);
+				mProductViewBean.setGoodsNum(1 + "");
+				mProductViewBean.setGoodsPic(mAdvViewList.get(position).getProThumb());
+				mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
+
 				Intent mIntent = new Intent(context,ProductBaseActivity.class);
-				mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.BUY_GOODS);
 				mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
 				context.startActivity(mIntent);
 			}

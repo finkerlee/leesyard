@@ -144,9 +144,11 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(MineActivity.this,SettingActivity.class));
                 break;
             case R.id.ship_address:
+
                 if (isLogin){
-                    startActivity(new Intent(MineActivity.this,AddressActivity.class));
-                    Intent mintent=new Intent();
+                    Intent intent = new Intent(MineActivity.this,AddressActivity.class);
+                    intent.putExtra(KeyConstants.UserInfoKey.userId, mSharedPreferences.getString(KeyConstants.UserInfoKey.userId, ""));
+                    startActivity(intent);
                 }else{
                     goLogin();
                 }
@@ -254,7 +256,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void setViewByData() {
-        mTvUserName.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userNick,"默认"));
+        mTvUserName.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userNick, "默认"));
         mTvUserLevel.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userLevel,"1"));
         String mHeadImage = mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage,"");
         if (!"".equals(mHeadImage)){

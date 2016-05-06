@@ -16,7 +16,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -272,12 +272,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    >
+                    android:gravity="center">
 
                     <Button
                         android:layout_width="130dp"
                         android:layout_height="50dp"
+                        android:gravity="center"
                         android:text="申请领取"
                         android:textColor="@color/color_white"
                         android:id="@+id/bt_reds_receive"
