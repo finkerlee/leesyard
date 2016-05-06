@@ -109,7 +109,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         mHandler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                super.handleMessage(msg);
+                 Toast.makeText(OrderActivity.this,msg.obj+"",Toast.LENGTH_LONG).show();
             }
         };
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
@@ -371,19 +371,24 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mGoodsNum = Integer.parseInt(mTvBuyGoodsNum.getText().toString());
             mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice())*mGoodsNum;
         }
+//        String sign = "partner=\"2088221309346686\"&seller_id=\"bjlijiadayuan@sina.com\"&out_trade_no=\"LPO0000000066\"&subject=\"null\"&body=\"李家大院\"&total_fee=\"11600.0\"&notify_url=\"http://beijinglijiadayuan.com:8080/pay/alipay\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&return_url=\"m.alipay.com\"&sign=\"dFgNs9rRkvtOdY7AkPTGkXGgXrWa%2BKbYHtmnRnhfWs1UVMzA%2F3Q9u7bFh8of%2BU1l%2BvZIqMMFFd1h6QQga2t3wzzlm1e2D0RZKWv6QnJTWaK2pR2Zz9PfW8Gz01vr1jV68D89J8FpA58mPBKLxdK9NwSVD0crq1MeN76g6iA6BYU%3D\"&sign_type=\"RSA\"";
+//        aliPay(sign);
         StringRequest mAccountRequest = new StringRequest(Request.Method.POST, UrlConstants.ORDERS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
                         if (JsonParseUtil.isSuccess(mJsonObject)){
-                           if ("1".equals(mJsonObject.get("response_data").getAsString())){
-                               //TODO 调用三方sdk 请求支付
-                               //String payInfo =
-                               //aliPay();
+                           if (mJsonObject.has("response_data")){
+                               JsonObject JsonObj = mJsonObject.get("response_data").getAsJsonObject();
+                               if (JsonObj.has("sign")){
+                                   //String sign = "jc88JhzGKXjErPEcj38Wr5%2BfgAKmNUCJI1Ta2mc8wwVlvR1bqWkOJKOWuni1skPT31R2%2FJ1mz9t2QCNblQppYNn8Ugg5B4emg4%2BM3P%2BhYk0gPbSCWMAkJN3xvwpqPkWMMkAarawOZO2vWhx9YynENV1fQ%2BlfTBU25P4ssXcRwAs%3D";
+                                   String sign = JsonObj.get("sign").getAsString();
+                                   aliPay(sign);
+                               }
                            }
                         }else {
-
+                            Toast.makeText(OrderActivity.this,"提交失败",Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -401,6 +406,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 params.put("addId",mAddress.getAddId());
                 params.put("count",mGoodsNum+"");
                 params.put("amount",mPrice+"");
+                params.put("name",mProductViewBean.getGoodsName());
+                params.put("payType",mRbAli.isChecked()?"0":"1");
                 return params;
             }
         };

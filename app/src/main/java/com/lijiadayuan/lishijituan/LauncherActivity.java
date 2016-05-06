@@ -18,9 +18,15 @@ import com.google.gson.JsonParser;
 import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 public class LauncherActivity extends BaseActivity{
     private Intent intent;
@@ -74,7 +80,15 @@ public class LauncherActivity extends BaseActivity{
                             Log.i("main", user.toString());
                             editor.putBoolean(KeyConstants.UserInfoKey.userIsLogin, true);
                             editor.commit();
-
+                            JPushInterface.setAliasAndTags(LauncherActivity.this, user.getUserId(),
+                                    new HashSet<String>(), new TagAliasCallback() {
+                                        @Override
+                                        public void gotResult(int i, String s, Set<String> set) {
+                                            Log.i("JPush",i + "测试");
+                                            Log.i("JPush",s + "测试");
+                                            //Log.i("JPush",i + "");
+                                        }
+                                    });
                         }
                     }else{
                         editor.clear();

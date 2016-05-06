@@ -98,15 +98,17 @@ public class ImagePagerAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View arg0) {
 				ProductViewBean mProductViewBean = new ProductViewBean();
-				mProductViewBean.setGoodsPrice(mAdvViewList.get(position).getProPrice()+"");
-				mProductViewBean.setGoodsName(mAdvViewList.get(position).getProName());
-				mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mAdvViewList.get(position).getProId());
-				mProductViewBean.setGoodsSpec(mAdvViewList.get(position).getProSpec());
+				AdvView mAdvView = mAdvViewList.get(position);
+				mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
+				mProductViewBean.setGoodsName(mAdvView.getProName());
+				mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mAdvView.getProId());
+				mProductViewBean.setGoodsSpec(mAdvView.getProSpec());
 				ArrayList<String> mlist= new ArrayList<String>();
-				mlist.add(mAdvViewList.get(position).getAdvImg());
+				mlist.add(mAdvViewList.get(position).getProImg());
+				mProductViewBean.setGoodsId(mAdvView.getProId());
 				mProductViewBean.setPicList(mlist);
 				mProductViewBean.setGoodsNum(1+"");
-				mProductViewBean.setGoodsPic(mAdvViewList.get(position).getProThumb());
+				mProductViewBean.setGoodsPic(mAdvView.getProThumb());
 				mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
 
 				Intent mIntent = new Intent(context,ProductBaseActivity.class);

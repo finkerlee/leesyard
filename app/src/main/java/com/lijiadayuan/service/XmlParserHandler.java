@@ -16,6 +16,7 @@ public class XmlParserHandler extends DefaultHandler {
 
 	private static XmlParserHandler xmlParserHandler;
 
+
 	/**
 	 * 存储所有的解析对象
 	 */

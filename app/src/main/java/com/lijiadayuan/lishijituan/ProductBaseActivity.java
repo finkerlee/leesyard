@@ -122,6 +122,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         iv_back.setOnClickListener(this);
 
         if (mProductViewBean.getGoodsType() == BUY_GOODS) {
+
             mBtnReceive.setText("我要购买");
         }else{
             mBtnReceive.setText("我要领取");

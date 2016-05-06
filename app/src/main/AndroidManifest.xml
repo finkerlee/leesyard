@@ -38,6 +38,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <service android:name=".LeeService" />
+
         <activity
             android:name=".LauncherActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -73,7 +76,14 @@
         <activity android:name=".LawActivity" />
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".MoreActivity" />
+
+
         <activity android:name=".MainActivity1" />
+
+
+
+
+
 
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
