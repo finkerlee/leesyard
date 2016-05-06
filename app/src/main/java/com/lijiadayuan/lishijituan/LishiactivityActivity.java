@@ -40,7 +40,7 @@ import java.util.ArrayList;
 public class LishiactivityActivity extends BaseActivity implements OnClickListener {
     private TextView tvTitle;
     private ImageView imageback;
-    private GridView gridView;
+    private ListView mListView;
 
     //图片ID数组
     private String[] images;
@@ -80,9 +80,9 @@ public class LishiactivityActivity extends BaseActivity implements OnClickListen
                     }
 
                     LishiactivityAdpter adapter = new LishiactivityAdpter(LishiactivityActivity.this,images,R.layout.redenvelope_image);
-                    gridView.setAdapter(adapter);
+                    mListView.setAdapter(adapter);
 
-                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             Intent mIntent = new Intent(LishiactivityActivity.this,RegistrationActivity.class);
                             mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,RegistrationActivity.GIFT_GOODS);
@@ -104,7 +104,7 @@ public class LishiactivityActivity extends BaseActivity implements OnClickListen
     }
 
     protected void initView() {
-        gridView = (GridView) findViewById(R.id.culture_gridView);
+        mListView = (ListView) findViewById(R.id.mListView);
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
         imageback.setOnClickListener(this);

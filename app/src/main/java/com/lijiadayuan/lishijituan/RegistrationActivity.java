@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,10 +32,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.google.gson.JsonObject;
 import com.lijiadayuan.lishijituan.adapter.UpLoadPicAdapter;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.ArchivesUtils;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UpLoadImageTask1;
@@ -67,7 +71,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
     private static RegistrationActivity instance;
     private GridView mGridView;
     private ImageView mShowIV;
-    private EditText mEtName,mEtsEX,mEtNation,mEtPhoneNum;
+    private EditText mEtName,mEtSex,mEtNation,mEtPhoneNum;
 
     private int gender ;  // 0:女，1:男 整型
 
@@ -78,6 +82,10 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
     private UpLoadPicAdapter mAdpter;
     private ArrayList<Bitmap> mBitmaps;
     private Bitmap[] bitmaps;
+
+    private String strUserAge = "";
+    //初始化选择器
+    private OptionsPickerView pickerView;
     //商品id
     private String shoppingId;
     //
@@ -112,20 +120,114 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                 }
             }
         });
+
+//        mEtSex.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View view, boolean b) {
+//                pickerView.setTitle("选择性别");
+//                pickerView.setPicker(ArchivesUtils.getAge());
+//                pickerView.setCyclic(false);
+//                if(!TextUtils.isEmpty(strUserAge)){
+//                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+//                }
+//                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+//                    @Override
+//                    public void onOptionsSelect(int options1, int option2, int options3) {
+//                        mEtSex.setText(ArchivesUtils.getAge().get(options1));
+////                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+////                        refreshMenuView();
+//                    }
+//                });
+//                if(!pickerView.isShowing()){
+//                    pickerView.show();
+//                }
+//            }
+//        });
+        mEtSex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.hasFocus()){
+                    //显示自己界面
+                    pickerView.setTitle("选择性别");
+                    pickerView.setPicker(ArchivesUtils.getAge());
+                    pickerView.setCyclic(false);
+                    if(!TextUtils.isEmpty(strUserAge)){
+                        pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+                    }
+                    pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                        @Override
+                        public void onOptionsSelect(int options1, int option2, int options3) {
+                            mEtSex.setText(ArchivesUtils.getAge().get(options1));
+//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+//                        refreshMenuView();
+                        }
+                    });
+                    if(!pickerView.isShowing()){
+                        pickerView.show();
+                    }
+                }
+            }
+        });
+
+//        mEtNation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View view, boolean b) {
+//                pickerView.setTitle("选择民族");
+//                pickerView.setPicker(ArchivesUtils.getNation());
+//                pickerView.setCyclic(false);
+//                if(!TextUtils.isEmpty(strUserAge)){
+//                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+//                }
+//                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+//                    @Override
+//                    public void onOptionsSelect(int options1, int option2, int options3) {
+//                        mEtNation.setText(ArchivesUtils.getNation().get(options1));
+////                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+////                        refreshMenuView();
+//                    }
+//                });
+//                if(!pickerView.isShowing()){
+//                    pickerView.show();
+//                }
+//            }
+//        });
+        mEtNation.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickerView.setTitle("选择民族");
+                pickerView.setPicker(ArchivesUtils.getNation());
+                pickerView.setCyclic(false);
+                if(!TextUtils.isEmpty(strUserAge)){
+                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+                }
+                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3) {
+                        mEtNation.setText(ArchivesUtils.getNation().get(options1));
+//                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+//                        refreshMenuView();
+                    }
+                });
+                if(!pickerView.isShowing()){
+                    pickerView.show();
+                }
+            }
+        });
     }
 
     protected void initView() {
+        pickerView = new OptionsPickerView(this);
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
         mGridView = (GridView) findViewById(R.id.up_load_pic);
         mEtName = (EditText) findViewById(R.id.name);
-        mEtsEX = (EditText) findViewById(R.id.sex);
-
-
+        mEtSex = (EditText) findViewById(R.id.sex);
+        mEtSex.setInputType(InputType.TYPE_NULL);
 
 
         mEtNation = (EditText) findViewById(R.id.nation);//
+        mEtNation.setInputType(InputType.TYPE_NULL);
         mEtPhoneNum = (EditText) findViewById(R.id.phone_num);
 
         findViewById(R.id.btn_receive).setOnClickListener(this);
@@ -280,7 +382,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
 
 
                 ;
-                sex = mEtsEX.getText().toString();
+                sex = mEtSex.getText().toString();
                 if("女".equals(sex)  ){
                     gender = 0;
                 }else if ("男".equals(sex)){
@@ -296,7 +398,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                     Toast.makeText(RegistrationActivity.this,"请填写申请人姓名",Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (mEtsEX.getText().toString().isEmpty()){
+                if (mEtSex.getText().toString().isEmpty()){
 
                     Toast.makeText(RegistrationActivity.this,"请填写性别",Toast.LENGTH_LONG).show();
                     return;
