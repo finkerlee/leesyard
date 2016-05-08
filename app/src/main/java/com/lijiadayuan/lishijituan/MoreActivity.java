@@ -74,7 +74,7 @@ public class MoreActivity extends BaseActivity {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             Intent mIntent = new Intent(MoreActivity.this,ProductBaseActivity.class);
                             mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.GIFT_GOODS);
-                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, ProductViewBean.getProductViewBeanList(mList.get(position),ProductBaseActivity.GIFT_GOODS));
+                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, ProductViewBean.getProductViewBean(mList.get(position),ProductBaseActivity.GIFT_GOODS));
                             startActivity(mIntent);
                         }
                     });

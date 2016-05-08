@@ -147,7 +147,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 
                 if (isLogin){
                     Intent intent = new Intent(MineActivity.this,AddressActivity.class);
-                    intent.putExtra(KeyConstants.UserInfoKey.userId, mSharedPreferences.getString(KeyConstants.UserInfoKey.userId, ""));
+                    intent.putExtra(KeyConstants.IntentPageKey.AddressMode,KeyConstants.IntentPageValues.normol);
                     startActivity(intent);
                 }else{
                     goLogin();

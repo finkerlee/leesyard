@@ -22,14 +22,33 @@ public interface UrlConstants {
     //福利商品
     String WELFARE = BASE_URL + "benefit/all";
 
-
     //红包
     String RED = BASE_URL+"red/all";
 
+    //申请领取红包
+    String REDS_APPLY = BASE_URL + "redapply/";
+
+    //提交领取红包申请
+    String RED_APPLY = REDS_APPLY + "apply";
+    //领取红包
+    String RED_RECEIVE = REDS_APPLY + "status";
+    //上传认证材料图片
+    String RED_UPLOAD = REDS_APPLY + "upload";
+
+
+    //卡票
+    String TICKET = BASE_URL + "ticket/all";                            //查询全部卡票
+    //申请卡票认证
+    String TICAPPLY = BASE_URL + "ticapply/";
+    String TICAPPLY_CERTIFICATION = TICAPPLY + "apply";                 //申请领取卡票
+    String UPLOAD_TICAPPLY = TICAPPLY + "upload";                       //上传认证
+    String RECEIVE_TICAPPLY = TICAPPLY + "receive";                     //领取卡票
 
     
     //发现
     String FIND = BASE_URL+"product/all";
+    //搜索
+    String SEARCH = BASE_URL+"product/all";
     // 地址
 
     String GET_ADDRESS = BASE_URL + "address/user?userId=";                          // 查询某一用户的全部收货地址
@@ -38,7 +57,7 @@ public interface UrlConstants {
     //商品详情URL
     String SHOPPING_INFO = BASE_URL + "benefit/detail?benId=";
 
-    //发现详情URL
+            //发现详情URL
     String FINDSHOPPING_INFO = BASE_URL + "product/detail?proId=";
 
     //增加商品浏览次数URL
@@ -54,19 +73,17 @@ public interface UrlConstants {
     String GET_ALL_ACTIVITY = LEEACTIVITY + "all";
     //活动报名
     String SIGN_UP_ACTIVITY = BASE_URL + "actapply/apply";
+    //活动详情
+    String ACTIVITES_DETAIL =  LEEACTIVITY + "detail?actId=";
+
+
     //上传认证资料图片
     String UP_LOAD_DATA = BASE_URL + "actapply/upload";
     //共享资源
     String SHARING_RESOURCE = BASE_URL + "resource/all";
     //共享资源公司简介URL
     String RESOURCE_DETAIL = BASE_URL + "resource/detail?resId=";
-    //卡票
-    String TICKET = BASE_URL + "ticket/all";                            //查询全部卡票
-    //申请卡票认证
-    String TICAPPLY = BASE_URL + "ticapply/";
-    String TICAPPLY_CERTIFICATION = TICAPPLY + "apply";                 //申请领取卡票
-    String UPLOAD_TICAPPLY = TICAPPLY + "upload";                       //上传认证
-    String RECEIVE_TICAPPLY = TICAPPLY + "receive";                     //领取卡票
+
     //
     //大院头条
     String HEAD_LINE = BASE_URL+ "topic/"+"all";
@@ -105,6 +122,9 @@ public interface UrlConstants {
     String APPLY = BA + "apply";
     //活动申请报名
     String ACTIVITY =BASE_URL  + "actapply/apply";
+
+
+
 
 //    // 地址
 //    String GET_ADDRESS = BASE_URL + "address/user";                          // 查询某一用户的全部收货地址

@@ -47,6 +47,10 @@ public class KeyConstants {
         //跳转到intentService时，判断当前service需要做的任务
         public static final String ServiceKey = "ServiceKey";
 
+        //跳转到地址管理时 判断当前页面的模式 normol，forResult；
+        public static final String AddressMode = "AddressMode";
+
+
     }
 
     public static class IntentPageValues{
@@ -57,8 +61,20 @@ public class KeyConstants {
 
         public static final String productViewBeanType = "productViewBean";
 
+
         //活动的key
         public static final String Actvites = "Actvites";
+
+        //红包的key
+        public static final String Reds = "Reds";
+
+        //卡票的key
+        public static final String Tickets = "Tickets";
+
+        //地址的key
+        public static final String Address = "Address";
+
+
     }
 
 }

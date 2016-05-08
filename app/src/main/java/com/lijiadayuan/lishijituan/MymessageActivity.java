@@ -46,7 +46,9 @@ public class MymessageActivity extends Activity implements View.OnClickListener{
         if (mList.size() == 0){
             mLayoutNoMessage.setVisibility(View.VISIBLE);
             listView.setVisibility(View.GONE);
+            findViewById(R.id.layout_btn).setVisibility(View.GONE);
         }else{
+            findViewById(R.id.layout_btn).setVisibility(View.VISIBLE);
             mLayoutNoMessage.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
             mAdpter = new QuickAdapter<MyMessage>(MymessageActivity.this,R.layout.item_myessage,mList) {

@@ -14,7 +14,6 @@ import com.lijiadayuan.model.CityModel;
 import com.lijiadayuan.model.DistrictModel;
 import com.lijiadayuan.model.ProvinceModel;
 import com.lijiadayuan.service.XmlParserHandler;
-import com.zhy.autolayout.AutoLayoutActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,7 +33,7 @@ import java.util.TimerTask;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-public abstract class BaseActivity extends AutoLayoutActivity {
+public abstract class BaseActivity extends Activity {
 
 	protected LeeApplication app;
 

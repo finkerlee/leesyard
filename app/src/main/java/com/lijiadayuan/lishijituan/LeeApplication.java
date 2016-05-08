@@ -33,6 +33,7 @@ public class LeeApplication extends Application {
 
     public static String newMessagePath = "";
     public static String myMessagePath = "";
+    public static String searchPath = "";
 
     @Override
     public void onCreate() {
@@ -67,7 +68,17 @@ public class LeeApplication extends Application {
                 e.printStackTrace();
             }
         }
-        myMessagePath = fileMyMsy.getPath();
+
+        //创建一个搜索里氏的本地文件
+        File fileSearch = new File(getFilesDir(),"Search");
+        if (!fileSearch.exists()){
+            try {
+                fileSearch.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        searchPath = fileMyMsy.getPath();
 
 
         //启动一个service去解析本地XML的数据

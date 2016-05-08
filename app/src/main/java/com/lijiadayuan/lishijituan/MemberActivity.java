@@ -442,7 +442,8 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                             Toast.makeText(MemberActivity.this,"资料已提交，请耐心等待",Toast.LENGTH_LONG).show();
                             finish();
                         }else{
-
+                            Toast.makeText(MemberActivity.this,"资料提交失败，请耐心等待",Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     }
                 }

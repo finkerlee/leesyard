@@ -76,10 +76,12 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".LawActivity" />
         <activity android:name=".MyOrderActivity" />
-        <activity android:name=".MoreActivity" />
         <activity android:name=".MainActivity1" />
-
-
+        <activity android:name=".MoreActivity" />
+        <activity android:name=".TicketTicapplyActivity"/>
+        <activity android:name=".SearchResultActivity"/>
+        <activity android:name=".ApplyRedsActivity" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ApplyTicketActivity" android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
 
@@ -105,6 +107,7 @@
         <activity android:name=".ArtActivity" />
         <activity android:name=".OrderActivity" />
         <activity android:name=".LishiactivityActivity" />
+        <activity android:name=".LeeActivityDetails" />
         <activity android:name=".EventdetailsActivity" />
         <activity android:name=".ReceiveActivity" />
         <activity android:name=".CompanyProfileActivity" />

@@ -57,7 +57,7 @@ public class UpLoadPicAdapter extends BaseAdapter{
         if (view == null){
             holder = new ViewHodler();
             view = View.inflate(mContext,R.layout.item_up_load_pic,null);
-            holder.mImageView = (ImageView) view.findViewById(R.id.iv_photos);
+            holder.mImageView = (SimpleDraweeView) view.findViewById(R.id.iv_photos);
             view.setTag(holder);
         }else{
             holder = (ViewHodler) view.getTag();
@@ -66,6 +66,6 @@ public class UpLoadPicAdapter extends BaseAdapter{
         return view;
     }
     class ViewHodler{
-        ImageView mImageView;
+        SimpleDraweeView mImageView;
     }
 }

@@ -180,17 +180,14 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                                startActivityForResult(intent, ORDEROK);
                            }else{
                                Intent intent = new Intent(this,SubmitDataActivity.class);
+                               intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
                                startActivityForResult(intent, ORDEROK);
                            }
                        }else{
-
-                           Intent intent = new Intent(this,SubmitDataActivity.class);
-                           intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
-                           startActivityForResult(intent, ORDEROK);
-
-//                           Intent intent = new Intent(this,MemberActivity.class);
-//                           intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
-//                           startActivityForResult(intent,RENZHENG);
+                           //跳往认证页面
+                           Intent intent = new Intent(this,MemberActivity.class);
+                           intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
+                           startActivityForResult(intent,RENZHENG);
                        }
                    }
                }else{

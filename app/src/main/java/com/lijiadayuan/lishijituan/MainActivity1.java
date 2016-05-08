@@ -387,16 +387,4 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         params.height = (dm.widthPixels - 36) / 4;
     }
-    private void startProductBaseActivity(){
-        ProductViewBean mProductViewBean = new ProductViewBean();
-        mProductViewBean.setGoodsPrice("222");
-        mProductViewBean.setGoodsNum("10");
-        mProductViewBean.setGoodsName("浪漫八音盒");
-        mProductViewBean.setGoodsInfoUrl("www.baidu.com");
-        Intent mIntent = new Intent(this,ProductBaseActivity.class);
-        mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.GIFT_GOODS);
-        mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
-        startActivity(mIntent);
-
-    }
 }
