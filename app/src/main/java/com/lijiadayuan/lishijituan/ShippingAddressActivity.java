@@ -30,6 +30,7 @@ import com.lijiadayuan.lishijituan.bean.Addresses;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
+import com.lijiadayuan.lishijituan.utils.VerficationUtil;
 import com.lijiadayuan.lishijituan.view.WheelDialog;
 
 import java.util.HashMap;
@@ -143,9 +144,8 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                   Toast.makeText(ShippingAddressActivity.this, R.string.address_name,Toast.LENGTH_SHORT).show();
                   return;
               }
-              //判断收货人手机号是否为空
-              if(TextUtils.isEmpty(editTextphone.getText())){
-                  Toast.makeText(ShippingAddressActivity.this, R.string.address_phone,Toast.LENGTH_SHORT).show();
+              // 判断手机号是否为空  是否正确
+              if (!VerficationUtil.checkMobile(this, editTextphone.getText().toString())) {
                   return;
               }
               //判断收货人地址是否为空

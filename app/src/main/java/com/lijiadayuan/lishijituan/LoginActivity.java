@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         if ("success".equals(result)){
                             JsonObject data = json.get("response_data").getAsJsonObject();
                             if (data.isJsonNull()||!data.has("userAvatar"))
-                                Toast.makeText(LoginActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "用户名密码错误", Toast.LENGTH_SHORT).show();
                             else {
                                 Gson mGson = new Gson();
                                 Users user = mGson.fromJson(data,Users.class);
@@ -114,7 +114,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     setResult(LOGIN,intent);
                                     finish();
                                 }
-                                Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                             }
                         }else{
                             Toast.makeText(LoginActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();

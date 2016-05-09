@@ -8,18 +8,16 @@
     <include
         android:id="@+id/iv_title"
         layout="@layout/common_title"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/iv_title">
-    <ListView
-        android:id="@+id/address_listview"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-    </ListView>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/iv_title"></LinearLayout>
+    </ScrollView>
 <Button
     android:id="@+id/id_address"
     android:layout_width="200dp"
@@ -27,8 +25,17 @@
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
     android:background="@drawable/rounded_button_color"
-    android:layout_marginBottom="50dp"
     android:text="+新建地址"
     android:textColor="@color/main_tab_bar_bg"/>
+
+    <ListView
+        android:id="@+id/address_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/id_address">
+    </ListView>
 
 </RelativeLayout>

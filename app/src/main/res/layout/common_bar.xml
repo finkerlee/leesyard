@@ -9,12 +9,12 @@
 
     <ImageView
         android:id="@+id/iv_address"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="60px"
+        android:layout_height="60px"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:src="@drawable/location_red"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginLeft="60px" />
     <TextView
         android:id="@+id/title_back"
         android:layout_width="wrap_content"
@@ -35,17 +35,17 @@
         android:layout_centerInParent="true" />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3px"
         android:background="#b4b4b4"
         android:layout_alignParentBottom="true"/>
     <ImageView
         android:id="@+id/iv_messsage"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="60px"
+        android:layout_height="60px"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:background="@drawable/news_red"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="60px" />
 
 </RelativeLayout>

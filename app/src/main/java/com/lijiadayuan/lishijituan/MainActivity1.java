@@ -35,6 +35,7 @@ import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.ImagePagerAdapter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdpter2;
+import com.lijiadayuan.lishijituan.adapter.TestAutoAdapter;
 import com.lijiadayuan.lishijituan.bean.AdvView;
 import com.lijiadayuan.lishijituan.bean.Benefits;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
@@ -45,6 +46,8 @@ import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
+import com.zhy.autolayout.AutoLayoutActivity;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -157,13 +160,14 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
                     JsonArray mJsonBenefitArray = mJson.get("benefit").getAsJsonArray();
                     if (mJsonAdvArray.size()>0){
                         mBenefitsData = JsonParseUtil.toListByJson(mJsonBenefitArray,Benefits.class);
-                        Log.i("main",mBenefitsData.size()+"");
+                        Log.i("main", mBenefitsData.size() + "");
                         QuickAdapter<Benefits> mAdpter = new QuickAdapter<Benefits>(MainActivity1.this,R.layout.item_giftgoods,mBenefitsData) {
                             @Override
                             protected void convert(BaseAdapterHelper helper, Benefits item) {
                                 SimpleDraweeView mSimpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
                                 mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
-                                mSimpleDraweeView.setAspectRatio(1.33f);
+
+//                                AutoUtils.autoSize(mSimpleDraweeView);
                                 //Log.i("main",item.getBenThumb());
                             }
                         };

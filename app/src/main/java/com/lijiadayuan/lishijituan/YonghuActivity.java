@@ -176,10 +176,6 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
                     Log.v(TAG, "username empty");
                     return;
                 }
-                // 判断手机号是否为空  是否正确
-                if (!VerficationUtil.checkMobile(this, etphone.getText().toString())) {
-                    return;
-                }
 
                 // 检查密码是否为空
                 if (TextUtils.isEmpty(etpass.getText())) {

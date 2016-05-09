@@ -36,11 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="收货人手机号"
+            android:inputType="phone"
             android:id="@+id/et_phone_address" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="邮编(非必填)"/>
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="邮编(非必填)"/>-->
         <EditText
             android:id="@+id/et_address_wheel"
             android:layout_width="match_parent"

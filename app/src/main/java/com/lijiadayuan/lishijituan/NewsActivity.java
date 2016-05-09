@@ -18,7 +18,7 @@ import com.lijiadayuan.lishijituan.utils.LocalUtils;
 import java.util.List;
 import java.util.Map;
 
-public class NewsActivity extends Activity {
+public class NewsActivity extends BaseActivity {
     private ListView listView;
     private TextView tvTitle;
     private List<NewMessage> mList;
