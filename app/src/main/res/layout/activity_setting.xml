@@ -45,6 +45,7 @@
         android:layout_height="1dp"
         android:background="#b4b4b4"/>
     <TextView
+        android:id="@+id/share_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="3.分享给朋友"
@@ -77,4 +78,28 @@
         android:background="@drawable/rounded_button_color"
         android:text="注销"
         android:textColor="@color/color_white" />
+    <View
+        android:layout_width="10dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <LinearLayout
+        android:id="@+id/layout_share"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/friend_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="朋友圈"
+            />
+        <Button
+            android:id="@+id/friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="朋友"
+            />
+    </LinearLayout>
 </LinearLayout>

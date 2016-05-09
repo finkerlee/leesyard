@@ -35,38 +35,43 @@ public class ProductViewBean implements Parcelable{
     }
 
 
+    public ProductViewBean(ArrayList<String> picList, String goodsName, String goodsNum, String goodsSpec, String goodsPrice, String goodsIntro, int goodsVerify, int goodsType, String goodsDetail, String goodsInfoUrl, String goodsInfoIncrease, String goodsThumb, String goodsOtherName, String goodsPic, int goodsStock, String goodsId) {
+        this.picList = picList;
+        this.goodsName = goodsName;
+        this.goodsNum = goodsNum;
+        this.goodsSpec = goodsSpec;
+        this.goodsPrice = goodsPrice;
+        this.goodsIntro = goodsIntro;
+        this.goodsVerify = goodsVerify;
+        this.goodsType = goodsType;
+        this.goodsDetail = goodsDetail;
+        this.goodsInfoUrl = goodsInfoUrl;
+        this.goodsInfoIncrease = goodsInfoIncrease;
+        this.goodsThumb = goodsThumb;
+        this.goodsOtherName = goodsOtherName;
+        this.goodsPic = goodsPic;
+        this.goodsStock = goodsStock;
+        this.goodsId = goodsId;
+    }
+
+
     protected ProductViewBean(Parcel in) {
         picList = in.createStringArrayList();
         goodsName = in.readString();
         goodsNum = in.readString();
         goodsSpec = in.readString();
         goodsPrice = in.readString();
-        goodsOtherName = in.readString();
+        goodsIntro = in.readString();
+        goodsVerify = in.readInt();
         goodsType = in.readInt();
+        goodsDetail = in.readString();
         goodsInfoUrl = in.readString();
+        goodsInfoIncrease = in.readString();
+        goodsThumb = in.readString();
+        goodsOtherName = in.readString();
         goodsPic = in.readString();
         goodsStock = in.readInt();
         goodsId = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringList(picList);
-        dest.writeString(goodsName);
-        dest.writeString(goodsNum);
-        dest.writeString(goodsSpec);
-        dest.writeString(goodsPrice);
-        dest.writeString(goodsOtherName);
-        dest.writeInt(goodsType);
-        dest.writeString(goodsInfoUrl);
-        dest.writeString(goodsPic);
-        dest.writeInt(goodsStock);
-        dest.writeString(goodsId);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     public static final Creator<ProductViewBean> CREATOR = new Creator<ProductViewBean>() {
@@ -255,7 +260,29 @@ public class ProductViewBean implements Parcelable{
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-
+    @Override
+        public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringList(picList);
+        dest.writeString(goodsName);
+        dest.writeString(goodsNum);
+        dest.writeString(goodsSpec);
+        dest.writeString(goodsPrice);
+        dest.writeString(goodsIntro);
+        dest.writeInt(goodsVerify);
+        dest.writeInt(goodsType);
+        dest.writeString(goodsDetail);
+        dest.writeString(goodsInfoUrl);
+        dest.writeString(goodsInfoIncrease);
+        dest.writeString(goodsThumb);
+        dest.writeString(goodsOtherName);
+        dest.writeString(goodsPic);
+        dest.writeInt(goodsStock);
+        dest.writeString(goodsId);
+    }
 }
 

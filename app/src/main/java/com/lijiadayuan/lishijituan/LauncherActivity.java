@@ -79,13 +79,13 @@ public class LauncherActivity extends BaseActivity{
                             Users user = mGson.fromJson(data,Users.class);
                             System.out.println("user: ========" + data.toString());
                             editor.clear();
-                            editor.putString(KeyConstants.UserInfoKey.userId, user.getUserId());
+                            editor.putString(KeyConstants.UserInfoKey.userId,user.getUserId());
                             editor.putString(KeyConstants.UserInfoKey.userName, user.getUserName());
                             editor.putString(KeyConstants.UserInfoKey.userNick, user.getUserNick());
                             editor.putString(KeyConstants.UserInfoKey.userPhone, user.getUserPhone());
                             editor.putString(KeyConstants.UserInfoKey.userPassword, user.getUserPassword());
                             editor.putString(KeyConstants.UserInfoKey.userHeadImage, user.getUserAvatar());
-                            Log.i("main", user.toString());
+                            editor.putBoolean(KeyConstants.UserInfoKey.userIfLee, user.getUserIfLee() == 1 ? true : false);
                             editor.putBoolean(KeyConstants.UserInfoKey.userIsLogin, true);
                             editor.commit();
                             JPushInterface.setAliasAndTags(LauncherActivity.this, user.getUserId(),

@@ -184,9 +184,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 }
                 mProductViewBean.setGoodsVerify(mBenefitsData.get(i).getBenVerify());
                 mProductViewBean.setPicList(mlist);
-                mProductViewBean.setGoodsNum(1+"");
+                mProductViewBean.setGoodsNum(1 + "");
+                mProductViewBean.setGoodsType(ProductBaseActivity.GIFT_GOODS);
                 Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
-                mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.GIFT_GOODS);
                 mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
                 startActivity(mIntent);
 
