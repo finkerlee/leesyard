@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.android.volley.AuthFailureError;
@@ -33,14 +34,17 @@ import java.util.Map;
 /**
  * Created by zhaoyi on 16/5/8.
  */
-public class SearchResultActivity extends BaseActivity{
+public class SearchResultActivity extends BaseActivity  implements View.OnClickListener{
     private ListView mLv;
     private ArrayList<Product> mList;
+    private ImageView iv_back;
     private String key = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+
+
         key =  getIntent().getStringExtra("keyword");
         initView();
         initData();
@@ -100,5 +104,17 @@ public class SearchResultActivity extends BaseActivity{
 
     private void initView() {
         mLv = (ListView) findViewById(R.id.lv_search_result);
+        iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+
+        }
     }
 }

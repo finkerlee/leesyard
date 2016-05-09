@@ -23,7 +23,7 @@ import java.util.Set;
 /**
  * Created by lifanqiao on 16/3/17.
  */
-public class SearchActivity extends BaseActivity{
+public class SearchActivity extends BaseActivity {
     private TextView mTvSearch;
     private EditText acTextView;
     private LocalUtils mLocalUtils;
@@ -72,4 +72,6 @@ public class SearchActivity extends BaseActivity{
             }
         });
     }
+
+
 }

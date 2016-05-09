@@ -7,34 +7,33 @@
     <LinearLayout
         android:id="@+id/search_top_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp">
 
             <EditText
                 android:completionThreshold="1"
                 android:id="@+id/search_et_input"
                 android:layout_gravity="center_vertical"
-                android:drawableLeft="@drawable/search_icon"
-                android:drawablePadding="10dp"
-                android:paddingLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:layout_width="310dp"
+                android:layout_height="30dp"
                 android:background="@drawable/search_edittext_shape"
+                android:drawableLeft="@drawable/search"
                 android:textSize="16sp"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:hint="  搜索李家大院" />
 
-
         <TextView
             android:id="@+id/search_btn_back"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="搜索"
             android:textSize="16sp"
             android:textColor="@color/back"/>
