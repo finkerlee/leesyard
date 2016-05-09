@@ -55,7 +55,7 @@ public class HomeActivity extends TabActivity {
 
         mTabHost = getTabHost();
 
-        Intent i_main = new Intent(this, MainActivity1.class);
+        Intent i_main = new Intent(this, MainActivity.class);
         Intent i_find = new Intent(this, FindActivity.class);
         Intent i_news = new Intent(this, NewsActivity.class);
         Intent i_mine = new Intent(this, MineActivity.class);

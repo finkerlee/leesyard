@@ -1,6 +1,7 @@
 package com.lijiadayuan.lishijituan;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,8 +18,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.joanzapata.android.BaseAdapterHelper;
+import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdpter1;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
@@ -60,6 +64,14 @@ public class MoreActivity extends BaseActivity {
                 if (JsonParseUtil.isSuccess(mJsonObject)){
                      mList =  JsonParseUtil.toListByJson(mJsonObject.get("response_data")
                             .getAsJsonArray(),WelfareGoodsBean.class);
+//                    QuickAdapter<WelfareGoodsBean> mAdpter = new QuickAdapter<WelfareGoodsBean>(MoreActivity.this,R.layout.more_item,mList) {
+//                        @Override
+//                        protected void convert(BaseAdapterHelper helper, WelfareGoodsBean item) {
+//                            SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage1);
+//                            mPic.setImageURI(Uri.parse(item.getBenThumb()));
+//                        }
+//                    };
+//                    gridView.setAdapter(mAdpter);
                     if (mList.size() > 0){
                         images = new String[mList.size()];
                         for (int i = 0;i < mList.size(); i++){
