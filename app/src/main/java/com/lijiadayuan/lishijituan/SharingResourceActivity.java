@@ -67,7 +67,7 @@ public class SharingResourceActivity extends BaseActivity implements OnClickList
                     QuickAdapter<Resources> adapter= new QuickAdapter<Resources>(SharingResourceActivity.this, R.layout.more_item,mList) {
                         @Override
                         protected void convert(BaseAdapterHelper helper, Resources item) {
-                            SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
+                            SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage1);
                             mPic.setImageURI(Uri.parse(item.getResImg()));
                             mPic.setAspectRatio(1.33f);
                         }

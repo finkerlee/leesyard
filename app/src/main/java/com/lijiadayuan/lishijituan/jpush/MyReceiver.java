@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.lijiadayuan.lishijituan.LeeApplication;
-import com.lijiadayuan.lishijituan.MainActivity1;
+import com.lijiadayuan.lishijituan.MainActivity;
 import com.lijiadayuan.lishijituan.bean.MyMessage;
 import com.lijiadayuan.lishijituan.bean.NewMessage;
 import com.lijiadayuan.lishijituan.utils.LocalUtils;
@@ -53,7 +53,7 @@ public class MyReceiver extends BroadcastReceiver {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
             
         	//打开自定义的Activity
-        	Intent i = new Intent(context, MainActivity1.class);
+        	Intent i = new Intent(context, MainActivity.class);
         	i.putExtras(bundle);
         	//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
@@ -62,7 +62,7 @@ public class MyReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..
-			Intent activityIntent = new Intent(context, MainActivity1.class);
+			Intent activityIntent = new Intent(context, MainActivity.class);
 			//  要想在Service中启动Activity，必须设置如下标志
 			activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(activityIntent);

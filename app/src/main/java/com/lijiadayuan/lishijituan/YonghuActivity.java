@@ -235,6 +235,7 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
                                         Toast.makeText(YonghuActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(YonghuActivity.this, LoginActivity.class);
                                         startActivity(intent);
+                                        finish();
                                     } else if (data == -1) {
                                         Toast.makeText(YonghuActivity.this, "该用户名已存在", Toast.LENGTH_SHORT).show();
                                     } else if (data == -2) {
@@ -255,9 +256,7 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             Map<String, String> params = new HashMap<>();
-                            System.out.println("userNick----------" + etUsername.getText().toString().trim());
-                            params.put("test","test");
-                            params.put("userNick ", etUsername.getText().toString().trim());
+                            params.put("userNick", etUsername.getText().toString().trim());
                             params.put("userPhone", etphone.getText().toString().trim());
                             params.put("userPassword", etpass.getText().toString().trim());
                             return params;
