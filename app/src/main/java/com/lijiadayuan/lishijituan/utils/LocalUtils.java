@@ -67,8 +67,10 @@ public class LocalUtils<T extends Serializable & Parcelable> {
             // 打开文件
             FileOutputStream fos = new FileOutputStream(mFilePath);
 
+
             // 将数据写入文件
             ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.reset();
             oos.writeObject(mT);
 
             // 释放资源

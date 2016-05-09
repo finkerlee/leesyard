@@ -2,6 +2,7 @@ package com.lijiadayuan.lishijituan;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,7 +19,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonObject;
+import com.joanzapata.android.BaseAdapterHelper;
+import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.FindAdpter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
 import com.lijiadayuan.lishijituan.adapter.PictureAdpter1;
@@ -31,6 +35,7 @@ import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,8 +45,7 @@ import java.util.TimerTask;
 public class FindActivity extends BaseActivity {
     private GridView gridView;//image
     private TextView tvTitle;
-    private String[] images;
-    private ArrayList<Product> mList;
+    private List<Product> mList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,20 +69,21 @@ public class FindActivity extends BaseActivity {
                 if (JsonParseUtil.isSuccess(mJsonObject)){
                     mList =  JsonParseUtil.toListByJson(mJsonObject.get("response_data")
                             .getAsJsonArray(),Product.class);
-                    if (mList.size() > 0){
-                        images = new String[mList.size()];
-                        for (int i = 0;i < mList.size(); i++){
-                            images[i] = mList.get(i).getProImg();
+                    QuickAdapter<Product> mAdpter = new QuickAdapter<Product>(FindActivity.this,R.layout.image,mList) {
+                        @Override
+                        protected void convert(BaseAdapterHelper helper, Product item) {
+                           SimpleDraweeView msp = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
+                            msp.setImageURI(Uri.parse(item.getProThumb()));
                         }
-                    }
+                    };
 
-                    FindAdpter adapter = new FindAdpter (FindActivity.this,images,R.layout.image);
-                    gridView.setAdapter(adapter);
+                    gridView.setAdapter(mAdpter);
+
 
                     gridView.setOnItemClickListener(new OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             Intent mIntent = new Intent(FindActivity.this,ProductBaseActivity.class);
-                            ProductViewBean mProductViewBean = ProductViewBean.getProductViewBeanList(mList.get(position), ProductBaseActivity.BUY_GOODS);
+                            ProductViewBean mProductViewBean = ProductViewBean.getProductViewBean(mList.get(position), ProductBaseActivity.BUY_GOODS);
                             Log.i("main",mProductViewBean.getGoodsType()+"");
                           mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                             startActivity(mIntent);

@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by zhaoyi on 16/5/2.
  */
-public class Activites {
+public class Activites implements Parcelable{
 
     private String actId;                      // 主键,自动增长
     private String actName;                 // 活动名称
@@ -37,6 +37,30 @@ public class Activites {
     }
 
 
+    protected Activites(Parcel in) {
+        actId = in.readString();
+        actName = in.readString();
+        actLocation = in.readString();
+        actScale = in.readString();
+        actDate = in.readLong();
+        actIntro = in.readString();
+        actShow = in.readInt();
+        actPosition = in.readInt();
+        actStatus = in.readInt();
+        actImg = in.readString();
+    }
+
+    public static final Creator<Activites> CREATOR = new Creator<Activites>() {
+        @Override
+        public Activites createFromParcel(Parcel in) {
+            return new Activites(in);
+        }
+
+        @Override
+        public Activites[] newArray(int size) {
+            return new Activites[size];
+        }
+    };
 
     public String getActId() {
         return actId;
@@ -119,4 +143,22 @@ public class Activites {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(actId);
+        parcel.writeString(actName);
+        parcel.writeString(actLocation);
+        parcel.writeString(actScale);
+        parcel.writeLong(actDate);
+        parcel.writeString(actIntro);
+        parcel.writeInt(actShow);
+        parcel.writeInt(actPosition);
+        parcel.writeInt(actStatus);
+        parcel.writeString(actImg);
+    }
 }

@@ -1,12 +1,15 @@
 package com.lijiadayuan.lishijituan.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Lee on 2016-03-23.
  * E-mail:johnyylee@163.com
  *
  * 封装reds表数据的类
  */
-public class Reds {
+public class Reds implements Parcelable{
 
     private String redId;                           // 主键,流水号
     private String redName;                         // 红包名称
@@ -45,6 +48,36 @@ public class Reds {
         this.redVerify = redVerify;
         this.redStatus = redStatus;
     }
+
+    protected Reds(Parcel in) {
+        redId = in.readString();
+        redName = in.readString();
+        redSort = in.readInt();
+        redLimit = in.readLong();
+        redStock = in.readInt();
+        redAmount = in.readDouble();
+        redThumb = in.readString();
+        redImg = in.readString();
+        redIntro = in.readString();
+        redDetail = in.readString();
+        redDate = in.readLong();
+        redShow = in.readInt();
+        redOut = in.readInt();
+        redVerify = in.readInt();
+        redStatus = in.readInt();
+    }
+
+    public static final Creator<Reds> CREATOR = new Creator<Reds>() {
+        @Override
+        public Reds createFromParcel(Parcel in) {
+            return new Reds(in);
+        }
+
+        @Override
+        public Reds[] newArray(int size) {
+            return new Reds[size];
+        }
+    };
 
     public String getRedId() {
         return redId;
@@ -164,5 +197,30 @@ public class Reds {
 
     public void setRedVerify(int redVerify) {
         this.redVerify = redVerify;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+        parcel.writeString(redId);
+        parcel.writeString(redName);
+        parcel.writeInt(redSort);
+        parcel.writeLong(redLimit);
+        parcel.writeInt(redStock);
+        parcel.writeDouble(redAmount);
+        parcel.writeString(redThumb);
+        parcel.writeString(redImg);
+        parcel.writeString(redIntro);
+        parcel.writeString(redDetail);
+        parcel.writeLong(redDate);
+        parcel.writeInt(redShow);
+        parcel.writeInt(redOut);
+        parcel.writeInt(redVerify);
+        parcel.writeInt(redStatus);
     }
 }

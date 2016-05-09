@@ -9,5 +9,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         fresco:actualImageScaleType="fitXY"
+        fresco:roundedCornerRadius="20px"
+        fresco:roundingBorderWidth="1px"
+        fresco:roundingBorderColor="#cccccc"
         />
 </LinearLayout>

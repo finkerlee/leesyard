@@ -107,7 +107,7 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
         mEtSituation = (EditText) findViewById(R.id.situation);
 
         findViewById(R.id.btn_receive).setOnClickListener(this);
-        tvTitle.setText("申请报名");
+        tvTitle.setText("申请领取");
         imageback.setOnClickListener(this);
         mBitmaps = new ArrayList<>();
         Bitmap defaultPic = BitmapFactory.decodeResource(getResources(), R.drawable.upload);

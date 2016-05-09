@@ -10,6 +10,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,8 +26,11 @@ import com.lijiadayuan.lishijituan.bean.Reds;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RedenvelopeActivity extends BaseActivity implements OnClickListener {
 
@@ -54,7 +58,7 @@ public class RedenvelopeActivity extends BaseActivity implements OnClickListener
         // 创建请求队列
         RequestQueue mQueue = app.getRequestQueue();
         // 创建一个字符串请求
-        StringRequest request = new StringRequest(Request.Method.GET, UrlConstants.RED, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, UrlConstants.RED, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
@@ -74,9 +78,9 @@ public class RedenvelopeActivity extends BaseActivity implements OnClickListener
                     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             Intent mIntent = new Intent(RedenvelopeActivity.this,ReddenvelopebaseActivity.class);
-                            mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.GIFT_GOODS);
-                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, ProductViewBean.getRedsViewBeanList(mList.get(position), ProductBaseActivity.GIFT_GOODS));
+                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mList.get(position));
                             startActivity(mIntent);
+                            finish();
                         }
                     });
                 }
@@ -87,7 +91,14 @@ public class RedenvelopeActivity extends BaseActivity implements OnClickListener
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId", UsersUtil.getUserId(RedenvelopeActivity.this));
+                return params;
+            }
+        };
         // 将请求添加到请求队列中(即发送请求)
         mQueue.add(request);
 

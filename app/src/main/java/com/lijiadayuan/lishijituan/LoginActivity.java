@@ -105,13 +105,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 editor.putBoolean(KeyConstants.UserInfoKey.userIsLogin, true);
                                 editor.commit();
 
-                                Intent intent = new Intent(LoginActivity.this,MineActivity.class);
                                 if (KeyConstants.IntentPageValues.normol.equals(getIntent().getStringExtra(KeyConstants.IntentPageKey.ToLoginPageStyle))){
+                                    Intent intent = new Intent(LoginActivity.this,MineActivity.class);
                                     intent.putExtra(KeyConstants.UserInfoKey.userInfo,user);
                                     startActivity(intent);
                                 }else{
-                                    intent.putExtra(KeyConstants.UserInfoKey.userIsLogin,true);
-                                    setResult(LOGIN,intent);
+                                    setResult(LOGIN);
                                     finish();
                                 }
                                 Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();

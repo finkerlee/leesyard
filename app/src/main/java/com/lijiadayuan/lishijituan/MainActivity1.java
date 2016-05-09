@@ -46,8 +46,7 @@ import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
-import com.zhy.autolayout.AutoLayoutActivity;
-import com.zhy.autolayout.utils.AutoUtils;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;

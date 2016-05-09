@@ -1,12 +1,15 @@
 package com.lijiadayuan.lishijituan.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Lee on 2016-03-17.
  * E-mail:johnyylee@163.com
  *
  * 封装tickets表数据的类
  */
-public class Tickets {
+public class Tickets implements Parcelable{
 
     private String tktId;                       // 主键,流水号
     private String tktName;                     // 卡票名称
@@ -45,6 +48,36 @@ public class Tickets {
         this.tktVerify = tktVerify;
         this.tktStatus = tktStatus;
     }
+
+    protected Tickets(Parcel in) {
+        tktId = in.readString();
+        tktName = in.readString();
+        tktSort = in.readInt();
+        tktLimit = in.readLong();
+        tktStock = in.readInt();
+        tktAmount = in.readDouble();
+        tktThumb = in.readString();
+        tktImg = in.readString();
+        tktIntro = in.readString();
+        tktDetail = in.readString();
+        tktDate = in.readLong();
+        tktShow = in.readInt();
+        tktOut = in.readInt();
+        tktVerify = in.readInt();
+        tktStatus = in.readInt();
+    }
+
+    public static final Creator<Tickets> CREATOR = new Creator<Tickets>() {
+        @Override
+        public Tickets createFromParcel(Parcel in) {
+            return new Tickets(in);
+        }
+
+        @Override
+        public Tickets[] newArray(int size) {
+            return new Tickets[size];
+        }
+    };
 
     public String getTktId() {
         return tktId;
@@ -164,5 +197,29 @@ public class Tickets {
 
     public void setTktVerify(int tktVerify) {
         this.tktVerify = tktVerify;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(tktId);
+        parcel.writeString(tktName);
+        parcel.writeInt(tktSort);
+        parcel.writeLong(tktLimit);
+        parcel.writeInt(tktStock);
+        parcel.writeDouble(tktAmount);
+        parcel.writeString(tktThumb);
+        parcel.writeString(tktImg);
+        parcel.writeString(tktIntro);
+        parcel.writeString(tktDetail);
+        parcel.writeLong(tktDate);
+        parcel.writeInt(tktShow);
+        parcel.writeInt(tktOut);
+        parcel.writeInt(tktVerify);
+        parcel.writeInt(tktStatus);
     }
 }

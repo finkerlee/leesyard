@@ -1,40 +1,14 @@
 package com.lijiadayuan.lishijituan;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.res.AssetManager;
-
-import com.lijiadayuan.model.CityModel;
-import com.lijiadayuan.model.DistrictModel;
-import com.lijiadayuan.model.ProvinceModel;
-import com.lijiadayuan.service.XmlParserHandler;
-import com.zhy.autolayout.AutoLayoutActivity;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.KeyEvent;
-import android.widget.Toast;
+
+import com.zhy.autolayout.AutoLayoutActivity;
 
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-public abstract class BaseActivity extends AutoLayoutActivity {
+public abstract class BaseActivity extends AutoLayoutActivity{
 
 	protected LeeApplication app;
 

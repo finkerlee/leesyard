@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,10 +32,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.google.gson.JsonObject;
 import com.lijiadayuan.lishijituan.adapter.UpLoadPicAdapter;
+import com.lijiadayuan.lishijituan.bean.Activites;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.ArchivesUtils;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UpLoadImageTask1;
@@ -50,26 +55,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegistrationActivity extends BaseActivity implements OnClickListener {
-
-    //购买页面
-    public static final int BUY_GOODS = 1;
-    //赠品页面
-    public static final int GIFT_GOODS = 0;
     //视图bean
-    private ProductViewBean mProductViewBean;
+    private Activites mActivites;
 
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
     private ImageView imageback;
-    InputMethodManager manager;
+    //软键盘管理器
+    private InputMethodManager manager;
     private ReceiveDialog dialog;
     private static RegistrationActivity instance;
     private GridView mGridView;
     private ImageView mShowIV;
-    private EditText mEtName,mEtsEX,mEtNation,mEtPhoneNum;
-
-    private int gender ;  // 0:女，1:男 整型
+    private EditText mEtName,mEtSex,mEtNation,mEtPhoneNum;
 
     private String mSaveDir;//拍照存放的文件夹名字
     private String mFileName;//拍照存放的文件的名字
@@ -78,20 +77,29 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
     private UpLoadPicAdapter mAdpter;
     private ArrayList<Bitmap> mBitmaps;
     private Bitmap[] bitmaps;
-    //商品id
-    private String shoppingId;
-    //
+
+    private String strUserAge = "";
+    //初始化选择器
+    private OptionsPickerView pickerView;
+    private String actId;
+
+    //存放民族id
+    private String nationId = "";
+    //存放 男女的id  // 0:女，1:男 整型
+    private String sexId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         instance = this;
-        shoppingId = getIntent().getStringExtra("shoppingId");
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
-        String actId = mProductViewBean.getGoodsActivityId();
-        Log.e("Log","actId===="+actId);
+        mActivites = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.Actvites);
+        if ("".equals(mActivites.getActId())){
+            Toast.makeText(RegistrationActivity.this,"获取活动信息失败",Toast.LENGTH_LONG).show();
+            return;
+        }
+        actId = mActivites.getActId();
 
         initView();
         setListener();
@@ -112,20 +120,128 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                 }
             }
         });
+
+        mEtSex.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                manager.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+                pickerView.setTitle("选择性别");
+                pickerView.setPicker(ArchivesUtils.getAge());
+                pickerView.setCyclic(false);
+                if(!TextUtils.isEmpty(strUserAge)){
+                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+                }
+                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3) {
+                        mEtSex.setText(ArchivesUtils.getAge().get(options1));
+                        sexId = options1+"";
+
+                    }
+                });
+                if(!pickerView.isShowing()){
+                    pickerView.show();
+                }
+            }
+        });
+//        mEtSex.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(v.hasFocus()){
+//                    //显示自己界面
+//                    pickerView.setTitle("选择性别");
+//                    pickerView.setPicker(ArchivesUtils.getAge());
+//                    pickerView.setCyclic(false);
+//                    if(!TextUtils.isEmpty(strUserAge)){
+//                        pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+//                    }
+//                    pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+//                        @Override
+//                        public void onOptionsSelect(int options1, int option2, int options3) {
+//                            mEtSex.setText(ArchivesUtils.getAge().get(options1));
+//                            sexId = options1+"";
+////                        strUserAge = ArchivesUtils.getAgeOp(ArchivesUtils.getAge().get(options1));
+////                        refreshMenuView();
+//                        }
+//                    });
+//                    if(!pickerView.isShowing()){
+//                        pickerView.show();
+//                    }
+//                }
+//            }
+//        });
+
+        mEtNation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                manager.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+                pickerView.setTitle("选择民族");
+                pickerView.setPicker(ArchivesUtils.getNationList());
+                pickerView.setCyclic(false);
+                if(!TextUtils.isEmpty(strUserAge)){
+                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+                }
+                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3) {
+                        mEtNation.setText(ArchivesUtils.getNationList().get(options1));
+                        nationId = (options1 +1) +"";
+
+                    }
+                });
+                if(!pickerView.isShowing()){
+                    pickerView.show();
+                }
+            }
+        });
+//        mEtNation.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                pickerView.setTitle("选择民族");
+//                pickerView.setPicker(ArchivesUtils.getNationList());
+//                pickerView.setCyclic(false);
+//                if(!TextUtils.isEmpty(strUserAge)){
+//                    pickerView.setSelectOptions(Integer.valueOf(strUserAge));
+//                }
+//                pickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+//                    @Override
+//                    public void onOptionsSelect(int options1, int option2, int options3) {
+//                        mEtNation.setText(ArchivesUtils.getNationList().get(options1));
+//                        nationId = (options1 +1) +"";
+//
+//                    }
+//                });
+//                if(!pickerView.isShowing()){
+//                    pickerView.show();
+//                }
+//            }
+//        });
+
+        mEtName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+            }
+        });
+        mEtPhoneNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+            }
+        });
     }
 
     protected void initView() {
+        pickerView = new OptionsPickerView(this);
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
         mGridView = (GridView) findViewById(R.id.up_load_pic);
         mEtName = (EditText) findViewById(R.id.name);
-        mEtsEX = (EditText) findViewById(R.id.sex);
-
-
+        mEtSex = (EditText) findViewById(R.id.sex);
+        mEtSex.setInputType(InputType.TYPE_NULL);
 
 
         mEtNation = (EditText) findViewById(R.id.nation);//
+        mEtNation.setInputType(InputType.TYPE_NULL);
         mEtPhoneNum = (EditText) findViewById(R.id.phone_num);
 
         findViewById(R.id.btn_receive).setOnClickListener(this);
@@ -202,7 +318,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                     file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
                     bitmap = getCompressBitmap(mSaveDir + mFileName);
                     mBitmaps.add(0, bitmap);
-                    mShowIV.setImageBitmap(bitmap);//让拍照的照片显示在控件上
+                    mAdpter.UpDataView(mBitmaps);
                     try {
                         outputStream = new FileOutputStream(file);
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
@@ -278,31 +394,17 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                 break;
             case R.id.btn_receive:
 
-
-                ;
-                sex = mEtsEX.getText().toString();
-                if("女".equals(sex)  ){
-                    gender = 0;
-                }else if ("男".equals(sex)){
-                    gender = 1;
-                }else{
-                    Toast.makeText(RegistrationActivity.this,"性别填写有误",Toast.LENGTH_SHORT).show();
-                }
-                Log.e("Log", "sex  =======" + sex);
-
-
-
                 if (mEtName.getText().toString().isEmpty()){
                     Toast.makeText(RegistrationActivity.this,"请填写申请人姓名",Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (mEtsEX.getText().toString().isEmpty()){
+                if (mEtSex.getText().toString().isEmpty()){
 
-                    Toast.makeText(RegistrationActivity.this,"请填写性别",Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrationActivity.this,"请选择性别",Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (mEtNation.getText().toString().isEmpty()){
-                    Toast.makeText(RegistrationActivity.this,"请填写民族",Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrationActivity.this,"请选择民族",Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (mEtPhoneNum.getText().toString().isEmpty()){
@@ -326,10 +428,16 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                             StringRequest mStringRequest = new StringRequest(Request.Method.POST, UrlConstants.ACTIVITY, new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Log.e("log","response === " + response);
+                                    Log.e("main","response === " + response);
                                     JsonObject mJsonObj = JsonParseUtil.getJsonByString(response).getAsJsonObject();
                                     if (JsonParseUtil.isSuccess(mJsonObj)){
-                                        Toast.makeText(RegistrationActivity.this,"ok",Toast.LENGTH_LONG).show();
+                                        String response_data =  mJsonObj.get("response_data").getAsString();
+                                        if ("1".equals(response_data)){
+                                            Toast.makeText(RegistrationActivity.this,"提交成功，请耐心等待",Toast.LENGTH_LONG).show();
+                                            finish();
+                                        }else{
+                                            Toast.makeText(RegistrationActivity.this,response_data,Toast.LENGTH_LONG).show();
+                                        }
                                     }
                                 }
                             }, new Response.ErrorListener() {
@@ -342,11 +450,11 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
                                 @Override
                                 protected Map<String, String> getParams() throws AuthFailureError {
                                     Map<String, String> params = new HashMap<String, String>();
-                                    params.put("actId", "1");//活动id
+                                    params.put("actId", actId);//活动id
                                     params.put("userId",UsersUtil.getUserId(RegistrationActivity.this));//用户id
                                     params.put("acaName",mEtName.getText().toString());//姓名
-                                    params.put("acaGender",gender + "");//性别 1
-                                    params.put("acaNation",mEtNation.getText().toString());//民族
+                                    params.put("acaGender",sexId);//性别 1
+                                    params.put("acaNation",nationId);//民族
                                     params.put("acaPhone",mEtPhoneNum.getText().toString() );//手机号
                                     if (iamgePicList.size()>0){
                                         for (int i = 0;i<iamgePicList.size();i++){

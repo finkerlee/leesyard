@@ -38,6 +38,7 @@ import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.PayUtils;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +47,8 @@ import java.util.Map;
 public class OrderActivity extends BaseActivity implements View.OnClickListener{
 
     private static final int SDK_PAY_FLAG = 1;
+
+    private static final int SELECT_ADDRESS = 4;
 
     //联系人信息
     private TextView mNameTV; // 收货人姓名
@@ -70,6 +73,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     //配送方式布局
     private TextView mTvExpressStyle;
     private TextView mTvExPressPrice;
+    private LinearLayout mLayoutExpress;
     //支付方式
     private RadioButton mRbWeiXin,mRbAli;
 
@@ -169,6 +173,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         //配送的布局
         mTvExpressStyle = (TextView) findViewById(R.id.express_style);
         mTvExPressPrice = (TextView) findViewById(R.id.express_price);
+        mLayoutExpress = (LinearLayout) findViewById(R.id.layout_express);
         //支付方式
         mRbWeiXin = (RadioButton) findViewById(R.id.rb_wechat);
         mRbAli = (RadioButton) findViewById(R.id.rb_ali);
@@ -245,7 +250,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mAddress = mAddressList.get(0);
             mNameTV.setText(mAddress.getAddName());
             mPhoneTV.setText(mAddress.getAddPhone());
-            mAddressTV.setText(mAddress.getAddProvince() + mAddress.getAddCity() + mAddress.getAddArea() + mAddress.getAddDetail());
+            mAddressTV.setText(UsersUtil.getPCA(mAddress.getAddArea()) + mAddress.getAddDetail());
         }
 
     }
@@ -260,7 +265,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             return;
         }
         //设置商品图片
-        if (mProductViewBean.getGoodsPic().isEmpty()){
+        if (null == mProductViewBean.getGoodsThumb()){
             mIvPic.setImageURI(Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image));
         }else{
             mIvPic.setImageURI(Uri.parse(mProductViewBean.getGoodsPic()));
@@ -273,6 +278,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mTvGiveGoodsOtherName.setText(mProductViewBean.getGoodsOtherName());
             mTvGiveGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
             mTvExpressStyle.setText("快递默认为在线支付");
+            mLayoutExpress.setVisibility(View.VISIBLE);
 
         }else if(mProductViewBean.getGoodsType() == ProductBaseActivity.BUY_GOODS){
             mLayoutBuy.setVisibility(View.VISIBLE);
@@ -281,6 +287,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mTvBuyGoodsOtherName.setText(mProductViewBean.getGoodsOtherName());
             mTvBuyGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
             mTvExpressStyle.setText("快递默认为货到付款");
+            mLayoutExpress.setVisibility(View.GONE);
         }
 
 
@@ -351,6 +358,9 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.rl_order_addresslayout:
+                Intent intent = new Intent(OrderActivity.this,AddressActivity.class);
+                intent.putExtra(KeyConstants.IntentPageKey.AddressMode, KeyConstants.IntentPageValues.forResult);
+                startActivityForResult(intent,SELECT_ADDRESS);
                 break;
         }
     }
@@ -364,7 +374,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         if (mProductViewBean.getGoodsType() == ProductBaseActivity.GIFT_GOODS){
             //当前商品是赠品的时候，只需要出运费,数量只能为1
             mGoodsNum =  1;
-            mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice());
+            mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice())+80;
 
         }else if(mProductViewBean.getGoodsType() == ProductBaseActivity.BUY_GOODS){
             //当前商品是购买的时候，运费到付，在线支付商品的价格，数量能变
@@ -437,4 +447,15 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK){
+            if (requestCode == SELECT_ADDRESS){
+                mAddress =  data.getParcelableExtra(KeyConstants.IntentPageValues.Address);
+                mNameTV.setText(mAddress.getAddName());
+                mPhoneTV.setText(mAddress.getAddPhone());
+                mAddressTV.setText(UsersUtil.getPCA(mAddress.getAddArea() + mAddress.getAddDetail()));
+            }
+        }
+    }
 }

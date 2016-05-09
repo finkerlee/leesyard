@@ -16,7 +16,7 @@ public class ProductViewBean implements Parcelable{
     private ArrayList<String> picList;
     private String goodsName;//名字
     private String goodsNum;//个数
-    private String goodsSpec;//领取说明
+    private String goodsSpec;//商品规格
     private String goodsPrice;//价格
     private String goodsIntro;//红包领取说明
     private int goodsVerify;   // 是否需要上传认证   redVerify
@@ -25,12 +25,10 @@ public class ProductViewBean implements Parcelable{
     private String goodsInfoUrl;//商品详情 webview
     private String goodsInfoIncrease;//商品浏览次数自增
     private String goodsThumb;//轮播图地址
-    private long goodsLimit;//红包截止时间
     private String goodsOtherName;//当前商品别名
     private String goodsPic; //商品展示的图片
     private int goodsStock; //商品的最大购买数量
     private String goodsId; //商品id
-    private String goodsActivityId;//活动id
 
     public ProductViewBean(){
 
@@ -83,11 +81,6 @@ public class ProductViewBean implements Parcelable{
         }
     };
 
-    public void setGoodsActivityId(String goodsActivityId) {
-
-        this.goodsActivityId = goodsActivityId;
-    }
-
     public String getGoodsId() {
         return goodsId;
     }
@@ -137,13 +130,6 @@ public class ProductViewBean implements Parcelable{
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
     }
-
-
-
-    public void setGoodsLimit(long goodsLimit) {
-        this.goodsLimit = goodsLimit;
-    }
-
 
     public void setGoodsInfoIncrease(String goodsInfoIncrease) {
         this.goodsInfoIncrease = goodsInfoIncrease;
@@ -217,14 +203,6 @@ public class ProductViewBean implements Parcelable{
         return goodsThumb;
     }
 
-    public String getGoodsActivityId() {
-        return goodsActivityId;
-    }
-
-    public long getGoodsLimit() {
-        return goodsLimit;
-    }
-
     public String getGoodsIntro() {
         return goodsIntro;
     }
@@ -233,8 +211,14 @@ public class ProductViewBean implements Parcelable{
         return goodsVerify;
     }
 
-
-    public static ProductViewBean getProductViewBeanList(WelfareGoodsBean mWelfareGoodsBean,int type){
+    /**
+     *
+     * 将福利商品转换成ProductViewBean
+     * @param mWelfareGoodsBean
+     * @param type
+     * @return
+     */
+    public static ProductViewBean getProductViewBean(WelfareGoodsBean mWelfareGoodsBean,int type){
         ProductViewBean  mProductViewBean = new ProductViewBean();
         mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mWelfareGoodsBean.getBenId());
         mProductViewBean.setGoodsName(mWelfareGoodsBean.getBenName());
@@ -245,8 +229,14 @@ public class ProductViewBean implements Parcelable{
         //mProductViewBean.setPicList();
         return mProductViewBean;
     }
-
-    public static ProductViewBean getProductViewBeanList(Product mProduct,int type){
+    /**
+     *
+     * 将普通商品转换成ProductViewBean
+     * @param mProduct
+     * @param type
+     * @return
+     */
+    public static ProductViewBean getProductViewBean(Product mProduct,int type){
         ProductViewBean  mProductViewBean = new ProductViewBean();
         mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mProduct.getProId());
         mProductViewBean.setGoodsInfoIncrease(mProduct.getProId());
@@ -264,40 +254,8 @@ public class ProductViewBean implements Parcelable{
         return mProductViewBean;
     }
 
-    public static ProductViewBean getRedsViewBeanList(Reds mReds, int type) {
-        ProductViewBean  mProductViewBean = new ProductViewBean();
-        mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mReds.getRedId());
-        mProductViewBean.setGoodsName(mReds.getRedName());//名称
-        mProductViewBean.setGoodsNum(mReds.getRedStock() + "");//红包数量
-        mProductViewBean.setGoodsSpec(mReds.getRedDetail());//红包领取说明
-        mProductViewBean.setGoodsPrice(mReds.getRedAmount() + "");//红包金额
-        mProductViewBean.setGoodsIntro(mReds.getRedIntro() + "");//红包详情介绍
-        mProductViewBean.setGoodsLimit(mReds.getRedLimit());//红包截止日期
-        mProductViewBean.setGoodsPic(mReds.getRedImg());
-        mProductViewBean.setGoodsId(mReds.getRedId());//红包id
-        mProductViewBean.setGoodsVerify(mReds.getRedVerify());//是否需要认证
-        mProductViewBean.setGoodsType(type);
-        return mProductViewBean;
-    }
 
-    public static ProductViewBean getTicketViewBeanList(Tickets mTickets, int type) {
-        ProductViewBean  mProductViewBean = new ProductViewBean();
-        mProductViewBean.setGoodsName(mTickets.getTktName());//名称
-        mProductViewBean.setGoodsNum(mTickets.getTktStock() + "");//红包数量
-        mProductViewBean.setGoodsPrice(mTickets.getTktAmount() + "");//红包金额
-        mProductViewBean.setGoodsSpec(mTickets.getTktDetail());//红包领取说明
-        mProductViewBean.setGoodsPic(mTickets.getTktImg());//轮播图
-        mProductViewBean.setGoodsIntro(mTickets.getTktIntro() + "");//红包详情介绍
-        mProductViewBean.setGoodsType(type);
-        return mProductViewBean;
-    }
 
-    public static ProductViewBean getProductViewBeanList(Activites mActivites, int type) {
-        ProductViewBean  mProductViewBean = new ProductViewBean();
-        mProductViewBean.setGoodsActivityId(mActivites.getActId());//活动id
-        mProductViewBean.setGoodsPic(mActivites.getActImg());
-        mProductViewBean.setGoodsType(type);
-        return mProductViewBean;
-    }
+
 }
 

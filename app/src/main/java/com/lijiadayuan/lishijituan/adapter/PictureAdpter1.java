@@ -52,7 +52,7 @@ public class PictureAdpter1 extends BaseAdapter{
         if (view ==null){
             mHolder = new ViewHolder();
             view = View.inflate(mContext,mItemId,null);
-            mHolder.mImageView = (SimpleDraweeView) view.findViewById(R.id.itemImage);
+            mHolder.mImageView = (SimpleDraweeView) view.findViewById(R.id.itemImage1);
             view.setTag(mHolder);
         }else{
             mHolder = (ViewHolder) view.getTag();

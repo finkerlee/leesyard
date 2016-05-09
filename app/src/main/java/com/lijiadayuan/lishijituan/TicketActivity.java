@@ -38,6 +38,7 @@ import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,20 +55,16 @@ public class TicketActivity extends BaseActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket);
-        findViewById();
         initView();
 
         initData();
     }
 
-    protected void findViewById() {
+
+    protected void initView() {
         gridView = (GridView) findViewById(R.id.culture_gridView);
         tvTitle = (TextView) findViewById(R.id.text_title);
         imageback = (ImageView) findViewById(R.id.iv_back);
-    }
-
-    protected void initView() {
-//        tvTitle.setText("卡票");
         imageback.setOnClickListener(this);
 
     }
@@ -78,7 +75,7 @@ public class TicketActivity extends BaseActivity implements OnClickListener {
         // 创建请求队列
         RequestQueue mQueue = app.getRequestQueue();
         // 创建一个字符串请求
-        StringRequest request = new StringRequest(Request.Method.GET, UrlConstants.TICKET, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, UrlConstants.TICKET, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
@@ -98,9 +95,9 @@ public class TicketActivity extends BaseActivity implements OnClickListener {
                     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             Intent mIntent = new Intent(TicketActivity.this,TicketTicapplyActivity.class);
-                            mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,TicketTicapplyActivity.GIFT_GOODS);
-                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, ProductViewBean.getTicketViewBeanList(mList.get(position), ProductBaseActivity.GIFT_GOODS));
+                            mIntent.putExtra(KeyConstants.IntentPageValues.Tickets,mList.get(position) );
                             startActivity(mIntent);
+                            finish();
                         }
                     });
                 }
@@ -111,7 +108,14 @@ public class TicketActivity extends BaseActivity implements OnClickListener {
             @Override
             public void onErrorResponse(VolleyError error) {
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId", UsersUtil.getUserId(TicketActivity.this));
+                return params;
+            }
+        };
 
         // 将请求添加到请求队列中(即发送请求)
         mQueue.add(request);

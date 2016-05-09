@@ -53,7 +53,7 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".YonghuActivity" />
-        <activity android:name=".MainActivity1" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".ForgetpasswordActivtiy" />
         <activity android:name=".ResetpasswordActivity" />
         <activity android:name=".BaseWebActivity" />
@@ -78,6 +78,9 @@
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".MoreActivity" />
 
+        <activity android:name=".SearchResultActivity"/>
+        <activity android:name=".ApplyRedsActivity" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ApplyTicketActivity" android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
 
@@ -104,6 +107,7 @@
         <activity android:name=".ArtActivity" />
         <activity android:name=".OrderActivity" />
         <activity android:name=".LishiactivityActivity" />
+        <activity android:name=".LeeActivityDetails" />
         <activity android:name=".EventdetailsActivity" />
         <activity android:name=".ReceiveActivity" />
         <activity android:name=".CompanyProfileActivity" />
