@@ -14,23 +14,18 @@ import com.lijiadayuan.lishijituan.http.UrlConstants;
 public class CompanyProfileActivity extends Activity implements OnClickListener{
     private TextView Texttitle;
     private WebView Webcompany;
-    private ImageView iv_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_profile);
         findView();
-        initView();
         Intent intent = getIntent();
         setViewByData(intent.getStringExtra("resName"), intent.getIntExtra("resId", 0));
     }
     protected void findView(){
         Texttitle= (TextView) findViewById(R.id.text_title);
         Webcompany = (WebView) findViewById(R.id.WebView);
-        iv_back = (ImageView) findViewById(R.id.iv_back);
-    }
-    protected void initView(){
-        iv_back.setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
 
     private void setViewByData(String resName, int resId) {

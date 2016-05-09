@@ -51,7 +51,7 @@ public class LeeActivityDetails extends BaseActivity implements View.OnClickList
             mBtnJion.setBackground(getResources().getDrawable(R.drawable.rounded_button_color));
             //已申请未审核
         }else if(1 == status){
-            mBtnJion.setText("审核中");
+            mBtnJion.setText("等待审核中");
             mBtnJion.setOnClickListener(null);
             mBtnJion.setBackground(getResources().getDrawable(R.drawable.rounded_button_color_gray));
             //审核通过,可领取
@@ -76,7 +76,7 @@ public class LeeActivityDetails extends BaseActivity implements View.OnClickList
                 break;
             case R.id.i_want_receive:
                 if (UsersUtil.isLogin(LeeActivityDetails.this)){
-                    if ("0".equals(mActivites.getActStatus())|| "-1".equals(mActivites.getActStatus())){
+                    if (0 == (mActivites.getActStatus())|| -1 == (mActivites.getActStatus())){
                         Intent intent = new Intent(LeeActivityDetails.this,RegistrationActivity.class);
                         intent.putExtra(KeyConstants.IntentPageValues.Actvites,mActivites);
                         startActivity(intent);

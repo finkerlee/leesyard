@@ -17,7 +17,6 @@ public class CultureActivity extends Activity implements OnClickListener{
 
     private GridView gridView;
     private TextView tvTitle;
-    private ImageView imageback;
     private PictureAdapter adapter ;
     //图片ID数组
     private int[] images = new int[]{R.drawable.ad5,
@@ -39,11 +38,10 @@ public class CultureActivity extends Activity implements OnClickListener{
     protected void findViewById() {
         gridView = (GridView) findViewById(R.id.culture_gridView);
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
     protected void initView() {
         tvTitle.setText("李氏文化");
-        imageback.setOnClickListener(this);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> images0, View images1, int images2, long images3) {

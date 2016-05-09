@@ -38,7 +38,6 @@ import java.util.Map;
 public class MyOrderActivity extends BaseActivity implements View.OnClickListener{
     private ListView mLvOrder;
     private TextView mTvTitle,mTvBack;
-    private ImageView mIvBack;
     private SharedPreferences msp;
     private ArrayList<ProductOrdersView> mOrdersData;
     private QuickAdapter<ProductOrdersView> mAdpter;
@@ -82,6 +81,8 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.rb_complete).setOnClickListener(this);
         mTvTitle = (TextView) findViewById(R.id.text_title);
         mTvBack = (TextView) findViewById(R.id.text_title);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         mTvTitle.setText("我的订单");
         //初始化适配器
         mOrdersData = new ArrayList<>();
@@ -155,6 +156,10 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
                 params.put("userId",msp.getString(KeyConstants.UserInfoKey.userId,""));
                 params.put("status",STATE_FINISHED+"");
                 getDataByParams(params,UrlConstants.QUERY_ALL_GOODS_INFO_BY_USERSTATE);
+                break;
+
+            case R.id.iv_back:
+                finish();
                 break;
 
         }

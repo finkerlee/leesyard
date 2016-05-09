@@ -36,7 +36,6 @@ public class RedenvelopeActivity extends BaseActivity implements OnClickListener
 
     private GridView gridView;
     private TextView tvTitle;
-    private ImageView imageback;
     private String[] images;
     private ArrayList<Reds> mList;
 
@@ -45,8 +44,8 @@ public class RedenvelopeActivity extends BaseActivity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redenvelope);
         gridView = (GridView) findViewById(R.id.culture_gridView);
-        imageback = (ImageView) findViewById(R.id.iv_back);
 
+        findViewById(R.id.iv_back).setOnClickListener(this);
         tvTitle = (TextView) findViewById(R.id.text_title);
         tvTitle.setText("红包");
         initData();

@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 public class JoinusActivity extends Activity implements View.OnClickListener{
     private TextView tvTitle;
-    private ImageView imageback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,11 +17,10 @@ public class JoinusActivity extends Activity implements View.OnClickListener{
     }
     protected void findViewById(){
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
     protected void initView(){
         tvTitle.setText("加入我们");
-        imageback.setOnClickListener(this);
     }
 
     @Override

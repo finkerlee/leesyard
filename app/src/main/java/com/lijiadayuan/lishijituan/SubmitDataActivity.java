@@ -50,7 +50,6 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
-    private ImageView imageback;
     InputMethodManager manager;
     private ReceiveDialog dialog;
     private static SubmitDataActivity instance;
@@ -98,7 +97,8 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
 
     protected void initView() {
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
         mGridView = (GridView) findViewById(R.id.up_load_pic);
         mEtName = (EditText) findViewById(R.id.name);
@@ -106,9 +106,8 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
         mEtAddress = (EditText) findViewById(R.id.address);
         mEtSituation = (EditText) findViewById(R.id.situation);
 
-        findViewById(R.id.btn_receive).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
         tvTitle.setText("申请领取");
-        imageback.setOnClickListener(this);
         mBitmaps = new ArrayList<>();
         Bitmap defaultPic = BitmapFactory.decodeResource(getResources(), R.drawable.upload);
         mBitmaps.add(defaultPic);

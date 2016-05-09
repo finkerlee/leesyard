@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 public class MywelfareActivity extends Activity implements View.OnClickListener{
     private TextView tvTitle;
-    private ImageView imageback;
     private RadioGroup mTabButtonGroup;
     private RadioButton available, disable;
     private TabHost mTabHost;
@@ -29,14 +28,13 @@ public class MywelfareActivity extends Activity implements View.OnClickListener{
     }
     protected void findViewById(){
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
 //        mTabButtonGroup = (RadioGroup) findViewById(R.id.radio_group);
 //        available = (RadioButton) findViewById(R.id.textView5);
 //        disable = (RadioButton) findViewById(R.id.textView7);
     }
     protected void initView(){
         tvTitle.setText("我的福利");
-        imageback.setOnClickListener(this);
 //        Intent i_available = new Intent(this, MainActivity.class);
 //        Intent i_disable = new Intent(this, FindActivity.class);
 //        mTabHost.addTab(mTabHost.newTabSpec(TAB_available).setIndicator(TAB_available)

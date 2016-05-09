@@ -61,7 +61,6 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
-    private ImageView imageback;
     //软键盘管理器
     private InputMethodManager manager;
     private ReceiveDialog dialog;
@@ -232,7 +231,8 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
     protected void initView() {
         pickerView = new OptionsPickerView(this);
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
         mGridView = (GridView) findViewById(R.id.up_load_pic);
         mEtName = (EditText) findViewById(R.id.name);
@@ -246,7 +246,6 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
 
         findViewById(R.id.btn_receive).setOnClickListener(this);
         tvTitle.setText("活动申请报名");
-        imageback.setOnClickListener(this);
         mBitmaps = new ArrayList<>();
         Bitmap defaultPic = BitmapFactory.decodeResource(getResources(), R.drawable.upload);
         mBitmaps.add(defaultPic);

@@ -14,24 +14,20 @@ import com.lijiadayuan.lishijituan.http.UrlConstants;
 public class CelebrityDetailsActivity extends Activity implements OnClickListener {
     private TextView Texttitle;
     private WebView Webcompany;
-    private ImageView iv_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_celebrity_details);
         findView();
-        initView();
         Intent intent = getIntent();
         setViewByData(intent.getStringExtra("celeName"), intent.getIntExtra("celeId",0));
     }
     private void findView(){
         Texttitle= (TextView) findViewById(R.id.text_title);
         Webcompany = (WebView) findViewById(R.id.celebrity_webView);
-        iv_back = (ImageView)findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
-    private void initView(){
-        iv_back.setOnClickListener(this);
-    }
+
     private void setViewByData(String celeName, int celeId) {
         Webcompany.loadUrl(UrlConstants.CELEBRITIEW_DETAILS + celeId);
         Texttitle.setText(celeName);

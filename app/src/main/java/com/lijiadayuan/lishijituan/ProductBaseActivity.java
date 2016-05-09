@@ -47,7 +47,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private static final int ORDEROK = 102;
 
     private ViewFlow mViewFlow;
-    private ImageView iv_back;
     private WebView mWbGoodsInfo;
     private TextView mTvGoodsName,mTvGoodsNum,mTvGoodsPrice,mTvGoodsSpec;
 
@@ -109,7 +108,9 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
 
     protected void initView(){
         mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
-        iv_back = (ImageView)findViewById(R.id.iv_back);
+
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         mWbGoodsInfo = (WebView) findViewById(R.id.WebView);
         mTvGoodsName = (TextView) findViewById(R.id.tv_goods_name);
@@ -119,7 +120,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         mBtnReceive = (Button) findViewById(R.id.i_want_receive);
 
         mBtnReceive.setOnClickListener(this);
-        iv_back.setOnClickListener(this);
 
         if (mProductViewBean.getGoodsType() == BUY_GOODS) {
 

@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 public class SettingActivity extends BaseActivity implements OnClickListener {
     private TextView tvTitle, about, law,wechat;
-    private ImageView imageback;
     private SharedPreferences mSp;
 
     @Override
@@ -30,14 +29,14 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
         about = (TextView) findViewById(R.id.iv_about);
         //law = (TextView) findViewById(R.id.iv_law);
         wechat= (TextView) findViewById(R.id.iv_wechat);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.cancle).setOnClickListener(this);
 
         tvTitle.setText("设置");
         about.setOnClickListener(this);
         //law.setOnClickListener(this);
         wechat.setOnClickListener(this);
-        imageback.setOnClickListener(this);
     }
 
     @Override

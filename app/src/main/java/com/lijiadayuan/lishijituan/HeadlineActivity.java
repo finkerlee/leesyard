@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -29,9 +30,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HeadlineActivity extends BaseActivity {
+public class HeadlineActivity extends BaseActivity implements View.OnClickListener {
     private TextView tvTitle;
-    private ImageView imageback;
     private ListView listView;
     private SimpleAdapter simp_adapter;
     private List<Map<String, Object>> dataList;
@@ -82,12 +82,22 @@ public class HeadlineActivity extends BaseActivity {
 
     protected void initView() {
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
+
         listView= (ListView) findViewById(R.id.lv_headline);
         tvTitle.setText("大院头条");
         //dataList= new ArrayList<Map<String, Object>>();
         //simp_adapter=new SimpleAdapter(this,getData(), R.layout.aheadlinedata,new String[]{"iv_date","iv_text"},new int[]{R.id.lv_headline_date,R.id.imageView2} );
         //listView.setAdapter(simp_adapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 //    public List<Map<String, Object>> getData() {
 //        for(int i=0;i<10;i++){

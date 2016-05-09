@@ -33,7 +33,6 @@ import java.util.Map;
 
 public class LishiactivityActivity extends BaseActivity implements OnClickListener {
     private TextView tvTitle;
-    private ImageView imageback;
     private ListView mListView;
 
     //图片ID数组
@@ -108,8 +107,8 @@ public class LishiactivityActivity extends BaseActivity implements OnClickListen
     protected void initView() {
         mListView = (ListView) findViewById(R.id.mListView);
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
-        imageback.setOnClickListener(this);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         tvTitle.setText("李氏活动");
     }
         @Override

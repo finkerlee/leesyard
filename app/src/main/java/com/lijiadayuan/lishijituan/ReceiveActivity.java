@@ -30,7 +30,6 @@ public class ReceiveActivity extends Activity implements OnClickListener {
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
-    private ImageView imageback;
     private ImageView photos;
     InputMethodManager manager;
     private ReceiveDialog dialog;
@@ -49,7 +48,9 @@ public class ReceiveActivity extends Activity implements OnClickListener {
     }
     protected void findViewById() {
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         photos= (ImageView) findViewById(R.id.iv_photos);
         mShowIV = (ImageView) findViewById(R.id.iv_photos);
     }
@@ -64,7 +65,6 @@ public class ReceiveActivity extends Activity implements OnClickListener {
             }
         });
         tvTitle.setText("申请报名");
-        imageback.setOnClickListener(this);
     }
     //空白处隐藏软键盘
     @Override
