@@ -40,6 +40,7 @@ import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.LocationService;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
 
@@ -158,7 +159,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 params.put("advNum",5+"");
                 params.put("topNum",10+"");
                 params.put("benNum",6+"");
-                params.put("userId","");
+                params.put("userId",UsersUtil.getUserId(MainActivity.this));
                 return params;
             }
         };
@@ -186,6 +187,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 mProductViewBean.setPicList(mlist);
                 mProductViewBean.setGoodsNum(1 + "");
                 mProductViewBean.setGoodsType(ProductBaseActivity.GIFT_GOODS);
+                mProductViewBean.setGoodStatus(mBenefitsData.get(i).getBaStatus());
                 Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
                 mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
                 startActivity(mIntent);

@@ -103,28 +103,48 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
     }
 
     private void share(int type){
-        // 初始化一个WXWebpageObject对象,填写url
-        WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "http://beijinglijiadayuan.com:8080/lees/main/download";
+//        // 初始化一个WXWebpageObject对象,填写url
+//        WXWebpageObject webpage = new WXWebpageObject();
+//        webpage.webpageUrl = "http://beijinglijiadayuan.com:8080/lees/main/download";
+//
+//        // 用WXWebpageObject对象初始化一个WXMediaMessage对象,填写标题 描述
+//        WXMediaMessage message = new WXMediaMessage(webpage);
+//        message.title = "北京李家大院";
+//        message.description = "欢迎下载北京李家大院APP";
+//        Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+//
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        thumb.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//
+//        message.thumbData = baos.toByteArray();
+//
+//        // 构造一个Req
+//        SendMessageToWX.Req req = new SendMessageToWX.Req();
+//        req.transaction = buildTransaction("webpage");
+//
+//        req.message = message;
+////                req.scene   设置分享到朋友圈还是分享给好友
+//        req.scene = type;
+//        weiXinApi.sendReq(req);
 
-        // 用WXWebpageObject对象初始化一个WXMediaMessage对象,填写标题 描述
-        WXMediaMessage message = new WXMediaMessage(webpage);
-        message.title = "北京李家大院";
-        message.description = "欢迎下载北京李家大院APP";
+
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = "http://www.baidu.com";
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title = "WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long";
+        msg.description = "WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description Very Long Very Long Very Long Very Long Very Long Very Long Very Long";
         Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         thumb.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        msg.thumbData = baos.toByteArray();
 
-        message.thumbData = baos.toByteArray();
-
-        // 构造一个Req
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("webpage");
-
-        req.message = message;
-//                req.scene   设置分享到朋友圈还是分享给好友
+        req.message = msg;
         req.scene = type;
+        //req.openId = getOpenId();
         weiXinApi.sendReq(req);
+
     }
 }
