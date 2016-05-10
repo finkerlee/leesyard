@@ -116,6 +116,7 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onClick(View view) {
                         //TODO 删除订单
+
                     }
                 });
             }

@@ -29,7 +29,7 @@ public class ProductViewBean implements Parcelable{
     private String goodsPic; //商品展示的图片
     private int goodsStock; //商品的最大购买数量
     private String goodsId; //商品id
-
+    private int goodStatus; //当前商品的状态 主要是福利商品
     public ProductViewBean(){
 
     }
@@ -41,32 +41,18 @@ public class ProductViewBean implements Parcelable{
         goodsNum = in.readString();
         goodsSpec = in.readString();
         goodsPrice = in.readString();
-        goodsOtherName = in.readString();
+        goodsIntro = in.readString();
+        goodsVerify = in.readInt();
         goodsType = in.readInt();
+        goodsDetail = in.readString();
         goodsInfoUrl = in.readString();
+        goodsInfoIncrease = in.readString();
+        goodsThumb = in.readString();
+        goodsOtherName = in.readString();
         goodsPic = in.readString();
         goodsStock = in.readInt();
         goodsId = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringList(picList);
-        dest.writeString(goodsName);
-        dest.writeString(goodsNum);
-        dest.writeString(goodsSpec);
-        dest.writeString(goodsPrice);
-        dest.writeString(goodsOtherName);
-        dest.writeInt(goodsType);
-        dest.writeString(goodsInfoUrl);
-        dest.writeString(goodsPic);
-        dest.writeInt(goodsStock);
-        dest.writeString(goodsId);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
+        goodStatus = in.readInt();
     }
 
     public static final Creator<ProductViewBean> CREATOR = new Creator<ProductViewBean>() {
@@ -80,6 +66,14 @@ public class ProductViewBean implements Parcelable{
             return new ProductViewBean[size];
         }
     };
+
+    public int getGoodStatus() {
+        return goodStatus;
+    }
+
+    public void setGoodStatus(int goodStatus) {
+        this.goodStatus = goodStatus;
+    }
 
     public String getGoodsId() {
         return goodsId;
@@ -254,8 +248,30 @@ public class ProductViewBean implements Parcelable{
         return mProductViewBean;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-
-
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringList(picList);
+        dest.writeString(goodsName);
+        dest.writeString(goodsNum);
+        dest.writeString(goodsSpec);
+        dest.writeString(goodsPrice);
+        dest.writeString(goodsIntro);
+        dest.writeInt(goodsVerify);
+        dest.writeInt(goodsType);
+        dest.writeString(goodsDetail);
+        dest.writeString(goodsInfoUrl);
+        dest.writeString(goodsInfoIncrease);
+        dest.writeString(goodsThumb);
+        dest.writeString(goodsOtherName);
+        dest.writeString(goodsPic);
+        dest.writeInt(goodsStock);
+        dest.writeString(goodsId);
+        dest.writeInt(goodStatus);
+    }
 }
 

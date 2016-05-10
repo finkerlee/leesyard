@@ -105,6 +105,7 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
         mEtPhone = (EditText) findViewById(R.id.phone);
         mEtAddress = (EditText) findViewById(R.id.address);
         mEtSituation = (EditText) findViewById(R.id.situation);
+        findViewById(R.id.btn_receive).setOnClickListener(this);
 
         findViewById(R.id.iv_back).setOnClickListener(this);
         tvTitle.setText("申请领取");
@@ -290,13 +291,18 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
                                 public void onResponse(String response) {
                                     JsonObject mJsonObj = JsonParseUtil.getJsonByString(response).getAsJsonObject();
                                     if (JsonParseUtil.isSuccess(mJsonObj)){
-                                        Toast.makeText(SubmitDataActivity.this,"ok",Toast.LENGTH_LONG).show();
+                                        if ("1".equals(mJsonObj.get("response_data").getAsString())){
+                                            Toast.makeText(SubmitDataActivity.this,"已提交申请,请耐心等待",Toast.LENGTH_LONG).show();
+                                            finish();
+                                        }else{
+                                            Toast.makeText(SubmitDataActivity.this,"提交失败",Toast.LENGTH_LONG).show();
+                                        }
                                     }
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(SubmitDataActivity.this,"faile",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SubmitDataActivity.this,"提交失败",Toast.LENGTH_LONG).show();
                                 }
                             }){
                                 @Override
