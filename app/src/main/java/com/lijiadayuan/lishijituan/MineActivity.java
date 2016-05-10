@@ -103,7 +103,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         dimensional= (RelativeLayout) findViewById(R.id.iv_2D);
         member= (RelativeLayout) findViewById(R.id.iv_member);
         welfare= (RelativeLayout) findViewById(R.id.iv_welfare);
-        join= (RelativeLayout) findViewById(R.id.iv_us);
+//        join= (RelativeLayout) findViewById(R.id.iv_us);
         mymessage= (RelativeLayout) findViewById(R.id.iv_mymessage);
         headImage = (SimpleDraweeView) findViewById(R.id.iv_avatar);
         mTvUserName = (TextView) findViewById(R.id.iv_name);
@@ -115,7 +115,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         setting.setOnClickListener(this);
         dimensional.setOnClickListener(this);
         member.setOnClickListener(this);
-        join.setOnClickListener(this);
+//        join.setOnClickListener(this);
         mymessage.setOnClickListener(this);
         headImage.setOnClickListener(this);
 
@@ -171,9 +171,9 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                     goLogin();
                 }
                 break;
-            case R.id.iv_us:
-                startActivity(new Intent(MineActivity.this,JoinusActivity.class));
-                break;
+//            case R.id.iv_us:
+//                startActivity(new Intent(MineActivity.this,JoinusActivity.class));
+//                break;
             case R.id.iv_mymessage:
                 if (isLogin){
                     startActivity(new Intent(MineActivity.this,MymessageActivity.class));

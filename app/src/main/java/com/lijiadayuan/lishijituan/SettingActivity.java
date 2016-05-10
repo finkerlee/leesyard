@@ -127,7 +127,6 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 //        req.scene = type;
 //        weiXinApi.sendReq(req);
 
-
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = "http://www.baidu.com";
         WXMediaMessage msg = new WXMediaMessage(webpage);

@@ -38,13 +38,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-
-
         <service android:name=".LeeService" />
+
         <activity
             android:name=".LauncherActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -77,14 +75,13 @@
         <activity android:name=".LawActivity" />
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".MoreActivity" />
-
-        <activity android:name=".SearchResultActivity"/>
-        <activity android:name=".ApplyRedsActivity" android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity android:name=".ApplyTicketActivity" android:windowSoftInputMode="adjustPan|stateHidden" />
-
-
-
-
+        <activity android:name=".SearchResultActivity" />
+        <activity
+            android:name=".ApplyRedsActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ApplyTicketActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -112,7 +109,6 @@
         <activity android:name=".ReceiveActivity" />
         <activity android:name=".CompanyProfileActivity" />
         <activity android:name=".SubmitDataActivity" />
-
 
         <!-- jpush -->
         <!-- Required SDK核心功能 -->
@@ -229,7 +225,7 @@
             android:enabled="true"
             android:process=":remote">
             <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2"></action>
+                <action android:name="com.baidu.location.service_v2.2" />
             </intent-filter>
         </service>
 
@@ -243,28 +239,28 @@
             android:name="JPUSH_APPKEY"
             android:value="518f6acc731be8f9c1ddd870" />
         <meta-data
-            android:name="design_width" android:value="1080"/>
+            android:name="design_width"
+            android:value="1080" />
         <meta-data
-            android:name="design_height" android:value="1920"/>
+            android:name="design_height"
+            android:value="1920" />
 
         <!-- </>值来自开发者平台取得的AppKey -->
         <activity android:name=".TicketTicapplyActivity" />
-        <activity android:name=".CelebrityDetailsActivity"></activity>
+        <activity android:name=".CelebrityDetailsActivity" />
 
-
-        <!--支付宝 -->
+        <!-- 支付宝 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
+        <activity android:name=".HeadlineDetailsActivity"></activity>
     </application>
 
 </manifest>

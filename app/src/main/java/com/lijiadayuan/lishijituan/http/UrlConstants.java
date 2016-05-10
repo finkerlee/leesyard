@@ -89,7 +89,8 @@ public interface UrlConstants {
     //
     //大院头条
     String HEAD_LINE = BASE_URL+ "topic/"+"all";
-
+    //大院头条详情
+    String HEAD_LINE_DETAILS= BASE_URL + "topic/detail?topId=";
     //商品订单
     String ORDER = BASE_URL + "po/";
     //下单

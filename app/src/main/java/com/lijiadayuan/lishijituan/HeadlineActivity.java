@@ -1,10 +1,12 @@
 package com.lijiadayuan.lishijituan;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -20,10 +22,13 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonArray;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
+import com.lijiadayuan.lishijituan.bean.Resources;
 import com.lijiadayuan.lishijituan.bean.Topics;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.DateTimeUtil;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
+
+import org.apache.log4j.lf5.util.Resource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,8 +38,6 @@ import java.util.Map;
 public class HeadlineActivity extends BaseActivity implements View.OnClickListener {
     private TextView tvTitle;
     private ListView listView;
-    private SimpleAdapter simp_adapter;
-    private List<Map<String, Object>> dataList;
     private ArrayList<Topics> mList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,16 @@ public class HeadlineActivity extends BaseActivity implements View.OnClickListen
                          }
                      };
                      listView.setAdapter(mAdpter);
+                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                         @Override
+                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                             Intent hintent=new Intent(HeadlineActivity.this,HeadlineDetailsActivity.class);
+                             Topics mtopics=mList.get(position);
+                             hintent.putExtra("topTitle",mtopics.getTopTitle());
+                             hintent.putExtra("topId",mtopics.getTopId());
+                             startActivity(hintent);
+                         }
+                     });
                  }
             }
         }, new Response.ErrorListener() {

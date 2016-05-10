@@ -303,41 +303,41 @@
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
             android:background="#b4b4b4"/>
-        <RelativeLayout
-            android:id="@+id/iv_us"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:layout_marginRight="20dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/come_join_us"
-                android:layout_alignParentLeft="true"
-                android:id="@+id/iv_come_join_us"
-                android:layout_centerVertical="true"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:text="加入我们"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/iv_come_join_us"
-                android:layout_centerVertical="true"/>
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/key"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/iv_us"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="47dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:layout_marginRight="20dp">-->
+            <!--<ImageView-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:background="@drawable/come_join_us"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:id="@+id/iv_come_join_us"-->
+                <!--android:layout_centerVertical="true"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="16dp"-->
+                <!--android:text="加入我们"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_toRightOf="@+id/iv_come_join_us"-->
+                <!--android:layout_centerVertical="true"/>-->
+            <!--<ImageView-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:background="@drawable/key"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"/>-->
 
-        </RelativeLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="#b4b4b4"/>
+        <!--</RelativeLayout>-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:background="#b4b4b4"/>-->
     </LinearLayout>
 </RelativeLayout>
     </ScrollView>
