@@ -81,25 +81,27 @@
     <View
         android:layout_width="10dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1"/>
     <LinearLayout
         android:id="@+id/layout_share"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        >
+        android:visibility="gone"
+        android:layout_marginBottom="10dp">
         <Button
             android:id="@+id/friend_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="朋友圈"
-            />
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/circlefriends" />
+
         <Button
             android:id="@+id/friend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="朋友"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/friends"
             />
     </LinearLayout>
 </LinearLayout>

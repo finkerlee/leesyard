@@ -7,5 +7,5 @@
         android:id="@+id/itemImage"
         android:layout_width="205dp"
         android:layout_height="120dp"/>　　 　　
-        
+
 </RelativeLayout>
