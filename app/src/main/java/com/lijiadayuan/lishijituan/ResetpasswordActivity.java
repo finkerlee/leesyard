@@ -103,7 +103,7 @@ public class ResetpasswordActivity extends BaseActivity implements View.OnClickL
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
-                        params.put("userPhone ", phonenum);
+                        params.put("userPhone", phonenum);
                         params.put("password", pass1.getText().toString().trim());
                         return params;
                     }
