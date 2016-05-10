@@ -5,8 +5,7 @@
 
     <com.facebook.drawee.view.SimpleDraweeView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/itemImage"
-        android:layout_width="180dp"
-        android:layout_height="120dp"
-        app:roundedCornerRadius="10dp"/>　　 　　
-
+        android:layout_width="205dp"
+        android:layout_height="120dp"/>　　 　　
+        
 </RelativeLayout>

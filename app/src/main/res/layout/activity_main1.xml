@@ -108,8 +108,8 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="30px"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1"/>
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
             <com.lijiadayuan.lishijituan.view.MyGrideView
                 android:id="@+id/mGridView"
                 android:layout_width="wrap_content"
-                android:layout_height="720px"
+                android:layout_height="700px"
                 android:numColumns="3"
                 android:horizontalSpacing="5dip"
                 android:verticalSpacing="5dip"
@@ -155,8 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/red_packet"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1"/>
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -164,8 +163,7 @@
                 android:text="常用工具"
                 android:textColor="#696969"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                />
+                android:layout_marginLeft="15dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -248,8 +246,8 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_alignParentTop="true"
-        >
+        android:layout_alignParentTop="true">
+
         <ImageView
             android:layout_width="60px"
             android:layout_height="60px"
@@ -265,8 +263,7 @@
             android:layout_weight="1"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/search_edittext_shape"
-            >
+            android:background="@drawable/search_edittext_shape">
             <ImageView
                 android:layout_width="60px"
                 android:layout_height="60px"

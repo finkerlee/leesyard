@@ -63,6 +63,7 @@ public class TicketActivity extends BaseActivity implements OnClickListener {
     protected void initView() {
         gridView = (GridView) findViewById(R.id.culture_gridView);
         tvTitle = (TextView) findViewById(R.id.text_title);
+        tvTitle.setText("卡票");
 
         findViewById(R.id.iv_back).setOnClickListener(this);
 
