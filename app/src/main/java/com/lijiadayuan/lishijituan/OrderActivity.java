@@ -276,7 +276,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         if (null == mProductViewBean.getGoodsThumb()){
             mIvPic.setImageURI(Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image));
         }else{
-            mIvPic.setImageURI(Uri.parse(mProductViewBean.getGoodsPic()));
+            mIvPic.setImageURI(Uri.parse(mProductViewBean.getGoodsThumb()));
         }
         //根据当前的模式 设置商品信息
         if (mProductViewBean.getGoodsType() == ProductBaseActivity.GIFT_GOODS){

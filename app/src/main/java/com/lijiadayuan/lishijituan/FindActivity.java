@@ -85,7 +85,7 @@ public class FindActivity extends BaseActivity {
                             Intent mIntent = new Intent(FindActivity.this,ProductBaseActivity.class);
                             ProductViewBean mProductViewBean = ProductViewBean.getProductViewBean(mList.get(position), ProductBaseActivity.BUY_GOODS);
                             Log.i("main",mProductViewBean.getGoodsType()+"");
-                          mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
+                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                             startActivity(mIntent);
                         }
                     });

@@ -105,14 +105,17 @@ public class ImagePagerAdapter extends BaseAdapter {
 				AdvView mAdvView = mAdvViewList.get(position);
 				mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
 				mProductViewBean.setGoodsName(mAdvView.getProName());
-				mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mAdvView.getProId());
+				mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mAdvView.getProId());
 				mProductViewBean.setGoodsSpec(mAdvView.getProSpec());
-				ArrayList<String> mlist= new ArrayList<String>();
-				mlist.add(mAdvViewList.get(position).getProImg());
-				mProductViewBean.setGoodsId(mAdvView.getProId());
-				mProductViewBean.setPicList(mlist);
 				mProductViewBean.setGoodsNum(1+"");
-				mProductViewBean.setGoodsPic(mAdvView.getProThumb());
+				mProductViewBean.setGoodsThumb(mAdvView.getProThumb());
+				mProductViewBean.setGoodsPic(mAdvView.getProImg());
+				String [] pics = mAdvView.getProImg().split(",");
+				ArrayList<String> mlist = new ArrayList<>();
+				for (String s : pics){
+					mlist.add(s);
+				}
+				mProductViewBean.setPicList(mlist);
 				mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
 
 				Intent mIntent = new Intent(context,ProductBaseActivity.class);

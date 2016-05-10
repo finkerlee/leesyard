@@ -101,6 +101,8 @@ public interface UrlConstants {
     String QUERY_ALL_GOODS_INFO = ORDER + "all";
     //查询某用户某状态的所有商品订单信息
     String QUERY_ALL_GOODS_INFO_BY_USERSTATE = ORDER + "status";
+    //删除订单
+    String DELETE_ORDER = ORDER + "delete";
 
     //管理收货地址
     String ADDRESS = BASE_URL + "address/";

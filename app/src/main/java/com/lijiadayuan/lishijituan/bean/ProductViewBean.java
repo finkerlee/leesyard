@@ -220,7 +220,12 @@ public class ProductViewBean implements Parcelable{
         mProductViewBean.setGoodsSpec(mWelfareGoodsBean.getBenSpec());
         mProductViewBean.setGoodsPrice(mWelfareGoodsBean.getBenPrice() + "");
         mProductViewBean.setGoodsType(type);
-        //mProductViewBean.setPicList();
+        String [] pics = mWelfareGoodsBean.getBenImg().split(",");
+        ArrayList<String> mlist = new ArrayList<>();
+        for (String s : pics){
+            mlist.add(s);
+        }
+        mProductViewBean.setPicList(mlist);
         return mProductViewBean;
     }
     /**
@@ -238,8 +243,16 @@ public class ProductViewBean implements Parcelable{
         mProductViewBean.setGoodsNum(mProduct.getProStock() + "");
         mProductViewBean.setGoodsSpec(mProduct.getProSpec());
         mProductViewBean.setGoodsPrice(mProduct.getProPrice() + "");
-        mProductViewBean.setGoodsThumb(mProduct.getProThumb());//轮播图地址
+        mProductViewBean.setGoodsThumb(mProduct.getProThumb());
         mProductViewBean.setGoodsOtherName(mProduct.getProSubtitle());
+
+        String [] pics = mProduct.getProImg().split(",");
+        ArrayList<String> mlist = new ArrayList<>();
+        for (String s : pics){
+            mlist.add(s);
+        }
+        mProductViewBean.setPicList(mlist);
+        mProductViewBean.setGoodsPic(mProduct.getProImg());  //轮播图地址
 //        mProductViewBean.setPicList(mProduct.getp() + "");
         mProductViewBean.setGoodsType(type);
         mProductViewBean.setGoodsStock(mProduct.getProStock());
