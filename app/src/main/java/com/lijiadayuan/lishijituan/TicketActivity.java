@@ -47,7 +47,6 @@ import java.util.Map;
 public class TicketActivity extends BaseActivity implements OnClickListener {
     private GridView gridView;
     private TextView tvTitle;
-    private ImageView imageback;
     private String[] images;
     private ArrayList<Tickets> mList;
 
@@ -64,8 +63,8 @@ public class TicketActivity extends BaseActivity implements OnClickListener {
     protected void initView() {
         gridView = (GridView) findViewById(R.id.culture_gridView);
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
-        imageback.setOnClickListener(this);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
 
     }
 

@@ -37,7 +37,6 @@ import java.util.Map;
 public class SearchResultActivity extends BaseActivity  implements View.OnClickListener{
     private ListView mLv;
     private ArrayList<Product> mList;
-    private ImageView iv_back;
     private String key = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +103,8 @@ public class SearchResultActivity extends BaseActivity  implements View.OnClickL
 
     private void initView() {
         mLv = (ListView) findViewById(R.id.lv_search_result);
-        iv_back = (ImageView) findViewById(R.id.iv_back);
-        iv_back.setOnClickListener(this);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
 
     @Override

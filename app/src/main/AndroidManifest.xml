@@ -51,7 +51,7 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".YonghuActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" android:launchMode="singleTask"/>
         <activity android:name=".ForgetpasswordActivtiy" />
         <activity android:name=".ResetpasswordActivity" />
         <activity android:name=".BaseWebActivity" />

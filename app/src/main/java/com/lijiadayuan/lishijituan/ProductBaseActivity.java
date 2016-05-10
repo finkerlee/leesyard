@@ -47,7 +47,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private static final int ORDEROK = 102;
 
     private ViewFlow mViewFlow;
-    private ImageView iv_back;
     private WebView mWbGoodsInfo;
     private TextView mTvGoodsName,mTvGoodsNum,mTvGoodsPrice,mTvGoodsSpec;
 
@@ -109,7 +108,9 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
 
     protected void initView(){
         mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
-        iv_back = (ImageView)findViewById(R.id.iv_back);
+
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         mWbGoodsInfo = (WebView) findViewById(R.id.WebView);
         mTvGoodsName = (TextView) findViewById(R.id.tv_goods_name);
@@ -119,7 +120,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         mBtnReceive = (Button) findViewById(R.id.i_want_receive);
 
         mBtnReceive.setOnClickListener(this);
-        iv_back.setOnClickListener(this);
 
         if (mProductViewBean.getGoodsType() == BUY_GOODS) {
 
@@ -127,6 +127,8 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         }else{
             mBtnReceive.setText("我要领取");
         }
+
+
     }
 
     private void initBanner(ArrayList<String> imageUrlList) {
@@ -172,17 +174,44 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                    }else{
                        //判断是否认证为姓李
                        if (UsersUtil.isLee(ProductBaseActivity.this)){
-                           //判断是否需要提交认证资料
-                           if (mProductViewBean.getGoodsVerify() == 0){
+                           //判断当前用户是否领取过福利商品的标识,0:未领取,未申请; 1:已申请未审核; 2:审核通过,可领取; 3:已领取; -1:审核失败
+                           if(mProductViewBean.getGoodStatus() == 0){
+                               //判断是否需要提交认证资料
+                               if (mProductViewBean.getGoodsVerify() == 0){
 
-                               Intent intent = new Intent(this,OrderActivity.class);
-                               intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
-                               startActivityForResult(intent, ORDEROK);
-                           }else{
+
+                                   Intent intent = new Intent(this,OrderActivity.class);
+                                   intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
+                                   startActivityForResult(intent, ORDEROK);
+                               }else{
+                                   Intent intent = new Intent(this,SubmitDataActivity.class);
+                                   intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
+                                   startActivityForResult(intent, ORDEROK);
+                               }
+                           }
+                           //审核通过,可以领取
+                           if (mProductViewBean.getGoodStatus() == 2){
                                Intent intent = new Intent(this,SubmitDataActivity.class);
                                intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
                                startActivityForResult(intent, ORDEROK);
                            }
+
+                           if (mProductViewBean.getGoodStatus() == 1){
+                               Toast.makeText(ProductBaseActivity.this,"你已提交申请,请耐心等待",Toast.LENGTH_SHORT).show();
+                           }
+
+                           if (mProductViewBean.getGoodStatus() == 3){
+                               Toast.makeText(ProductBaseActivity.this,"你已领取该商品",Toast.LENGTH_SHORT).show();
+                           }
+
+                           if (mProductViewBean.getGoodStatus() == -1){
+                               Toast.makeText(ProductBaseActivity.this,"审核失败,请从新提交",Toast.LENGTH_SHORT).show();
+                               Intent intent = new Intent(this,SubmitDataActivity.class);
+                               intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
+                               startActivityForResult(intent, ORDEROK);
+                           }
+
+
                        }else{
                            //跳往认证页面
                            Intent intent = new Intent(this,MemberActivity.class);
@@ -191,8 +220,8 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                        }
                    }
                }else{
-                   Intent intent = new Intent(this,LoginActivity.class);
-                   startActivityForResult(intent,LOGIN);
+                   Intent intent = new Intent(this, LoginActivity.class);
+                   startActivityForResult(intent, LOGIN);
                }
            break;
            case R.id.iv_back:

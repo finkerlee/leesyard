@@ -18,6 +18,8 @@ public class UsersUtil {
      */
     public static boolean isLee(Context mContext){
         SharedPreferences mSp = mContext.getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
+        Boolean s = mSp.getBoolean(KeyConstants.UserInfoKey.userIfLee, false);
+        Boolean b = mSp.getBoolean(KeyConstants.UserInfoKey.userIsLogin, false);
         return mSp.getBoolean(KeyConstants.UserInfoKey.userIfLee,false);
     }
 

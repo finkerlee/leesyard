@@ -19,6 +19,8 @@ import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,12 +35,18 @@ public class LauncherActivity extends BaseActivity{
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor editor;
+    //微信用到的appid
+    public static final String APP_ID = "wxc4a07077153cb3a2";
+    private IWXAPI weiXinApi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         mSharedPreferences = getSharedPreferences("userInfo", 0);
         editor = mSharedPreferences.edit();
+        weiXinApi = WXAPIFactory.createWXAPI(this, APP_ID, false);
+        weiXinApi.registerApp(APP_ID);
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 /* Create an Intent that will start the Main WordPress Activity. */
@@ -71,13 +79,13 @@ public class LauncherActivity extends BaseActivity{
                             Users user = mGson.fromJson(data,Users.class);
                             System.out.println("user: ========" + data.toString());
                             editor.clear();
-                            editor.putString(KeyConstants.UserInfoKey.userId, user.getUserId());
+                            editor.putString(KeyConstants.UserInfoKey.userId,user.getUserId());
                             editor.putString(KeyConstants.UserInfoKey.userName, user.getUserName());
                             editor.putString(KeyConstants.UserInfoKey.userNick, user.getUserNick());
                             editor.putString(KeyConstants.UserInfoKey.userPhone, user.getUserPhone());
                             editor.putString(KeyConstants.UserInfoKey.userPassword, user.getUserPassword());
                             editor.putString(KeyConstants.UserInfoKey.userHeadImage, user.getUserAvatar());
-                            Log.i("main", user.toString());
+                            editor.putBoolean(KeyConstants.UserInfoKey.userIfLee, user.getUserIfLee() == 1 ? true : false);
                             editor.putBoolean(KeyConstants.UserInfoKey.userIsLogin, true);
                             editor.commit();
                             JPushInterface.setAliasAndTags(LauncherActivity.this, user.getUserId(),

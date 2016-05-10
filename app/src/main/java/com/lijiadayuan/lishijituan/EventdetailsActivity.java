@@ -15,7 +15,6 @@ import com.lijiadayuan.lishijituan.utils.KeyConstants;
 
 public class EventdetailsActivity extends Activity implements OnClickListener {
     private TextView tvTitle;
-    private ImageView imageback;
     private Button enroll;
     private WebView mWbDetail;
     private Activites mActivites;
@@ -30,13 +29,12 @@ public class EventdetailsActivity extends Activity implements OnClickListener {
     }
     protected void findViewById() {
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
         enroll= (Button) findViewById(R.id.btn_enroll);
         mWbDetail = (WebView) findViewById(R.id.activity_detail);
     }
     protected void initView() {
         tvTitle.setText("活动详情");
-        imageback.setOnClickListener(this);
         enroll.setOnClickListener(this);
         mWbDetail.loadUrl("www.baidu.com");
     }

@@ -5,6 +5,8 @@ package com.lijiadayuan.lishijituan.http;
  * E-mail:johnyylee@163.com
  */
 public interface UrlConstants {
+    //http://192.168.0.103:8080/
+    //http://beijinglijiadayuan.com:8080/lees
     String BASE_URL = "http://192.168.0.103:8080/";                     // 测试地址
     //首页的数据
     String MAIN_PAGE_URL = BASE_URL + "main/index";

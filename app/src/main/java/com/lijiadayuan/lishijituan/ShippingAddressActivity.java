@@ -53,7 +53,6 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
     private EditText editTextaddress,editTextname,editTextphone,editTextdetailed;
     private WheelDialog dialog;
     private TextView tvTitle;
-    private ImageView imageback;
     private Button btnsave;
     private Addresses address;
     private String mAddId;
@@ -97,14 +96,14 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
     }
     protected void initView(){
         tvTitle= (TextView) findViewById(R.id.text_title);
-        imageback= (ImageView) findViewById(R.id.iv_back);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         btnsave= (Button) findViewById(R.id.btn_save);
         editTextname= (EditText) findViewById(R.id.et_name_address);
         editTextphone= (EditText) findViewById(R.id.et_phone_address);
         editTextdetailed= (EditText) findViewById(R.id.et_detailed_address);
 
         tvTitle.setText("收货地址");
-        imageback.setOnClickListener(this);
         btnsave.setOnClickListener(this);
         editTextphone.setOnClickListener(this);
         editTextdetailed.setOnClickListener(this);

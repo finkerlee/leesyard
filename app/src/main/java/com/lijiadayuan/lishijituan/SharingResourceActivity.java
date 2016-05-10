@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 public class SharingResourceActivity extends BaseActivity implements OnClickListener {
     private TextView tvTitle;
-    private ImageView imageback;
     private GridView gridView;
     ArrayList<Resources> mList;
     //图片ID数组
@@ -43,13 +42,14 @@ public class SharingResourceActivity extends BaseActivity implements OnClickList
 
     protected void findViewById() {
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
         gridView = (GridView) findViewById(R.id.mGridView);
     }
 
     protected void initView() {
         tvTitle.setText("共享资源");
-        imageback.setOnClickListener(this);
     }
     //加载数据
     private void initData() {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
@@ -50,8 +51,6 @@ public class AddressActivity extends BaseActivity implements OnClickListener {
     private ListView catergory_listview;
     private Button button;
     private TextView tvTitle;
-    private ImageView imageback;
-    private SharedPreferences mSharedPreferences;
     private ArrayList<Addresses> AList;
     private QuickAdapter<Addresses> adapter;
     private RequestQueue mQueue;
@@ -63,7 +62,6 @@ public class AddressActivity extends BaseActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
-        mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
         currentMode = getIntent().getStringExtra(KeyConstants.IntentPageKey.AddressMode);
         initView();
         initdata();
@@ -72,11 +70,10 @@ public class AddressActivity extends BaseActivity implements OnClickListener {
     private void initView() {
         button = (Button) findViewById(R.id.id_address);
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
         catergory_listview = (ListView) this.findViewById(R.id.address_listview);
         button.setOnClickListener(this);
         tvTitle.setText("地址管理");
-        imageback.setOnClickListener(this);
         AList = new ArrayList<>();
         adapter = new QuickAdapter<Addresses>(AddressActivity.this, R.layout.activity_address_item, AList) {
             @Override

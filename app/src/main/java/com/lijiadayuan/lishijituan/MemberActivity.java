@@ -66,7 +66,6 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
         private EditText id;//身份证
         private Button mBtnVerification;
 
-        private ImageView imageback;
 
         private final int OPEN_ALBUM_FLAG = 1023;//第一张相册打开
         private final int OPEN_CAMERA_FLAG = 1024;//第一张拍照
@@ -110,7 +109,8 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
 
         protected void findViewById() {
             tvTitle = (TextView) findViewById(R.id.text_title);
-            imageback = (ImageView) findViewById(R.id.iv_back);
+
+            findViewById(R.id.iv_back).setOnClickListener(this);
             photos = (ImageView) findViewById(R.id.iv_photos_correct);
             mShowIV = (ImageView) findViewById(R.id.iv_photos_correct);
             photos2 = (ImageView) findViewById(R.id.iv_photos_opposite);
@@ -129,7 +129,6 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
 
         protected void initView() {
             tvTitle.setText("认证会员");
-            imageback.setOnClickListener(this);
             photos.setOnClickListener(new View.OnClickListener() {
 
                 @Override

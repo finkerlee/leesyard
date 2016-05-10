@@ -21,7 +21,6 @@ import java.util.Map;
 
 public class MymessageActivity extends Activity implements View.OnClickListener{
     private TextView tvTitle;
-    private ImageView imageback;
     private ListView listView;
     private LocalUtils mLocalUtils;
     private QuickAdapter<MyMessage> mAdpter;
@@ -64,13 +63,14 @@ public class MymessageActivity extends Activity implements View.OnClickListener{
     }
     protected void initView(){
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
+
         listView= (ListView) findViewById(R.id.listView);
         findViewById(R.id.clear_message).setOnClickListener(this);
         findViewById(R.id.read_all_message).setOnClickListener(this);
         mLayoutNoMessage = (LinearLayout) findViewById(R.id.layout_no_message);
         tvTitle.setText("我的消息");
-        imageback.setOnClickListener(this);
     }
 
     @Override

@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 public class CelebrityActivity extends BaseActivity implements View.OnClickListener{
     private TextView tvTitle;
-    private ImageView imageback;
     ArrayList<Celebrities> mList;
     private ListView listView;
     @Override
@@ -38,12 +37,11 @@ public class CelebrityActivity extends BaseActivity implements View.OnClickListe
     }
     private void findViewById(){
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
         listView= (ListView) findViewById(R.id.celebrity_listview);
     }
     private void initView(){
         tvTitle.setText("李氏名人");
-        imageback.setOnClickListener(this);
     }
     private void initdata(){
         //请求队列

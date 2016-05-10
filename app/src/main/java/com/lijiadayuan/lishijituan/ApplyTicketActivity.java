@@ -61,7 +61,6 @@ public class ApplyTicketActivity extends BaseActivity implements OnClickListener
     private final int OPEN_ALBUM_FLAG = 1023;
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
-    private ImageView imageback;
     //软键盘管理器
     private InputMethodManager manager;
     private ReceiveDialog dialog;
@@ -145,14 +144,13 @@ public class ApplyTicketActivity extends BaseActivity implements OnClickListener
 
     protected void initView() {
         tvTitle = (TextView) findViewById(R.id.text_title);
-        imageback = (ImageView) findViewById(R.id.iv_back);
+        findViewById(R.id.iv_back).setOnClickListener(this);
         mGridView = (GridView) findViewById(R.id.up_load_pic);
         mEtName = (EditText) findViewById(R.id.name);
         mEtPhoneNum = (EditText) findViewById(R.id.phone_num);
         mEtAccount = (EditText) findViewById(R.id.account_name);
         findViewById(R.id.btn_receive).setOnClickListener(this);
         tvTitle.setText("卡票领取");
-        imageback.setOnClickListener(this);
         mBitmaps = new ArrayList<>();
         Bitmap defaultPic = BitmapFactory.decodeResource(getResources(), R.drawable.upload);
         mBitmaps.add(defaultPic);

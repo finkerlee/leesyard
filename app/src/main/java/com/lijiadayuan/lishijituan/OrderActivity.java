@@ -39,6 +39,9 @@ import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.PayUtils;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -95,6 +98,10 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
 
     private Handler mHandler;
 
+    public static final String APP_ID = "wxc4a07077153cb3a2";
+
+    private IWXAPI weiXinApi;
+
 
 
     /**
@@ -110,6 +117,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order1);
+        weiXinApi = WXAPIFactory.createWXAPI(this, APP_ID);
         mHandler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -381,6 +389,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mGoodsNum = Integer.parseInt(mTvBuyGoodsNum.getText().toString());
             mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice())*mGoodsNum;
         }
+
+
 //        String sign = "partner=\"2088221309346686\"&seller_id=\"bjlijiadayuan@sina.com\"&out_trade_no=\"LPO0000000066\"&subject=\"null\"&body=\"李家大院\"&total_fee=\"11600.0\"&notify_url=\"http://beijinglijiadayuan.com:8080/pay/alipay\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&return_url=\"m.alipay.com\"&sign=\"dFgNs9rRkvtOdY7AkPTGkXGgXrWa%2BKbYHtmnRnhfWs1UVMzA%2F3Q9u7bFh8of%2BU1l%2BvZIqMMFFd1h6QQga2t3wzzlm1e2D0RZKWv6QnJTWaK2pR2Zz9PfW8Gz01vr1jV68D89J8FpA58mPBKLxdK9NwSVD0crq1MeN76g6iA6BYU%3D\"&sign_type=\"RSA\"";
 //        aliPay(sign);
         StringRequest mAccountRequest = new StringRequest(Request.Method.POST, UrlConstants.ORDERS,
@@ -391,11 +401,38 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                         if (JsonParseUtil.isSuccess(mJsonObject)){
                            if (mJsonObject.has("response_data")){
                                JsonObject JsonObj = mJsonObject.get("response_data").getAsJsonObject();
-                               if (JsonObj.has("sign")){
-                                   //String sign = "jc88JhzGKXjErPEcj38Wr5%2BfgAKmNUCJI1Ta2mc8wwVlvR1bqWkOJKOWuni1skPT31R2%2FJ1mz9t2QCNblQppYNn8Ugg5B4emg4%2BM3P%2BhYk0gPbSCWMAkJN3xvwpqPkWMMkAarawOZO2vWhx9YynENV1fQ%2BlfTBU25P4ssXcRwAs%3D";
-                                   String sign = JsonObj.get("sign").getAsString();
-                                   aliPay(sign);
+                               if (mRbAli.isChecked()){
+                                   if (JsonObj.has("sign")){
+                                       //String sign = "jc88JhzGKXjErPEcj38Wr5%2BfgAKmNUCJI1Ta2mc8wwVlvR1bqWkOJKOWuni1skPT31R2%2FJ1mz9t2QCNblQppYNn8Ugg5B4emg4%2BM3P%2BhYk0gPbSCWMAkJN3xvwpqPkWMMkAarawOZO2vWhx9YynENV1fQ%2BlfTBU25P4ssXcRwAs%3D";
+                                       String sign = JsonObj.get("sign").getAsString();
+                                       aliPay(sign);
+                                   }
+                               }else{
+
+                                   if(null != JsonObj){
+                                       PayReq req = new PayReq();
+                                       //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
+                                       req.appId			= APP_ID;
+                                       req.partnerId		= "1319153601"; //商户id
+                                       req.prepayId		= JsonObj.get("prepayId").getAsString();
+                                       req.nonceStr		= JsonObj.get("nonce").getAsString();
+                                       req.timeStamp		= JsonObj.get("timestamp").getAsString();
+                                       req.packageValue	= "Sign=WXPay";
+                                       req.sign			= JsonObj.get("sign").getAsString();
+                                       req.extData			= "a"; // optional
+                                       //Toast.makeText(PayActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
+                                       // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                                       Boolean m = weiXinApi.sendReq(req);
+                                       Log.i("main",m+"");
+                                   }else{
+                                       Log.d("PAY_GET", "返回错误"+JsonObj.get("retmsg"));
+                                       Toast.makeText(OrderActivity.this, "返回错误"+JsonObj.get("retmsg").getAsString(), Toast.LENGTH_SHORT).show();
+                                   }
+
+
                                }
+
+
                            }
                         }else {
                             Toast.makeText(OrderActivity.this,"提交失败",Toast.LENGTH_LONG).show();
@@ -418,7 +455,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 params.put("amount",mPrice+"");
                 params.put("name",mProductViewBean.getGoodsName());
                 params.put("payType",mRbAli.isChecked()?"0":"1");
-                return params;
+                 return params;
             }
         };
         mQueue.add(mAccountRequest);
