@@ -72,12 +72,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         linkUrlArray
                 .add("");
         initView();
-        //加载轮播图
-        if(null == mProductViewBean.getPicList()){
-            ArrayList<String> mlist =new ArrayList<>();
-            mlist.add(mProductViewBean.getGoodsPic());
-            mProductViewBean.setPicList(mlist);
-        }
         initBanner(mProductViewBean.getPicList());
         //将数据加载到视图
         setViewByData();

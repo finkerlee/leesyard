@@ -56,6 +56,7 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
     private Button btnsave;
     private Addresses address;
     private String mAddId;
+    private String mAreaId;
 
 
     private String pageTypeText = "";
@@ -78,7 +79,7 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                     @Override
                     public void refresh(String info, String areaId) {
                         editTextaddress.setText(info);
-                        mAddId = areaId;
+                        mAreaId = areaId;
                     }
                 });
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -89,7 +90,7 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
 
     }
     private void setViewByData(Addresses address) {
-        editTextaddress.setText(address.getAddArea());
+        editTextaddress.setText(UsersUtil.getPCA(address.getAddArea()));
         editTextname.setText(address.getAddName());
         editTextphone.setText(address.getAddPhone());
         editTextdetailed.setText(address.getAddDetail());
@@ -110,7 +111,8 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
 
         if (currentType == UPDATA_ADDRESS){
             address = getIntent().getParcelableExtra("address");
-            mAddId = address.getAddArea();
+            mAddId = address.getAddId();
+            mAreaId = address.getAddArea();
             setViewByData(address);
             url = UrlConstants.MODIFY_ADDRESS;
             pageTypeText = "修改";
@@ -187,7 +189,7 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
               }, new Response.ErrorListener() {
                   @Override
                   public void onErrorResponse(VolleyError error) {
-                      Log.i("main", error.toString());
+                      Toast.makeText(ShippingAddressActivity.this,"失败,请重试",Toast.LENGTH_LONG).show();
 
                   }
               }){
@@ -198,13 +200,15 @@ public class ShippingAddressActivity extends BaseActivity implements OnClickList
                       params.put("addId",mAddId);
                       params.put("addName", editTextname.getText().toString().trim());
                       params.put("addPhone", editTextphone.getText().toString().trim());
-                      params.put("addProvince", mAddId.substring(0,2));
-                      params.put("addCity",mAddId.substring(0,4));
-                      params.put("addArea",mAddId);
+                      params.put("addProvince", mAreaId.substring(0,2));
+                      params.put("addCity",mAreaId.substring(0,4));
+                      params.put("addArea",mAreaId);
                       params.put("addDetail",editTextdetailed.getText().toString().trim());
                       if (currentType == ADD_ADDRESS){
                           params.put("userId", UsersUtil.getUserId(ShippingAddressActivity.this));
+
                       }
+
                       return params;
                   }
               };

@@ -80,6 +80,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 mEditor.clear();
                 mEditor.commit();
                 Toast.makeText(SettingActivity.this,"注销成功",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(SettingActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.share_friend:
                 layoutShare.setVisibility(View.VISIBLE);

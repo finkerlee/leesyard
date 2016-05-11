@@ -44,6 +44,8 @@ import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
 
+import org.apache.log4j.chainsaw.Main;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,8 +65,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     private GridView mGvGoods;
     //卡票和红包
     private ImageView mIvTicket,mIvRed;
-    //保存当前地址
-    private String mCurrentAddress;
 
     private AddressDialog dialog;
 
@@ -87,8 +87,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     private List<Topics> mTopicsData;
     //首页福利商品的数据
     private List<Benefits> mBenefitsData;
-
-    private SharedPreferences mSp;
 
     private ProductViewBean mProductViewBean;
 
@@ -201,6 +199,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         findViewById(R.id.iv_address).setOnClickListener(this);
         findViewById(R.id.iv_message).setOnClickListener(this);
         findViewById(R.id.search).setOnClickListener(this);
+        findViewById(R.id.iv_message).setOnClickListener(this);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         notice_vf = (ViewFlipper) findViewById(R.id.homepage_notice_vf);
         findViewById(R.id.iv_more).setOnClickListener(this);
@@ -281,22 +280,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     }
 
 
-    private BDLocationListener mListener = new BDLocationListener() {
-        @Override
-        public void onReceiveLocation(BDLocation bdLocation) {
-            if (bdLocation.hasAddr()){
-                mCurrentAddress = bdLocation.getAddrStr();
-                Log.i("main",bdLocation.getAddrStr());
-                locationService.unregisterListener(mListener); //注销掉监听
-                locationService.stop(); //停止定位服务
-
-                dialog = new AddressDialog(MainActivity.this, R.style.protocol_dialog,mCurrentAddress);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.show();
-
-            }
-        }
-    };
 
     @Override
     protected void onStart() {
@@ -341,18 +324,15 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 break;
 
             case R.id.iv_address:
-                locationService = ((LeeApplication) getApplication()).locationService;
-                locationService.registerListener(mListener);
-                //注册监听
-                int type = getIntent().getIntExtra("from", 0);
-                if (type == 0) {
-                    locationService.setLocationOption(locationService.getDefaultLocationClientOption());
-                } else if (type == 1) {
-                    locationService.setLocationOption(locationService.getOption());
-                }
-                locationService.start();
-                break;
 
+                dialog = new AddressDialog(MainActivity.this, R.style.protocol_dialog,HomeActivity.mCurrentAddress);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
+                break;
+            case R.id.iv_message:
+                Intent intent = new Intent(MainActivity.this,MymessageActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }

@@ -5,19 +5,13 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-<<<<<<< HEAD
-        <option name="gradleJvm" value="1.7" />
-=======
-        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.10" />
->>>>>>> 1060b6c8372144d76e0521b7c90db5042de52b8d
+        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/adapter" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/autolayout" />
-<<<<<<< HEAD
-=======
             <option value="$PROJECT_DIR$/pickerview" />
             <option value="$PROJECT_DIR$/volley" />
           </set>
@@ -28,7 +22,6 @@
             <option value="$PROJECT_DIR$/adapter" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/autolayout" />
->>>>>>> 1060b6c8372144d76e0521b7c90db5042de52b8d
             <option value="$PROJECT_DIR$/pickerview" />
             <option value="$PROJECT_DIR$/volley" />
           </set>
