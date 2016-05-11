@@ -134,7 +134,10 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
                                                 if (mOrdersData.size() == 0){
                                                     findViewById(R.id.layout_no_order).setVisibility(View.VISIBLE);
                                                     mLvOrder.setVisibility(View.GONE);
+                                                    return;
                                                 }
+                                                mAdpter.clear();
+                                                mAdpter.addAll(mOrdersData);
                                                 mAdpter.notifyDataSetChanged();
                                             }else{
                                                 Toast.makeText(MyOrderActivity.this,"删除失败",Toast.LENGTH_LONG).show();

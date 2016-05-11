@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,6 +20,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonObject;
 import com.joanzapata.android.BaseAdapterHelper;
@@ -33,6 +36,8 @@ import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.lijiadayuan.lishijituan.utils.LocationService;
+import com.lijiadayuan.lishijituan.view.AddressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,17 +47,19 @@ import java.util.TimerTask;
 
 
 
-public class FindActivity extends BaseActivity {
+public class FindActivity extends BaseActivity implements View.OnClickListener{
     private GridView gridView;//image
     private TextView tvTitle;
     private List<Product> mList;
-
+    private AddressDialog dialog;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
         gridView = (GridView) findViewById(R.id.gridView);
         tvTitle = (TextView) findViewById(R.id.tv_title);
+        findViewById(R.id.iv_address).setOnClickListener(this);
+        findViewById(R.id.iv_messsage).setOnClickListener(this);
         tvTitle.setText("发现");
         initData();
     }
@@ -105,7 +112,20 @@ public class FindActivity extends BaseActivity {
     }
 
 
-
+    @Override
+    public void onClick(View view) {
+       switch (view.getId()){
+           case R.id.iv_address:
+               dialog = new AddressDialog(FindActivity.this, R.style.protocol_dialog,HomeActivity.mCurrentAddress);
+               dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+               dialog.show();
+               break;
+           case R.id.iv_messsage:
+               Intent mIntent = new Intent(FindActivity.this,MymessageActivity.class);
+               startActivity(mIntent);
+               break;
+       }
+    }
 
 }
 

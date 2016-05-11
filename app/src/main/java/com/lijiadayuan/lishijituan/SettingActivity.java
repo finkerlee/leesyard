@@ -80,6 +80,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 mEditor.clear();
                 mEditor.commit();
                 Toast.makeText(SettingActivity.this,"注销成功",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(SettingActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.share_friend:
                 layoutShare.setVisibility(View.VISIBLE);
@@ -126,7 +129,6 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 ////                req.scene   设置分享到朋友圈还是分享给好友
 //        req.scene = type;
 //        weiXinApi.sendReq(req);
-
 
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = "http://www.baidu.com";

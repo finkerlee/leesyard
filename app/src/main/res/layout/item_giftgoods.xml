@@ -10,8 +10,8 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/itemImage"
-        android:layout_width="300px"
-        android:layout_height="300px"
+        android:layout_width="320px"
+        android:layout_height="320px"
         android:layout_weight="1"
         fresco:roundedCornerRadius="20px"
         fresco:roundingBorderWidth="1px"
