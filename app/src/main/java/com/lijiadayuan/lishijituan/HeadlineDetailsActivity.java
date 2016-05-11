@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.map.Text;
@@ -15,7 +16,7 @@ import com.lijiadayuan.lishijituan.http.UrlConstants;
 public class HeadlineDetailsActivity extends BaseActivity implements View.OnClickListener {
     private TextView Texttitle;
     private WebView Webcompany;
-    private ImageView iv_back;
+    private LinearLayout iv_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,7 @@ public class HeadlineDetailsActivity extends BaseActivity implements View.OnClic
     private void findView(){
         Texttitle= (TextView) findViewById(R.id.text_title);
         Webcompany = (WebView) findViewById(R.id.web_headline);
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_back = (LinearLayout) findViewById(R.id.iv_back);
     }
     private void initView(){
         iv_back.setOnClickListener(this);
