@@ -163,6 +163,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         mAddressTV = (TextView) findViewById(R.id.tv_address);
         mIvPic = (SimpleDraweeView) findViewById(R.id.goods_pic);
 
+        findViewById(R.id.iv_back).setOnClickListener(this);
+
         //购买的布局
         mLayoutBuy = (LinearLayout) findViewById(R.id.buy_layout);
         mTvBuyGoodsName = (TextView) findViewById(R.id.buy_goods_name);
@@ -235,6 +237,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
      * 拼接url
      * @return
      */
+
     private java.lang.String getUrl(String url, Map<String, String> params) {
         if(params.size() == 0) {
             return url;
@@ -352,6 +355,9 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.be_sure:
                 account();
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
             case R.id.jia:
                 if (mGoodsNum < mProductViewBean.getGoodsStock()){
