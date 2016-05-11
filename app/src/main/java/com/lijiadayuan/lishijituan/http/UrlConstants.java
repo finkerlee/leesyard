@@ -50,7 +50,7 @@ public interface UrlConstants {
     //发现
     String FIND = BASE_URL+"product/all";
     //搜索
-    String SEARCH = BASE_URL+"product/all";
+    String SEARCH = BASE_URL+"product/key";
     // 地址
 
     String GET_ADDRESS = BASE_URL + "address/user?userId=";                          // 查询某一用户的全部收货地址

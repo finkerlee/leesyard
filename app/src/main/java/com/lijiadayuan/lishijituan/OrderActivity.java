@@ -393,6 +393,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
 
 //        String sign = "partner=\"2088221309346686\"&seller_id=\"bjlijiadayuan@sina.com\"&out_trade_no=\"LPO0000000066\"&subject=\"null\"&body=\"李家大院\"&total_fee=\"11600.0\"&notify_url=\"http://beijinglijiadayuan.com:8080/pay/alipay\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&return_url=\"m.alipay.com\"&sign=\"dFgNs9rRkvtOdY7AkPTGkXGgXrWa%2BKbYHtmnRnhfWs1UVMzA%2F3Q9u7bFh8of%2BU1l%2BvZIqMMFFd1h6QQga2t3wzzlm1e2D0RZKWv6QnJTWaK2pR2Zz9PfW8Gz01vr1jV68D89J8FpA58mPBKLxdK9NwSVD0crq1MeN76g6iA6BYU%3D\"&sign_type=\"RSA\"";
 //        aliPay(sign);
+
         StringRequest mAccountRequest = new StringRequest(Request.Method.POST, UrlConstants.ORDERS,
                 new Response.Listener<String>() {
                     @Override
@@ -442,7 +443,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                 Toast.makeText(OrderActivity.this,"下单失败,请联系客服",Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -455,7 +456,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 params.put("amount",mPrice+"");
                 params.put("name",mProductViewBean.getGoodsName());
                 params.put("payType",mRbAli.isChecked()?"0":"1");
-                 return params;
+                return params;
             }
         };
         mQueue.add(mAccountRequest);

@@ -77,9 +77,9 @@ public class LauncherActivity extends BaseActivity{
                             //Toast.makeText(LauncherActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
                         }else {
                             Users user = mGson.fromJson(data,Users.class);
-                            System.out.println("user: ========" + data.toString());
                             editor.clear();
                             editor.putString(KeyConstants.UserInfoKey.userId,user.getUserId());
+                            Log.i("main",user.getUserId());
                             editor.putString(KeyConstants.UserInfoKey.userName, user.getUserName());
                             editor.putString(KeyConstants.UserInfoKey.userNick, user.getUserNick());
                             editor.putString(KeyConstants.UserInfoKey.userPhone, user.getUserPhone());
@@ -127,4 +127,15 @@ public class LauncherActivity extends BaseActivity{
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(LauncherActivity.this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(LauncherActivity.this);
+    }
 }

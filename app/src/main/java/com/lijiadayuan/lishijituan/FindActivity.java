@@ -38,6 +38,7 @@ import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,7 @@ public class FindActivity extends BaseActivity implements View.OnClickListener{
                         protected void convert(BaseAdapterHelper helper, Product item) {
                            SimpleDraweeView msp = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
                             msp.setImageURI(Uri.parse(item.getProThumb()));
+                            AutoUtils.autoSize(helper.getView());
                         }
                     };
 

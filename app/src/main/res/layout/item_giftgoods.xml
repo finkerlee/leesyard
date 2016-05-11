@@ -3,16 +3,15 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="123dp"
+    android:layout_height="wrap_content"
     android:gravity="center"
     android:paddingBottom="10dp"
     >
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/itemImage"
-        android:layout_width="320px"
-        android:layout_height="320px"
-        android:layout_weight="1"
+        android:layout_width="305px"
+        android:layout_height="273px"
         fresco:roundedCornerRadius="20px"
         fresco:roundingBorderWidth="1px"
         fresco:roundingBorderColor="#cccccc"

@@ -49,7 +49,9 @@ public class NewsActivity extends BaseActivity implements View.OnClickListener{
                     helper.setText(R.id.tv_title,item.getTitle());
                     helper.setText(R.id.tv_time,item.getTime());
                     helper.setText(R.id.tv_content,item.getContent());
-                    helper.setBackgroundColor(R.id.layout,item.getSee()? Color.parseColor("#ffffff"):Color.parseColor("#000000"));
+                    helper.setTextColor(R.id.tv_title,item.getSee()? Color.parseColor("#b9b9b9"):Color.parseColor("#000000"));
+                    helper.setTextColor(R.id.tv_time,item.getSee()? Color.parseColor("#b9b9b9"):Color.parseColor("#000000"));
+                    helper.setTextColor(R.id.tv_content,item.getSee()? Color.parseColor("#b9b9b9"):Color.parseColor("#000000"));
                 }
             };
             listView.setAdapter(mAdpter);
@@ -61,8 +63,14 @@ public class NewsActivity extends BaseActivity implements View.OnClickListener{
                     mAdpter.clear();
                     mAdpter.addAll(mList);
                     mAdpter.notifyDataSetChanged();
-                    mLocalUtils.deleteFile();
-                    mLocalUtils.put(mList);
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            mLocalUtils.deleteFile();
+                            mLocalUtils.put(mList);
+                        }
+                    }.start();
+
                 }
             });
     }

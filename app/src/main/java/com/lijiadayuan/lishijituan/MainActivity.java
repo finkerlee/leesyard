@@ -1,7 +1,6 @@
 package com.lijiadayuan.lishijituan;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,8 +23,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -43,8 +40,7 @@ import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
-
-import org.apache.log4j.chainsaw.Main;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,7 +89,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main1);
+        setContentView(R.layout.activity_main);
         initView();
         //初始化数据
         initData();
@@ -139,6 +135,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                                 mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
                                 mSimpleDraweeView.setAspectRatio(1.33f);
                                 //Log.i("main",item.getBenThumb());
+                                AutoUtils.autoSize(helper.getView());
                             }
                         };
                         mGvGoods.setAdapter(mAdpter);

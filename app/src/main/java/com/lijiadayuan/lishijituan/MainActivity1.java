@@ -2,7 +2,6 @@ package com.lijiadayuan.lishijituan;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -17,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.android.volley.AuthFailureError;
@@ -34,8 +32,6 @@ import com.google.gson.JsonObject;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.ImagePagerAdapter;
-import com.lijiadayuan.lishijituan.adapter.PictureAdpter2;
-import com.lijiadayuan.lishijituan.adapter.TestAutoAdapter;
 import com.lijiadayuan.lishijituan.bean.AdvView;
 import com.lijiadayuan.lishijituan.bean.Benefits;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
@@ -99,7 +95,7 @@ public class MainActivity1 extends BaseActivity implements OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main1);
+        setContentView(R.layout.activity_main);
         initView();
         //初始化数据
         initData();

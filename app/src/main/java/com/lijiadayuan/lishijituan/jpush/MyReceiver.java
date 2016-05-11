@@ -116,6 +116,7 @@ public class MyReceiver extends BroadcastReceiver {
 							MyMessage mMyMessage = new MyMessage();
 							mMyMessage.setTime(json.getString("time"));
 							mMyMessage.setContent(json.getString("content"));
+							mMyMessage.setmIsRead(false);
 							LocalUtils LocalUtils = new LocalUtils(LeeApplication.myMessagePath);
 							ArrayList<MyMessage> mList = (ArrayList<MyMessage>) LocalUtils.read();
 							mList.add(mMyMessage);
