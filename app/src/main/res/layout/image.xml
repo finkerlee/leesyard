@@ -6,7 +6,6 @@
     android:layout_marginLeft="5dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
-
         android:id="@+id/itemImage"
         android:layout_width="600px"
         android:layout_height="390px"
@@ -14,5 +13,5 @@
         app:roundingBorderWidth="1dp"
         app:roundingBorderColor="@color/red"
         />　　 　　
-        
+
 </RelativeLayout>
