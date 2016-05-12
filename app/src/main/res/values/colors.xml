@@ -28,10 +28,12 @@
     <color name="tab_text_unchecked">#ff2e2e2e</color>
      <color name="red">#ff0000</color>
 
-    <!--app的默认字体颜色  edittext默认显示的颜色-->
-    <color name="app_text_normol_color">#999999</color>
-    <!--app的默认字体颜色  edittext显示的颜色   暂时没用到-->
-    <color name="app_text_color">#666666</color>
-    <!--app的默认字体颜色  输入后显示的字体颜色-->
-    <color name="app_text_main_color">#333333</color>
+    <!--app的默认字体颜色  深黑-->
+    <color name="app_text_heigh_color">#999999</color>
+    <!--app的默认字体颜色  中黑 -->
+    <color name="app_text_center_color">#666666</color>
+    <!--app的默认字体颜色  浅黑-->
+    <color name="app_text_shallow_color">#333333</color>
+    <!--app的红色 -->
+    <color name="app_bg_main_red">#ea5959</color>
 </resources>

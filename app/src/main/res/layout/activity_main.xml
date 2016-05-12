@@ -22,7 +22,7 @@
                 <com.lijiadayuan.lishijituan.ViewFlow
                     android:id="@+id/viewflow"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="528px"
                     android:fitsSystemWindows="true"
                     android:clipToPadding="true"
                     android:layout_alignParentBottom="true"
@@ -32,15 +32,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|bottom"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="99px"
+                    android:layout_marginBottom="15px"
                     android:padding="2dip"
-                    app:activeColor="#ff0000"
+                    app:activeColor="#ffffff"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     app:activeType="fill"
                     app:circleSeparation="18dip"
-                    app:inactiveColor="#ffffff"
+                    app:inactiveColor="#5effffff"
                     app:inactiveType="fill"
                     app:radius="4dip" />
             </RelativeLayout>
