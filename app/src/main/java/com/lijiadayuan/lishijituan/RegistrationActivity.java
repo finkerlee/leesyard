@@ -341,6 +341,7 @@ public class RegistrationActivity extends BaseActivity implements OnClickListene
      * @param path 图片的路径
      * @return 压缩后的图片
      */
+
     private Bitmap getCompressBitmap(String path) {
         int BASE_SIZE = 100;//需要压缩到的最小宽高
         Bitmap bitmap;

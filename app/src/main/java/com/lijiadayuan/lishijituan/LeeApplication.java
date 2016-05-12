@@ -68,6 +68,7 @@ public class LeeApplication extends Application {
                 e.printStackTrace();
             }
         }
+        myMessagePath = fileMyMsy.getPath();
 
         //创建一个搜索里氏的本地文件
         File fileSearch = new File(getFilesDir(),"Search");
@@ -78,7 +79,7 @@ public class LeeApplication extends Application {
                 e.printStackTrace();
             }
         }
-        searchPath = fileMyMsy.getPath();
+        searchPath = fileSearch.getPath();
 
 
         //启动一个service去解析本地XML的数据

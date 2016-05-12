@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class MyMessage implements Serializable{
     private String time;
     private String content;
-
+    private Boolean mIsRead;
 
     public void setTime(String time) {
         this.time = time;
@@ -25,5 +25,13 @@ public class MyMessage implements Serializable{
 
     public String getContent() {
         return content;
+    }
+
+    public Boolean getmIsRead() {
+        return mIsRead;
+    }
+
+    public void setmIsRead(Boolean mIsRead) {
+        this.mIsRead = mIsRead;
     }
 }

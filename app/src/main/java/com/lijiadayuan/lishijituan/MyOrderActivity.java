@@ -1,6 +1,8 @@
 package com.lijiadayuan.lishijituan;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -88,7 +90,7 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
         mOrdersData = new ArrayList<>();
         mAdpter = new QuickAdapter<ProductOrdersView>(MyOrderActivity.this,R.layout.item_order,mOrdersData) {
             @Override
-            protected void convert(BaseAdapterHelper helper, ProductOrdersView item) {
+            protected void convert(BaseAdapterHelper helper, final ProductOrdersView item) {
                 helper.setText(R.id.goods_name,item.getAddName());
                 helper.setText(R.id.goods_price,item.getProPrice()+"");
                 helper.setText(R.id.tv_unitprice,item.getPoAmount()+"");
@@ -116,6 +118,56 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onClick(View view) {
                         //TODO 删除订单
+                        new AlertDialog.Builder(MyOrderActivity.this)
+                                .setTitle("删除订单").setMessage("确定删除订单").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                StringRequest mStringRequest = new StringRequest(Request.Method.POST,UrlConstants.DELETE_ORDER, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        JsonObject mJsonObj = JsonParseUtil.getJsonByString(response).getAsJsonObject();
+                                        if (JsonParseUtil.isSuccess(mJsonObj)){
+                                            String status = mJsonObj.get("response_data").getAsString();
+                                            if ("1".equals(status)){
+                                                Toast.makeText(MyOrderActivity.this,"删除成功",Toast.LENGTH_LONG).show();
+                                                mOrdersData.remove(item);
+                                                if (mOrdersData.size() == 0){
+                                                    findViewById(R.id.layout_no_order).setVisibility(View.VISIBLE);
+                                                    mLvOrder.setVisibility(View.GONE);
+                                                    return;
+                                                }
+                                                mAdpter.clear();
+                                                mAdpter.addAll(mOrdersData);
+                                                mAdpter.notifyDataSetChanged();
+                                            }else{
+                                                Toast.makeText(MyOrderActivity.this,"删除失败",Toast.LENGTH_LONG).show();
+                                            }
+
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                    }
+                                }){
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<String, String>();
+                                        params.put("poId",item.getPoId());
+                                        return params;
+                                    }
+                                };
+                                mRequestQueue.add(mStringRequest);
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).create().show();
+
+
 
                     }
                 });
@@ -175,10 +227,13 @@ public class MyOrderActivity extends BaseActivity implements View.OnClickListene
                 if (JsonParseUtil.isSuccess(mJsonObj)){
                     JsonArray mJsonArray = mJsonObj.get("response_data").getAsJsonArray();
                     if (mJsonArray.size() ==0){
-                        Toast.makeText(MyOrderActivity.this,"暂无商品订单",Toast.LENGTH_LONG).show();
+                        findViewById(R.id.layout_no_order).setVisibility(View.VISIBLE);
+                        mLvOrder.setVisibility(View.GONE);
                         mAdpter.clear();
                         mAdpter.notifyDataSetChanged();
                     }else{
+                        findViewById(R.id.layout_no_order).setVisibility(View.GONE);
+                        mLvOrder.setVisibility(View.VISIBLE);
                         mOrdersData =  JsonParseUtil.toListByJson(mJsonArray,ProductOrdersView.class);
                         mAdpter.clear();
                         mAdpter.addAll(mOrdersData);

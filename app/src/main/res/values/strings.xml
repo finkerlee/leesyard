@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">北京李家大院</string>
     <string name="login_username">请输入用户名/手机号</string>
-    <string name="login_password">请输入密码</string>
+    <string name="login_password">请输入密码  (6~14位数字)</string>
     <string name="login_failure">登录失败,请重试</string>
     <string name="register_failure">注册失败,请重试</string>
     <string name="registration_username">请输入用户名</string>

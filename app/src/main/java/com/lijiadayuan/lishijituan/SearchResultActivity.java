@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -36,6 +37,7 @@ import java.util.Map;
  */
 public class SearchResultActivity extends BaseActivity  implements View.OnClickListener{
     private ListView mLv;
+    private TextView mTvNoData;
     private ArrayList<Product> mList;
     private String key = "";
     @Override
@@ -69,6 +71,8 @@ public class SearchResultActivity extends BaseActivity  implements View.OnClickL
                     if (!mJsonObj.get("response_data").isJsonNull()){
                        JsonArray mJsonArray =  mJsonObj.get("response_data").getAsJsonArray();
                         if (mJsonArray.size()>0){
+                            mLv.setVisibility(View.VISIBLE);
+                            mTvNoData.setVisibility(View.GONE);
                             mList = JsonParseUtil.toListByJson(mJsonArray, Product.class) ;
                             QuickAdapter<Product> mAdpter = new QuickAdapter<Product>(SearchResultActivity.this,R.layout.item_search_result,mList) {
                                 @Override
@@ -80,6 +84,9 @@ public class SearchResultActivity extends BaseActivity  implements View.OnClickL
                                 }
                             };
                             mLv.setAdapter(mAdpter);
+                        }else{
+                            mLv.setVisibility(View.GONE);
+                            mTvNoData.setVisibility(View.VISIBLE);
                         }
 
                     }
@@ -103,7 +110,7 @@ public class SearchResultActivity extends BaseActivity  implements View.OnClickL
 
     private void initView() {
         mLv = (ListView) findViewById(R.id.lv_search_result);
-
+        mTvNoData = (TextView) findViewById(R.id.no_data);
         findViewById(R.id.iv_back).setOnClickListener(this);
     }
 

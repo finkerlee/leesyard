@@ -118,7 +118,7 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 //        join.setOnClickListener(this);
         mymessage.setOnClickListener(this);
         headImage.setOnClickListener(this);
-
+        findViewById(R.id.message).setOnClickListener(this);
         setViewByStatus();
     }
     //根据登陆状态去设置view
@@ -224,6 +224,10 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 //                takeIntent1.putExtra(MediaStore.EXTRA_OUTPUT,
 //                        Uri.fromFile(new File(Environment.getExternalStorageDirectory(), PHOTO_FILE_NAME)));
 //                startActivityForResult(takeIntent1, REQUESTCODE_TAKE);
+                break;
+            case R.id.message:
+                Intent intent = new Intent(MineActivity.this,MymessageActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

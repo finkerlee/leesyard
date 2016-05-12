@@ -163,6 +163,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         mAddressTV = (TextView) findViewById(R.id.tv_address);
         mIvPic = (SimpleDraweeView) findViewById(R.id.goods_pic);
 
+        findViewById(R.id.iv_back).setOnClickListener(this);
+
         //购买的布局
         mLayoutBuy = (LinearLayout) findViewById(R.id.buy_layout);
         mTvBuyGoodsName = (TextView) findViewById(R.id.buy_goods_name);
@@ -235,6 +237,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
      * 拼接url
      * @return
      */
+
     private java.lang.String getUrl(String url, Map<String, String> params) {
         if(params.size() == 0) {
             return url;
@@ -276,7 +279,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         if (null == mProductViewBean.getGoodsThumb()){
             mIvPic.setImageURI(Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image));
         }else{
-            mIvPic.setImageURI(Uri.parse(mProductViewBean.getGoodsPic()));
+            mIvPic.setImageURI(Uri.parse(mProductViewBean.getGoodsThumb()));
         }
         //根据当前的模式 设置商品信息
         if (mProductViewBean.getGoodsType() == ProductBaseActivity.GIFT_GOODS){
@@ -353,6 +356,9 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             case R.id.be_sure:
                 account();
                 break;
+            case R.id.iv_back:
+                finish();
+                break;
             case R.id.jia:
                 if (mGoodsNum < mProductViewBean.getGoodsStock()){
                     mGoodsNum++;
@@ -393,6 +399,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
 
 //        String sign = "partner=\"2088221309346686\"&seller_id=\"bjlijiadayuan@sina.com\"&out_trade_no=\"LPO0000000066\"&subject=\"null\"&body=\"李家大院\"&total_fee=\"11600.0\"&notify_url=\"http://beijinglijiadayuan.com:8080/pay/alipay\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&return_url=\"m.alipay.com\"&sign=\"dFgNs9rRkvtOdY7AkPTGkXGgXrWa%2BKbYHtmnRnhfWs1UVMzA%2F3Q9u7bFh8of%2BU1l%2BvZIqMMFFd1h6QQga2t3wzzlm1e2D0RZKWv6QnJTWaK2pR2Zz9PfW8Gz01vr1jV68D89J8FpA58mPBKLxdK9NwSVD0crq1MeN76g6iA6BYU%3D\"&sign_type=\"RSA\"";
 //        aliPay(sign);
+
         StringRequest mAccountRequest = new StringRequest(Request.Method.POST, UrlConstants.ORDERS,
                 new Response.Listener<String>() {
                     @Override
@@ -442,7 +449,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                 Toast.makeText(OrderActivity.this,"下单失败,请联系客服",Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -455,7 +462,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 params.put("amount",mPrice+"");
                 params.put("name",mProductViewBean.getGoodsName());
                 params.put("payType",mRbAli.isChecked()?"0":"1");
-                 return params;
+                return params;
             }
         };
         mQueue.add(mAccountRequest);

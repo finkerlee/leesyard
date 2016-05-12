@@ -1,8 +1,10 @@
 package com.lijiadayuan.lishijituan;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,6 +27,7 @@ public class MymessageActivity extends Activity implements View.OnClickListener{
     private LocalUtils mLocalUtils;
     private QuickAdapter<MyMessage> mAdpter;
     private LinearLayout mLayoutNoMessage;
+    private List<MyMessage> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class MymessageActivity extends Activity implements View.OnClickListener{
 
     private void initData() {
         mLocalUtils = new LocalUtils(LeeApplication.myMessagePath);
-        List<MyMessage> mList = mLocalUtils.read();
+        mList = mLocalUtils.read();
         if (mList.size() == 0){
             mLayoutNoMessage.setVisibility(View.VISIBLE);
             listView.setVisibility(View.GONE);
@@ -55,10 +58,23 @@ public class MymessageActivity extends Activity implements View.OnClickListener{
                 protected void convert(BaseAdapterHelper helper, MyMessage item) {
                     helper.setText(R.id.tv_time,item.getTime());
                     helper.setText(R.id.tv_content,item.getContent());
+                    helper.setTextColor(R.id.tv_time,item.getmIsRead()? Color.parseColor("#b9b9b9"):Color.parseColor("#000000"));
+                    helper.setTextColor(R.id.tv_content,item.getmIsRead()? Color.parseColor("#b9b9b9"):Color.parseColor("#000000"));
                 }
             };
             listView.setAdapter(mAdpter);
         }
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                mList.get(i).setmIsRead(true);
+                mAdpter.clear();
+                mAdpter.addAll(mList);
+                mAdpter.notifyDataSetChanged();
+                updataMessage();
+            }
+        });
 
     }
     protected void initView(){
@@ -80,10 +96,46 @@ public class MymessageActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.clear_message:
-                mLocalUtils.deleteFile();
+                mList.clear();
+                mAdpter.clear();
+                mAdpter.notifyDataSetChanged();
+                listView.setVisibility(View.GONE);
+                mLayoutNoMessage.setVisibility(View.VISIBLE);
+                findViewById(R.id.layout_btn).setVisibility(View.GONE);
+                clearMessage();
                 break;
             case R.id.read_all_message:
+                for (MyMessage mMyMessage : mList ){
+                    mMyMessage.setmIsRead(true);
+                }
+                mAdpter.clear();
+                mAdpter.addAll(mList);
+                mAdpter.notifyDataSetChanged();
+                updataMessage();
                 break;
         }
+    }
+    /**
+     * 更新数据
+     */
+    private void updataMessage(){
+        new Thread(){
+            @Override
+            public void run() {
+                mLocalUtils.deleteFile();
+                mLocalUtils.put(mList);
+            }
+        }.start();
+    }
+    /**
+     * 删除存放消息的文件夹
+     */
+    private void clearMessage(){
+        new Thread(){
+            @Override
+            public void run() {
+                mLocalUtils.deleteFile();
+            }
+        }.start();
     }
 }

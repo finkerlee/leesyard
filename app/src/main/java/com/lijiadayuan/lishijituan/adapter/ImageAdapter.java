@@ -85,27 +85,27 @@ public class ImageAdapter extends BaseAdapter {
                 (String) this.imageIdList.get(getPosition(position)),
                 holder.imageView, options);
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                String url = linkUrlArray.get(ImageAdapter.this
-                        .getPosition(position));
-				/*
-				 * if (TextUtils.isEmpty(url)) {
-				 * holder.imageView.setEnabled(false); return; }
-				 */
-                Bundle bundle = new Bundle();
-
-                bundle.putString("url", url);
-                Intent intent = new Intent(context, BaseWebActivity.class);
-                intent.putExtras(bundle);
-
-                context.startActivity(intent);
-                Toast.makeText(context, "点击了第" + getPosition(position) + "美女", Toast.LENGTH_SHORT).show();
-
-            }
-        });
+//        holder.imageView.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                String url = linkUrlArray.get(ImageAdapter.this
+//                        .getPosition(position));
+//				/*
+//				 * if (TextUtils.isEmpty(url)) {
+//				 * holder.imageView.setEnabled(false); return; }
+//				 */
+//                Bundle bundle = new Bundle();
+//
+//                bundle.putString("url", url);
+//                Intent intent = new Intent(context, BaseWebActivity.class);
+//                intent.putExtras(bundle);
+//
+//                context.startActivity(intent);
+//                Toast.makeText(context, "点击了第" + getPosition(position) + "美女", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
         return view;
     }

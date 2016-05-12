@@ -1,10 +1,12 @@
 package com.lijiadayuan.lishijituan;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,17 +16,19 @@ import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.bean.NewMessage;
 import com.lijiadayuan.lishijituan.utils.LocalUtils;
+import com.lijiadayuan.lishijituan.view.AddressDialog;
 
 import java.util.List;
 import java.util.Map;
 
-public class NewsActivity extends BaseActivity {
+public class NewsActivity extends BaseActivity implements View.OnClickListener{
     private ListView listView;
     private TextView tvTitle;
     private List<NewMessage> mList;
     private QuickAdapter<NewMessage> mAdpter;
     private LinearLayout mLayoutNoMessage;
     private LocalUtils mLocalUtils;
+    private AddressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +49,9 @@ public class NewsActivity extends BaseActivity {
                     helper.setText(R.id.tv_title,item.getTitle());
                     helper.setText(R.id.tv_time,item.getTime());
                     helper.setText(R.id.tv_content,item.getContent());
-                    helper.setBackgroundColor(R.id.layout,item.getSee()? Color.parseColor("#ffffff"):Color.parseColor("#000000"));
+                    helper.setTextColor(R.id.tv_title,item.getSee()? Color.parseColor("#b9b9b9"):Color.parseColor("#000000"));
+                    helper.setTextColor(R.id.tv_time,item.getSee()? Color.parseColor("#b9b9b9"):Color.parseColor("#000000"));
+                    helper.setTextColor(R.id.tv_content,item.getSee()? Color.parseColor("#b9b9b9"):Color.parseColor("#000000"));
                 }
             };
             listView.setAdapter(mAdpter);
@@ -57,8 +63,14 @@ public class NewsActivity extends BaseActivity {
                     mAdpter.clear();
                     mAdpter.addAll(mList);
                     mAdpter.notifyDataSetChanged();
-                    mLocalUtils.deleteFile();
-                    mLocalUtils.put(mList);
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            mLocalUtils.deleteFile();
+                            mLocalUtils.put(mList);
+                        }
+                    }.start();
+
                 }
             });
     }
@@ -71,5 +83,20 @@ public class NewsActivity extends BaseActivity {
         listView= (ListView) findViewById(R.id.listView);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvTitle.setText("最新消息");
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.iv_address:
+                dialog = new AddressDialog(NewsActivity.this, R.style.protocol_dialog,HomeActivity.mCurrentAddress);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
+                break;
+            case R.id.iv_messsage:
+                Intent mIntent = new Intent(NewsActivity.this,MymessageActivity.class);
+                startActivity(mIntent);
+                break;
+        }
     }
 }

@@ -3,179 +3,146 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
-
-    <RelativeLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
-
-
-
-        <TextView
-            android:id="@+id/et_loginback"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="返回"
-            android:textColor="@color/back"
-            android:textSize="16sp" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="注册"
-            android:textColor="@color/black_yonghu"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="#b4b4b4"/>
-    </RelativeLayout>
-
+    <include
+        layout="@layout/common_title"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:orientation="vertical">
-
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="@dimen/edittext_margin_left"
-            android:layout_marginRight="@dimen/edittext_margin_Right"
-            android:layout_marginTop="@dimen/edittext_margin_Top"
+            android:layout_width="900px"
+            android:layout_height="126px"
             android:background="@drawable/rounded_edittext"
-            android:gravity="center_vertical"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="90px"
+            android:layout_marginTop="120px"
             android:hint="请输入用户名"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colortext"
-            android:textSize="16sp"
+            android:gravity="center"
+            android:paddingLeft="45px"
+            android:textColor="#666666"
+            android:textColorHint="#999999"
+            android:textSize="49px"
             android:id="@+id/et_yonghu_username" />
-
         <EditText
             android:id="@+id/et_yonghu_phonenum"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="@dimen/edittext_margin_left"
-            android:layout_marginRight="@dimen/edittext_margin_Right"
-            android:layout_marginTop="@dimen/edittext_margin_Top"
+            android:layout_width="900px"
+            android:layout_height="126px"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="90px"
+            android:layout_marginTop="42px"
+            android:gravity="center"
+            android:paddingLeft="45px"
+            android:textSize="49px"
+            android:textColor="#666666"
+            android:textColorHint="#999999"
             android:background="@drawable/rounded_edittext"
-            android:gravity="center_vertical"
             android:hint="请输入您的手机号码"
             android:inputType="phone"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colortext"
-            android:textSize="16sp" />
-
+            />
         <EditText
             android:id="@+id/et_yonghu_password"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="@dimen/edittext_margin_left"
-            android:layout_marginRight="@dimen/edittext_margin_Right"
-            android:layout_marginTop="@dimen/edittext_margin_Top"
+            android:layout_width="900px"
+            android:layout_height="126px"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="90px"
+            android:layout_marginTop="42px"
+            android:gravity="center"
+            android:paddingLeft="45px"
+            android:textSize="49px"
+            android:textColor="#666666"
+            android:textColorHint="#999999"
             android:background="@drawable/rounded_edittext"
-            android:gravity="center_vertical"
             android:hint="请输入您的密码"
             android:inputType="textPassword"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colortext"
-            android:textSize="16sp" />
-
+           />
         <EditText
             android:id="@+id/et_yonghu_password2"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="@dimen/edittext_margin_left"
-            android:layout_marginRight="@dimen/edittext_margin_Right"
-            android:layout_marginTop="@dimen/edittext_margin_Top"
+            android:layout_width="900px"
+            android:layout_height="126px"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="90px"
+            android:layout_marginTop="42px"
+            android:gravity="center"
+            android:paddingLeft="45px"
+            android:textSize="49px"
+            android:textColor="#666666"
+            android:textColorHint="#999999"
             android:background="@drawable/rounded_edittext"
-            android:gravity="center_vertical"
             android:hint="请再次输入您的密码"
             android:inputType="textPassword"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colortext"
-            android:textSize="16sp" />
-
+            />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
+            android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/et_numpass"
-                android:layout_width="wrap_content"
-                android:layout_height="47dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="10"
+                android:layout_width="579px"
+                android:layout_height="126px"
+                android:layout_marginLeft="90px"
+                android:layout_marginTop="42px"
+                android:gravity="center"
+                android:paddingLeft="45px"
+                android:textSize="49px"
+                android:textColor="#666666"
+                android:textColorHint="#999999"
                 android:background="@drawable/rounded_edittext"
                 android:hint="请输入验证码"
                 android:inputType="number"
-                android:paddingLeft="10dp"
-                android:textColor="@color/colortext"
-                android:textSize="16sp"
-
                 />
-
             <Button
                 android:id="@+id/getVerfication"
-                android:layout_width="wrap_content"
-                android:layout_height="49dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="2"
+                android:layout_width="276px"
+                android:layout_height="126px"
+                android:layout_marginTop="42px"
+                android:layout_marginLeft="42px"
+                android:layout_marginRight="90px"
                 android:background="@drawable/rounded_rectangle_button"
                 android:text="获取手机验证码"
                 android:textColor="@color/color_white" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
+            android:layout_marginTop="42px"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="90px">
             <CheckBox
                 android:id="@+id/task_info_list_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="44.1px"
+                android:layout_height="44.1px"
                 android:button="@drawable/task_type_image_selector"
-                android:layout_marginLeft="@dimen/edittext_margin_left"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="42px"
                 android:checked="false" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我已经阅读并且同意"
-                android:textColor="@color/colortext" />
-
+                android:textSize="43px"
+                android:textColor="#999999" />
             <TextView
                 android:id="@+id/tx_XYuers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
                 android:text="用户协议"
-                android:textColor="#000000" />
+                android:textSize="43px"
+                android:textColor="#333333" />
         </LinearLayout>
-
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/rounded_button_color"
-            android:text="确认"
-            android:textColor="@color/color_white"
-            android:textAlignment="center"
-            android:id="@+id/btn_registration" />
     </LinearLayout>
+    <Button
+        android:layout_width="774px"
+        android:layout_height="132px"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/rounded_button_color"
+        android:text="确认"
+        android:textAlignment="center"
+        android:id="@+id/btn_registration"
+        android:textColor="#ffffff"
+        android:textSize="43px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="264px"/>
 </RelativeLayout>
 

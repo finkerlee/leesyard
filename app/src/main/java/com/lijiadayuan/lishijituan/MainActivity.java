@@ -1,7 +1,6 @@
 package com.lijiadayuan.lishijituan;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,8 +23,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -43,6 +40,7 @@ import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,8 +61,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     private GridView mGvGoods;
     //卡票和红包
     private ImageView mIvTicket,mIvRed;
-    //保存当前地址
-    private String mCurrentAddress;
 
     private AddressDialog dialog;
 
@@ -88,14 +84,12 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     //首页福利商品的数据
     private List<Benefits> mBenefitsData;
 
-    private SharedPreferences mSp;
-
     private ProductViewBean mProductViewBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main1);
+        setContentView(R.layout.activity_main);
         initView();
         //初始化数据
         initData();
@@ -141,6 +135,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                                 mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
                                 mSimpleDraweeView.setAspectRatio(1.33f);
                                 //Log.i("main",item.getBenThumb());
+                                AutoUtils.autoSize(helper.getView());
                             }
                         };
                         mGvGoods.setAdapter(mAdpter);
@@ -201,6 +196,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         findViewById(R.id.iv_address).setOnClickListener(this);
         findViewById(R.id.iv_message).setOnClickListener(this);
         findViewById(R.id.search).setOnClickListener(this);
+        findViewById(R.id.iv_message).setOnClickListener(this);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         notice_vf = (ViewFlipper) findViewById(R.id.homepage_notice_vf);
         findViewById(R.id.iv_more).setOnClickListener(this);
@@ -281,22 +277,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     }
 
 
-    private BDLocationListener mListener = new BDLocationListener() {
-        @Override
-        public void onReceiveLocation(BDLocation bdLocation) {
-            if (bdLocation.hasAddr()){
-                mCurrentAddress = bdLocation.getAddrStr();
-                Log.i("main",bdLocation.getAddrStr());
-                locationService.unregisterListener(mListener); //注销掉监听
-                locationService.stop(); //停止定位服务
-
-                dialog = new AddressDialog(MainActivity.this, R.style.protocol_dialog,mCurrentAddress);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.show();
-
-            }
-        }
-    };
 
     @Override
     protected void onStart() {
@@ -341,18 +321,15 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 break;
 
             case R.id.iv_address:
-                locationService = ((LeeApplication) getApplication()).locationService;
-                locationService.registerListener(mListener);
-                //注册监听
-                int type = getIntent().getIntExtra("from", 0);
-                if (type == 0) {
-                    locationService.setLocationOption(locationService.getDefaultLocationClientOption());
-                } else if (type == 1) {
-                    locationService.setLocationOption(locationService.getOption());
-                }
-                locationService.start();
-                break;
 
+                dialog = new AddressDialog(MainActivity.this, R.style.protocol_dialog,HomeActivity.mCurrentAddress);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
+                break;
+            case R.id.iv_message:
+                Intent intent = new Intent(MainActivity.this,MymessageActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }

@@ -66,7 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
+            android:layout_marginTop="12dp"
+            android:layout_below="@id/TextView"
             android:orientation="horizontal">
 
             <TextView
@@ -77,14 +78,15 @@
 
             <TextView
                 android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
+                android:layout_width="261dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="北京市西城区乐坛南路69号"
+                android:text="北京市西城区乐坛9号北京市西城区乐坛南路69号北京市西城区乐坛南路69号北京市西城区乐坛南路69号北京市西城区乐坛南路69号"
                 android:textSize="15sp" />
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/mImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
