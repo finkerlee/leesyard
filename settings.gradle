@@ -1,1 +1,1 @@
-include ':pickerview', ':adapter', ':app', ':volley',':autolayout'
+include ':pickerview', ':adapter', ':app', ':volley',':autolayout',':shapeloading'

@@ -13,15 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+
 import com.lijiadayuan.lishijituan.adapter.ImageAdapter;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
-import com.lijiadayuan.lishijituan.bean.Users;
-import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
 
@@ -37,8 +31,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private ProductViewBean mProductViewBean;
 
     //浏览商品次数  "http://192.168.0.103:8080/product/click?proId=LPRO000000001"
-    private String proId ;
-
 
     private static final int LOGIN = 100;
     private static final int RENZHENG = 101;
@@ -48,9 +40,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private WebView mWbGoodsInfo;
     private TextView mTvGoodsName,mTvGoodsNum,mTvGoodsPrice,mTvGoodsSpec;
 
-    private SharedPreferences mSharedPreferences;
-
-    ArrayList<String> linkUrlArray= new ArrayList<String>();
     private CircleFlowIndicator mFlowIndicator;
     private Button mBtnReceive;
     @Override
@@ -59,14 +48,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         setContentView(R.layout.activity_product_base);
 
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
-        linkUrlArray
-                .add("");
-        linkUrlArray
-                .add("");
-        linkUrlArray
-                .add("");
-        linkUrlArray
-                .add("");
         initView();
         initBanner(mProductViewBean.getPicList());
         //将数据加载到视图
@@ -86,7 +67,12 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
      */
 
     private void setViewByData() {
-
+        if (mProductViewBean.getGoodsType() == BUY_GOODS) {
+            mBtnReceive.setText("我要购买");
+        }else if (mProductViewBean.getGoodsType() == GIFT_GOODS){
+            mBtnReceive.setText("我要领取");
+            //TODO 显示领取条件
+        }
         mWbGoodsInfo.loadUrl(mProductViewBean.getGoodsInfoUrl());
         mTvGoodsName.setText(mProductViewBean.getGoodsName());
         mTvGoodsNum.setText(mProductViewBean.getGoodsNum());
@@ -98,8 +84,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
 
     protected void initView(){
         mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
-
-
         findViewById(R.id.iv_back).setOnClickListener(this);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         mWbGoodsInfo = (WebView) findViewById(R.id.WebView);
@@ -108,26 +92,13 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         mTvGoodsPrice = (TextView) findViewById(R.id.tv_goods_price);
         mTvGoodsSpec = (TextView) findViewById(R.id.tv_goods_spec);
         mBtnReceive = (Button) findViewById(R.id.i_want_receive);
-
         mBtnReceive.setOnClickListener(this);
-
-        if (mProductViewBean.getGoodsType() == BUY_GOODS) {
-
-            mBtnReceive.setText("我要购买");
-        }else{
-            mBtnReceive.setText("我要领取");
-        }
-
-
     }
 
     private void initBanner(ArrayList<String> imageUrlList) {
-
-        mViewFlow.setAdapter(new ImageAdapter(this, imageUrlList,
-                linkUrlArray).setInfiniteLoop(true));
+        mViewFlow.setAdapter(new ImageAdapter(this, imageUrlList).setInfiniteLoop(true));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
-
         mViewFlow.setFlowIndicator(mFlowIndicator);
         mViewFlow.setTimeSpan(4500);
         mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
@@ -155,12 +126,12 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
        switch (v.getId()){
            case R.id.i_want_receive:
                //如果已经登陆
-               if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin,false)){
-                   if("我要购买".equals(mBtnReceive.getText())){
+               if (UsersUtil.isLogin(ProductBaseActivity.this)){
+                   if(BUY_GOODS == mProductViewBean.getGoodsType()){
                        Intent intent = new Intent(this,OrderActivity.class);
                        intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                        startActivity(intent);
-                   }else{
+                   }else if (GIFT_GOODS == mProductViewBean.getGoodsType()){
                        //判断是否认证为姓李
                        if (UsersUtil.isLee(ProductBaseActivity.this)){
                            //判断当前用户是否领取过福利商品的标识,0:未领取,未申请; 1:已申请未审核; 2:审核通过,可领取; 3:已领取; -1:审核失败

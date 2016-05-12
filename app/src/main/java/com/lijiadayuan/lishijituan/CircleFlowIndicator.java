@@ -134,7 +134,7 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 		}else{
 			mPaintInactive.setStyle(Style.FILL);
 		}
-		mPaintInactive.setColor(activeColor);
+		mPaintActive.setColor(activeColor);
 
 	}
 

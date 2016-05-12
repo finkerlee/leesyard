@@ -55,7 +55,6 @@ public class TicketTicapplyActivity extends BaseActivity implements View.OnClick
     private Tickets mTickets;
 
     private ViewFlow mViewFlow;
-    ArrayList<String> linkUrlArray= new ArrayList<String>();
     private CircleFlowIndicator mFlowIndicator;
     private ArrayList<String> imageUrlList = new ArrayList<String>();
 
@@ -75,10 +74,6 @@ public class TicketTicapplyActivity extends BaseActivity implements View.OnClick
         for (String s :mImgList ){
             imageUrlList.add(s);
         }
-        linkUrlArray.add("");
-        linkUrlArray.add("");
-        linkUrlArray.add("");
-        linkUrlArray.add("");
         initView();
         initBanner(imageUrlList);
 
@@ -157,8 +152,7 @@ public class TicketTicapplyActivity extends BaseActivity implements View.OnClick
     }
     private void initBanner(ArrayList<String> imageUrlList) {
 
-        mViewFlow.setAdapter(new ImageAdapter(this, imageUrlList,
-                linkUrlArray).setInfiniteLoop(true));
+        mViewFlow.setAdapter(new ImageAdapter(this, imageUrlList).setInfiniteLoop(true));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
 

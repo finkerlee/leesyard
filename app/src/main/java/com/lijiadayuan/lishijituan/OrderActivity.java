@@ -39,6 +39,7 @@ import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.PayUtils;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
+import com.mingle.widget.ShapeLoadingDialog;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -103,6 +104,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     private IWXAPI weiXinApi;
 
 
+    //加载中
+    private ShapeLoadingDialog shapeLoadingDialog;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -121,12 +124,12 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         mHandler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                 Toast.makeText(OrderActivity.this,msg.obj+"",Toast.LENGTH_LONG).show();
+                String data = msg.obj.toString();
+                Log.i("main",data);
             }
         };
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
-        SharedPreferences mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
-        userId = mSharedPreferences.getString(KeyConstants.UserInfoKey.userId, "");
+        userId = UsersUtil.getUserId(OrderActivity.this);
         //初始化布局
         initView();
         //初始化数据
@@ -157,6 +160,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void initView() {
+        shapeLoadingDialog = new ShapeLoadingDialog(this);
+        shapeLoadingDialog.setLoadingText("加载中...");
         //联系人信息
         mNameTV = (TextView) findViewById(R.id.tv_name);
         mPhoneTV = (TextView) findViewById(R.id.iv_phone_num);
@@ -179,7 +184,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         mTvGiveGoodsName = (TextView) findViewById(R.id.give_goods_name);
         mTvGiveGoodsOtherName = (TextView) findViewById(R.id.give_english_name);
         mTvGiveGoodsNum = (TextView) findViewById(R.id.give_goods_num);
-        //mTvGiveGoodsPrice = (TextView) findViewById(R.id.give_goods_price);
+        mTvGiveGoodsPrice = (TextView) findViewById(R.id.give_goods_price);
         //配送的布局
         mTvExpressStyle = (TextView) findViewById(R.id.express_style);
         mTvExPressPrice = (TextView) findViewById(R.id.express_price);
@@ -207,7 +212,6 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("userId", userId + "");
-
         // 创建一个字符串请求
         StringRequest request = new StringRequest(Request.Method.GET, getUrl(UrlConstants.USER_ADDRESS,params), new Response.Listener<String>() {
             @Override
@@ -256,7 +260,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
      */
     private void setAddressView() {
         if (mAddressList == null || mAddressList.size() == 0) {
-            Toast.makeText(this, "暂时没有收货地址", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "暂时没有收货地址,请添加地址", Toast.LENGTH_SHORT).show();
         } else {
             mAddress = mAddressList.get(0);
             mNameTV.setText(mAddress.getAddName());
@@ -287,7 +291,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mLayoutGive.setVisibility(View.VISIBLE);
             mTvGiveGoodsName.setText(mProductViewBean.getGoodsName());
             mTvGiveGoodsOtherName.setText(mProductViewBean.getGoodsOtherName());
-            //mTvGiveGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
+            mTvGiveGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
             mTvExpressStyle.setText("快递默认为在线支付");
             mTvExPressPrice.setText(mProductViewBean.getGoodsPrice() + "元");
             mLayoutExpress.setVisibility(View.VISIBLE);
@@ -355,6 +359,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.be_sure:
+                shapeLoadingDialog.show();
                 account();
                 break;
             case R.id.iv_back:
@@ -385,7 +390,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
      * 2,当下单请求回来后 调用三方结算sdk
      * 3,当sdk请求结束后调用  添加支付／完成日期 接口
      */
-    private  void account() {
+    private synchronized void account() {
         if (mProductViewBean.getGoodsType() == ProductBaseActivity.GIFT_GOODS){
             //当前商品是赠品的时候，只需要出运费,数量只能为1
             mGoodsNum =  1;
@@ -413,6 +418,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                                    if (JsonObj.has("sign")){
                                        //String sign = "jc88JhzGKXjErPEcj38Wr5%2BfgAKmNUCJI1Ta2mc8wwVlvR1bqWkOJKOWuni1skPT31R2%2FJ1mz9t2QCNblQppYNn8Ugg5B4emg4%2BM3P%2BhYk0gPbSCWMAkJN3xvwpqPkWMMkAarawOZO2vWhx9YynENV1fQ%2BlfTBU25P4ssXcRwAs%3D";
                                        String sign = JsonObj.get("sign").getAsString();
+                                       shapeLoadingDialog.dismiss();
                                        aliPay(sign);
                                    }
                                }else{

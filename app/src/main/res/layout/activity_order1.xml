@@ -11,7 +11,6 @@
     <include
         android:id="@+id/include14"
         layout="@layout/common_title" />
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,8 +19,10 @@
     <RelativeLayout
         android:id="@+id/rl_order_addresslayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="15dp">
+        android:layout_height="230px"
+        android:paddingTop="48px"
+        android:paddingLeft="43px"
+        >
 
         <TextView
             android:id="@+id/TextView"
@@ -29,7 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:text="姓名："
-            android:textSize="15sp" />
+            android:textSize="40px"
+            android:textColor="@color/app_text_heigh_color"
+            />
 
         <TextView
             android:id="@+id/tv_name"
@@ -37,8 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/TextView"
-            android:text="李国强"
-            android:textSize="15sp" />
+            android:textSize="40px"
+            android:textColor="@color/app_text_heigh_color"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -51,15 +55,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="手机号码:"
-                android:textSize="15sp" />
+                android:textSize="40px"
+                android:textColor="@color/app_text_heigh_color"/>
 
             <TextView
                 android:id="@+id/iv_phone_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="18535624211"
-                android:textSize="15sp" />
+                android:textSize="40px"
+                android:textColor="@color/app_text_heigh_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,21 +73,23 @@
             android:layout_alignParentBottom="true"
             android:layout_marginTop="12dp"
             android:layout_below="@id/TextView"
+
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="收货地址:"
-                android:textSize="15sp" />
+                android:textSize="40px"
+                android:textColor="@color/app_text_heigh_color" />
 
             <TextView
                 android:id="@+id/tv_address"
                 android:layout_width="261dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="北京市西城区乐坛9号北京市西城区乐坛南路69号北京市西城区乐坛南路69号北京市西城区乐坛南路69号北京市西城区乐坛南路69号"
-                android:textSize="15sp" />
+                android:textSize="40px"
+                android:textColor="@color/app_text_heigh_color" />
         </LinearLayout>
 
         <ImageView
@@ -91,6 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginTop="55px"
+            android:layout_marginRight="43px"
             android:src="@drawable/arrows" />
 
 
@@ -110,17 +119,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:layout_height="370px"
+        android:padding="44px"
         >
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/goods_pic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="321px"
+            android:layout_height="285px"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
             fresco:roundingBorderWidth="1dp"
             fresco:roundedCornerRadius="5dp"
             fresco:roundingBorderColor="#969696"
@@ -133,6 +140,8 @@
             android:layout_toRightOf="@id/goods_pic"
             android:layout_marginLeft="10dp"
             android:visibility="visible"
+            android:layout_centerVertical="true"
+
             >
             <TextView
                 android:id="@+id/give_english_name"
@@ -140,14 +149,18 @@
                 android:layout_height="wrap_content"
                 android:text="BELA DESINGN"
                 android:textStyle="bold"
+                android:textColor="@color/app_text_heigh_color"
+                android:textSize="43px"
                 />
             <TextView
                 android:id="@+id/give_goods_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="浪漫可旋转的八音盒"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="14px"
                 android:textStyle="bold"
+                android:textColor="@color/app_text_heigh_color"
+                android:textSize="43px"
                 />
 
             <TextView
@@ -156,17 +169,19 @@
                 android:layout_height="wrap_content"
                 android:text="x1"
                 android:layout_marginTop="5dp"
-                android:textSize="12sp"
+                android:textSize="29px"
+                android:textColor="@color/app_text_heigh_color"
+                android:textStyle="bold"
                 />
-
-            <!--<TextView-->
-                <!--android:id="@+id/give_goods_price"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="￥168"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:textSize="18sp"-->
-                <!--/>-->
+            <TextView
+                android:id="@+id/give_goods_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥168"
+                android:textSize="49px"
+                android:layout_marginTop="46px"
+                android:textColor="@color/app_text_heigh_color"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -176,8 +191,8 @@
             android:orientation="vertical"
             android:layout_toRightOf="@id/goods_pic"
             android:layout_marginLeft="10dp"
-            android:paddingTop="10dp"
             android:visibility="gone"
+            android:layout_centerVertical="true"
             >
             <TextView
                 android:id="@+id/buy_english_name"
@@ -185,20 +200,29 @@
                 android:layout_height="wrap_content"
                 android:text="BELA DESINGN"
                 android:textStyle="bold"
+                android:textSize="43px"
+                android:textColor="@color/app_text_heigh_color"
                 />
             <TextView
                 android:id="@+id/buy_goods_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="浪漫可旋转的八音盒"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="14px"
                 android:textStyle="bold"
+                android:textSize="43px"
+                android:textColor="@color/app_text_heigh_color"
                 />
+            <View
+                android:layout_weight="1"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp"
                 >
                 <TextView
                     android:id="@+id/jian"
@@ -207,10 +231,11 @@
                     android:text="-"
                     android:gravity="center"
                     android:background="@drawable/add_btn_bg"
+                    android:translationX="2dp"
                     />
                 <TextView
                     android:id="@+id/buy_goods_num"
-                    android:layout_width="20dp"
+                    android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:text="1"
                     android:textSize="13sp"
@@ -224,6 +249,7 @@
                     android:text="＋"
                     android:gravity="center"
                     android:background="@drawable/reduce_btn_bg"
+                    android:layout_marginLeft="-2dp"
                     />
 
                 <TextView
@@ -279,7 +305,7 @@
                 android:layout_height="wrap_content"
                 android:text="快递默认为在线支付"
                 android:textColor="#ea5959"
-                android:textSize="18sp"
+                android:textSize="49px"
                 />
 
             <LinearLayout
@@ -287,6 +313,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="27px"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -318,21 +345,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="10dp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="支付方式"
-            android:textSize="18sp"
-            android:layout_marginLeft="20dp"
+            android:textSize="49px"
+            android:layout_marginLeft="44px"
+            android:layout_marginTop="44px"
             android:textStyle="bold"
+            android:textColor="@color/app_text_heigh_color"
             />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/relativeLayout5"
-            android:layout_marginLeft="29dp"
+            android:layout_marginLeft="70px"
             android:layout_marginTop="10dp"
             >
 
@@ -343,7 +371,9 @@
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/alipay"
                 android:text="支付宝支付"
-                android:textSize="18dp"
+                android:textSize="49px"
+                android:drawablePadding="26px"
+                android:textColor="@color/app_text_heigh_color"
                 android:layout_marginBottom="5dp"/>
 
 
@@ -354,8 +384,10 @@
                 android:layout_below="@id/tv_ali"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/wechatpay"
+                android:textColor="@color/app_text_heigh_color"
+                android:drawablePadding="26px"
                 android:text="微信支付"
-                android:textSize="18dp"/>
+                android:textSize="49px"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -389,7 +421,7 @@
         </RelativeLayout>
     </LinearLayout>
     <View
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="44px"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#b9b9b9"
