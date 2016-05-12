@@ -66,7 +66,7 @@ public class HeadlineActivity extends BaseActivity implements View.OnClickListen
                          protected void convert(BaseAdapterHelper helper, Topics item) {
                //              helper.setText(R.id.tv_title,item.getTopTitle());
                              helper.setText(R.id.tv_title,item.getTopTitle()+"");
-                             helper.setText(R.id.tv_headline_date,DateTimeUtil.getTargetDate( item.getTopDate()*1000));
+                             helper.setText(R.id.tv_headline_date,DateTimeUtil.getTargetDates(item.getTopDate() * 1000));
                              SimpleDraweeView mIvPic = (SimpleDraweeView) helper.getView().findViewById(R.id.head_image_pic);
                              mIvPic.setImageURI(Uri.parse(item.getTopImg()));
                          }
