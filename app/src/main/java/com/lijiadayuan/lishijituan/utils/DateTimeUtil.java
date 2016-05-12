@@ -17,8 +17,19 @@ public class DateTimeUtil {
 	 */
 	public static String getTargetDate(Long l){
 		Date date = new Date(l);
-		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		 String value = dateFormat.format(date);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String value = dateFormat.format(date);
+		return value;
+	}
+
+	/**
+	 * 时间戳转成为时间 yyyy-MM-dd hh:mm:ss
+	 * @return
+	 */
+	public static String getTargetDates(Long l){
+		Date date = new Date(l);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String value = dateFormat.format(date);
 		return value;
 	}
 
