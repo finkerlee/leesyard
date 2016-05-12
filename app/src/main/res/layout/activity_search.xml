@@ -14,13 +14,13 @@
             <EditText
                 android:completionThreshold="1"
                 android:id="@+id/search_et_input"
-                android:layout_width="310dp"
-                android:layout_height="54px"
+                android:layout_width="876px"
+                android:layout_height="70px"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="15px"
                 android:layout_marginLeft="42px"
                 android:layout_marginTop="30px"
                 android:layout_marginBottom="30px"
+                android:paddingLeft="15px"
                 android:background="@drawable/search_edittext_shape"
                 android:drawableLeft="@drawable/search"
                 android:textSize="44px"
@@ -38,7 +38,7 @@
             android:textSize="48px"
             android:textColor="#ea5959"/>
     </LinearLayout>
-
+    
     <ListView
         android:id="@+id/history_list"
         android:layout_width="match_parent"
