@@ -35,8 +35,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     public static final int GIFT_GOODS = 0;
     //视图bean
     private ProductViewBean mProductViewBean;
-    //
-    private Boolean isLogin;
 
     //浏览商品次数  "http://192.168.0.103:8080/product/click?proId=LPRO000000001"
     private String proId ;
@@ -60,8 +58,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_base);
 
-        mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
-        isLogin = mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin, false);
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
         linkUrlArray
                 .add("");
@@ -143,7 +139,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         if (resultCode == RESULT_OK){
             switch (requestCode){
                 case LOGIN:
-                    isLogin = data.getBooleanExtra(KeyConstants.UserInfoKey.userIsLogin,false);
                     break;
                 case RENZHENG:
                     Toast.makeText(this,"认证成功,请耐心等待",Toast.LENGTH_LONG).show();
@@ -185,8 +180,8 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                            }
                            //审核通过,可以领取
                            if (mProductViewBean.getGoodStatus() == 2){
-                               Intent intent = new Intent(this,SubmitDataActivity.class);
-                               intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
+                               Intent intent = new Intent(this,OrderActivity.class);
+                               intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                                startActivityForResult(intent, ORDEROK);
                            }
 
