@@ -282,7 +282,7 @@
                 android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
                 android:textSize="36px"
-                android:textColor="@color/app_text_normol_color"
+                android:textColor="@color/app_text_heigh_color"
                 />
 
         </RelativeLayout>
