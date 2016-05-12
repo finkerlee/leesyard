@@ -179,7 +179,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
         mTvGiveGoodsName = (TextView) findViewById(R.id.give_goods_name);
         mTvGiveGoodsOtherName = (TextView) findViewById(R.id.give_english_name);
         mTvGiveGoodsNum = (TextView) findViewById(R.id.give_goods_num);
-        mTvGiveGoodsPrice = (TextView) findViewById(R.id.give_goods_price);
+        //mTvGiveGoodsPrice = (TextView) findViewById(R.id.give_goods_price);
         //配送的布局
         mTvExpressStyle = (TextView) findViewById(R.id.express_style);
         mTvExPressPrice = (TextView) findViewById(R.id.express_price);
@@ -287,8 +287,9 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             mLayoutGive.setVisibility(View.VISIBLE);
             mTvGiveGoodsName.setText(mProductViewBean.getGoodsName());
             mTvGiveGoodsOtherName.setText(mProductViewBean.getGoodsOtherName());
-            mTvGiveGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
+            //mTvGiveGoodsPrice.setText("￥" + mProductViewBean.getGoodsPrice());
             mTvExpressStyle.setText("快递默认为在线支付");
+            mTvExPressPrice.setText(mProductViewBean.getGoodsPrice() + "元");
             mLayoutExpress.setVisibility(View.VISIBLE);
 
         }else if(mProductViewBean.getGoodsType() == ProductBaseActivity.BUY_GOODS){
@@ -384,11 +385,11 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
      * 2,当下单请求回来后 调用三方结算sdk
      * 3,当sdk请求结束后调用  添加支付／完成日期 接口
      */
-    private void account() {
+    private  void account() {
         if (mProductViewBean.getGoodsType() == ProductBaseActivity.GIFT_GOODS){
             //当前商品是赠品的时候，只需要出运费,数量只能为1
             mGoodsNum =  1;
-            mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice())+80;
+            mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice());
 
         }else if(mProductViewBean.getGoodsType() == ProductBaseActivity.BUY_GOODS){
             //当前商品是购买的时候，运费到付，在线支付商品的价格，数量能变

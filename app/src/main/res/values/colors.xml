@@ -6,7 +6,6 @@
     <color name="myred">#eb4f38</color>
     <color name="darkgray">#cccc</color>
     <color name="back">#ea5959</color>
-    <color name="colortext">#999999</color>
     <color name="color_white">#ffffff</color>
     <color name="btn_press_color">#5677fc</color>
     <color name="btn_pressed_color">#3ca0ec</color>
@@ -28,4 +27,11 @@
     <color name="reds_divider">#eeeeee</color>
     <color name="tab_text_unchecked">#ff2e2e2e</color>
      <color name="red">#ff0000</color>
+
+    <!--app的默认字体颜色  edittext默认显示的颜色-->
+    <color name="app_text_normol_color">#999999</color>
+    <!--app的默认字体颜色  edittext显示的颜色   暂时没用到-->
+    <color name="app_text_color">#666666</color>
+    <!--app的默认字体颜色  输入后显示的字体颜色-->
+    <color name="app_text_main_color">#333333</color>
 </resources>

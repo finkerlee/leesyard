@@ -247,6 +247,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_alignParentTop="true"
+        android:paddingTop="30px"
 
         >
 
@@ -258,29 +259,34 @@
             android:layout_marginRight="60px"
             android:id="@+id/iv_address"
             android:background="@drawable/location"/>
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="57px"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/search_edittext_shape">
-            <ImageView
-                android:layout_width="60px"
-                android:layout_height="60px"
-                android:layout_marginLeft="15px"
-                android:layout_marginRight="15px"
-                android:src="@drawable/search_icon"
+            android:background="@drawable/search_edittext_shape"
+            android:alpha="70"
+            >
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="45px"
+                android:layout_height="45px"
+                android:layout_marginLeft="40px"
+                android:background="@drawable/search_icon"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="搜索李家大院"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:textSize="36px"
+                android:textColor="@color/app_text_normol_color"
                 />
 
-        </LinearLayout>
-        <ImageView
+        </RelativeLayout>
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_message"
             android:layout_width="60px"
             android:layout_height="60px"

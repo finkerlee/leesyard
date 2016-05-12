@@ -107,7 +107,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 				mProductViewBean.setGoodsName(mAdvView.getProName());
 				mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mAdvView.getProId());
 				mProductViewBean.setGoodsSpec(mAdvView.getProSpec());
-				mProductViewBean.setGoodsNum(1+"");
+				mProductViewBean.setGoodsNum(mAdvView.getProStock()+"");
 				mProductViewBean.setGoodsThumb(mAdvView.getProThumb());
 				mProductViewBean.setGoodsPic(mAdvView.getProImg());
 				mProductViewBean.setGoodsId(mAdvView.getProId());
