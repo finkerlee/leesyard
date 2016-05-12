@@ -15,7 +15,7 @@
         android:paddingLeft="60px"
         android:textSize="36px"
         android:textColor="#666666" />
-        
+
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
@@ -23,8 +23,7 @@
         android:paddingLeft="60px"
         android:hint="联系方式"
         android:textColor="#666666"
-        android:textSize="36px"
-        />
+        android:textSize="36px"/>
 
     <EditText
         android:id="@+id/address"

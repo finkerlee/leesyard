@@ -8,6 +8,7 @@
     <include
         android:id="@+id/iv_title"
         layout="@layout/common_title"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,12 +21,13 @@
     </ScrollView>
 <Button
     android:id="@+id/id_address"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
+    android:layout_width="772px"
+    android:layout_height="133px"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
     android:background="@drawable/rounded_button_color"
     android:text="+新建地址"
+    android:layout_marginBottom="237px"
     android:textColor="@color/main_tab_bar_bg"/>
 
     <ListView
