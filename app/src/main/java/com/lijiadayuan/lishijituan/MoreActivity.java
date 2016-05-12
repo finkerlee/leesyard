@@ -110,7 +110,7 @@ public class MoreActivity extends BaseActivity {
     private void initView() {
         gridView = (GridView) findViewById(R.id.gridView);
         ImageView mIv = (ImageView) findViewById(R.id.iv_address);
-        mIv.setImageResource(R.drawable.return_back);
+        mIv.setImageResource(R.drawable.btn_return);
         findViewById(R.id.iv_messsage).setVisibility(View.GONE);
         tvTitleback= (TextView) findViewById(R.id.title_back);
         tvTitleback.setText("返回");

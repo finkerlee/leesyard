@@ -6,8 +6,8 @@
     android:layout_height="wrap_content">
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/iv_photos"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="327px"
+        android:layout_height="327px"
         fresco:actualImageScaleType="fitXY"
         fresco:roundedCornerRadius="20px"
         fresco:roundingBorderWidth="1px"

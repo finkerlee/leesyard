@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
 
-public class CultureActivity extends Activity implements OnClickListener{
+public class CultureActivity extends BaseActivity implements OnClickListener{
 
     private GridView gridView;
     private TextView tvTitle;

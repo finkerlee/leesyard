@@ -8,7 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="537px"
         android:orientation="vertical"
         android:background="#ffffff"
         android:layout_alignParentBottom="true">
@@ -17,19 +18,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="72px"
             android:text="用户协议"
-            android:textSize="22sp"
-            android:textColor="#000000"
+            android:textSize="34px"
+            android:textColor="#333333"
             android:gravity="center"
             />
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="1000px">
 
             <TextView
                 android:id="@+id/et_xytext"
+                android:layout_marginTop="45px"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:singleLine="false"
                 android:text="一、本站服务条款的接纳和确认\n
 （1）本站的各项电子服务的运作权和所有权归本站。本站提供的服务将完全按照其发布的服务条款和操作规则严格执行。用户同意所有服务条款并完成注册程序时，本协议在用户与本站间成立并发生法律效力，同时成为本站正式用户。\n
@@ -67,23 +70,21 @@
 本协议条款如发生与中国法律相抵触时，则这些条款将完全按法律规定重新解释，而其它有效条款继续有效。双方就本协议内容或其执行发生任何争议，双方应友好协商解决；协商不成时，任何一方均可向人民法院提起诉讼。\n
 "
                 android:textColor="#000000"
-                android:textSize="12sp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"/>
+                android:textSize="28px"
+                android:layout_marginLeft="90px"
+                android:layout_marginRight="90px"/>
         </ScrollView>
-
         <Button
             android:id="@+id/btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="774px"
+            android:layout_height="132.9px"
             android:background="@drawable/rounded_button_color"
+            android:layout_marginTop="90px"
             android:text="确 认"
+            android:gravity="center"
+            android:textSize="43px"
             android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_gravity="center"
             />
     </LinearLayout>
 </RelativeLayout>

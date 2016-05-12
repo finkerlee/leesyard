@@ -33,6 +33,7 @@ public class ForgetpasswordActivtiy extends BaseActivity implements View.OnClick
     private static final String TAG = "ForgetpasswordActivitiy";
     private EditText etphone,etcode;
     private Button mBtnGetVerfication;
+    private TextView tvTitle;
     // 保存验证码
     private String verificationCode = "1000";
     @Override
@@ -41,16 +42,18 @@ public class ForgetpasswordActivtiy extends BaseActivity implements View.OnClick
         setContentView(R.layout.activtiy_forget_password);
         findViewById();
         initView();
+        tvTitle.setText("忘了密码");
     }
     protected void findViewById(){
-        findViewById(R.id.et_loginback).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.btn_Verification).setOnClickListener(this);
         etphone= (EditText) findViewById(R.id.et_phone);
         mBtnGetVerfication = (Button) findViewById(R.id.btn_code);
-
+        tvTitle= (TextView) findViewById(R.id.text_title);
         etcode= (EditText) findViewById(R.id.et_code);
     }
     protected void initView(){
+
         etphone.setOnClickListener(this);
         etcode.setOnClickListener(this);
         mBtnGetVerfication.setOnClickListener(this);
@@ -82,7 +85,7 @@ public class ForgetpasswordActivtiy extends BaseActivity implements View.OnClick
                 break;
 
 
-            case R.id.et_loginback:
+            case R.id.iv_back:
                 finish();
                 break;
             case R.id.btn_code:

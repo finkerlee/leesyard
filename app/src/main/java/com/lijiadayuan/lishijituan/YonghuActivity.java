@@ -46,7 +46,7 @@ import java.util.regex.Pattern;
 public class YonghuActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "YonghuActivity";
     private TextView text;
-    private TextView textback;
+    private TextView tvTitle;
     InputMethodManager manager;
     private ProtocolDialog dialog;
     private EditText etUsername;                // 用户名
@@ -68,20 +68,8 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
         //空白处隐藏软键盘
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        textback.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.et_loginback:
-                        finish();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
-
+        findViewById(R.id.iv_back).setOnClickListener(this);
+        tvTitle.setText("注册");
         text.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -95,7 +83,7 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
     }
 
     protected void initView() {
-        textback = (TextView) findViewById(R.id.et_loginback);
+        tvTitle = (TextView) findViewById(R.id.text_title);
         text = (TextView) findViewById(R.id.tx_XYuers);
         mBtnGetVerfication = (Button) findViewById(R.id.getVerfication);
         mBtnGetVerfication.setOnClickListener(this);
@@ -124,6 +112,9 @@ public class YonghuActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
             case R.id.getVerfication:
                 if (VerficationUtil.checkMobile(this, etphone.getText().toString())){
                     new Thread() {

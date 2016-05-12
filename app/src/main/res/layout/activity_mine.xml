@@ -20,13 +20,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginLeft="126px"
+        android:layout_marginTop="203px">
 
         <com.facebook.drawee.view.SimpleDraweeView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="300px"
+            android:layout_height="300px"
             app:citv_border_width="2dp"
             app:citv_border_color="#FF000000"
             android:id="@+id/iv_avatar"
@@ -47,35 +47,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="默认"
-                android:textSize="20dp"
-                android:textColor="@color/back"
+                android:textSize="50px"
                 android:id="@+id/iv_name"/>
                 <TextView
-                    android:layout_width="18dp"
-                    android:layout_height="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="8dp"
+                    android:layout_width="60px"
+                    android:layout_height="30px"
+                    android:layout_marginLeft="8px"
+                    android:textSize="24px"
+                    android:gravity="center"
                     android:text="认证"
                     android:background="@drawable/rounded_edittext_red"
                     android:textColor="#ea5959"
                     android:layout_toRightOf="@id/iv_name"
                     android:layout_alignBottom="@id/iv_name"
-                    android:layout_marginBottom="5dp" />
+                     />
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="9px"
                 android:orientation="horizontal"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#ea5959"
                     android:text="用户等级LV."
                     />
                 <TextView
                     android:id="@+id/tv_user_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#ea5959"
                     android:text="13"/>
             </LinearLayout>
 
@@ -84,24 +87,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="600px"
         android:orientation="vertical">
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="3px"
             android:background="#b4b4b4"/>
         <RelativeLayout
             android:id="@+id/myorder"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_height="128px"
+            android:layout_marginLeft="66px"
+            android:layout_marginRight="66px">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/iv_order1"
+                android:src="@drawable/iv_order"
                 android:layout_alignParentLeft="true"
                 android:id="@+id/iv_order"
                 android:layout_centerVertical="true"/>
@@ -109,31 +111,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="35px"
                 android:text="我的订单"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="26px"
                 android:layout_toRightOf="@id/iv_order"
                 android:layout_centerVertical="true"/>
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="45px"
+                android:layout_height="45px"
                 android:background="@drawable/key"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
 
         </RelativeLayout>
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="3px"
             android:background="#b4b4b4"/>
         <RelativeLayout
             android:id="@+id/iv_mymessage"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:layout_marginRight="20dp">
+            android:layout_height="128px"
+            android:layout_marginLeft="66px"
+            android:layout_marginRight="66px">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,31 +144,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="35px"
                 android:text="我的消息"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_mymine"
                 android:layout_centerVertical="true"/>
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="45px"
+                android:layout_height="45px"
                 android:background="@drawable/key"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
 
         </RelativeLayout>
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="3px"
             android:background="#b4b4b4"/>
         <RelativeLayout
             android:id="@+id/iv_welfare"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:layout_marginRight="20dp">
+            android:layout_height="128px"
+            android:layout_marginLeft="66px"
+            android:layout_marginRight="66px">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -179,31 +177,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="35px"
                 android:text="我的福利"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_mywelfare"
                 android:layout_centerVertical="true"/>
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="45px"
+                android:layout_height="45px"
                 android:background="@drawable/key"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
 
         </RelativeLayout>
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="3px"
             android:background="#b4b4b4"/>
         <RelativeLayout
             android:id="@+id/iv_member"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:layout_marginRight="20dp">
+            android:layout_height="128px"
+            android:layout_marginLeft="66px"
+            android:layout_marginRight="66px">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -215,31 +211,29 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="35px"
                 android:text="认证会员"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_verifiedmember"
                 android:layout_centerVertical="true"/>
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="45px"
+                android:layout_height="45px"
                 android:background="@drawable/key"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
 
         </RelativeLayout>
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="3px"
             android:background="#b4b4b4"/>
         <RelativeLayout
             android:id="@+id/iv_2D"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:layout_marginRight="20dp">
+            android:layout_height="128px"
+            android:layout_marginLeft="66px"
+            android:layout_marginRight="66px">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -250,31 +244,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="35px"
                 android:text="二维码"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_qr"
                 android:layout_centerVertical="true"/>
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="45px"
+                android:layout_height="45px"
                 android:background="@drawable/key"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
 
         </RelativeLayout>
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="3px"
             android:background="#b4b4b4"/>
         <RelativeLayout
             android:id="@+id/ship_address"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:layout_marginRight="20dp">
+            android:layout_height="128px"
+            android:layout_marginLeft="66px"
+            android:layout_marginRight="66px">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -285,23 +277,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="35px"
                 android:text="地址管理"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_shipingaddress"
                 android:layout_centerVertical="true"/>
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="45px"
+                android:layout_height="45px"
                 android:background="@drawable/key"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
 
         </RelativeLayout>
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="3px"
             android:background="#b4b4b4"/>
         <!--<RelativeLayout-->
             <!--android:id="@+id/iv_us"-->

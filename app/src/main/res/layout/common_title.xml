@@ -4,39 +4,39 @@
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/iv_address">
+        android:layout_height="120px"
+        android:id="@+id/iv_address"
+        android:gravity="center_vertical">
+
         <LinearLayout
             android:id="@+id/iv_back"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center"
-            android:src="@drawable/return_back"/>
+            android:layout_height="45px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="72px">
+            <ImageView
+                android:layout_width="27px"
+                android:layout_height="match_parent"
+                android:src="@drawable/btn_return"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="返回"
-            android:layout_gravity="center_vertical"
-            android:textColor="#ff4650"
-            android:textSize="17dp"
-            android:layout_centerInParent="true"
-
-            android:layout_toRightOf="@+id/iv_back"
+            android:textColor="#ea5959"
+            android:textSize="44px"
+            android:layout_marginLeft="24px"
             />
         </LinearLayout>
         <TextView
             android:id="@+id/text_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
             android:textColor="#333333"
-            android:textSize="18sp"
+            android:textSize="49px"
             />
     </RelativeLayout>
     <TextView

@@ -3,6 +3,13 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/volley/pom.xml" />
+      </list>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
@@ -27,6 +34,7 @@
       </value>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -64,6 +72,8 @@
       </profile-state>
     </entry>
   </component>
+=======
+>>>>>>> 1eed1bd7dd9a1a25a1e72cd7938287120d24f86d
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -74,12 +84,21 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+=======
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+>>>>>>> 4e92a2ab37cd5f1b118dbe997a4e642deae2fe03
+>>>>>>> 1eed1bd7dd9a1a25a1e72cd7938287120d24f86d
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+<<<<<<< HEAD
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">
@@ -107,4 +126,6 @@
       </state>
     </states>
   </component>
+=======
+>>>>>>> 1eed1bd7dd9a1a25a1e72cd7938287120d24f86d
 </project>

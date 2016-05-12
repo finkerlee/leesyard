@@ -31,7 +31,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private ProductViewBean mProductViewBean;
 
     //浏览商品次数  "http://192.168.0.103:8080/product/click?proId=LPRO000000001"
-
     private static final int LOGIN = 100;
     private static final int RENZHENG = 101;
     private static final int ORDEROK = 102;
@@ -128,6 +127,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                //如果已经登陆
                if (UsersUtil.isLogin(ProductBaseActivity.this)){
                    if(BUY_GOODS == mProductViewBean.getGoodsType()){
+
                        Intent intent = new Intent(this,OrderActivity.class);
                        intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                        startActivity(intent);

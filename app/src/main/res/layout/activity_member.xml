@@ -12,87 +12,102 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout9"
         android:layout_below="@+id/include15"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginTop="125px"
+        android:layout_marginLeft="66px"
+        android:layout_marginRight="66px"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="463px"
+            android:layout_height="126px"
             android:background="@drawable/rounded_edittext">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="李"
-                android:layout_marginLeft="10dp"
-                android:textSize="18dp"
-                android:textColor="@color/main_tab_btn_pressed"/>
-
+                android:layout_marginLeft="45px"
+                android:textSize="34px"
+                android:layout_gravity="center"
+                android:textColor="#999999"/>
             <EditText
                 android:id="@+id/et_name"
-                android:padding="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00ffffff"
+                android:hint="请输入您的名字"
                 android:maxLength="3"
-                android:hint="请输入您的名字"/>
+                android:paddingLeft="20px"
+                android:textSize="30px"
+                android:layout_gravity="center"
+                android:textColor="#666666"
+                android:textColorHint="#999999"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:padding="15dp">
+            android:layout_marginLeft="30px"
+            android:padding="36px"
+            android:layout_gravity="center">
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RadioButton
                     android:id="@+id/rb_man"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100px"
                     android:layout_height="wrap_content"
                     android:button="@null"
                     android:drawableLeft="@drawable/radio_"
-                    android:textSize="20dp"
-                    android:text="男" />
-
+                    android:textColor="#666666"
+                    android:textSize="30px"
+                    android:text="  男"
+                    android:layout_gravity="center"
+                />
                 <RadioButton
                     android:id="@+id/rb_woman"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100px"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/radio_"
-                    android:layout_marginLeft="10dp"
-                    android:text="女"
-                    android:textSize="20dp"
-                    android:button="@null" />
+                    android:layout_marginLeft="35px"
+                    android:textColor="#666666"
+                    android:text="  女"
+                    android:textSize="30px"
+                    android:button="@null"
+                    android:layout_gravity="center"/>
             </RadioGroup>
         </LinearLayout>
     </LinearLayout>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="17dp"
+        android:layout_height="126px"
+        android:paddingLeft="45px"
         android:hint="请输入您的手机号码"
         android:maxLength="11"
         android:background="@drawable/rounded_edittext"
         android:layout_below="@+id/linearLayout9"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:textSize="30px"
+        android:layout_marginTop="42px"
+        android:layout_marginLeft="66px"
         android:inputType="phone"
-        android:layout_marginRight="20dp"
-        android:id="@+id/et_phoneNum" />
+        android:layout_marginRight="66px"
+        android:id="@+id/et_phoneNum"
+        android:textColor="#666666"
+        android:textColorHint="#999999"/>
     <EditText
         android:id="@+id/et_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="17dp"
+        android:layout_height="126px"
+        android:paddingLeft="45px"
         android:hint="请输入您的身份证号"
         android:maxLength="18"
-        android:inputType=""
         android:background="@drawable/rounded_edittext"
-        android:layout_marginTop="20dp"
         android:layout_below="@+id/et_phoneNum"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:textSize="30px"
+        android:layout_marginTop="42px"
+        android:layout_marginLeft="66px"
+        android:layout_marginRight="66px"
+        android:textColor="#666666"
+        android:textColorHint="#999999"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,26 +117,27 @@
 
         <ImageView
             android:id="@+id/iv_photos_correct"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="360px"
+            android:layout_height="360px"
             android:src="@drawable/correct_side"
             android:layout_weight="1"/>
 
         <ImageView
             android:id="@+id/iv_photos_opposite"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="360px"
+            android:layout_height="360px"
             android:src="@drawable/opposite_side"
             android:layout_weight="1"/>
     </LinearLayout>
     <Button
         android:id="@+id/btn_verification"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_width="774px"
+        android:layout_height="132px"
         android:background="@drawable/rounded_button_color"
         android:text="验证"
+        android:textSize="43px"
         android:textColor="@color/color_white"
         android:layout_below="@+id/linearLayout10"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp" />
+        android:layout_marginTop="390px" />
 </RelativeLayout>
