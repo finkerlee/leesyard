@@ -27,6 +27,7 @@ import com.lijiadayuan.lishijituan.bean.ProductViewBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,6 +82,9 @@ public class SearchResultActivity extends BaseActivity  implements View.OnClickL
                                     helper.setText(R.id.tv_price,item.getProPrice()+"");
                                     SimpleDraweeView msv = (SimpleDraweeView) helper.getView().findViewById(R.id.iv_pic);
                                     msv.setImageURI(Uri.parse(item.getProThumb()));
+
+
+                                    AutoUtils.autoSize(helper.getView());
                                 }
                             };
                             mLv.setAdapter(mAdpter);

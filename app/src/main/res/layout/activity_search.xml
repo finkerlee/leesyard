@@ -7,44 +7,77 @@
     <LinearLayout
         android:id="@+id/search_top_layout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="5dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
             <EditText
-                android:completionThreshold="1"
                 android:id="@+id/search_et_input"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:layout_width="310dp"
-                android:layout_height="30dp"
+                android:layout_width="876px"
+                android:layout_height="80px"
+                android:layout_marginLeft="42px"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="30px"
+                android:paddingLeft="15px"
                 android:background="@drawable/search_edittext_shape"
-                android:drawableLeft="@drawable/search"
-                android:textSize="16sp"
-                android:imeOptions="actionSearch"
+                android:drawableLeft="@drawable/searchs"
+                android:textSize="44px"
                 android:inputType="text"
-                android:hint="  搜索李家大院" />
+                android:hint="  搜索李家大院商品" />
+
 
         <TextView
             android:id="@+id/search_btn_back"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="27px"
             android:text="搜索"
-            android:textSize="16sp"
-            android:textColor="@color/back"/>
+            android:textSize="48px"
+            android:textColor="#ea5959"/>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:background="@color/darkgray"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_search_history"
+        android:layout_width="match_parent"
+        android:layout_height="105px"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="历史搜索"
+            android:textSize="49px"
+            android:layout_marginLeft="39px"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textColor="@color/app_text_shallow_color"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:background="@color/darkgray"/>
 
 
     <ListView
         android:id="@+id/history_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="#ffffff"
         android:layout_below="@id/search_top_layout"
 />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button" />
 
 </LinearLayout>

@@ -4,6 +4,8 @@ package com.lijiadayuan.lishijituan.http;
  * Created by Lee on 2016-03-04.
  * E-mail:johnyylee@163.com
  */
+
+
 public interface UrlConstants {
     //http://192.168.0.103:8080/
     //http://beijinglijiadayuan.com:8080/lees

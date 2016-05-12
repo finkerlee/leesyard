@@ -50,7 +50,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends BaseActivity implements OnClickListener{
-
+    
     //轮播图
     private ViewFlow mViewFlow;
     //红点
@@ -102,6 +102,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     /**
      * 初始化数据
      */
+
     private void initData() {
         RequestQueue mRequestQueue = app.getRequestQueue();
         StringRequest mRequest = new StringRequest(Request.Method.POST, UrlConstants.MAIN_PAGE_URL, new Response.Listener<String>() {

@@ -18,10 +18,9 @@
             android:layout_marginRight="90px"
             android:layout_marginTop="120px"
             android:hint="请输入用户名"
-            android:paddingLeft="45px"
-            android:textColor="#666666"
-            android:textColorHint="#999999"
-            android:textSize="49px"
+            android:paddingLeft="10dp"
+            android:textColor="@color/app_text_heigh_color"
+            android:textSize="16sp"
             android:id="@+id/et_yonghu_username" />
         <EditText
             android:id="@+id/et_yonghu_phonenum"
@@ -36,8 +35,8 @@
             android:textColorHint="#999999"
             android:background="@drawable/rounded_edittext"
             android:hint="请输入您的手机号码"
-            android:inputType="phone"
-            />
+            android:inputType="phone" />
+
         <EditText
             android:id="@+id/et_yonghu_password"
             android:layout_width="900px"
@@ -53,6 +52,7 @@
             android:hint="请输入您的密码"
             android:inputType="textPassword"
            />
+
         <EditText
             android:id="@+id/et_yonghu_password2"
             android:layout_width="900px"
@@ -67,7 +67,11 @@
             android:background="@drawable/rounded_edittext"
             android:hint="请再次输入您的密码"
             android:inputType="textPassword"
+/>
+
+
             />
+>>>>>>> 6ffafd7bf1412209278e97f7e9aa7a04247569a3
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -84,6 +88,8 @@
                 android:background="@drawable/rounded_edittext"
                 android:hint="请输入验证码"
                 android:inputType="number"
+
+
                 />
             <Button
                 android:id="@+id/getVerfication"
@@ -118,6 +124,7 @@
                 android:textSize="43px"
                 android:textColor="#999999"
                 android:layout_gravity="center_horizontal"/>
+
             <TextView
                 android:id="@+id/tx_XYuers"
                 android:layout_width="wrap_content"

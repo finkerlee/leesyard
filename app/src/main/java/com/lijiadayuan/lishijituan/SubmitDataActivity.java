@@ -108,14 +108,12 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
         findViewById(R.id.btn_receive).setOnClickListener(this);
 
         findViewById(R.id.iv_back).setOnClickListener(this);
-        tvTitle.setText("申请领取");
+        tvTitle.setText("我要领取");
         mBitmaps = new ArrayList<>();
         Bitmap defaultPic = BitmapFactory.decodeResource(getResources(), R.drawable.upload);
         mBitmaps.add(defaultPic);
         mAdpter = new UpLoadPicAdapter(this, mBitmaps);
         mGridView.setAdapter(mAdpter);
-
-
     }
 
     //空白处隐藏软键盘
