@@ -283,8 +283,8 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="36px"
                 android:textColor="@color/app_text_heigh_color"
-                />
 
+                />
         </RelativeLayout>
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_message"

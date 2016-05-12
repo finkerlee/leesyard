@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.lijiadayuan.lishijituan.RegistrationActivity">
-
     <include layout="@layout/common_title" />
 
     <EditText
@@ -24,6 +23,7 @@
         android:paddingLeft="20dp"
         android:inputType="phone"
         android:maxLength="11"/>
+
     <EditText
         android:id="@+id/account_name"
         android:layout_width="match_parent"

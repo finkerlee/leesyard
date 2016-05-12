@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class SearchActivity extends BaseActivity {
                 helper.setText(R.id.tv_search,item);
             }
         };
+
         mLvHistory.setAdapter(mAdpter);
         mTvSearch= (TextView)findViewById(R.id.search_btn_back);
         mTvSearch.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +56,7 @@ public class SearchActivity extends BaseActivity {
                     Toast.makeText(SearchActivity.this,"请输入关键字",Toast.LENGTH_LONG).show();
                     return;
                 }
+
                 Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
                 intent.putExtra("keyword",acTextView.getText().toString());
                 startActivity(intent);

@@ -19,10 +19,11 @@
                 android:layout_marginBottom="30px"
                 android:paddingLeft="15px"
                 android:background="@drawable/search_edittext_shape"
-                android:drawableLeft="@drawable/search"
+                android:drawableLeft="@drawable/searchs"
                 android:textSize="44px"
                 android:inputType="text"
                 android:hint="  搜索李家大院商品" />
+
 
         <TextView
             android:id="@+id/search_btn_back"
@@ -35,11 +36,48 @@
             android:textColor="#ea5959"/>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:background="@color/darkgray"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_search_history"
+        android:layout_width="match_parent"
+        android:layout_height="105px"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="历史搜索"
+            android:textSize="49px"
+            android:layout_marginLeft="39px"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textColor="@color/app_text_shallow_color"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:background="@color/darkgray"/>
+
+
     <ListView
         android:id="@+id/history_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="#ffffff"
         android:layout_below="@id/search_top_layout"
 />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button" />
 
 </LinearLayout>

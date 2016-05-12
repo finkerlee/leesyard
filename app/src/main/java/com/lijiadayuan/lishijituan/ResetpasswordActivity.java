@@ -28,7 +28,7 @@ import java.util.Map;
  * Created by lifanqiao on 16/3/11.
  */
 public class ResetpasswordActivity extends BaseActivity implements View.OnClickListener{
-    private TextView textback;
+    private TextView  textback,tvTitle,text_title;
     private EditText pass1,pass2;
     private Button btnsure;
     @Override
@@ -37,17 +37,16 @@ public class ResetpasswordActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_resetpassword);
         findViewById();
         initView();
-
+        text_title.setText("重置密码");
 
     }
     protected void findViewById() {
-        textback=(TextView)findViewById(R.id.et_loginback);
         pass1= (EditText) findViewById(R.id.et_reset_password);
         pass2= (EditText) findViewById(R.id.et_reset_password2);
         btnsure= (Button) findViewById(R.id.btn_sure);
+        text_title = (TextView) findViewById(R.id.text_title);
     }
     protected void initView(){
-        textback.setOnClickListener(this);
         pass1.setOnClickListener(this);
         pass2.setOnClickListener(this);
         btnsure.setOnClickListener(this);
@@ -55,9 +54,9 @@ public class ResetpasswordActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.et_loginback:
-                finish();
-                break;
+//            case R.id.iv_back:
+//                finish();
+//                break;
             case R.id.btn_sure:
                 //验证两次密码是否一致
                 if (!pass1.getText().toString().equals(pass2.getText().toString())){
