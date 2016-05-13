@@ -65,8 +65,6 @@
         android:textColorHint="#999999"
         android:text="报名材料上传" />
 
-
-
         <GridView
             android:id="@+id/up_load_pic"
             android:layout_width="match_parent"
@@ -78,8 +76,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="0px"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1"/>
         <Button
             android:id="@+id/btn_receive"
             android:layout_width="774px"

@@ -20,6 +20,7 @@ public class LeeActivityDetails extends BaseActivity implements View.OnClickList
     private TextView mTvTitle;
     private WebView mActivitesDetail;
     private Activites mActivites;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

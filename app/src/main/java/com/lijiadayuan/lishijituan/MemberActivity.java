@@ -33,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.JsonObject;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.DialogUtil;
 import com.lijiadayuan.lishijituan.utils.IDCard;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
@@ -90,11 +91,14 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
 
         private String[] mlist = new String[2];
 
+        private DialogUtil mDialogUtil;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_member);
             //mBitmapList = new ArrayList<>();
+            mDialogUtil = new DialogUtil(MemberActivity.this);
             mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
             if (getIntent() != null) {
                 goodsPageValue = getIntent().getStringExtra(KeyConstants.IntentPageKey.GoodsPageType);
@@ -362,7 +366,7 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                      * 1,先访问服务器上传照片
                      * 2,根据返回的地址去提交认证申请
                      */
-
+                    mDialogUtil.show();
                     UpLoadImageTask1  mUpLoadImageTask1 = (UpLoadImageTask1) new UpLoadImageTask1(MemberActivity.this,mBitmapList).execute(UrlConstants.UPLOAD_IDENTIFY);
                     mUpLoadImageTask1.setCallBACK(new UpLoadPicCallBack() {
                         @Override
@@ -437,11 +441,12 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                 public void onResponse(String response) {
                     JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
                     if(JsonParseUtil.isSuccess(mJsonObject)) {
+                        mDialogUtil.dismiss();
                         if (1 == mJsonObject.get("response_data").getAsInt()){
                             Toast.makeText(MemberActivity.this,"资料已提交，请耐心等待",Toast.LENGTH_LONG).show();
                             finish();
                         }else{
-                            Toast.makeText(MemberActivity.this,"资料提交失败，请耐心等待",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MemberActivity.this,"资料提交失败",Toast.LENGTH_LONG).show();
                             finish();
                         }
                     }
@@ -449,7 +454,8 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    mDialogUtil.dismiss();
+                    Toast.makeText(MemberActivity.this,"资料提交失败",Toast.LENGTH_LONG).show();
                 }
             }) {
 

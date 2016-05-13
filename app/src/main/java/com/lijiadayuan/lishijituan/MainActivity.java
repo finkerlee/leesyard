@@ -342,4 +342,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         params.height = (dm.widthPixels - 36) / 4;
     }
+
+    @Override
+    protected void onRestart() {
+        initData();
+        super.onRestart();
+    }
 }

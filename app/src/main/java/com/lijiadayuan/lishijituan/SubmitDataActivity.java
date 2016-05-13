@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,11 +33,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.gson.JsonObject;
 import com.lijiadayuan.lishijituan.adapter.UpLoadPicAdapter;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.DialogUtil;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.UpLoadImageTask1;
 import com.lijiadayuan.lishijituan.utils.UpLoadPicCallBack;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.ReceiveDialog;
+import com.lijiadayuan.lishijituan.view.WheelDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,11 +54,11 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
     private final int OPEN_CAMERA_FLAG = 1024;
     private TextView tvTitle;
     InputMethodManager manager;
-    private ReceiveDialog dialog;
+    private ReceiveDialog photoDialog;
     private static SubmitDataActivity instance;
     private GridView mGridView;
     private ImageView mShowIV;
-    private EditText mEtName,mEtPhone,mEtAddress,mEtSituation;
+    private EditText mEtName, mEtPhone, mEtAddress, mEtSituation;
 
     private String mSaveDir;//拍照存放的文件夹名字
     private String mFileName;//拍照存放的文件的名字
@@ -66,12 +69,15 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
     //商品id
     private String shoppingId;
 
+    private DialogUtil mDialogUtil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_data);
         instance = this;
         shoppingId = getIntent().getStringExtra("shoppingId");
+        mDialogUtil = new DialogUtil(SubmitDataActivity.this);
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         initView();
         setListener();
@@ -83,10 +89,10 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 4) {
                     return;
-                } else if (i+1 == mBitmaps.size()) {
-                    dialog = new ReceiveDialog(SubmitDataActivity.this, R.style.protocol_dialog);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.show();
+                } else if (i + 1 == mBitmaps.size()) {
+                    photoDialog = new ReceiveDialog(SubmitDataActivity.this, R.style.protocol_dialog);
+                    photoDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    photoDialog.show();
                 } else {
 
                 }
@@ -230,13 +236,13 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
                 finish();
                 break;
             case R.id.tv_cancel:
-                dialog.dismiss();
+                photoDialog.dismiss();
                 break;
             case R.id.tv_gallery://相册获取
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, OPEN_ALBUM_FLAG);
-                dialog.dismiss();
+                photoDialog.dismiss();
                 break;
             case R.id.tv_photo://拍照获取
                 //指定拍照后的输出路径
@@ -251,69 +257,72 @@ public class SubmitDataActivity extends BaseActivity implements OnClickListener 
                 intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                 startActivityForResult(intent, OPEN_CAMERA_FLAG);
-                dialog.dismiss();
+                photoDialog.dismiss();
                 break;
             case R.id.btn_receive:
-                if (mEtName.getText().toString().isEmpty()){
-                    Toast.makeText(SubmitDataActivity.this,"请填写申请人姓名",Toast.LENGTH_LONG).show();
+                if (mEtName.getText().toString().isEmpty()) {
+                    Toast.makeText(SubmitDataActivity.this, "请填写申请人姓名", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (mEtPhone.getText().toString().isEmpty()){
-                    Toast.makeText(SubmitDataActivity.this,"请填写联系方式",Toast.LENGTH_LONG).show();
+                if (mEtPhone.getText().toString().isEmpty()) {
+                    Toast.makeText(SubmitDataActivity.this, "请填写联系方式", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (mEtAddress.getText().toString().isEmpty()){
-                    Toast.makeText(SubmitDataActivity.this,"请填写收货地址",Toast.LENGTH_LONG).show();
+                if (mEtAddress.getText().toString().isEmpty()) {
+                    Toast.makeText(SubmitDataActivity.this, "请选择收货地址", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (mEtSituation.getText().toString().isEmpty()){
-                    Toast.makeText(SubmitDataActivity.this,"请填写情况说明",Toast.LENGTH_LONG).show();
+                if (mEtSituation.getText().toString().isEmpty()) {
+                    Toast.makeText(SubmitDataActivity.this, "请填写情况说明", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (mBitmaps.size() == 1){
-                    Toast.makeText(SubmitDataActivity.this,"请上传图片",Toast.LENGTH_LONG).show();
+                if (mBitmaps.size() == 1) {
+                    Toast.makeText(SubmitDataActivity.this, "请上传图片", Toast.LENGTH_LONG).show();
                     return;
                 }
-                bitmaps = new Bitmap[mBitmaps.size()-1];
-                for (int i = 0; i<mBitmaps.size()-1; i++){
+                bitmaps = new Bitmap[mBitmaps.size() - 1];
+                for (int i = 0; i < mBitmaps.size() - 1; i++) {
                     bitmaps[i] = mBitmaps.get(i);
                 }
-                UpLoadImageTask1 mUpLoadImageTask1 = (UpLoadImageTask1) new UpLoadImageTask1(SubmitDataActivity.this,bitmaps).execute(UrlConstants.UP_LOAD_PIC);
+                mDialogUtil.show();
+                UpLoadImageTask1 mUpLoadImageTask1 = (UpLoadImageTask1) new UpLoadImageTask1(SubmitDataActivity.this, bitmaps).execute(UrlConstants.UP_LOAD_PIC);
                 mUpLoadImageTask1.setCallBACK(new UpLoadPicCallBack() {
                     @Override
                     public void setCompleteImage(final ArrayList<String> iamgePicList) {
-                        if (iamgePicList.size()>0){
+                        if (iamgePicList.size() > 0) {
                             RequestQueue mRequestQueue = app.getRequestQueue();
                             StringRequest mStringRequest = new StringRequest(Request.Method.POST, UrlConstants.APPLY, new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     JsonObject mJsonObj = JsonParseUtil.getJsonByString(response).getAsJsonObject();
-                                    if (JsonParseUtil.isSuccess(mJsonObj)){
-                                        if ("1".equals(mJsonObj.get("response_data").getAsString())){
-                                            Toast.makeText(SubmitDataActivity.this,"已提交申请,请耐心等待",Toast.LENGTH_LONG).show();
+                                    mDialogUtil.dismiss();
+                                    if (JsonParseUtil.isSuccess(mJsonObj)) {
+                                        if ("1".equals(mJsonObj.get("response_data").getAsString())) {
+                                            Toast.makeText(SubmitDataActivity.this, "已提交申请,请耐心等待", Toast.LENGTH_LONG).show();
                                             finish();
-                                        }else{
-                                            Toast.makeText(SubmitDataActivity.this,"提交失败",Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(SubmitDataActivity.this, "提交失败", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(SubmitDataActivity.this,"提交失败",Toast.LENGTH_LONG).show();
+                                    mDialogUtil.dismiss();
+                                    Toast.makeText(SubmitDataActivity.this, "提交失败", Toast.LENGTH_LONG).show();
                                 }
-                            }){
+                            }) {
                                 @Override
                                 protected Map<String, String> getParams() throws AuthFailureError {
                                     Map<String, String> params = new HashMap<String, String>();
-                                    params.put("benId",shoppingId);
+                                    params.put("benId", shoppingId);
                                     params.put("userId", UsersUtil.getUserId(SubmitDataActivity.this));
-                                    if (iamgePicList.size()>0){
-                                        for (int i = 0;i<iamgePicList.size();i++){
-                                            params.put("baImg"+(i+1),iamgePicList.get(i));
+                                    if (iamgePicList.size() > 0) {
+                                        for (int i = 0; i < iamgePicList.size(); i++) {
+                                            params.put("baImg" + (i + 1), iamgePicList.get(i));
                                         }
                                     }
-                                    params.put("addId","010101010101");
+                                    params.put("addId", mEtAddress.getText().toString());
                                     return params;
                                 }
                             };

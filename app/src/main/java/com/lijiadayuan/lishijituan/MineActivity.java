@@ -140,6 +140,12 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 Uri uri = Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image);
                 headImage.setImageURI(uri);
             }
+
+            if (UsersUtil.isLee(MineActivity.this)){
+                mTvAuthentication.setVisibility(View.VISIBLE);
+            }else{
+                mTvAuthentication.setVisibility(View.GONE);
+            }
         }else{
             mLayoutUserInfo.setVisibility(View.GONE);
             Uri uri = Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image);

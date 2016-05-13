@@ -146,10 +146,12 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                            if(mProductViewBean.getGoodStatus() == 0){
                                //判断是否需要提交认证资料
                                if (mProductViewBean.getGoodsVerify() == 0){
+                                   //不需要直接跳提交订单页面
                                    Intent intent = new Intent(this,OrderActivity.class);
                                    intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                                    startActivityForResult(intent, ORDEROK);
                                }else{
+                                   //跳提交资料页面
                                    Intent intent = new Intent(this,SubmitDataActivity.class);
                                    intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
                                    startActivityForResult(intent, ORDEROK);
