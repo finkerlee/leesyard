@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="160px"
         android:hint="申请人姓名"
         android:paddingLeft="60px"
         android:textSize="36px"
@@ -19,7 +19,7 @@
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="160px"
         android:paddingLeft="60px"
         android:hint="联系方式"
         android:textColor="#666666"
@@ -28,41 +28,61 @@
     <EditText
         android:id="@+id/address"
         android:layout_width="match_parent"
-        android:layout_height="237px"
+        android:layout_height="160px"
         android:hint="收货地址"
         android:paddingLeft="60px"
+        android:textSize="36px"
         android:textColor="#666666"/>
 
     <EditText
         android:id="@+id/situation"
         android:layout_width="match_parent"
-        android:layout_height="237px"
+        android:layout_height="160px"
         android:hint="情况说明"
         android:paddingLeft="60px"
+        android:textSize="36px"
         android:textColor="#666666"/>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="609px"
+    android:orientation="vertical">
     <FrameLayout
         android:id="@+id/ll_photo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="780px">
+
         <GridView
             android:id="@+id/up_load_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="12px"
+            android:layout_marginRight="12px"
+            android:layout_marginBottom="12px"
+            android:horizontalSpacing="12px"
             android:numColumns="3"/>
+    </FrameLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btn_receive"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="774px"
+            android:layout_height="132px"
             android:background="@drawable/rounded_button_color"
             android:text="上传资料"
             android:textColor="@color/color_white"
-            android:layout_marginBottom="40dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal|bottom" />
-    </FrameLayout>
+    </RelativeLayout>
 
 </LinearLayout>
