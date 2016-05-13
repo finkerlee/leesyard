@@ -22,6 +22,14 @@ public class MyGrideView extends GridView{
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        // TODO Auto-generated method stub
+        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+                MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, expandSpec);
+    }
+
+    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if(ev.getAction() == MotionEvent.ACTION_MOVE)
         {

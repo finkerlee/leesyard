@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonArray;
@@ -41,6 +42,8 @@ import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,16 +70,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
 
 
-    private ArrayList<String> imageUrlList = new ArrayList<String>();
-    ArrayList<String> linkUrlArray= new ArrayList<String>();
     ArrayList<String> titleList= new ArrayList<String>();
     private int mCurrPos;
-    private LinearLayout radioMain, radioFind, radioNews, radioMine;
-    private XCRoundRectImageView ivTicket, ivRed;
-    private ImageButton imagesharing,imageculture,imageproduct;
-    private ImageView ivmore;
-    private LocationService locationService;
-
     //首页轮播图的数据
     private ArrayList<AdvView> mAdvViewData;
     //头条数据
@@ -110,36 +105,39 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             public void onResponse(String response) {
                 JsonObject mJson = JsonParseUtil.getJsonByString(response).getAsJsonObject();
                 if (JsonParseUtil.isSuccess(mJson)){
-                    JsonArray mJsonAdvArray = mJson.get("adv").getAsJsonArray();
-                    if (mJsonAdvArray.size()>0){
-                        mAdvViewData = JsonParseUtil.toListByJson(mJsonAdvArray,AdvView.class);
-                        //轮播图
-                        initBanner(mAdvViewData);
-                    }
-                    JsonArray mJsonTopArray = mJson.get("topic").getAsJsonArray();
-                    if (mJsonAdvArray.size()>0){
-                        mTopicsData = JsonParseUtil.toListByJson(mJsonTopArray,Topics.class);
-                        for (Topics mTopics :mTopicsData){
-                            titleList.add(mTopics.getTopTitle());
+                    if (mJson.has("adv")){
+                        JsonArray mJsonAdvArray = mJson.get("adv").getAsJsonArray();
+                        if (mJsonAdvArray.size()>0){
+                            mAdvViewData = JsonParseUtil.toListByJson(mJsonAdvArray,AdvView.class);
+                            //轮播图
+                            initBanner(mAdvViewData);
                         }
-                        //大院头条
-                        initRollNotice();
                     }
-                    JsonArray mJsonBenefitArray = mJson.get("benefit").getAsJsonArray();
-                    if (mJsonAdvArray.size()>0){
-                        mBenefitsData = JsonParseUtil.toListByJson(mJsonBenefitArray,Benefits.class);
-                        Log.i("main",mBenefitsData.size()+"");
-                        QuickAdapter<Benefits> mAdpter = new QuickAdapter<Benefits>(MainActivity.this,R.layout.item_giftgoods,mBenefitsData) {
-                            @Override
-                            protected void convert(BaseAdapterHelper helper, Benefits item) {
-                                SimpleDraweeView mSimpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
-                                mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
-                                mSimpleDraweeView.setAspectRatio(1.33f);
-                                //Log.i("main",item.getBenThumb());
-                                AutoUtils.autoSize(helper.getView());
+                    if (mJson.has("topic")){
+                        JsonArray mJsonTopArray = mJson.get("topic").getAsJsonArray();
+                        if (mJsonTopArray.size()>0){
+                            mTopicsData = JsonParseUtil.toListByJson(mJsonTopArray,Topics.class);
+                            for (Topics mTopics :mTopicsData){
+                                titleList.add(mTopics.getTopTitle());
                             }
-                        };
-                        mGvGoods.setAdapter(mAdpter);
+                            //大院头条
+                            initRollNotice();
+                        }
+                    }
+                    if (mJson.has("benefit")){
+                        JsonArray mJsonBenefitArray = mJson.get("benefit").getAsJsonArray();
+                        if (mJsonBenefitArray.size()>0){
+                            mBenefitsData = JsonParseUtil.toListByJson(mJsonBenefitArray,Benefits.class);
+                            QuickAdapter<Benefits> mAdpter = new QuickAdapter<Benefits>(MainActivity.this,R.layout.item_giftgoods,mBenefitsData) {
+                                @Override
+                                protected void convert(BaseAdapterHelper helper, Benefits item) {
+                                    SimpleDraweeView mSimpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
+                                    mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
+                                    AutoUtils.autoSize(helper.getView());
+                                }
+                            };
+                            mGvGoods.setAdapter(mAdpter);
+                        }
                     }
                 }
             }
@@ -212,13 +210,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         findViewById(R.id.lee_black_list).setOnClickListener(this);
         findViewById(R.id.head_message).setOnClickListener(this);
         findViewById(R.id.search).setOnClickListener(this);
-
-      //  imagesharing.setOnClickListener(this);
-      //  imageculture.setOnClickListener(this);
-      //  imageproduct.setOnClickListener(this);
-      //  ivTicket.setOnClickListener(this);
-      //  ivRed.setOnClickListener(this);
-        //ivmore.setOnClickListener(this);
     }
 
     private void initRollNotice() {

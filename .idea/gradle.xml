@@ -5,15 +5,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-<<<<<<< HEAD
         <option name="gradleJvm" value="1.7" />
-=======
-        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.8" />
-<<<<<<< HEAD
-        <option name="gradleJvm" value="1.8" />
-=======
->>>>>>> 2bf7441cf60026d9423260d14a57bccd5640fbc6
->>>>>>> 6ffafd7bf1412209278e97f7e9aa7a04247569a3
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -21,6 +13,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/autolayout" />
             <option value="$PROJECT_DIR$/pickerview" />
+            <option value="$PROJECT_DIR$/shapeloading" />
             <option value="$PROJECT_DIR$/volley" />
           </set>
         </option>

@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/autolayout/autolayout.iml" filepath="$PROJECT_DIR$/autolayout/autolayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/leesyard.iml" filepath="$PROJECT_DIR$/leesyard.iml" />
       <module fileurl="file://$PROJECT_DIR$/pickerview/pickerview.iml" filepath="$PROJECT_DIR$/pickerview/pickerview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shapeloading/shapeloading.iml" filepath="$PROJECT_DIR$/shapeloading/shapeloading.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shapeloading/shapeloading.iml" filepath="$PROJECT_DIR$/shapeloading/shapeloading.iml" />
       <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
     </modules>
   </component>

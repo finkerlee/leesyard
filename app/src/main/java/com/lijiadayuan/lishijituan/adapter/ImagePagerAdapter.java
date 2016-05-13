@@ -10,6 +10,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.lijiadayuan.lishijituan.BaseWebActivity;
 import com.lijiadayuan.lishijituan.MainActivity;
 import com.lijiadayuan.lishijituan.ProductBaseActivity;
@@ -40,23 +42,12 @@ public class ImagePagerAdapter extends BaseAdapter {
 	private List<AdvView> mAdvViewList;
 	private int size;
 	private boolean isInfiniteLoop;
-	private ImageLoader imageLoader;
-	private DisplayImageOptions options;
+	//private DisplayImageOptions options;
 
 	public ImagePagerAdapter(Context context, List<AdvView> mAdvViewList) {
 		this.context = context;
 		this.mAdvViewList = mAdvViewList;
 		isInfiniteLoop = false;
-		// 初始化imageLoader 否则会报错
-		imageLoader = ImageLoader.getInstance();
-		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.ic_launcher) // 设置图片下载期间显示的图片
-				.showImageForEmptyUri(R.drawable.meinv) // 设置图片Uri为空或是错误的时候显示的图片
-				.showImageOnFail(R.drawable.meinv) // 设置图片加载或解码过程中发生错误显示的图片
-				.cacheInMemory(true) // 设置下载的图片是否缓存在内存中
-				.cacheOnDisc(true) // 设置下载的图片是否缓存在SD卡中
-				.build();
 
 	}
 
@@ -84,7 +75,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 		final ViewHolder holder;
 		if (view == null) {
 			holder = new ViewHolder();
-			view = holder.imageView = new ImageView(context);
+			view = holder.imageView = new SimpleDraweeView(context);
 			holder.imageView
 					.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
 			holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -93,16 +84,14 @@ public class ImagePagerAdapter extends BaseAdapter {
 			holder = (ViewHolder) view.getTag();
 		}
 
-		imageLoader.displayImage(
-				mAdvViewList.get(position).getAdvImg(),
-				holder.imageView, options);
-
+		holder.imageView.setImageURI(Uri.parse(mAdvViewList.get(position).getAdvImg()));
 		holder.imageView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				ProductViewBean mProductViewBean = new ProductViewBean();
 				AdvView mAdvView = mAdvViewList.get(position);
+
+				ProductViewBean mProductViewBean = new ProductViewBean();
 				mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
 				mProductViewBean.setGoodsName(mAdvView.getProName());
 				mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mAdvView.getProId());
@@ -118,7 +107,6 @@ public class ImagePagerAdapter extends BaseAdapter {
 				}
 				mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
 				mProductViewBean.setPicList(mlist);
-				mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
 
 				Intent mIntent = new Intent(context,ProductBaseActivity.class);
 				mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
@@ -131,7 +119,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 
 	private static class ViewHolder {
 
-		ImageView imageView;
+		SimpleDraweeView imageView;
 	}
 
 	/**

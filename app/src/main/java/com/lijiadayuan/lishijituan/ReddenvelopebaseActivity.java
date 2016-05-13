@@ -49,7 +49,6 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
     private TextView reds_AsOfTime;//截止时间
 
     private ViewFlow mViewFlow;
-    ArrayList<String> linkUrlArray= new ArrayList<String>();
     private CircleFlowIndicator mFlowIndicator;
     private ArrayList<String> imageUrlList = new ArrayList<String>();
 
@@ -64,11 +63,6 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
         mReds = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
 
         imageUrlList.add(mReds.getRedImg());
-
-        linkUrlArray.add("");
-        linkUrlArray.add("");
-        linkUrlArray.add("");
-        linkUrlArray.add("");
         findViewById();
         initBanner(imageUrlList);
 
@@ -142,8 +136,7 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
     }
     private void initBanner(ArrayList<String> imageUrlList) {
 
-        mViewFlow.setAdapter(new ImageAdapter(this, imageUrlList,
-                linkUrlArray).setInfiniteLoop(true));
+        mViewFlow.setAdapter(new ImageAdapter(this, imageUrlList).setInfiniteLoop(true));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
 
