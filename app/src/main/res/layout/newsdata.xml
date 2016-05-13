@@ -2,34 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="288px"
     android:orientation="vertical"
-    android:padding="15dp"
-    android:id="@+id/layout"
-    >
+    android:id="@+id/layout">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="123"
+        android:layout_marginTop="44px"
+        android:layout_marginLeft="75px"
+        android:text="年货红包全场通用"
         android:textStyle="bold"
-        android:textSize="15sp"/>
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="123"
-        android:textSize="13sp"/>
+        android:textColor="@color/app_text_shallow_color"
+        android:textSize="40px"/>
 
     <TextView
-        android:id="@+id/tv_content"
-        android:layout_marginTop="5dp"
+        android:id="@+id/tv_time"
+         android:textColor="@color/app_text_heigh_color"
+        android:layout_marginLeft="75px"
+        android:layout_marginTop="23px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="123"
-        android:textSize="13sp"/>
+        android:text="2016"
+        android:textSize="29px"/>
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_marginLeft="75px"
+        android:layout_marginTop="31px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_text_center_color"
+        android:text="年货红包全场通用，只有你想不到，没有我没做不到....."
+        android:textSize="36px"/>
 
 </LinearLayout>

@@ -4,24 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="15dp"
-    android:id="@+id/layout"
-    >
+    android:id="@+id/layout">
 
     <TextView
         android:id="@+id/tv_time"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="29px"
+        android:layout_marginLeft="74px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="123"
-        android:textSize="15sp"/>
+        android:textColor="@color/app_text_shallow_color"
+        android:textSize="34px"/>
 
     <TextView
         android:id="@+id/tv_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="27px"
+        android:layout_marginLeft="74px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="123"
-        android:textSize="15sp"/>
+        android:textColor="@color/app_text_shallow_color"
+        android:textSize="34px"/>
 
 </LinearLayout>

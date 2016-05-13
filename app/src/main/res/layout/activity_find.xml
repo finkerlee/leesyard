@@ -6,13 +6,13 @@
     tools:context="com.lijiadayuan.lishijituan.FindActivity">
     <include
         android:id="@+id/include_find"
-        layout="@layout/common_bar"
-        />
+        layout="@layout/common_bar"/>
     <include
         layout="@layout/find_gridview"
         android:layout_below="@+id/include_find"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
+        android:layout_marginLeft="14px"
+        android:layout_marginRight="14px"
+        android:layout_marginTop="14px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

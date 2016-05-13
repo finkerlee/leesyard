@@ -185,7 +185,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
                 mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
                 startActivity(mIntent);
-
             }
         });
     }
