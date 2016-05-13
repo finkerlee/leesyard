@@ -18,7 +18,7 @@ public class ProductViewBean implements Parcelable{
     private String goodsNum;//个数
     private String goodsSpec;//商品规格
     private String goodsPrice;//价格
-    private String goodsIntro;//红包领取说明
+    private ArrayList<String> goodsIntro;//红包领取说明
     private int goodsVerify;   // 是否需要上传认证   redVerify
     private int goodsType;
     private String goodsDetail;//// 具体详情
@@ -41,7 +41,7 @@ public class ProductViewBean implements Parcelable{
         goodsNum = in.readString();
         goodsSpec = in.readString();
         goodsPrice = in.readString();
-        goodsIntro = in.readString();
+        goodsIntro = in.createStringArrayList();
         goodsVerify = in.readInt();
         goodsType = in.readInt();
         goodsDetail = in.readString();
@@ -53,6 +53,32 @@ public class ProductViewBean implements Parcelable{
         goodsStock = in.readInt();
         goodsId = in.readString();
         goodStatus = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringList(picList);
+        dest.writeString(goodsName);
+        dest.writeString(goodsNum);
+        dest.writeString(goodsSpec);
+        dest.writeString(goodsPrice);
+        dest.writeStringList(goodsIntro);
+        dest.writeInt(goodsVerify);
+        dest.writeInt(goodsType);
+        dest.writeString(goodsDetail);
+        dest.writeString(goodsInfoUrl);
+        dest.writeString(goodsInfoIncrease);
+        dest.writeString(goodsThumb);
+        dest.writeString(goodsOtherName);
+        dest.writeString(goodsPic);
+        dest.writeInt(goodsStock);
+        dest.writeString(goodsId);
+        dest.writeInt(goodStatus);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ProductViewBean> CREATOR = new Creator<ProductViewBean>() {
@@ -137,10 +163,6 @@ public class ProductViewBean implements Parcelable{
         this.goodsThumb = goodsThumb;
     }
 
-    public void setGoodsIntro(String goodsIntro) {
-        this.goodsIntro = goodsIntro;
-    }
-
     public void setGoodsNum(String goodsNum) {
         this.goodsNum = goodsNum;
     }
@@ -197,8 +219,12 @@ public class ProductViewBean implements Parcelable{
         return goodsThumb;
     }
 
-    public String getGoodsIntro() {
+    public ArrayList<String> getGoodsIntro() {
         return goodsIntro;
+    }
+
+    public void setGoodsIntro(ArrayList<String> goodsIntro) {
+        this.goodsIntro = goodsIntro;
     }
 
     public int getGoodsVerify() {
@@ -259,32 +285,6 @@ public class ProductViewBean implements Parcelable{
         mProductViewBean.setGoodsId(mProduct.getProId());
         //mProductViewBean.setPicList();
         return mProductViewBean;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringList(picList);
-        dest.writeString(goodsName);
-        dest.writeString(goodsNum);
-        dest.writeString(goodsSpec);
-        dest.writeString(goodsPrice);
-        dest.writeString(goodsIntro);
-        dest.writeInt(goodsVerify);
-        dest.writeInt(goodsType);
-        dest.writeString(goodsDetail);
-        dest.writeString(goodsInfoUrl);
-        dest.writeString(goodsInfoIncrease);
-        dest.writeString(goodsThumb);
-        dest.writeString(goodsOtherName);
-        dest.writeString(goodsPic);
-        dest.writeInt(goodsStock);
-        dest.writeString(goodsId);
-        dest.writeInt(goodStatus);
     }
 }
 

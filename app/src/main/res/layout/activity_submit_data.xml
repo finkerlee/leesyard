@@ -14,6 +14,7 @@
         android:hint="申请人姓名"
         android:paddingLeft="60px"
         android:textSize="36px"
+        android:maxLength="5"
         android:textColor="#666666" />
 
     <EditText
@@ -23,6 +24,7 @@
         android:paddingLeft="60px"
         android:hint="联系方式"
         android:textColor="#666666"
+        android:inputType="phone"
         android:textSize="36px"/>
 
     <EditText
@@ -32,7 +34,8 @@
         android:hint="收货地址"
         android:paddingLeft="60px"
         android:textSize="36px"
-        android:textColor="#666666"/>
+        android:textColor="#666666"
+        />
 
     <EditText
         android:id="@+id/situation"
@@ -42,46 +45,33 @@
         android:paddingLeft="60px"
         android:textSize="36px"
         android:textColor="#666666"/>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="609px"
-    android:orientation="vertical">
-    <FrameLayout
-        android:id="@+id/ll_photo"
+
+    <GridView
+        android:id="@+id/up_load_pic"
         android:layout_width="match_parent"
-        android:layout_height="780px">
-
-        <GridView
-            android:id="@+id/up_load_pic"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="12px"
-            android:layout_marginRight="12px"
-            android:layout_marginBottom="12px"
-            android:horizontalSpacing="12px"
-            android:numColumns="3"/>
-    </FrameLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0px"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/btn_receive"
-            android:layout_width="774px"
-            android:layout_height="132px"
-            android:background="@drawable/rounded_button_color"
-            android:text="上传资料"
-            android:textColor="@color/color_white"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal|bottom" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12px"
+        android:layout_marginRight="12px"
+        android:layout_marginBottom="12px"
+        android:horizontalSpacing="12px"
+        android:verticalSpacing="12px"
+        android:numColumns="3"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <Button
+        android:id="@+id/btn_receive"
+        android:layout_width="774px"
+        android:layout_height="132px"
+        android:background="@drawable/rounded_button_color"
+        android:text="上传资料"
+        android:textColor="@color/color_white"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|bottom" />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        />
 </LinearLayout>

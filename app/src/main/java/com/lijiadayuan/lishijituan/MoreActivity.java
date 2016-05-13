@@ -64,23 +64,23 @@ public class MoreActivity extends BaseActivity {
                 if (JsonParseUtil.isSuccess(mJsonObject)){
                      mList =  JsonParseUtil.toListByJson(mJsonObject.get("response_data")
                             .getAsJsonArray(),WelfareGoodsBean.class);
-//                    QuickAdapter<WelfareGoodsBean> mAdpter = new QuickAdapter<WelfareGoodsBean>(MoreActivity.this,R.layout.more_item,mList) {
-//                        @Override
-//                        protected void convert(BaseAdapterHelper helper, WelfareGoodsBean item) {
-//                            SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage1);
-//                            mPic.setImageURI(Uri.parse(item.getBenThumb()));
-//                        }
-//                    };
-//                    gridView.setAdapter(mAdpter);
-                    if (mList.size() > 0){
-                        images = new String[mList.size()];
-                        for (int i = 0;i < mList.size(); i++){
-                            images[i] = mList.get(i).getBenThumb();
+                    QuickAdapter<WelfareGoodsBean> mAdpter = new QuickAdapter<WelfareGoodsBean>(MoreActivity.this,R.layout.more_item,mList) {
+                        @Override
+                        protected void convert(BaseAdapterHelper helper, WelfareGoodsBean item) {
+                            SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage1);
+                            mPic.setImageURI(Uri.parse(item.getBenThumb()));
                         }
-                    }
-
-                    PictureAdpter1 adapter = new PictureAdpter1(MoreActivity.this,images,R.layout.more_item);
-                    gridView.setAdapter(adapter);
+                    };
+                    gridView.setAdapter(mAdpter);
+//                    if (mList.size() > 0){
+//                        images = new String[mList.size()];
+//                        for (int i = 0;i < mList.size(); i++){
+//                            images[i] = mList.get(i).getBenThumb();
+//                        }
+//                    }
+//
+//                    PictureAdpter1 adapter = new PictureAdpter1(MoreActivity.this,images,R.layout.more_item);
+//                    gridView.setAdapter(adapter);
 
                     gridView.setOnItemClickListener(new OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

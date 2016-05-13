@@ -100,6 +100,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 				mProductViewBean.setGoodsThumb(mAdvView.getProThumb());
 				mProductViewBean.setGoodsPic(mAdvView.getProImg());
 				mProductViewBean.setGoodsId(mAdvView.getProId());
+				mProductViewBean.setGoodsOtherName(mAdvView.getProSubtitle());
 				String [] pics = mAdvView.getProImg().split(",");
 				ArrayList<String> mlist = new ArrayList<>();
 				for (String s : pics){

@@ -95,8 +95,12 @@ public interface UrlConstants {
     String HEAD_LINE_DETAILS= BASE_URL + "topic/detail?topId=";
     //商品订单
     String ORDER = BASE_URL + "po/";
-    //下单
-    String ORDERS = ORDER + "add";
+    //普通商品下单
+    String PO_ORDERS = ORDER + "add";
+    //福利商品订单
+    String GIFT_ORDER = BASE_URL + "bo/";
+    //福利商品下单
+    String GIFT_UP_ORDER = GIFT_ORDER + "add";
     //添加支付／完成日期
     String UPDATA_ORDERS_STATE = ORDER + "upstatus";
     //查询某用户所有商品订单信息

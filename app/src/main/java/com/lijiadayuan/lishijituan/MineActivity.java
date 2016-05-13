@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ import com.lijiadayuan.lishijituan.http.UrlConstants;;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UpLoadImageTask;
 import com.lijiadayuan.lishijituan.utils.UpLoadPicCallBack;
+import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.photoscorrect;
 
 
@@ -57,6 +59,9 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     private TextView mTvUserName,mTvUserLevel;
     private PopupWindow mPopupWindow;
     private photoscorrect dialog;
+    private TextView mTvAuthentication;
+    private LinearLayout mLayoutUserInfo;
+
 
     protected SharedPreferences mSharedPreferences;
 
@@ -108,7 +113,8 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
         headImage = (SimpleDraweeView) findViewById(R.id.iv_avatar);
         mTvUserName = (TextView) findViewById(R.id.iv_name);
         mTvUserLevel = (TextView) findViewById(R.id.tv_user_level);
-
+        mTvAuthentication = (TextView) findViewById(R.id.is_authentication);
+        mLayoutUserInfo = (LinearLayout) findViewById(R.id.layout_user_info);
         findViewById(R.id.myorder).setOnClickListener(this);
         welfare.setOnClickListener(this);
         address.setOnClickListener(this);
@@ -123,15 +129,30 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     }
     //根据登陆状态去设置view
     private  void setViewByStatus() {
-        mTvUserName.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userNick,"默认"));
-        mTvUserLevel.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userLevel,"1"));
-        String mHeadImage = mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage,"");
-        if (!"".equals(mHeadImage)){
-            headImage.setImageURI(Uri.parse(mHeadImage));
+        if (UsersUtil.isLogin(MineActivity.this)){
+            mLayoutUserInfo.setVisibility(View.VISIBLE);
+            mTvUserName.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userNick,"默认"));
+            mTvUserLevel.setText(mSharedPreferences.getString(KeyConstants.UserInfoKey.userLevel,"1"));
+            String mHeadImage = mSharedPreferences.getString(KeyConstants.UserInfoKey.userHeadImage,"");
+            if (!"".equals(mHeadImage)){
+                headImage.setImageURI(Uri.parse(mHeadImage));
+            }else{
+                Uri uri = Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image);
+                headImage.setImageURI(uri);
+            }
+
+            if (UsersUtil.isLee(MineActivity.this)){
+                mTvAuthentication.setVisibility(View.VISIBLE);
+            }else{
+                mTvAuthentication.setVisibility(View.GONE);
+            }
         }else{
+            mLayoutUserInfo.setVisibility(View.GONE);
             Uri uri = Uri.parse("res://com.lijiadayuan.lishijituan/" + R.drawable.user_normol_head_image);
             headImage.setImageURI(uri);
         }
+
+
     }
 
     @Override
@@ -158,7 +179,11 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.iv_member:
                 if (isLogin){
-                    startActivity(new Intent(MineActivity.this,MemberActivity.class));
+                    if (UsersUtil.isLee(MineActivity.this)){
+                        Toast.makeText(MineActivity.this,"你已经通过认证",Toast.LENGTH_LONG).show();
+                    }else {
+                        startActivity(new Intent(MineActivity.this,MemberActivity.class));
+                    }
                 }else {
                     goLogin();
                 }

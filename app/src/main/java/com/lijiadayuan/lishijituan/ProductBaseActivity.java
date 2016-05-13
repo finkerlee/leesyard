@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,8 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private ViewFlow mViewFlow;
     private WebView mWbGoodsInfo;
     private TextView mTvGoodsName,mTvGoodsNum,mTvGoodsPrice,mTvGoodsSpec;
+    //当是领取的商品时,需展示领取条件
+    private ListView mLvConditon;
 
     private CircleFlowIndicator mFlowIndicator;
     private Button mBtnReceive;
@@ -68,16 +72,19 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private void setViewByData() {
         if (mProductViewBean.getGoodsType() == BUY_GOODS) {
             mBtnReceive.setText("我要购买");
+            mLvConditon.setVisibility(View.GONE);
         }else if (mProductViewBean.getGoodsType() == GIFT_GOODS){
             mBtnReceive.setText("我要领取");
+            mLvConditon.setVisibility(View.VISIBLE);
             //TODO 显示领取条件
+            ArrayAdapter<String> mAdpter = new ArrayAdapter<String>(ProductBaseActivity.this,android.R.layout.simple_list_item_1,mProductViewBean.getGoodsIntro());
+            mLvConditon.setAdapter(mAdpter);
         }
         mWbGoodsInfo.loadUrl(mProductViewBean.getGoodsInfoUrl());
         mTvGoodsName.setText(mProductViewBean.getGoodsName());
         mTvGoodsNum.setText(mProductViewBean.getGoodsNum());
         mTvGoodsPrice.setText(mProductViewBean.getGoodsPrice());
-        mTvGoodsSpec.setText(mProductViewBean.getGoodsSpec());
-
+        mTvGoodsSpec.setText(mProductViewBean.getGoodsOtherName());
 
     }
 
@@ -91,6 +98,7 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
         mTvGoodsPrice = (TextView) findViewById(R.id.tv_goods_price);
         mTvGoodsSpec = (TextView) findViewById(R.id.tv_goods_spec);
         mBtnReceive = (Button) findViewById(R.id.i_want_receive);
+        mLvConditon = (ListView) findViewById(R.id.lv_condition);
         mBtnReceive.setOnClickListener(this);
     }
 
@@ -138,12 +146,12 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
                            if(mProductViewBean.getGoodStatus() == 0){
                                //判断是否需要提交认证资料
                                if (mProductViewBean.getGoodsVerify() == 0){
-
-
+                                   //不需要直接跳提交订单页面
                                    Intent intent = new Intent(this,OrderActivity.class);
                                    intent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                                    startActivityForResult(intent, ORDEROK);
                                }else{
+                                   //跳提交资料页面
                                    Intent intent = new Intent(this,SubmitDataActivity.class);
                                    intent.putExtra("shoppingId",mProductViewBean.getGoodsId());
                                    startActivityForResult(intent, ORDEROK);

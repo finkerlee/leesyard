@@ -83,6 +83,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
 
     private Button mBtnCancle,mBtnSure;
 
+
     // 创建请求队列
     private RequestQueue mQueue;
     //商品数量
@@ -366,7 +367,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.jia:
-                if (mGoodsNum < mProductViewBean.getGoodsStock()){
+                if (mGoodsNum < Integer.parseInt(mProductViewBean.getGoodsNum())){
                     mGoodsNum++;
                     mTvBuyGoodsNum.setText(mGoodsNum+"");
                 }
@@ -391,25 +392,28 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
      * 3,当sdk请求结束后调用  添加支付／完成日期 接口
      */
     private synchronized void account() {
+        String url = "";
         if (mProductViewBean.getGoodsType() == ProductBaseActivity.GIFT_GOODS){
             //当前商品是赠品的时候，只需要出运费,数量只能为1
             mGoodsNum =  1;
             mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice());
-
+            url = UrlConstants.GIFT_UP_ORDER;
         }else if(mProductViewBean.getGoodsType() == ProductBaseActivity.BUY_GOODS){
             //当前商品是购买的时候，运费到付，在线支付商品的价格，数量能变
             mGoodsNum = Integer.parseInt(mTvBuyGoodsNum.getText().toString());
             mPrice = Double.parseDouble(mProductViewBean.getGoodsPrice())*mGoodsNum;
+            url = UrlConstants.PO_ORDERS;
         }
 
 
 //        String sign = "partner=\"2088221309346686\"&seller_id=\"bjlijiadayuan@sina.com\"&out_trade_no=\"LPO0000000066\"&subject=\"null\"&body=\"李家大院\"&total_fee=\"11600.0\"&notify_url=\"http://beijinglijiadayuan.com:8080/pay/alipay\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&return_url=\"m.alipay.com\"&sign=\"dFgNs9rRkvtOdY7AkPTGkXGgXrWa%2BKbYHtmnRnhfWs1UVMzA%2F3Q9u7bFh8of%2BU1l%2BvZIqMMFFd1h6QQga2t3wzzlm1e2D0RZKWv6QnJTWaK2pR2Zz9PfW8Gz01vr1jV68D89J8FpA58mPBKLxdK9NwSVD0crq1MeN76g6iA6BYU%3D\"&sign_type=\"RSA\"";
 //        aliPay(sign);
 
-        StringRequest mAccountRequest = new StringRequest(Request.Method.POST, UrlConstants.ORDERS,
+        StringRequest mAccountRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        shapeLoadingDialog.dismiss();
                         JsonObject mJsonObject = JsonParseUtil.getJsonByString(response).getAsJsonObject();
                         if (JsonParseUtil.isSuccess(mJsonObject)){
                            if (mJsonObject.has("response_data")){
@@ -418,7 +422,6 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                                    if (JsonObj.has("sign")){
                                        //String sign = "jc88JhzGKXjErPEcj38Wr5%2BfgAKmNUCJI1Ta2mc8wwVlvR1bqWkOJKOWuni1skPT31R2%2FJ1mz9t2QCNblQppYNn8Ugg5B4emg4%2BM3P%2BhYk0gPbSCWMAkJN3xvwpqPkWMMkAarawOZO2vWhx9YynENV1fQ%2BlfTBU25P4ssXcRwAs%3D";
                                        String sign = JsonObj.get("sign").getAsString();
-                                       shapeLoadingDialog.dismiss();
                                        aliPay(sign);
                                    }
                                }else{
@@ -456,13 +459,17 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                shapeLoadingDialog.dismiss();
                  Toast.makeText(OrderActivity.this,"下单失败,请联系客服",Toast.LENGTH_LONG).show();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+
                 Map<String, String> params = new HashMap<>();
-                params.put("proId",mProductViewBean.getGoodsId());
+
+                params.put(mProductViewBean.getGoodsType() ==
+                        ProductBaseActivity.BUY_GOODS ? "proId":"benId",mProductViewBean.getGoodsId());
                 params.put("userId",userId);
                 params.put("addId",mAddress.getAddId());
                 params.put("count",mGoodsNum+"");

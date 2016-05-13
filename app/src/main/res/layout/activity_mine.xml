@@ -34,6 +34,7 @@
             fresco:roundAsCircle="true"
             />
         <LinearLayout
+            android:id="@+id/layout_user_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_avatar"
@@ -46,10 +47,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="默认"
                 android:textSize="50px"
                 android:id="@+id/iv_name"/>
                 <TextView
+                    android:id="@+id/is_authentication"
                     android:layout_width="60px"
                     android:layout_height="30px"
                     android:layout_marginLeft="8px"
