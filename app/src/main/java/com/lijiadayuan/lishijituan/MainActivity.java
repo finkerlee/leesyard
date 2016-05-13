@@ -166,22 +166,31 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //跳商品详情
                 mProductViewBean = new ProductViewBean();
-                mProductViewBean.setGoodsId(mBenefitsData.get(i).getBenId());
-                mProductViewBean.setGoodsPrice(mBenefitsData.get(i).getBenPrice()+"");
-                mProductViewBean.setGoodsName(mBenefitsData.get(i).getBenName());
-                mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO+ mBenefitsData.get(i).getBenId());
-                mProductViewBean.setGoodsSpec(mBenefitsData.get(i).getBenSpec());
-                String [] mBenData = mBenefitsData.get(i).getBenImg().split(",");
+                Benefits mBenefits = mBenefitsData.get(i);
+                mProductViewBean.setGoodsId(mBenefits.getBenId());
+                mProductViewBean.setGoodsPrice(mBenefits.getBenPrice()+"");
+                mProductViewBean.setGoodsName(mBenefits.getBenName());
+                mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO+ mBenefits.getBenId());
+                mProductViewBean.setGoodsSpec(mBenefits.getBenSpec());
+                String [] mBenData = mBenefits.getBenImg().split(",");
 
                 ArrayList<String> mlist = new ArrayList<String>();
                 for (String s : mBenData){
                     mlist.add(s);
                 }
-                mProductViewBean.setGoodsVerify(mBenefitsData.get(i).getBenVerify());
                 mProductViewBean.setPicList(mlist);
+
+                mlist = new ArrayList<String>();
+                String [] mBenRemark =  mBenefits.getBenRemark().split(";");
+                for (String s : mBenRemark){
+                    mlist.add(s);
+                }
+                mProductViewBean.setGoodsIntro(mlist);
+                mProductViewBean.setGoodsVerify(mBenefits.getBenVerify());
                 mProductViewBean.setGoodsNum(1 + "");
                 mProductViewBean.setGoodsType(ProductBaseActivity.GIFT_GOODS);
-                mProductViewBean.setGoodStatus(mBenefitsData.get(i).getBaStatus());
+                mProductViewBean.setGoodStatus(mBenefits.getBaStatus());
+                mProductViewBean.setGoodsOtherName(mBenefits.getBenSubtitle());
                 Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
                 mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
                 startActivity(mIntent);

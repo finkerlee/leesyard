@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MymessageActivity extends Activity implements View.OnClickListener{
+public class MymessageActivity extends BaseActivity implements View.OnClickListener{
     private TextView tvTitle;
     private ListView listView;
     private LocalUtils mLocalUtils;

@@ -151,7 +151,7 @@
                 <ImageView
                     android:id="@+id/iv_ticket"
                     android:layout_width="0px"
-                    android:layout_height="222px"
+                    android:layout_height="250px"
                     android:background="@drawable/ticket"
                     android:layout_weight="1"
                     />
@@ -162,7 +162,7 @@
                 <ImageView
                     android:id="@+id/iv_red"
                     android:layout_width="0px"
-                    android:layout_height="222px"
+                    android:layout_height="250px"
                     android:background="@drawable/red_packet"
                     android:layout_weight="1"/>
             </LinearLayout>
@@ -189,7 +189,6 @@
                     android:layout_width="225px"
                     android:layout_height="225px"
                     android:layout_margin="0dp"
-                    android:layout_weight="1"
                     android:background="@drawable/culture"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
@@ -208,7 +207,6 @@
                     android:layout_width="225px"
                     android:layout_height="225px"
                     android:layout_margin="0dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rescue"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
@@ -223,7 +221,6 @@
                     android:layout_width="225px"
                     android:layout_height="225px"
                     android:layout_margin="0dp"
-                    android:layout_weight="1"
                     android:background="@drawable/resource"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
@@ -238,7 +235,6 @@
                     android:layout_width="225px"
                     android:layout_height="225px"
                     android:layout_margin="0dp"
-                    android:layout_weight="1"
                     android:background="@drawable/blacklist"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"

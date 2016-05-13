@@ -21,6 +21,7 @@ public class AdvView {
     private String proThumb;        // 商品缩略图网络访问地址
     private String proImg;          // 商品图片网络访问地址
     private String proIntro;        // 商品介绍
+    private String proSubtitle;     // 商品副标题
     private String proRemark;       // 商品备注
     private int proShow;            // 商品是否显示
     private int proClick;           // 商品浏览数
@@ -194,5 +195,13 @@ public class AdvView {
 
     public void setProSort(int proSort) {
         this.proSort = proSort;
+    }
+
+    public String getProSubtitle() {
+        return proSubtitle;
+    }
+
+    public void setProSubtitle(String proSubTitle) {
+        this.proSubtitle = proSubTitle;
     }
 }

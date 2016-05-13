@@ -144,15 +144,6 @@
 
             >
             <TextView
-                android:id="@+id/give_english_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BELA DESINGN"
-                android:textStyle="bold"
-                android:textColor="@color/app_text_heigh_color"
-                android:textSize="43px"
-                />
-            <TextView
                 android:id="@+id/give_goods_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,6 +153,17 @@
                 android:textColor="@color/app_text_heigh_color"
                 android:textSize="43px"
                 />
+
+            <TextView
+                android:id="@+id/give_english_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BELA DESINGN"
+                android:textStyle="bold"
+                android:textColor="@color/app_text_heigh_color"
+                android:textSize="43px"
+                />
+
 
             <TextView
                 android:id="@+id/give_goods_num"
@@ -194,21 +196,21 @@
             android:visibility="gone"
             android:layout_centerVertical="true"
             >
+
             <TextView
-                android:id="@+id/buy_english_name"
+                android:id="@+id/buy_goods_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BELA DESINGN"
+                android:layout_height="wrap_content" android:text="浪漫可旋转的八音盒"
+                android:layout_marginTop="14px"
                 android:textStyle="bold"
                 android:textSize="43px"
                 android:textColor="@color/app_text_heigh_color"
                 />
             <TextView
-                android:id="@+id/buy_goods_name"
+                android:id="@+id/buy_english_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="浪漫可旋转的八音盒"
-                android:layout_marginTop="14px"
+                android:text="BELA DESINGN"
                 android:textStyle="bold"
                 android:textSize="43px"
                 android:textColor="@color/app_text_heigh_color"

@@ -366,7 +366,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.jia:
-                if (mGoodsNum < mProductViewBean.getGoodsStock()){
+                if (mGoodsNum < Integer.parseInt(mProductViewBean.getGoodsNum())){
                     mGoodsNum++;
                     mTvBuyGoodsNum.setText(mGoodsNum+"");
                 }
