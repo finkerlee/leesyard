@@ -6,12 +6,11 @@
     android:layout_marginLeft="5dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
+
         android:id="@+id/itemImage"
-        android:layout_width="600px"
-        android:layout_height="390px"
-        app:roundedCornerRadius="5dp"
-        app:roundingBorderWidth="1dp"
-        app:roundingBorderColor="@color/red"
-        />　　 　　
+        android:layout_width="519px"
+        android:layout_height="352px"
+        app:roundedCornerRadius="15px"
+        app:roundingBorderWidth="3px"/>
 
 </RelativeLayout>

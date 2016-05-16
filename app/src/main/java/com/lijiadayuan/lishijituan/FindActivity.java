@@ -45,9 +45,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-
-
 public class FindActivity extends BaseActivity implements View.OnClickListener{
     private GridView gridView;//image
     private TextView tvTitle;
@@ -85,10 +82,7 @@ public class FindActivity extends BaseActivity implements View.OnClickListener{
                             AutoUtils.autoSize(helper.getView());
                         }
                     };
-
                     gridView.setAdapter(mAdpter);
-
-
                     gridView.setOnItemClickListener(new OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             Intent mIntent = new Intent(FindActivity.this,ProductBaseActivity.class);
@@ -99,9 +93,7 @@ public class FindActivity extends BaseActivity implements View.OnClickListener{
                         }
                     });
                 }
-
             }
-
         },new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {

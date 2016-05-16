@@ -6,8 +6,7 @@
     tools:context="com.lijiadayuan.lishijituan.FindActivity">
     <include
         android:id="@+id/include_find"
-        layout="@layout/common_bar"
-        />
+        layout="@layout/common_bar"/>
     <include
         layout="@layout/find_gridview"
         android:layout_below="@+id/include_find"
