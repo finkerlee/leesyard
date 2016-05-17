@@ -423,6 +423,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                                        //String sign = "jc88JhzGKXjErPEcj38Wr5%2BfgAKmNUCJI1Ta2mc8wwVlvR1bqWkOJKOWuni1skPT31R2%2FJ1mz9t2QCNblQppYNn8Ugg5B4emg4%2BM3P%2BhYk0gPbSCWMAkJN3xvwpqPkWMMkAarawOZO2vWhx9YynENV1fQ%2BlfTBU25P4ssXcRwAs%3D";
                                        String sign = JsonObj.get("sign").getAsString();
                                        aliPay(sign);
+                                   }else{
+                                       Toast.makeText(OrderActivity.this,"支付失败,请联系客服",Toast.LENGTH_LONG).show();
                                    }
                                }else{
 
@@ -431,11 +433,17 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                                        //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
                                        req.appId			= APP_ID;
                                        req.partnerId		= "1319153601"; //商户id
-                                       req.prepayId		= JsonObj.get("prepayId").getAsString();
-                                       req.nonceStr		= JsonObj.get("nonce").getAsString();
-                                       req.timeStamp		= JsonObj.get("timestamp").getAsString();
+                                       if (JsonObj.has("prepayId")&&JsonObj.has("nonce")&&JsonObj.has("timestamp")&&JsonObj.has("sign")){
+                                           req.prepayId		= JsonObj.get("prepayId").getAsString();
+                                           req.nonceStr		= JsonObj.get("nonce").getAsString();
+                                           req.timeStamp		= JsonObj.get("timestamp").getAsString();
+                                           req.sign			= JsonObj.get("sign").getAsString();
+
+                                       }else{
+                                           Toast.makeText(OrderActivity.this,"支付失败,请联系客服",Toast.LENGTH_LONG).show();
+                                           return;
+                                       }
                                        req.packageValue	= "Sign=WXPay";
-                                       req.sign			= JsonObj.get("sign").getAsString();
                                        req.extData			= "a"; // optional
                                        //Toast.makeText(PayActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
                                        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信

@@ -3,6 +3,7 @@ package com.lijiadayuan.lishijituan;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.joanzapata.android.BaseAdapterHelper;
@@ -52,8 +56,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends BaseActivity implements OnClickListener{
-    
+public class MainActivity extends BaseActivity implements OnClickListener {
+
     //轮播图
     private ViewFlow mViewFlow;
     //红点
@@ -63,14 +67,12 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     //李氏福利社商品
     private GridView mGvGoods;
     //卡票和红包
-    private ImageView mIvTicket,mIvRed;
+    private ImageView mIvTicket, mIvRed;
 
     private AddressDialog dialog;
 
 
-
-
-    ArrayList<String> titleList= new ArrayList<String>();
+    ArrayList<String> titleList = new ArrayList<String>();
     private int mCurrPos;
     //首页轮播图的数据
     private ArrayList<AdvView> mAdvViewData;
@@ -80,6 +82,11 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     private List<Benefits> mBenefitsData;
 
     private ProductViewBean mProductViewBean;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +96,14 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         //初始化数据
         initData();
 
+        //大院头条
+        initRollNotice();
 
-        
+
         setListener();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
@@ -104,31 +116,29 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             @Override
             public void onResponse(String response) {
                 JsonObject mJson = JsonParseUtil.getJsonByString(response).getAsJsonObject();
-                if (JsonParseUtil.isSuccess(mJson)){
-                    if (mJson.has("adv")){
+                if (JsonParseUtil.isSuccess(mJson)) {
+                    if (mJson.has("adv")) {
                         JsonArray mJsonAdvArray = mJson.get("adv").getAsJsonArray();
-                        if (mJsonAdvArray.size()>0){
-                            mAdvViewData = JsonParseUtil.toListByJson(mJsonAdvArray,AdvView.class);
+                        if (mJsonAdvArray.size() > 0) {
+                            mAdvViewData = JsonParseUtil.toListByJson(mJsonAdvArray, AdvView.class);
                             //轮播图
                             initBanner(mAdvViewData);
                         }
                     }
-                    if (mJson.has("topic")){
+                    if (mJson.has("topic")) {
                         JsonArray mJsonTopArray = mJson.get("topic").getAsJsonArray();
-                        if (mJsonTopArray.size()>0){
-                            mTopicsData = JsonParseUtil.toListByJson(mJsonTopArray,Topics.class);
-                            for (Topics mTopics :mTopicsData){
+                        if (mJsonTopArray.size() > 0) {
+                            mTopicsData = JsonParseUtil.toListByJson(mJsonTopArray, Topics.class);
+                            for (Topics mTopics : mTopicsData) {
                                 titleList.add(mTopics.getTopTitle());
                             }
-                            //大院头条
-                            initRollNotice();
                         }
                     }
-                    if (mJson.has("benefit")){
+                    if (mJson.has("benefit")) {
                         JsonArray mJsonBenefitArray = mJson.get("benefit").getAsJsonArray();
-                        if (mJsonBenefitArray.size()>0){
-                            mBenefitsData = JsonParseUtil.toListByJson(mJsonBenefitArray,Benefits.class);
-                            QuickAdapter<Benefits> mAdpter = new QuickAdapter<Benefits>(MainActivity.this,R.layout.item_giftgoods,mBenefitsData) {
+                        if (mJsonBenefitArray.size() > 0) {
+                            mBenefitsData = JsonParseUtil.toListByJson(mJsonBenefitArray, Benefits.class);
+                            QuickAdapter<Benefits> mAdpter = new QuickAdapter<Benefits>(MainActivity.this, R.layout.item_giftgoods, mBenefitsData) {
                                 @Override
                                 protected void convert(BaseAdapterHelper helper, Benefits item) {
                                     SimpleDraweeView mSimpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
@@ -146,14 +156,14 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("advNum",5+"");
-                params.put("topNum",10+"");
-                params.put("benNum",6+"");
-                params.put("userId",UsersUtil.getUserId(MainActivity.this));
+                params.put("advNum", 5 + "");
+                params.put("topNum", 10 + "");
+                params.put("benNum", 6 + "");
+                params.put("userId", UsersUtil.getUserId(MainActivity.this));
                 return params;
             }
         };
@@ -168,21 +178,21 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 mProductViewBean = new ProductViewBean();
                 Benefits mBenefits = mBenefitsData.get(i);
                 mProductViewBean.setGoodsId(mBenefits.getBenId());
-                mProductViewBean.setGoodsPrice(mBenefits.getBenPrice()+"");
+                mProductViewBean.setGoodsPrice(mBenefits.getBenPrice() + "");
                 mProductViewBean.setGoodsName(mBenefits.getBenName());
-                mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO+ mBenefits.getBenId());
+                mProductViewBean.setGoodsInfoUrl(UrlConstants.SHOPPING_INFO + mBenefits.getBenId());
                 mProductViewBean.setGoodsSpec(mBenefits.getBenSpec());
-                String [] mBenData = mBenefits.getBenImg().split(",");
+                String[] mBenData = mBenefits.getBenImg().split(",");
 
                 ArrayList<String> mlist = new ArrayList<String>();
-                for (String s : mBenData){
+                for (String s : mBenData) {
                     mlist.add(s);
                 }
                 mProductViewBean.setPicList(mlist);
 
                 mlist = new ArrayList<String>();
-                String [] mBenRemark =  mBenefits.getBenRemark().split(";");
-                for (String s : mBenRemark){
+                String[] mBenRemark = mBenefits.getBenRemark().split(";");
+                for (String s : mBenRemark) {
                     mlist.add(s);
                 }
                 mProductViewBean.setGoodsIntro(mlist);
@@ -191,8 +201,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 mProductViewBean.setGoodsType(ProductBaseActivity.GIFT_GOODS);
                 mProductViewBean.setGoodStatus(mBenefits.getBaStatus());
                 mProductViewBean.setGoodsOtherName(mBenefits.getBenSubtitle());
-                Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
-                mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
+                Intent mIntent = new Intent(MainActivity.this, ProductBaseActivity.class);
+                mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
                 startActivity(mIntent);
             }
         });
@@ -235,7 +245,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
             }
         };
-        Timer timer = new Timer(true);
+        Timer timer = new Timer();
         timer.schedule(task, 1000, 4000);
     }
 
@@ -266,9 +276,12 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         mCurrPos = next;
 
     }
+
     //初始化轮播图
     private void initBanner(ArrayList<AdvView> imageUrlList) {
-        mViewFlow.setAdapter(new ImagePagerAdapter(this,imageUrlList)
+
+
+        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList)
                 .setInfiniteLoop(false));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
@@ -279,22 +292,53 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     }
 
 
-
     @Override
     protected void onStart() {
         super.onStart();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.lijiadayuan.lishijituan/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.lijiadayuan.lishijituan/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.disconnect();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.head_message:
-                startActivity(new Intent(MainActivity.this,HeadlineActivity.class));
+                startActivity(new Intent(MainActivity.this, HeadlineActivity.class));
                 break;
 
 //            case R.id.button:
@@ -304,16 +348,16 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 //                startActivity(new Intent(this,HeadlineActivity.class));
 //                break;
             case R.id.iv_ticket:
-                startActivity(new Intent(this,TicketActivity.class));
+                startActivity(new Intent(this, TicketActivity.class));
                 break;
             case R.id.iv_red:
-                startActivity(new Intent(this,RedenvelopeActivity.class));
+                startActivity(new Intent(this, RedenvelopeActivity.class));
                 break;
             case R.id.lee_culture:
-                startActivity(new Intent(this,CultureActivity.class));
+                startActivity(new Intent(this, CultureActivity.class));
                 break;
             case R.id.shareResources:
-                startActivity(new Intent(this,SharingResourceActivity.class));
+                startActivity(new Intent(this, SharingResourceActivity.class));
                 break;
             case R.id.search:
                 openActivity(SearchActivity.class);
@@ -324,12 +368,12 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
             case R.id.iv_address:
 
-                dialog = new AddressDialog(MainActivity.this, R.style.protocol_dialog,HomeActivity.mCurrentAddress);
+                dialog = new AddressDialog(MainActivity.this, R.style.protocol_dialog, HomeActivity.mCurrentAddress);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
                 break;
             case R.id.iv_message:
-                Intent intent = new Intent(MainActivity.this,MymessageActivity.class);
+                Intent intent = new Intent(MainActivity.this, MymessageActivity.class);
                 startActivity(intent);
                 break;
             default:
@@ -337,7 +381,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         }
     }
 
-    private void setHeight(LinearLayout linearLayout){
+    private void setHeight(LinearLayout linearLayout) {
         ViewGroup.LayoutParams params = linearLayout.getLayoutParams();
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

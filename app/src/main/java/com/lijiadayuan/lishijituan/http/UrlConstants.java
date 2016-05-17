@@ -9,7 +9,7 @@ package com.lijiadayuan.lishijituan.http;
 public interface UrlConstants {
     //http://192.168.0.103:8080/
     //http://beijinglijiadayuan.com:8080/lees
-    String BASE_URL = "http://finkerlee.oicp.net:30080/";                     // 测试地址
+    String BASE_URL = "http://beijinglijiadayuan.com:8080/testlees/";                     // 测试地址
     //首页的数据
     String MAIN_PAGE_URL = BASE_URL + "main/index";
 

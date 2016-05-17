@@ -228,6 +228,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 			 * If being flinged and user touches, stop the fling. isFinished
 			 * will be false if being flinged.
 			 */
+
 			if (!mScroller.isFinished()) {
 				mScroller.abortAnimation();
 			}
@@ -305,7 +306,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 		case MotionEvent.ACTION_CANCEL:
 			mTouchState = TOUCH_STATE_REST;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
