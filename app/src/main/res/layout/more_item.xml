@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center">
@@ -13,7 +11,11 @@
         android:layout_width="521px"
         android:layout_height="281px"
         android:layout_marginTop="14px"
-        app:roundedCornerRadius="15px"/>　　
+        fresco:roundedCornerRadius="20px"
+        fresco:roundingBorderWidth="1px"
+        fresco:roundingBorderColor="#cccccc"
+        fresco:actualImageScaleType="fitCenter"
+        />　　
     　　
 </LinearLayout>
 

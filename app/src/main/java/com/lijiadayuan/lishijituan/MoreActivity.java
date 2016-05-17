@@ -30,6 +30,7 @@ import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -39,10 +40,6 @@ import java.util.TimerTask;
 public class MoreActivity extends BaseActivity {
     private GridView gridView;
     private TextView tvTitle,tvTitleback;
-
-    //图片ID数组
-    private String[] images;
-
     private  ArrayList<WelfareGoodsBean> mList;
 
     @Override
@@ -69,6 +66,7 @@ public class MoreActivity extends BaseActivity {
                         protected void convert(BaseAdapterHelper helper, WelfareGoodsBean item) {
                             SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage1);
                             mPic.setImageURI(Uri.parse(item.getBenThumb()));
+                            AutoUtils.autoSize(helper.getView());
                         }
                     };
                     gridView.setAdapter(mAdpter);
@@ -85,7 +83,6 @@ public class MoreActivity extends BaseActivity {
                     gridView.setOnItemClickListener(new OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             Intent mIntent = new Intent(MoreActivity.this,ProductBaseActivity.class);
-                            mIntent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,ProductBaseActivity.GIFT_GOODS);
                             mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, ProductViewBean.getProductViewBean(mList.get(position),ProductBaseActivity.GIFT_GOODS));
                             startActivity(mIntent);
                         }

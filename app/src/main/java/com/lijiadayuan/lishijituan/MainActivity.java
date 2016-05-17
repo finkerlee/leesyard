@@ -221,6 +221,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     }
 
     private void initRollNotice() {
+
+
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -233,8 +235,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
             }
         };
-        Timer timer = new Timer();
-        timer.schedule(task, 0, 4000);
+        Timer timer = new Timer(true);
+        timer.schedule(task, 1000, 4000);
     }
 
     private void moveNext() {

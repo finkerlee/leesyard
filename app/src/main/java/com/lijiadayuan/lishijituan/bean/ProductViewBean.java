@@ -246,12 +246,20 @@ public class ProductViewBean implements Parcelable{
         mProductViewBean.setGoodsSpec(mWelfareGoodsBean.getBenSpec());
         mProductViewBean.setGoodsPrice(mWelfareGoodsBean.getBenPrice() + "");
         mProductViewBean.setGoodsType(type);
+
         String [] pics = mWelfareGoodsBean.getBenImg().split(",");
         ArrayList<String> mlist = new ArrayList<>();
         for (String s : pics){
             mlist.add(s);
         }
         mProductViewBean.setPicList(mlist);
+        mlist = new ArrayList<String>();
+        String [] mBenRemark =  mWelfareGoodsBean.getBenRemark().split(";");
+        for (String s : mBenRemark){
+            mlist.add(s);
+        }
+        mProductViewBean.setGoodsIntro(mlist);
+
         return mProductViewBean;
     }
     /**
