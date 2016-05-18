@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-    <com.lijiadayuan.lishijituan.view.MyScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,13 +16,14 @@
             android:orientation="vertical"
             >
             <RelativeLayout
+                android:id="@+id/mLayoutViewPage"
                 android:layout_width="match_parent"
                 android:layout_height="528px"
                 >
 
 
 
-                <com.lijiadayuan.lishijituan.ViewFlow
+                <android.support.v4.view.ViewPager
                     android:id="@+id/viewflow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -29,22 +31,18 @@
                     android:clipToPadding="true"
                     android:layout_alignParentBottom="true"
                     />
-                <com.lijiadayuan.lishijituan.CircleFlowIndicator
-                    android:id="@+id/viewflowindic"
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|bottom"
-                    android:layout_marginRight="50px"
-                    android:layout_marginBottom="15px"
-                    android:padding="2dip"
-                    app:activeColor="#ffffff"
-                    android:layout_alignParentBottom="true"
+                    android:id="@+id/indexpoint_parent"
+                    android:orientation="horizontal"
                     android:layout_alignParentRight="true"
-                    app:activeType="fill"
-                    app:circleSeparation="18dip"
-                    app:inactiveColor="#5effffff"
-                    app:inactiveType="fill"
-                    app:radius="4dip" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    >
+                </LinearLayout>
             </RelativeLayout>
 
             <LinearLayout
@@ -182,13 +180,12 @@
                 android:paddingLeft="60px"
                 android:paddingRight="60px"
                 android:paddingBottom="30px"
-                android:layout_marginTop="30px"
+                android:paddingTop="30px"
                 >
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/lee_culture"
-                    android:layout_width="225px"
-                    android:layout_height="225px"
-                    android:layout_margin="0dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:background="@drawable/culture"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
@@ -201,11 +198,12 @@
                 <View
                     android:layout_width="20px"
                     android:layout_height="1dp"
+                    android:layout_weight="1"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/luKongRescus"
-                    android:layout_width="225px"
-                    android:layout_height="225px"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_margin="0dp"
                     android:background="@drawable/rescue"
                     app:roundedCornerRadius="5dp"
@@ -215,11 +213,12 @@
                 <View
                     android:layout_width="20px"
                     android:layout_height="1dp"
+                    android:layout_weight="1"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/shareResources"
-                    android:layout_width="225px"
-                    android:layout_height="225px"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_margin="0dp"
                     android:background="@drawable/resource"
                     app:roundedCornerRadius="5dp"
@@ -229,12 +228,12 @@
                 <View
                     android:layout_width="20px"
                     android:layout_height="1dp"
+                    android:layout_weight="1"
                     />
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/lee_black_list"
-                    android:layout_width="225px"
-                    android:layout_height="225px"
-                    android:layout_margin="0dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:background="@drawable/blacklist"
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
@@ -246,7 +245,7 @@
 
         </LinearLayout>
 
-    </com.lijiadayuan.lishijituan.view.MyScrollView>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

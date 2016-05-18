@@ -3,6 +3,8 @@ package com.lijiadayuan.lishijituan;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -34,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.ImagePagerAdapter;
+import com.lijiadayuan.lishijituan.adapter.ViewPageAdapter;
 import com.lijiadayuan.lishijituan.bean.AdvView;
 import com.lijiadayuan.lishijituan.bean.Benefits;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
@@ -59,7 +63,7 @@ import java.util.TimerTask;
 public class MainActivity extends BaseActivity implements OnClickListener {
 
     //轮播图
-    private ViewFlow mViewFlow;
+    private ViewPager mViewFlow;
     //红点
     private CircleFlowIndicator mFlowIndicator;
     //头条
@@ -88,16 +92,36 @@ public class MainActivity extends BaseActivity implements OnClickListener {
      */
     private GoogleApiClient client;
 
+    private RelativeLayout mViewPagerLayout;
+
+    private Handler mHandler;
+
+    private ViewPageAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                //当前无用户接触时，自动播放轮播图
+                if (mViewFlow != null && !mAdapter.isTouched()) {
+                    int targetIndex = mViewFlow.getCurrentItem() + 1;
+                    if (targetIndex >= mAdapter.getCount()) {
+                        targetIndex = 0;
+                    }
+                    mViewFlow.setCurrentItem(targetIndex);
+                }
+                sendMessageDelayed(mHandler.obtainMessage(1), 10000);
+                super.handleMessage(msg);
+            }
+        };
         initView();
         //初始化数据
         initData();
 
-        //大院头条
-        initRollNotice();
+
 
 
         setListener();
@@ -132,6 +156,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                             for (Topics mTopics : mTopicsData) {
                                 titleList.add(mTopics.getTopTitle());
                             }
+                            //大院头条
+                            initRollNotice();
                         }
                     }
                     if (mJson.has("benefit")) {
@@ -143,7 +169,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                                 protected void convert(BaseAdapterHelper helper, Benefits item) {
                                     SimpleDraweeView mSimpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
                                     mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
-                                    AutoUtils.autoSize(helper.getView());
+                                   // AutoUtils.autoSize(helper.getView());
                                 }
                             };
                             mGvGoods.setAdapter(mAdpter);
@@ -209,7 +235,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     }
 
     protected void initView() {
-        mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
+        mViewFlow = (ViewPager) findViewById(R.id.viewflow);
         findViewById(R.id.iv_address).setOnClickListener(this);
         findViewById(R.id.iv_message).setOnClickListener(this);
         findViewById(R.id.search).setOnClickListener(this);
@@ -220,6 +246,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         mGvGoods = (GridView) findViewById(R.id.mGridView);
         mIvTicket = (ImageView) findViewById(R.id.iv_ticket);
         mIvRed = (ImageView) findViewById(R.id.iv_red);
+        mViewPagerLayout = (RelativeLayout) findViewById(R.id.mLayoutViewPage);
         mIvTicket.setOnClickListener(this);
         mIvRed.setOnClickListener(this);
         findViewById(R.id.lee_culture).setOnClickListener(this);
@@ -279,16 +306,47 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     //初始化轮播图
     private void initBanner(ArrayList<AdvView> imageUrlList) {
+        ViewGroup.LayoutParams linearParams = mViewFlow.getLayoutParams();
+        ArrayList<SimpleDraweeView> mSimpleDrawViewList = new ArrayList<>();
+        ArrayList<String> mStringUrlList = new ArrayList<>();
+        for (AdvView mAdvView : imageUrlList){
+            SimpleDraweeView simpleDraweeView = new SimpleDraweeView(MainActivity.this);
+            simpleDraweeView.setLayoutParams(linearParams);
+            mSimpleDrawViewList.add(simpleDraweeView);
+            mStringUrlList.add(mAdvView.getAdvImg());
+        }
 
 
-        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList)
-                .setInfiniteLoop(false));
-        mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
-        // 我的ImageAdapter实际图片张数为3
-        mViewFlow.setFlowIndicator(mFlowIndicator);
-        mViewFlow.setTimeSpan(4500);
-        mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
-        mViewFlow.startAutoFlowTimer(); // 启动自动播放
+        mAdapter = new ViewPageAdapter(mSimpleDrawViewList, mStringUrlList, new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AdvView mAdvView = mAdvViewData.get(mViewFlow.getCurrentItem());
+
+                ProductViewBean mProductViewBean = new ProductViewBean();
+                mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
+                mProductViewBean.setGoodsName(mAdvView.getProName());
+                mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mAdvView.getProId());
+                mProductViewBean.setGoodsSpec(mAdvView.getProSpec());
+                mProductViewBean.setGoodsNum(mAdvView.getProStock()+"");
+                mProductViewBean.setGoodsThumb(mAdvView.getProThumb());
+                mProductViewBean.setGoodsPic(mAdvView.getProImg());
+                mProductViewBean.setGoodsId(mAdvView.getProId());
+                mProductViewBean.setGoodsOtherName(mAdvView.getProSubtitle());
+                String [] pics = mAdvView.getProImg().split(",");
+                ArrayList<String> mlist = new ArrayList<>();
+                for (String s : pics){
+                    mlist.add(s);
+                }
+                mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
+                mProductViewBean.setPicList(mlist);
+
+                Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
+                mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
+                startActivity(mIntent);
+            }
+        });
+        mViewFlow.setAdapter(mAdapter);
+        initPointIndex(mViewPagerLayout,mStringUrlList,mViewFlow);
     }
 
 
@@ -390,7 +448,73 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     @Override
     protected void onRestart() {
-        initData();
+        //initData();
         super.onRestart();
     }
+
+    @Override
+    protected void onResume() {
+        mHandler.removeMessages(1);
+        mHandler.sendEmptyMessageDelayed(1,10000);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mHandler.removeMessages(1);
+        super.onPause();
+    }
+
+    /**
+     * 初始化下标，并设置下标变化回调
+     *
+     * @param view      当前全局view
+     * @param imageurls 图片地址连接集合
+     * @param viewPager 轮播元素
+     */
+    private void initPointIndex(View view, List<String> imageurls, ViewPager viewPager) {
+        final LinearLayout indexParent = (LinearLayout) view.findViewById(R.id.indexpoint_parent);
+        for (int i = 0; i < imageurls.size(); i++) {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            if(i != imageurls.size()-1)
+                layoutParams.setMargins(0, 0, 18, 0);
+            SimpleDraweeView imageView = new SimpleDraweeView(this);
+            if (i == 0)
+                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_select);
+            else
+                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
+            indexParent.addView(imageView, layoutParams);
+        }
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            //上一个选择的元素
+            private SimpleDraweeView imageView;
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (imageView != null)//重置上一个元素，为灰色
+                    imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
+                if (imageView == null) {//如果刚展示的时候，将第一个元素换成未选择
+                    SimpleDraweeView firtInitImageView = (SimpleDraweeView) indexParent.getChildAt(0);
+                    firtInitImageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
+                }
+                //获取当前选择的元素，然后将其换成已选择
+                imageView = (SimpleDraweeView) indexParent.getChildAt(position);
+                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_select);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
 }

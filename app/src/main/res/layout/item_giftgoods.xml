@@ -9,8 +9,8 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/itemImage"
-        android:layout_width="305px"
-        android:layout_height="273px"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
         fresco:roundedCornerRadius="20px"
         fresco:roundingBorderWidth="1px"
         fresco:roundingBorderColor="#cccccc"

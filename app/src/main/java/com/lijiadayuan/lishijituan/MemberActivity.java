@@ -382,7 +382,6 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
 
                         }
                     });
-                    Verification();
                     Intent inten = new Intent(this, ProductBaseActivity.class);
                     if (goodsPageValue == KeyConstants.IntentPageValues.forResult) {
                         inten.putExtra(KeyConstants.UserInfoKey.userIfLee, true);

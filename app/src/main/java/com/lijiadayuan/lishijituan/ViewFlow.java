@@ -416,7 +416,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 			snapToDestination();
 			mTouchState = TOUCH_STATE_REST;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
