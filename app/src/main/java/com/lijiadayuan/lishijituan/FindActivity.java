@@ -79,7 +79,7 @@ public class FindActivity extends BaseActivity implements View.OnClickListener{
                         protected void convert(BaseAdapterHelper helper, Product item) {
                            SimpleDraweeView msp = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
                             msp.setImageURI(Uri.parse(item.getProThumb()));
-                            AutoUtils.autoSize(helper.getView());
+//                            AutoUtils.autoSize(helper.getView());
                         }
                     };
                     gridView.setAdapter(mAdpter);
