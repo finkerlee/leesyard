@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lijiadayuan.lishijituan.MemberActivity">
@@ -113,21 +114,34 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_id"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:id="@+id/linearLayout10">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_photos_correct"
-            android:layout_width="360px"
-            android:layout_height="360px"
-            android:src="@drawable/correct_side"
-            android:layout_weight="1"/>
+            android:layout_width="109dp"
+            android:layout_height="109dp"
+            fresco:roundedCornerRadius="20px"
+            fresco:roundingBorderWidth="1px"
+            fresco:roundingBorderColor="#cccccc"
+            fresco:actualImageScaleType="fitCenter"
+            android:background="@drawable/correct_side"
 
-        <ImageView
+            />
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            />
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_photos_opposite"
-            android:layout_width="360px"
-            android:layout_height="360px"
-            android:src="@drawable/opposite_side"
-            android:layout_weight="1"/>
+            android:layout_width="109dp"
+            android:layout_height="109dp"
+            android:background="@drawable/correct_side"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:roundedCornerRadius="20px"
+            fresco:roundingBorderWidth="1px"
+            fresco:roundingBorderColor="#999999"
+            />
     </LinearLayout>
     <Button
         android:id="@+id/btn_verification"
