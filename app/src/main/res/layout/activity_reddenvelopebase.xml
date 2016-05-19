@@ -92,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="红包的名称 : "
                 android:textSize="14sp"
+                android:textColor="@color/app_text_heigh_color"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="28dp"
                 android:id="@+id/textView15" />
@@ -99,6 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/app_text_heigh_color"
                 android:text="李姓宝宝满百天红包"
                 android:textSize="14sp"
                 android:layout_marginTop="15dp"
@@ -117,6 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="红包金额 : "
+                android:textColor="@color/app_text_center_color"
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="28dp"
@@ -143,6 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="红包剩余 : "
+            android:textColor="@color/app_text_center_color"
             android:textSize="12sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="28dp"
@@ -169,6 +173,7 @@
                 android:layout_height="wrap_content"
                 android:text="红包介绍 : "
                 android:textSize="12sp"
+                android:textColor="@color/app_text_center_color"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="28dp"
                 android:id="@+id/textView18" />
@@ -185,6 +190,7 @@
                 android:layout_height="wrap_content"
                 android:text="           阿打算打算打算打打打算的撒打算公司公司的不是告诉大哥是大概都干啥"
                 android:textSize="12sp"
+                android:textColor="@color/app_text_shallow_color"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="31dp"
                 android:layout_marginLeft="28dp"
@@ -215,12 +221,23 @@
             android:layout_marginTop="5dp"
             android:background="@color/main_tab_bar_bg">
 
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/icon_question"
+                />
+
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="3dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/app_text_heigh_color"
+
                 android:background="@color/main_tab_bar_bg"
                 android:text="领取说明"/>
 
@@ -242,6 +259,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/app_text_center_color"
                 android:textSize="12sp"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="5dp"
@@ -253,6 +271,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:layout_marginLeft="28dp"
+                android:textColor="@color/app_text_center_color"
                 android:layout_marginTop="5dp"
                 android:id="@+id/res_get_conditions2"
                 android:text="1.asdsadasd"/>
@@ -262,6 +281,7 @@
                 android:textSize="12sp"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="5dp"
+                android:textColor="@color/app_text_center_color"
                 android:id="@+id/res_get_conditions3"
                 android:text="1.asdsadasd"/>
 
@@ -271,6 +291,7 @@
                 android:textSize="12sp"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="5dp"
+                android:textColor="@color/app_text_center_color"
                 android:id="@+id/res_get_conditions4"
                 android:text="1.asdsadasd"/>
 
@@ -280,6 +301,7 @@
                 android:textSize="12sp"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="5dp"
+                android:textColor="@color/app_text_center_color"
                 android:id="@+id/res_get_conditions5"
                 android:text="1.asdsadasd"/>
 
@@ -288,6 +310,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:layout_marginLeft="28dp"
+                android:textColor="@color/app_text_center_color"
                 android:layout_marginTop="5dp"
                 android:id="@+id/res_get_conditions6"
                 android:text="1.asdsadasd"/>
