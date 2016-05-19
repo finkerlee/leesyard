@@ -62,7 +62,6 @@ public class ProductBaseActivity extends BaseActivity implements OnClickListener
     private void initIncrease() {
 
 
-
     }
 
     /**
