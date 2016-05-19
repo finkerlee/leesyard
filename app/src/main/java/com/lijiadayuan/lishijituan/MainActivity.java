@@ -45,13 +45,8 @@ import com.lijiadayuan.lishijituan.bean.Topics;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
-import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
-import com.lijiadayuan.lishijituan.view.XCRoundRectImageView;
-import com.zhy.autolayout.utils.AutoUtils;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
