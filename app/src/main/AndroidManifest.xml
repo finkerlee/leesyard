@@ -55,7 +55,7 @@
         <activity android:name=".ForgetpasswordActivtiy" />
         <activity android:name=".ResetpasswordActivity" />
         <activity android:name=".BaseWebActivity" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".HomeActivity" />
         <activity android:name=".MineActivity" />
         <activity android:name=".NewsActivity" />

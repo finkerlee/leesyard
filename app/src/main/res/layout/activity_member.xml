@@ -124,7 +124,7 @@
             fresco:roundedCornerRadius="20px"
             fresco:roundingBorderWidth="1px"
             fresco:roundingBorderColor="#cccccc"
-            fresco:actualImageScaleType="fitCenter"
+            fresco:actualImageScaleType="fitXY"
             android:background="@drawable/correct_side"
 
             />
@@ -137,7 +137,7 @@
             android:layout_width="109dp"
             android:layout_height="109dp"
             android:background="@drawable/correct_side"
-            fresco:actualImageScaleType="centerCrop"
+            fresco:actualImageScaleType="fitXY"
             fresco:roundedCornerRadius="20px"
             fresco:roundingBorderWidth="1px"
             fresco:roundingBorderColor="#999999"

@@ -370,12 +370,14 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
                 if (mGoodsNum < Integer.parseInt(mProductViewBean.getGoodsNum())){
                     mGoodsNum++;
                     mTvBuyGoodsNum.setText(mGoodsNum+"");
+                    mTvBuyGoodsPrice.setText("￥" + Double.parseDouble(mProductViewBean.getGoodsPrice())*mGoodsNum + "");
                 }
                 break;
             case R.id.jian:
                 if (mGoodsNum > 1){
                     mGoodsNum--;
                     mTvBuyGoodsNum.setText(mGoodsNum +"");
+                    mTvBuyGoodsPrice.setText("￥" + Double.parseDouble(mProductViewBean.getGoodsPrice())*mGoodsNum + "");
                 }
                 break;
             case R.id.rl_order_addresslayout:
