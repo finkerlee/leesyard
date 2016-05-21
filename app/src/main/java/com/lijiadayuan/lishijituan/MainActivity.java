@@ -28,6 +28,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -38,6 +40,7 @@ import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.ImagePagerAdapter;
 import com.lijiadayuan.lishijituan.adapter.ViewPageAdapter;
+import com.lijiadayuan.lishijituan.adapter.ViewPageHolder;
 import com.lijiadayuan.lishijituan.bean.AdvView;
 import com.lijiadayuan.lishijituan.bean.Benefits;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
@@ -49,6 +52,7 @@ import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +62,10 @@ import java.util.TimerTask;
 public class MainActivity extends BaseActivity implements OnClickListener {
 
     //轮播图
-    private ViewPager mViewFlow;
+    private ConvenientBanner mConvenientBanner;
+    //轮播图的集合
+    private List<String> networkImages;
+
     //红点
     private CircleFlowIndicator mFlowIndicator;
     //头条
@@ -97,21 +104,21 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                //当前无用户接触时，自动播放轮播图
-                if (mViewFlow != null && !mAdapter.isTouched()) {
-                    int targetIndex = mViewFlow.getCurrentItem() + 1;
-                    if (targetIndex >= mAdapter.getCount()) {
-                        targetIndex = 0;
-                    }
-                    mViewFlow.setCurrentItem(targetIndex);
-                }
-                sendMessageDelayed(mHandler.obtainMessage(1), 10000);
-                super.handleMessage(msg);
-            }
-        };
+//        mHandler = new Handler(){
+//            @Override
+//            public void handleMessage(Message msg) {
+//                //当前无用户接触时，自动播放轮播图
+//                if (mViewFlow != null && !mAdapter.isTouched()) {
+//                    int targetIndex = mViewFlow.getCurrentItem() + 1;
+//                    if (targetIndex >= mAdapter.getCount()) {
+//                        targetIndex = 0;
+//                    }
+//                    mViewFlow.setCurrentItem(targetIndex);
+//                }
+//                sendMessageDelayed(mHandler.obtainMessage(1), 10000);
+//                super.handleMessage(msg);
+//            }
+//        };
         initView();
         //初始化数据
         initData();
@@ -230,7 +237,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     }
 
     protected void initView() {
-        mViewFlow = (ViewPager) findViewById(R.id.viewflow);
+        mConvenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
         findViewById(R.id.iv_address).setOnClickListener(this);
         findViewById(R.id.iv_message).setOnClickListener(this);
         findViewById(R.id.search).setOnClickListener(this);
@@ -301,47 +308,62 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     //初始化轮播图
     private void initBanner(ArrayList<AdvView> imageUrlList) {
-        ViewGroup.LayoutParams linearParams = mViewFlow.getLayoutParams();
-        ArrayList<SimpleDraweeView> mSimpleDrawViewList = new ArrayList<>();
-        ArrayList<String> mStringUrlList = new ArrayList<>();
+        ArrayList<String> mList = new ArrayList<String>();
         for (AdvView mAdvView : imageUrlList){
-            SimpleDraweeView simpleDraweeView = new SimpleDraweeView(MainActivity.this);
-            simpleDraweeView.setLayoutParams(linearParams);
-            mSimpleDrawViewList.add(simpleDraweeView);
-            mStringUrlList.add(mAdvView.getAdvImg());
+            mList.add(mAdvView.getAdvImg());
         }
-
-
-        mAdapter = new ViewPageAdapter(mSimpleDrawViewList, mStringUrlList, new OnClickListener() {
+        //networkImages= Arrays.asList(images);
+        mConvenientBanner.setPages(new CBViewHolderCreator<ViewPageHolder>() {
             @Override
-            public void onClick(View view) {
-                AdvView mAdvView = mAdvViewData.get(mViewFlow.getCurrentItem());
-
-                ProductViewBean mProductViewBean = new ProductViewBean();
-                mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
-                mProductViewBean.setGoodsName(mAdvView.getProName());
-                mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mAdvView.getProId());
-                mProductViewBean.setGoodsSpec(mAdvView.getProSpec());
-                mProductViewBean.setGoodsNum(mAdvView.getProStock()+"");
-                mProductViewBean.setGoodsThumb(mAdvView.getProThumb());
-                mProductViewBean.setGoodsPic(mAdvView.getProImg());
-                mProductViewBean.setGoodsId(mAdvView.getProId());
-                mProductViewBean.setGoodsOtherName(mAdvView.getProSubtitle());
-                String [] pics = mAdvView.getProImg().split(",");
-                ArrayList<String> mlist = new ArrayList<>();
-                for (String s : pics){
-                    mlist.add(s);
-                }
-                mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
-                mProductViewBean.setPicList(mlist);
-
-                Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
-                mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
-                startActivity(mIntent);
+            public ViewPageHolder createHolder() {
+                return new ViewPageHolder();
             }
-        });
-        mViewFlow.setAdapter(mAdapter);
-        initPointIndex(mViewPagerLayout,mStringUrlList,mViewFlow);
+        },mList)
+        .setPageIndicator(new int[]{R.drawable.carousel_dot_indicator_state_select,R.drawable.carousel_dot_indicator_state_normal});
+//        Class cls = Class.forName("com.ToxicBakery.viewpager.transforms." + DefaultTransformer.class.getSimpleName())
+//        mConvenientBanner.getViewPager().setPageTransformer(true,);
+
+//        ViewGroup.LayoutParams linearParams = mViewFlow.getLayoutParams();
+//        ArrayList<SimpleDraweeView> mSimpleDrawViewList = new ArrayList<>();
+//        ArrayList<String> mStringUrlList = new ArrayList<>();
+//        for (AdvView mAdvView : imageUrlList){
+//            SimpleDraweeView simpleDraweeView = new SimpleDraweeView(MainActivity.this);
+//            simpleDraweeView.setLayoutParams(linearParams);
+//            mSimpleDrawViewList.add(simpleDraweeView);
+//            mStringUrlList.add(mAdvView.getAdvImg());
+//        }
+//
+//
+//        mAdapter = new ViewPageAdapter(mSimpleDrawViewList, mStringUrlList, new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AdvView mAdvView = mAdvViewData.get(mViewFlow.getCurrentItem());
+//
+//                ProductViewBean mProductViewBean = new ProductViewBean();
+//                mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
+//                mProductViewBean.setGoodsName(mAdvView.getProName());
+//                mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mAdvView.getProId());
+//                mProductViewBean.setGoodsSpec(mAdvView.getProSpec());
+//                mProductViewBean.setGoodsNum(mAdvView.getProStock()+"");
+//                mProductViewBean.setGoodsThumb(mAdvView.getProThumb());
+//                mProductViewBean.setGoodsPic(mAdvView.getProImg());
+//                mProductViewBean.setGoodsId(mAdvView.getProId());
+//                mProductViewBean.setGoodsOtherName(mAdvView.getProSubtitle());
+//                String [] pics = mAdvView.getProImg().split(",");
+//                ArrayList<String> mlist = new ArrayList<>();
+//                for (String s : pics){
+//                    mlist.add(s);
+//                }
+//                mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
+//                mProductViewBean.setPicList(mlist);
+//
+//                Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
+//                mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
+//                startActivity(mIntent);
+//            }
+//        });
+//        mViewFlow.setAdapter(mAdapter);
+//        initPointIndex(mViewPagerLayout,mStringUrlList,mViewFlow);
     }
 
 
@@ -444,19 +466,25 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onRestart() {
         //initData();
+
         super.onRestart();
+
     }
 
     @Override
     protected void onResume() {
-        mHandler.removeMessages(1);
-        mHandler.sendEmptyMessageDelayed(1,10000);
+//        mHandler.removeMessages(1);
+//        mHandler.sendEmptyMessageDelayed(1,10000);
+        //开始自动翻页
+        mConvenientBanner.startTurning(5000);
+
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        mHandler.removeMessages(1);
+        //停止翻页
+        mConvenientBanner.stopTurning();
         super.onPause();
     }
 

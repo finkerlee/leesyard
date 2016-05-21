@@ -4,41 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonObject;
-import com.joanzapata.android.BaseAdapterHelper;
-import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.FindAdpter;
-import com.lijiadayuan.lishijituan.adapter.PictureAdapter;
-import com.lijiadayuan.lishijituan.adapter.PictureAdpter1;
-import com.lijiadayuan.lishijituan.bean.Addresses;
+import com.lijiadayuan.lishijituan.adapter.FindSpacesItemDecoration;
 import com.lijiadayuan.lishijituan.bean.Product;
-import com.lijiadayuan.lishijituan.bean.ProductViewBean;
-import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
-import com.lijiadayuan.lishijituan.utils.KeyConstants;
-import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
-import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +29,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class FindActivity extends BaseActivity implements View.OnClickListener{
-    private GridView gridView;//image
+    private RecyclerView mRecyclerView;//image
     private TextView tvTitle;
     private List<Product> mList;
     private AddressDialog dialog;
@@ -54,12 +37,22 @@ public class FindActivity extends BaseActivity implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
-        gridView = (GridView) findViewById(R.id.gridView);
+        initView();
+        initData();
+    }
+
+    /**
+     * 初始化view
+     */
+    private void initView() {
         tvTitle = (TextView) findViewById(R.id.tv_title);
         findViewById(R.id.iv_address).setOnClickListener(this);
         findViewById(R.id.iv_messsage).setOnClickListener(this);
         tvTitle.setText("发现");
-        initData();
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+
     }
 
     //加载数据
@@ -74,24 +67,32 @@ public class FindActivity extends BaseActivity implements View.OnClickListener{
                 if (JsonParseUtil.isSuccess(mJsonObject)){
                     mList =  JsonParseUtil.toListByJson(mJsonObject.get("response_data")
                             .getAsJsonArray(),Product.class);
-                    QuickAdapter<Product> mAdpter = new QuickAdapter<Product>(FindActivity.this,R.layout.image,mList) {
-                        @Override
-                        protected void convert(BaseAdapterHelper helper, Product item) {
-                           SimpleDraweeView msp = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
-                            msp.setImageURI(Uri.parse(item.getProThumb()));
-//                            AutoUtils.autoSize(helper.getView());
-                        }
-                    };
-                    gridView.setAdapter(mAdpter);
-                    gridView.setOnItemClickListener(new OnItemClickListener() {
-                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                            Intent mIntent = new Intent(FindActivity.this,ProductBaseActivity.class);
-                            ProductViewBean mProductViewBean = ProductViewBean.getProductViewBean(mList.get(position), ProductBaseActivity.BUY_GOODS);
-                            Log.i("main",mProductViewBean.getGoodsType()+"");
-                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
-                            startActivity(mIntent);
-                        }
-                    });
+
+                    FindAdpter mAdpter = new FindAdpter(FindActivity.this,mList);
+                    mRecyclerView.setAdapter(mAdpter);
+
+                    //设置间距
+                    FindSpacesItemDecoration decoration=new FindSpacesItemDecoration(16);
+                    mRecyclerView.addItemDecoration(decoration);
+//                    QuickAdapter<Product> mAdpter = new QuickAdapter<Product>(FindActivity.this,R.layout.image,mList) {
+//                        @Override
+//                        protected void convert(BaseAdapterHelper helper, Product item) {
+//                           SimpleDraweeView msp = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
+//                            msp.setImageURI(Uri.parse(item.getProThumb()));
+////                            AutoUtils.autoSize(helper.getView());
+//                        }
+//                    };
+//
+//                    gridView.setAdapter(mAdpter);
+//                    gridView.setOnItemClickListener(new OnItemClickListener() {
+//                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+//                            Intent mIntent = new Intent(FindActivity.this,ProductBaseActivity.class);
+//                            ProductViewBean mProductViewBean = ProductViewBean.getProductViewBean(mList.get(position), ProductBaseActivity.BUY_GOODS);
+//                            Log.i("main",mProductViewBean.getGoodsType()+"");
+//                            mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType, mProductViewBean);
+//                            startActivity(mIntent);
+//                        }
+//                    });
                 }
             }
         },new Response.ErrorListener(){

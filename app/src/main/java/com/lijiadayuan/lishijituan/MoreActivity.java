@@ -30,7 +30,6 @@ import com.lijiadayuan.lishijituan.bean.WelfareGoodsBean;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.JsonParseUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
-import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -66,7 +65,7 @@ public class MoreActivity extends BaseActivity {
                         protected void convert(BaseAdapterHelper helper, WelfareGoodsBean item) {
                             SimpleDraweeView mPic = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage1);
                             mPic.setImageURI(Uri.parse(item.getBenThumb()));
-                            AutoUtils.autoSize(helper.getView());
+                            //AutoUtils.autoSize(helper.getView());
                         }
                     };
                     gridView.setAdapter(mAdpter);

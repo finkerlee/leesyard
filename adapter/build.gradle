@@ -4,7 +4,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //facebook图片内存管理
     compile 'com.facebook.fresco:fresco:0.5.2'
-    compile project(':autolayout')
+    //compile project(':autolayout')
 }
 
 android {

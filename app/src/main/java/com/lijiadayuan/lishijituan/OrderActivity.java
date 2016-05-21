@@ -127,6 +127,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener{
             public void handleMessage(Message msg) {
                 String data = msg.obj.toString();
                 Log.i("main",data);
+                Intent intnt = new Intent();
             }
         };
         mProductViewBean = getIntent().getParcelableExtra(KeyConstants.IntentPageValues.productViewBeanType);
