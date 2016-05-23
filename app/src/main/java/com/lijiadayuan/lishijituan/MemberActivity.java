@@ -213,6 +213,7 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                                 outputStream = new FileOutputStream(file);
                                 //将bitmap写入file
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+
                                 System.out.println("file size:" + file.length());
                         /* 到这里已经成功将bitmap写入file了，此时可以将file或者流发送给服务器了 */
                             } catch (Exception e) {
@@ -260,13 +261,11 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                         if (1 == photoFlag) {
                             file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
                             bitmap = getCompressBitmap(mSaveDir + mFileName);
-                            //mBitmapList.set(0,bitmap);
                             mBitmapList[0] = bitmap;
-                            mShowIV.setImageBitmap(bitmap);
                             try {
                                 outputStream = new FileOutputStream(file);
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                                System.out.println("file size:" + file.length());
+                                mShowIV.setImageURI(Uri.parse("file://com.lijiadayuan.lishijituan/" + file.getAbsolutePath()));
                         /* 到这里已经成功将bitmap写入file了，此时可以将file或者流发送给服务器了 */
                                 break;
                             } catch (FileNotFoundException e) {
@@ -275,14 +274,12 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                         } else if (2 == photoFlag) {
                             file = new File(mSaveDir + mFileName);//拍照前指定的输出路径
                             bitmap = getCompressBitmap(mSaveDir + mFileName);
-                            //mBitmapList.set(0,bitmap);
                             mBitmapList[1] = bitmap;
-                            mshowIV2.setImageBitmap(bitmap);
                             try {
                                 outputStream = new FileOutputStream(file);
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                                System.out.println("file size:" + file.length());
-                        /* 到这里已经成功将bitmap写入file了，此时可以将file或者流发送给服务器了 */
+                                mshowIV2.setImageURI(Uri.parse("file://com.lijiadayuan.lishijituan/" + file.getAbsolutePath()));
+                            /* 到这里已经成功将bitmap写入file了，此时可以将file或者流发送给服务器了 */
                                 break;
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();

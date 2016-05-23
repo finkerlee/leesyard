@@ -5,11 +5,13 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.baidu.mapapi.SDKInitializer;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.lijiadayuan.lishijituan.utils.DPIUtil;
 import com.lijiadayuan.lishijituan.utils.LocationService;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
 
@@ -34,6 +36,8 @@ public class LeeApplication extends Application {
     public static String newMessagePath = "";
     public static String myMessagePath = "";
     public static String searchPath = "";
+
+    public static LeeApplication mLeeApplication = null;
 
     @Override
     public void onCreate() {
@@ -86,9 +90,11 @@ public class LeeApplication extends Application {
         Intent intent=new Intent(this,LeeService.class);
         startService(intent);
 
-
+        //获取当前屏幕的高度和宽度
+        DPIUtil.setWidth(((WindowManager)this).getDefaultDisplay().getWidth());
+        DPIUtil.setHeight(((WindowManager)this).getDefaultDisplay().getHeight());
+        DPIUtil.setmDensity(getResources().getDisplayMetrics().density);
     }
-
 
     /**
      * 获取http请求队列
@@ -97,4 +103,6 @@ public class LeeApplication extends Application {
     public RequestQueue getRequestQueue(){
         return requestQueue;
     }
+
+
 }

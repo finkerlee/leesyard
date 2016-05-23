@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除"
+        android:layout_alignParentRight="true"
+        />
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/iv_photos"
         android:layout_width="327px"
@@ -13,4 +20,4 @@
         fresco:roundingBorderWidth="1px"
         fresco:roundingBorderColor="#cccccc"
         />
-</LinearLayout>
+</RelativeLayout>

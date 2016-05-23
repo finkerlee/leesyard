@@ -47,4 +47,12 @@
 		<attr name="strokeWidth" format="dimension"/>
 		<attr name="strokeColor" format="color"/>
 	</declare-styleable>
+
+	<declare-styleable name="MyItemView">
+		<attr name="item_title_size" format="dimension"  />
+		<attr name="item_right_icon" format="reference"  />
+		<attr name="item_is_show_more_icon" format="boolean"  />
+		<attr name="item_title_text" format="string"  />
+		<attr name="item_title_color" format="color"  />
+	</declare-styleable>
 </resources>
