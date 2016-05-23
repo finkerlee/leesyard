@@ -94,8 +94,7 @@ public class HomeActivity extends TabActivity {
                 .setContent(i_mine));
 
         mTabHost.setCurrentTabByTag(TAB_MAIN);
-        mTabButtonGroup
-                .setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        mTabButtonGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch (checkedId) {
                             case R.id.home_tabe_main:
@@ -109,12 +108,9 @@ public class HomeActivity extends TabActivity {
                             case R.id.home_tabe_news:
                                 mTabHost.setCurrentTabByTag(TAB_NEWS);
                                 break;
-
                             case R.id.home_tabe_mine:
                                 mTabHost.setCurrentTabByTag(TAB_MINE);
                                 break;
-
-
                             default:
                                 break;
                         }

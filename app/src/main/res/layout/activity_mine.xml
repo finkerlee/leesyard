@@ -1,99 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/parent"
-    tools:context=".MineActivity"
-    >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fadingEdge="none"
-        android:fadingEdgeLength="0dp"
-        android:overScrollMode="never"
-        android:scrollbars="none">
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <RelativeLayout
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="126px"
-        android:layout_marginTop="203px">
+        android:background="#ff3000"
+        android:orientation="vertical">
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="300px"
-            android:layout_height="300px"
-            app:citv_border_width="2dp"
-            app:citv_border_color="#FF000000"
-            android:id="@+id/iv_avatar"
-            app:failureImage="@drawable/user_normol_head_image"
-            fresco:roundAsCircle="true"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <com.facebook.drawee.view.SimpleDraweeView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="50dp"
+                app:citv_border_color="#FF000000"
+                app:citv_border_width="2dp"
+                app:failureImage="@drawable/user_normol_head_image"
+                fresco:roundAsCircle="true" />
+
+
+        </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/layout_user_info"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iv_avatar"
-            android:orientation="vertical"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="40dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="50px"
-                android:id="@+id/iv_name"/>
-                <TextView
-                    android:id="@+id/is_authentication"
-                    android:layout_width="60px"
-                    android:layout_height="30px"
-                    android:layout_marginLeft="8px"
-                    android:textSize="24px"
-                    android:gravity="center"
-                    android:text="认证"
-                    android:background="@drawable/rounded_edittext_red"
-                    android:textColor="#ea5959"
-                    android:layout_toRightOf="@id/iv_name"
-                    android:layout_alignBottom="@id/iv_name"
-                     />
-            </RelativeLayout>
+            android:layout_below="@+id/iv_avatar"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="-10dp"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9px"
-                android:orientation="horizontal"
-                >
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:background="@drawable/rounded_button_color"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ea5959"
-                    android:text="用户等级LV."
-                    />
+                    android:layout_gravity="center_horizontal"
+                    android:text="等级"
+                    android:textColor="#ea5959" />
+
                 <TextView
                     android:id="@+id/tv_user_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ea5959"
-                    android:text="13"/>
+                    android:text="4V"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="#ea5959" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/iv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="3dp"
+                android:text="爱叹气的猫"
+                android:textSize="50px" />
+
         </LinearLayout>
-    </RelativeLayout>
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="600px"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3px"
-            android:background="#b4b4b4"/>
+            android:background="#b4b4b4" />
+
         <RelativeLayout
             android:id="@+id/myorder"
             android:layout_width="match_parent"
@@ -102,265 +99,227 @@
             android:layout_marginRight="66px">
 
             <ImageView
+                android:id="@+id/iv_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/iv_order"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/iv_order"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/iv_order" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35px"
-                android:text="我的订单"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="26px"
                 android:layout_toRightOf="@id/iv_order"
-                android:layout_centerVertical="true"/>
+                android:text="我的订单"
+                android:textSize="35px" />
+
             <ImageView
                 android:layout_width="45px"
                 android:layout_height="45px"
-                android:background="@drawable/key"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/key" />
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3px"
-            android:background="#b4b4b4"/>
+            android:background="#b4b4b4" />
+
         <RelativeLayout
             android:id="@+id/iv_mymessage"
             android:layout_width="match_parent"
             android:layout_height="128px"
             android:layout_marginLeft="66px"
             android:layout_marginRight="66px">
+
             <ImageView
+                android:id="@+id/iv_mymine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/mymine"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/iv_mymine"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/mymine" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35px"
-                android:text="我的消息"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_mymine"
-                android:layout_centerVertical="true"/>
+                android:text="我的消息"
+                android:textSize="35px" />
+
             <ImageView
                 android:layout_width="45px"
                 android:layout_height="45px"
-                android:background="@drawable/key"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/key" />
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3px"
-            android:background="#b4b4b4"/>
+            android:background="#b4b4b4" />
+
         <RelativeLayout
             android:id="@+id/iv_welfare"
             android:layout_width="match_parent"
             android:layout_height="128px"
             android:layout_marginLeft="66px"
             android:layout_marginRight="66px">
+
             <ImageView
+                android:id="@+id/iv_mywelfare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/mywelfare"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/iv_mywelfare"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/mywelfare" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35px"
-                android:text="我的福利"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_mywelfare"
-                android:layout_centerVertical="true"/>
+                android:text="我的福利"
+                android:textSize="35px" />
+
             <ImageView
                 android:layout_width="45px"
                 android:layout_height="45px"
-                android:background="@drawable/key"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/key" />
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3px"
-            android:background="#b4b4b4"/>
+            android:background="#b4b4b4" />
+
         <RelativeLayout
             android:id="@+id/iv_member"
             android:layout_width="match_parent"
             android:layout_height="128px"
             android:layout_marginLeft="66px"
             android:layout_marginRight="66px">
+
             <ImageView
+                android:id="@+id/iv_verifiedmember"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/verifiedmember"
-                android:id="@+id/iv_verifiedmember"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/verifiedmember" />
+
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35px"
-                android:text="认证会员"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_verifiedmember"
-                android:layout_centerVertical="true"/>
+                android:text="认证会员"
+                android:textSize="35px" />
+
             <ImageView
                 android:layout_width="45px"
                 android:layout_height="45px"
-                android:background="@drawable/key"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/key" />
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3px"
-            android:background="#b4b4b4"/>
+            android:background="#b4b4b4" />
+
         <RelativeLayout
             android:id="@+id/iv_2D"
             android:layout_width="match_parent"
             android:layout_height="128px"
             android:layout_marginLeft="66px"
             android:layout_marginRight="66px">
+
             <ImageView
+                android:id="@+id/iv_qr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/qr"
-                android:id="@+id/iv_qr"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/qr" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35px"
-                android:text="二维码"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_qr"
-                android:layout_centerVertical="true"/>
+                android:text="二维码"
+                android:textSize="35px" />
+
             <ImageView
                 android:layout_width="45px"
                 android:layout_height="45px"
-                android:background="@drawable/key"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/key" />
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3px"
-            android:background="#b4b4b4"/>
+            android:background="#b4b4b4" />
+
         <RelativeLayout
             android:id="@+id/ship_address"
             android:layout_width="match_parent"
             android:layout_height="128px"
             android:layout_marginLeft="66px"
             android:layout_marginRight="66px">
+
             <ImageView
+                android:id="@+id/iv_shipingaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shipingaddress"
-                android:id="@+id/iv_shipingaddress"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/shipingaddress" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35px"
-                android:text="地址管理"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="26px"
                 android:layout_toRightOf="@+id/iv_shipingaddress"
-                android:layout_centerVertical="true"/>
+                android:text="地址管理"
+                android:textSize="35px" />
+
             <ImageView
                 android:layout_width="45px"
                 android:layout_height="45px"
-                android:background="@drawable/key"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/key" />
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3px"
-            android:background="#b4b4b4"/>
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/iv_us"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="47dp"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:layout_marginRight="20dp">-->
-            <!--<ImageView-->
-                <!--android:layout_width="20dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:background="@drawable/come_join_us"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:id="@+id/iv_come_join_us"-->
-                <!--android:layout_centerVertical="true"/>-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textSize="16dp"-->
-                <!--android:text="加入我们"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_toRightOf="@+id/iv_come_join_us"-->
-                <!--android:layout_centerVertical="true"/>-->
-            <!--<ImageView-->
-                <!--android:layout_width="20dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:background="@drawable/key"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_centerVertical="true"/>-->
+            android:background="#b4b4b4" />
 
-        <!--</RelativeLayout>-->
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:background="#b4b4b4"/>-->
     </LinearLayout>
-</RelativeLayout>
-    </ScrollView>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="center_vertical"
-        >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/iv_setting"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/setting"
-            android:layout_marginLeft="20dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#00b4b4b4"
-            android:layout_alignParentBottom="true"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/message"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/news_gray"
-            android:layout_marginRight="60px" />
-    </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

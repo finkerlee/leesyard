@@ -124,7 +124,6 @@ public class SearchResultActivity extends BaseActivity  implements View.OnClickL
             case R.id.iv_back:
                 finish();
                 break;
-
         }
     }
 }

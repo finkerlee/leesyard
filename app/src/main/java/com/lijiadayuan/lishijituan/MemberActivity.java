@@ -99,7 +99,7 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
             setContentView(R.layout.activity_member);
             //mBitmapList = new ArrayList<>();
             mDialogUtil = new DialogUtil(MemberActivity.this);
-            mSharedPreferences = getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
+            mSharedPreferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
             if (getIntent() != null) {
                 goodsPageValue = getIntent().getStringExtra(KeyConstants.IntentPageKey.GoodsPageType);
             }

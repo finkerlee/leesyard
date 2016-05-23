@@ -58,7 +58,6 @@ public class TicketTicapplyActivity extends BaseActivity implements View.OnClick
     private CircleFlowIndicator mFlowIndicator;
     private ArrayList<String> imageUrlList = new ArrayList<String>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

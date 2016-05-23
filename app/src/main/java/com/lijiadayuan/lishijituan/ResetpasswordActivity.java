@@ -45,6 +45,7 @@ public class ResetpasswordActivity extends BaseActivity implements View.OnClickL
         pass2= (EditText) findViewById(R.id.et_reset_password2);
         btnsure= (Button) findViewById(R.id.btn_sure);
         text_title = (TextView) findViewById(R.id.text_title);
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
     protected void initView(){
         pass1.setOnClickListener(this);
@@ -111,8 +112,9 @@ public class ResetpasswordActivity extends BaseActivity implements View.OnClickL
                 mQueue.add(request);
 
                 break;
+            case R.id.iv_back:
+                finish();
+                break;
         }
-
     }
-
 }
