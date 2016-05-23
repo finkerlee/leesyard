@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,6 +32,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.JsonObject;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
 import com.lijiadayuan.lishijituan.utils.DialogUtil;
@@ -72,11 +76,11 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
         private final int OPEN_CAMERA_FLAG = 1024;//第一张拍照
         private final int TAKING_ALBUM_FLAG = 1025;//第二张相册打开
         private final int TAKING_CAMERA_FLAG = 1026;//第二张拍照
-        private ImageView photos, photos2;
+        private SimpleDraweeView photos, photos2;
         InputMethodManager manager;
         private photoscorrect dialog;
         private static MemberActivity instance;
-        private ImageView mShowIV, mshowIV2;
+        private SimpleDraweeView mShowIV, mshowIV2;
         private String mSaveDir;//拍照存放的文件夹名字
         private String mFileName;//拍照存放的文件的名字
         private String sex = "1";
@@ -115,10 +119,10 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
             tvTitle = (TextView) findViewById(R.id.text_title);
 
             findViewById(R.id.iv_back).setOnClickListener(this);
-            photos = (ImageView) findViewById(R.id.iv_photos_correct);
-            mShowIV = (ImageView) findViewById(R.id.iv_photos_correct);
-            photos2 = (ImageView) findViewById(R.id.iv_photos_opposite);
-            mshowIV2 = (ImageView) findViewById(R.id.iv_photos_opposite);
+            photos = (SimpleDraweeView) findViewById(R.id.iv_photos_correct);
+            mShowIV = (SimpleDraweeView) findViewById(R.id.iv_photos_correct);
+            photos2 = (SimpleDraweeView) findViewById(R.id.iv_photos_opposite);
+            mshowIV2 = (SimpleDraweeView) findViewById(R.id.iv_photos_opposite);
             RadioButton rbMan = (RadioButton) findViewById(R.id.rb_man);
             RadioButton rbWoMan = (RadioButton) findViewById(R.id.rb_woman);
             name = (EditText) findViewById(R.id.et_name);//名字
@@ -191,8 +195,7 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                             String path = cursor.getString(columnIndex);
                             bitmap = getCompressBitmap(path);
                             mBitmapList[0] = bitmap;
-                            //mBitmapList.set(1,bitmap);
-                            mShowIV.setImageBitmap(bitmap);//将选中的图片展示出来
+                            mShowIV.setImageURI(originUri);
                     /* 创建一个新的文件，存放压缩过的bitmap，用于发送给服务器 */
                             String saveDir = Environment.getExternalStorageDirectory() + "/wyk_dir/";
                             File dir = new File(saveDir);
@@ -226,7 +229,7 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                             bitmap = getCompressBitmap(path);
                             //mBitmapList.set(1,bitmap);
                             mBitmapList[1] = bitmap;
-                            mshowIV2.setImageBitmap(bitmap);//将选中的图片展示出来
+                            mshowIV2.setImageURI(originUri);
                     /* 创建一个新的文件，存放压缩过的bitmap，用于发送给服务器 */
                             String saveDir = Environment.getExternalStorageDirectory() + "/wyk_dir/";
                             File dir = new File(saveDir);
@@ -259,7 +262,7 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                             bitmap = getCompressBitmap(mSaveDir + mFileName);
                             //mBitmapList.set(0,bitmap);
                             mBitmapList[0] = bitmap;
-                            mShowIV.setImageBitmap(bitmap);//让拍照的照片显示在控件上
+                            mShowIV.setImageBitmap(bitmap);
                             try {
                                 outputStream = new FileOutputStream(file);
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
@@ -274,7 +277,7 @@ public class MemberActivity extends BaseActivity implements OnClickListener {
                             bitmap = getCompressBitmap(mSaveDir + mFileName);
                             //mBitmapList.set(0,bitmap);
                             mBitmapList[1] = bitmap;
-                            mshowIV2.setImageBitmap(bitmap);//让拍照的照片显示在控件上
+                            mshowIV2.setImageBitmap(bitmap);
                             try {
                                 outputStream = new FileOutputStream(file);
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);

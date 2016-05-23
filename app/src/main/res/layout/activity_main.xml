@@ -18,15 +18,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="528px">
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewflow"
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    android:id="@+id/convenientBanner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
-                    android:clipToPadding="true"
-                    android:layout_alignParentBottom="true"
+                    app:canLoop="true"
                     />
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -185,10 +182,6 @@
                     app:roundedCornerRadius="5dp"
                     app:roundingBorderWidth="1dp"
                     app:roundingBorderColor="#cccccc"/>
-
-                <!--app:roundedCornerRadius="5dp"-->
-                <!--app:roundingBorderWidth="1dp"-->
-                <!--app:roundingBorderColor="#747474"-->
                 <View
                     android:layout_width="20px"
                     android:layout_height="1dp"

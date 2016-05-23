@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.app.Activity;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lijiadayuan.lishijituan.wxapi.WXEntryActivity;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXImageObject;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
@@ -25,7 +27,6 @@ import java.io.ByteArrayOutputStream;
 
 
 public class SettingActivity extends BaseActivity implements OnClickListener {
-    public static final String APP_ID = "wxc4a07077153cb3a2";
     private TextView tvTitle, about, law,wechat,mTvShare;
     private SharedPreferences mSp;
     private IWXAPI weiXinApi;
@@ -36,7 +37,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        weiXinApi = WXAPIFactory.createWXAPI(this, APP_ID);
+        weiXinApi = WXAPIFactory.createWXAPI(this, OrderActivity.APP_ID);
         mSp = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);
         initView();
     }
@@ -90,11 +91,11 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 break;
 
             case R.id.friend:
-                share(SendMessageToWX.Req.WXSceneSession);
+                share2weixin(SendMessageToWX.Req.WXSceneSession);
                 layoutShare.setVisibility(View.GONE);
                 break;
             case R.id.friend_circle:
-                share(SendMessageToWX.Req.WXSceneTimeline);
+                share2weixin(SendMessageToWX.Req.WXSceneTimeline);
                 layoutShare.setVisibility(View.GONE);
                 break;
         }
@@ -105,48 +106,27 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
     }
 
-    private void share(int type){
-//        // 初始化一个WXWebpageObject对象,填写url
-//        WXWebpageObject webpage = new WXWebpageObject();
-//        webpage.webpageUrl = "http://beijinglijiadayuan.com:8080/lees/main/download";
-//
-//        // 用WXWebpageObject对象初始化一个WXMediaMessage对象,填写标题 描述
-//        WXMediaMessage message = new WXMediaMessage(webpage);
-//        message.title = "北京李家大院";
-//        message.description = "欢迎下载北京李家大院APP";
-//        Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-//
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        thumb.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//
-//        message.thumbData = baos.toByteArray();
-//
-//        // 构造一个Req
-//        SendMessageToWX.Req req = new SendMessageToWX.Req();
-//        req.transaction = buildTransaction("webpage");
-//
-//        req.message = message;
-////                req.scene   设置分享到朋友圈还是分享给好友
-//        req.scene = type;
-//        weiXinApi.sendReq(req);
+    private void share2weixin(int flag) {
+        if (!weiXinApi.isWXAppInstalled()) {
+            Toast.makeText(SettingActivity.this, "您还未安装微信客户端",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "http://www.baidu.com";
+        webpage.webpageUrl = "http://baidu.com";
         WXMediaMessage msg = new WXMediaMessage(webpage);
-        msg.title = "WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long";
-        msg.description = "WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description Very Long Very Long Very Long Very Long Very Long Very Long Very Long";
-        Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        thumb.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        msg.thumbData = baos.toByteArray();
-
+        msg.title = "title";
+        msg.description = "能分享么";
+        Bitmap thumb = BitmapFactory.decodeResource(getResources(),
+                R.drawable.ic_launcher);
+        msg.setThumbImage(thumb);
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = buildTransaction("webpage");
+        req.transaction = String.valueOf(System.currentTimeMillis());
         req.message = msg;
-        req.scene = type;
-        //req.openId = getOpenId();
-        weiXinApi.sendReq(req);
-
+        req.scene = flag;
+        Boolean b = weiXinApi.sendReq(req);
+        Log.i("main",b + "分享");
     }
 }

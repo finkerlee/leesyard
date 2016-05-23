@@ -28,6 +28,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -38,6 +41,7 @@ import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
 import com.lijiadayuan.lishijituan.adapter.ImagePagerAdapter;
 import com.lijiadayuan.lishijituan.adapter.ViewPageAdapter;
+import com.lijiadayuan.lishijituan.adapter.ViewPageHolder;
 import com.lijiadayuan.lishijituan.bean.AdvView;
 import com.lijiadayuan.lishijituan.bean.Benefits;
 import com.lijiadayuan.lishijituan.bean.ProductViewBean;
@@ -49,6 +53,7 @@ import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.lijiadayuan.lishijituan.view.AddressDialog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +63,10 @@ import java.util.TimerTask;
 public class MainActivity extends BaseActivity implements OnClickListener {
 
     //轮播图
-    private ViewPager mViewFlow;
+    private ConvenientBanner mConvenientBanner;
+    //轮播图的集合
+    private List<String> networkImages;
+
     //红点
     private CircleFlowIndicator mFlowIndicator;
     //头条
@@ -81,11 +89,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     private List<Benefits> mBenefitsData;
 
     private ProductViewBean mProductViewBean;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     private RelativeLayout mViewPagerLayout;
 
@@ -97,32 +100,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                //当前无用户接触时，自动播放轮播图
-                if (mViewFlow != null && !mAdapter.isTouched()) {
-                    int targetIndex = mViewFlow.getCurrentItem() + 1;
-                    if (targetIndex >= mAdapter.getCount()) {
-                        targetIndex = 0;
-                    }
-                    mViewFlow.setCurrentItem(targetIndex);
-                }
-                sendMessageDelayed(mHandler.obtainMessage(1), 10000);
-                super.handleMessage(msg);
-            }
-        };
+        //初始化view
         initView();
         //初始化数据
         initData();
-
-
-
-
+        //设置监听
         setListener();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
@@ -230,7 +213,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     }
 
     protected void initView() {
-        mViewFlow = (ViewPager) findViewById(R.id.viewflow);
+        mConvenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
         findViewById(R.id.iv_address).setOnClickListener(this);
         findViewById(R.id.iv_message).setOnClickListener(this);
         findViewById(R.id.search).setOnClickListener(this);
@@ -300,22 +283,23 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     }
 
     //初始化轮播图
-    private void initBanner(ArrayList<AdvView> imageUrlList) {
-        ViewGroup.LayoutParams linearParams = mViewFlow.getLayoutParams();
-        ArrayList<SimpleDraweeView> mSimpleDrawViewList = new ArrayList<>();
-        ArrayList<String> mStringUrlList = new ArrayList<>();
+    private void initBanner(final ArrayList<AdvView> imageUrlList) {
+        ArrayList<String> mList = new ArrayList<String>();
         for (AdvView mAdvView : imageUrlList){
-            SimpleDraweeView simpleDraweeView = new SimpleDraweeView(MainActivity.this);
-            simpleDraweeView.setLayoutParams(linearParams);
-            mSimpleDrawViewList.add(simpleDraweeView);
-            mStringUrlList.add(mAdvView.getAdvImg());
+            mList.add(mAdvView.getAdvImg());
         }
-
-
-        mAdapter = new ViewPageAdapter(mSimpleDrawViewList, mStringUrlList, new OnClickListener() {
+        //networkImages= Arrays.asList(images);
+        mConvenientBanner.setPages(new CBViewHolderCreator<ViewPageHolder>() {
             @Override
-            public void onClick(View view) {
-                AdvView mAdvView = mAdvViewData.get(mViewFlow.getCurrentItem());
+            public ViewPageHolder createHolder() {
+                return new ViewPageHolder();
+            }
+        },mList)
+        .setPageIndicator(new int[]{R.drawable.carousel_dot_indicator_state_select,R.drawable.carousel_dot_indicator_state_normal})
+        .setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                AdvView mAdvView = imageUrlList.get(position);
 
                 ProductViewBean mProductViewBean = new ProductViewBean();
                 mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
@@ -340,51 +324,18 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 startActivity(mIntent);
             }
         });
-        mViewFlow.setAdapter(mAdapter);
-        initPointIndex(mViewPagerLayout,mStringUrlList,mViewFlow);
+
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.lijiadayuan.lishijituan/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.lijiadayuan.lishijituan/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.disconnect();
     }
 
     @Override
@@ -444,72 +395,25 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onRestart() {
         //initData();
+
         super.onRestart();
+
     }
 
     @Override
     protected void onResume() {
-        mHandler.removeMessages(1);
-        mHandler.sendEmptyMessageDelayed(1,10000);
+//        mHandler.removeMessages(1);
+//        mHandler.sendEmptyMessageDelayed(1,10000);
+        //开始自动翻页
+        mConvenientBanner.startTurning(5000);
+
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        mHandler.removeMessages(1);
+        //停止翻页
+        mConvenientBanner.stopTurning();
         super.onPause();
     }
-
-    /**
-     * 初始化下标，并设置下标变化回调
-     *
-     * @param view      当前全局view
-     * @param imageurls 图片地址连接集合
-     * @param viewPager 轮播元素
-     */
-    private void initPointIndex(View view, List<String> imageurls, ViewPager viewPager) {
-        final LinearLayout indexParent = (LinearLayout) view.findViewById(R.id.indexpoint_parent);
-        for (int i = 0; i < imageurls.size(); i++) {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            if(i != imageurls.size()-1)
-                layoutParams.setMargins(0, 0, 18, 0);
-            SimpleDraweeView imageView = new SimpleDraweeView(this);
-            if (i == 0)
-                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_select);
-            else
-                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
-            indexParent.addView(imageView, layoutParams);
-        }
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            //上一个选择的元素
-            private SimpleDraweeView imageView;
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (imageView != null)//重置上一个元素，为灰色
-                    imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
-                if (imageView == null) {//如果刚展示的时候，将第一个元素换成未选择
-                    SimpleDraweeView firtInitImageView = (SimpleDraweeView) indexParent.getChildAt(0);
-                    firtInitImageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
-                }
-                //获取当前选择的元素，然后将其换成已选择
-                imageView = (SimpleDraweeView) indexParent.getChildAt(position);
-                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_select);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
 }

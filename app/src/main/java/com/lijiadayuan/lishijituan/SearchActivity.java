@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -30,24 +31,26 @@ public class SearchActivity extends BaseActivity {
     private LocalUtils mLocalUtils;
     private ArrayList<String> mHistoryData;
     private ListView mLvHistory;
+    private Button mBtnClear;
+    private QuickAdapter<String> mAdpter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         mLocalUtils = new LocalUtils(LeeApplication.searchPath);
-        mHistoryData = (ArrayList<String>) mLocalUtils.read();
+        mBtnClear = (Button) findViewById(R.id.clear_history);
         acTextView= (EditText) findViewById(R.id.search_et_input);
         mLvHistory = (ListView) findViewById(R.id.history_list);
-
-        QuickAdapter<String> mAdpter = new QuickAdapter<String>(SearchActivity.this,R.layout.item_search_history,mHistoryData) {
+        mHistoryData = new ArrayList<>();
+        mAdpter = new QuickAdapter<String>(SearchActivity.this,R.layout.item_search_history,mHistoryData) {
             @Override
             protected void convert(BaseAdapterHelper helper, String item) {
                 helper.setText(R.id.tv_search,item);
             }
         };
-
         mLvHistory.setAdapter(mAdpter);
+        upDataList();
         mTvSearch= (TextView)findViewById(R.id.search_btn_back);
         mTvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,5 +77,33 @@ public class SearchActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        mBtnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mLocalUtils.deleteFile();
+                mAdpter.clear();
+                mAdpter.notifyDataSetChanged();
+                mBtnClear.setVisibility(View.GONE);
+            }
+        });
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        upDataList();
+
+    }
+    private void upDataList(){
+        mHistoryData = (ArrayList<String>) mLocalUtils.read();
+        mAdpter.clear();
+        mAdpter.addAll(mHistoryData);
+        if (mHistoryData.size() == 0){
+            mBtnClear.setVisibility(View.GONE);
+        }else {
+            mBtnClear.setVisibility(View.VISIBLE);
+        }
+        mAdpter.notifyDataSetChanged();
     }
 }

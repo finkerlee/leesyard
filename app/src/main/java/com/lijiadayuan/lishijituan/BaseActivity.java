@@ -1,13 +1,11 @@
 package com.lijiadayuan.lishijituan;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
-import com.zhy.autolayout.AutoLayoutActivity;
-
-
-public abstract class BaseActivity extends AutoLayoutActivity {
+public abstract class BaseActivity extends Activity {
 
 	protected LeeApplication app;
 

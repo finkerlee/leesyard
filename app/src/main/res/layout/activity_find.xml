@@ -7,10 +7,18 @@
     <include
         android:id="@+id/include_find"
         layout="@layout/common_bar"/>
-    <include
-        layout="@layout/find_gridview"
-        android:layout_below="@+id/include_find"
+    <!--<include-->
+        <!--layout="@layout/find_gridview"-->
+        <!--android:layout_below="@+id/include_find"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--/>-->
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:id="@+id/rv_list"
+        android:layout_below="@id/include_find"
         />
 </RelativeLayout>
