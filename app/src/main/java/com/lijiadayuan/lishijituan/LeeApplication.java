@@ -89,11 +89,6 @@ public class LeeApplication extends Application {
         //启动一个service去解析本地XML的数据
         Intent intent=new Intent(this,LeeService.class);
         startService(intent);
-
-        //获取当前屏幕的高度和宽度
-        DPIUtil.setWidth(((WindowManager)this).getDefaultDisplay().getWidth());
-        DPIUtil.setHeight(((WindowManager)this).getDefaultDisplay().getHeight());
-        DPIUtil.setmDensity(getResources().getDisplayMetrics().density);
     }
 
     /**

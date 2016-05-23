@@ -89,15 +89,12 @@ public class SearchActivity extends BaseActivity {
             }
         });
     }
-
-
     @Override
     protected void onRestart() {
         super.onRestart();
         upDataList();
 
     }
-
     private void upDataList(){
         mHistoryData = (ArrayList<String>) mLocalUtils.read();
         mAdpter.clear();

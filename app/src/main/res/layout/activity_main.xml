@@ -85,15 +85,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/app_text_heigh_color"
-                />
+                android:background="@color/app_text_heigh_color"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                >
+                android:paddingBottom="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -259,8 +257,8 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="@drawable/search_edittext_shape"
-                >
+                android:background="@drawable/search_edittext_shape">
+
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="45px"
                     android:layout_height="45px"
@@ -275,8 +273,7 @@
                     android:layout_centerHorizontal="true"
                     android:textSize="36px"
                     android:textColor="@color/app_text_heigh_color"
-                    android:textColorHint="@color/app_text_shallow_color"
-                    />
+                    android:textColorHint="@color/app_text_shallow_color"/>
             </RelativeLayout>
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/iv_message"
@@ -290,5 +287,4 @@
                 android:background="@drawable/news" />
 
     </LinearLayout>
-
 </RelativeLayout>

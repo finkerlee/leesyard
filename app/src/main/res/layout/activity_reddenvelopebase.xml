@@ -58,9 +58,6 @@
 
         </LinearLayout>
     <!--</ScrollView>-->
-<include
-    layout="@layout/common_title_no"
-    android:id="@+id/include12" />
 
     <TextView
         android:layout_width="match_parent"
@@ -335,4 +332,8 @@
     </LinearLayout>
 </RelativeLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/include11"
+        layout="@layout/common_title_back" />
 </RelativeLayout>

@@ -129,7 +129,7 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
         res_get_conditions5 = (TextView) findViewById(R.id.res_get_conditions5);
         res_get_conditions6 = (TextView) findViewById(R.id.res_get_conditions6);
 
-
+        findViewById(R.id.iv_back).setOnClickListener(this);
         mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
         mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         bt_reds_receive = (Button)findViewById(R.id.bt_reds_receive);
@@ -207,6 +207,10 @@ public class ReddenvelopebaseActivity extends BaseActivity implements OnClickLis
                     Intent intent = new Intent(this,LoginActivity.class);
                     startActivityForResult(intent,LOGIN);
                 }
+                break;
+
+            case R.id.iv_back:
+                finish();
                 break;
         }
 

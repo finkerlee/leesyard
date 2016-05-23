@@ -99,6 +99,7 @@ public class ForgetpasswordActivtiy extends BaseActivity implements View.OnClick
                                 //TODO 正常
                                 Log.i(TAG, "正常");
                                 runOnUiThread(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         setCountDown();

@@ -123,12 +123,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("main",error.toString());
-
                     }
                 }){
                     /** 在StringRequest的匿名内部类中重写getParams方法,用于传递请求参数 **/
                     @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
+                    protected Map<String,String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("userName", etUsername.getText().toString().trim());
                         params.put("userPassword", etPassword.getText().toString().trim());
