@@ -30,6 +30,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -88,11 +89,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     private List<Benefits> mBenefitsData;
 
     private ProductViewBean mProductViewBean;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     private RelativeLayout mViewPagerLayout;
 
@@ -104,32 +100,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        mHandler = new Handler(){
-//            @Override
-//            public void handleMessage(Message msg) {
-//                //当前无用户接触时，自动播放轮播图
-//                if (mViewFlow != null && !mAdapter.isTouched()) {
-//                    int targetIndex = mViewFlow.getCurrentItem() + 1;
-//                    if (targetIndex >= mAdapter.getCount()) {
-//                        targetIndex = 0;
-//                    }
-//                    mViewFlow.setCurrentItem(targetIndex);
-//                }
-//                sendMessageDelayed(mHandler.obtainMessage(1), 10000);
-//                super.handleMessage(msg);
-//            }
-//        };
+        //初始化view
         initView();
         //初始化数据
         initData();
-
-
-
-
+        //设置监听
         setListener();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
@@ -307,7 +283,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     }
 
     //初始化轮播图
-    private void initBanner(ArrayList<AdvView> imageUrlList) {
+    private void initBanner(final ArrayList<AdvView> imageUrlList) {
         ArrayList<String> mList = new ArrayList<String>();
         for (AdvView mAdvView : imageUrlList){
             mList.add(mAdvView.getAdvImg());
@@ -319,94 +295,47 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 return new ViewPageHolder();
             }
         },mList)
-        .setPageIndicator(new int[]{R.drawable.carousel_dot_indicator_state_select,R.drawable.carousel_dot_indicator_state_normal});
-//        Class cls = Class.forName("com.ToxicBakery.viewpager.transforms." + DefaultTransformer.class.getSimpleName())
-//        mConvenientBanner.getViewPager().setPageTransformer(true,);
+        .setPageIndicator(new int[]{R.drawable.carousel_dot_indicator_state_select,R.drawable.carousel_dot_indicator_state_normal})
+        .setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                AdvView mAdvView = imageUrlList.get(position);
 
-//        ViewGroup.LayoutParams linearParams = mViewFlow.getLayoutParams();
-//        ArrayList<SimpleDraweeView> mSimpleDrawViewList = new ArrayList<>();
-//        ArrayList<String> mStringUrlList = new ArrayList<>();
-//        for (AdvView mAdvView : imageUrlList){
-//            SimpleDraweeView simpleDraweeView = new SimpleDraweeView(MainActivity.this);
-//            simpleDraweeView.setLayoutParams(linearParams);
-//            mSimpleDrawViewList.add(simpleDraweeView);
-//            mStringUrlList.add(mAdvView.getAdvImg());
-//        }
-//
-//
-//        mAdapter = new ViewPageAdapter(mSimpleDrawViewList, mStringUrlList, new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AdvView mAdvView = mAdvViewData.get(mViewFlow.getCurrentItem());
-//
-//                ProductViewBean mProductViewBean = new ProductViewBean();
-//                mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
-//                mProductViewBean.setGoodsName(mAdvView.getProName());
-//                mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mAdvView.getProId());
-//                mProductViewBean.setGoodsSpec(mAdvView.getProSpec());
-//                mProductViewBean.setGoodsNum(mAdvView.getProStock()+"");
-//                mProductViewBean.setGoodsThumb(mAdvView.getProThumb());
-//                mProductViewBean.setGoodsPic(mAdvView.getProImg());
-//                mProductViewBean.setGoodsId(mAdvView.getProId());
-//                mProductViewBean.setGoodsOtherName(mAdvView.getProSubtitle());
-//                String [] pics = mAdvView.getProImg().split(",");
-//                ArrayList<String> mlist = new ArrayList<>();
-//                for (String s : pics){
-//                    mlist.add(s);
-//                }
-//                mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
-//                mProductViewBean.setPicList(mlist);
-//
-//                Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
-//                mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
-//                startActivity(mIntent);
-//            }
-//        });
-//        mViewFlow.setAdapter(mAdapter);
-//        initPointIndex(mViewPagerLayout,mStringUrlList,mViewFlow);
+                ProductViewBean mProductViewBean = new ProductViewBean();
+                mProductViewBean.setGoodsPrice(mAdvView.getProPrice()+"");
+                mProductViewBean.setGoodsName(mAdvView.getProName());
+                mProductViewBean.setGoodsInfoUrl(UrlConstants.FINDSHOPPING_INFO + mAdvView.getProId());
+                mProductViewBean.setGoodsSpec(mAdvView.getProSpec());
+                mProductViewBean.setGoodsNum(mAdvView.getProStock()+"");
+                mProductViewBean.setGoodsThumb(mAdvView.getProThumb());
+                mProductViewBean.setGoodsPic(mAdvView.getProImg());
+                mProductViewBean.setGoodsId(mAdvView.getProId());
+                mProductViewBean.setGoodsOtherName(mAdvView.getProSubtitle());
+                String [] pics = mAdvView.getProImg().split(",");
+                ArrayList<String> mlist = new ArrayList<>();
+                for (String s : pics){
+                    mlist.add(s);
+                }
+                mProductViewBean.setGoodsType(ProductBaseActivity.BUY_GOODS);
+                mProductViewBean.setPicList(mlist);
+
+                Intent mIntent = new Intent(MainActivity.this,ProductBaseActivity.class);
+                mIntent.putExtra(KeyConstants.IntentPageValues.productViewBeanType,mProductViewBean);
+                startActivity(mIntent);
+            }
+        });
+
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.lijiadayuan.lishijituan/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.lijiadayuan.lishijituan/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.disconnect();
     }
 
     @Override
@@ -487,57 +416,4 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         mConvenientBanner.stopTurning();
         super.onPause();
     }
-
-    /**
-     * 初始化下标，并设置下标变化回调
-     *
-     * @param view      当前全局view
-     * @param imageurls 图片地址连接集合
-     * @param viewPager 轮播元素
-     */
-    private void initPointIndex(View view, List<String> imageurls, ViewPager viewPager) {
-        final LinearLayout indexParent = (LinearLayout) view.findViewById(R.id.indexpoint_parent);
-        for (int i = 0; i < imageurls.size(); i++) {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            if(i != imageurls.size()-1)
-                layoutParams.setMargins(0, 0, 18, 0);
-            SimpleDraweeView imageView = new SimpleDraweeView(this);
-            if (i == 0)
-                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_select);
-            else
-                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
-            indexParent.addView(imageView, layoutParams);
-        }
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            //上一个选择的元素
-            private SimpleDraweeView imageView;
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (imageView != null)//重置上一个元素，为灰色
-                    imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
-                if (imageView == null) {//如果刚展示的时候，将第一个元素换成未选择
-                    SimpleDraweeView firtInitImageView = (SimpleDraweeView) indexParent.getChildAt(0);
-                    firtInitImageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_normal);
-                }
-                //获取当前选择的元素，然后将其换成已选择
-                imageView = (SimpleDraweeView) indexParent.getChildAt(position);
-                imageView.setBackgroundResource(R.drawable.carousel_dot_indicator_state_select);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
 }
