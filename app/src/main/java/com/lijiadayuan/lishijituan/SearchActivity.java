@@ -65,8 +65,7 @@ public class SearchActivity extends BaseActivity {
                 startActivity(intent);
                 mHistoryData.add(acTextView.getText().toString());
                 mLocalUtils.put(mHistoryData);
-
-            }
+                }
         });
 
         mLvHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {

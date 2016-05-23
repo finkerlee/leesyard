@@ -48,7 +48,7 @@
                 android:paddingRight="6dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:background="@drawable/rounded_button_color"
+                android:background="@drawable/login_color"
                 android:orientation="horizontal">
 
                 <TextView

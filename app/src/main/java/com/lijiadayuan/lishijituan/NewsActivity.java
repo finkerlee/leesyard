@@ -74,7 +74,6 @@ public class NewsActivity extends BaseActivity implements View.OnClickListener{
                 }
             });
     }
-
     }
     /**
      * 初始化控件
