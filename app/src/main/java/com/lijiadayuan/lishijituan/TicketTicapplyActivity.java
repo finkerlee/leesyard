@@ -210,10 +210,15 @@ public class TicketTicapplyActivity extends BaseActivity implements View.OnClick
                         }
 
                     }else{
+                        //TODO 到时候删除
+                        Intent intent = new Intent(TicketTicapplyActivity.this,ApplyTicketActivity.class);
+                        intent.putExtra(KeyConstants.IntentPageValues.Tickets,mTickets);
+                        startActivity(intent);
+                        finish();
                         //跳往李姓验证页面
-                        Intent intent = new Intent(this,MemberActivity.class);
-                        intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
-                        startActivityForResult(intent,RENZHENG);
+//                        Intent intent = new Intent(this,MemberActivity.class);
+//                        intent.putExtra(KeyConstants.IntentPageKey.GoodsPageType,KeyConstants.IntentPageValues.forResult);
+//                        startActivityForResult(intent,RENZHENG);
                     }
 
                 }else{

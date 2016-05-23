@@ -1,11 +1,14 @@
 package com.lijiadayuan.lishijituan;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.WindowManager;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +20,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.lijiadayuan.lishijituan.bean.Users;
 import com.lijiadayuan.lishijituan.http.UrlConstants;
+import com.lijiadayuan.lishijituan.utils.DPIUtil;
 import com.lijiadayuan.lishijituan.utils.KeyConstants;
 import com.lijiadayuan.lishijituan.utils.UsersUtil;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -55,6 +59,13 @@ public class LauncherActivity extends BaseActivity{
                 finish();
             }
         }, 3000); //2900 for release
+
+        //获取当前屏幕的高度和宽度
+        WindowManager wm = (WindowManager) this
+                .getSystemService(Context.WINDOW_SERVICE);
+        DPIUtil.setWidth(wm.getDefaultDisplay().getWidth());
+        DPIUtil.setHeight(wm.getDefaultDisplay().getWidth());
+        DPIUtil.setmDensity(getResources().getDisplayMetrics().density);
 
         if (mSharedPreferences.getBoolean(KeyConstants.UserInfoKey.userIsLogin, false)){
             // 创建请求队列

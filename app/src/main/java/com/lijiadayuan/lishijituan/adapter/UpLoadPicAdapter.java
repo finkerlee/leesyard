@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.lijiadayuan.lishijituan.R;
@@ -52,20 +53,29 @@ public class UpLoadPicAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHodler holder = null;
         if (view == null){
             holder = new ViewHodler();
             view = View.inflate(mContext,R.layout.item_up_load_pic,null);
             holder.mImageView = (SimpleDraweeView) view.findViewById(R.id.iv_photos);
+            holder.mTvDelete = (TextView) view.findViewById(R.id.delete);
             view.setTag(holder);
         }else{
             holder = (ViewHodler) view.getTag();
         }
         holder.mImageView.setImageBitmap(mData.get(i));
+        holder.mTvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mData.remove(i);
+                UpDataView(mData);
+            }
+        });
         return view;
     }
     class ViewHodler{
         SimpleDraweeView mImageView;
+        TextView mTvDelete;
     }
 }

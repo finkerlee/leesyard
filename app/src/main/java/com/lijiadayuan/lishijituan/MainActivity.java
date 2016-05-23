@@ -64,11 +64,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     //轮播图
     private ConvenientBanner mConvenientBanner;
-    //轮播图的集合
-    private List<String> networkImages;
-
-    //红点
-    private CircleFlowIndicator mFlowIndicator;
     //头条
     private ViewFlipper notice_vf;
     //李氏福利社商品
@@ -89,12 +84,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     private List<Benefits> mBenefitsData;
 
     private ProductViewBean mProductViewBean;
-
-    private RelativeLayout mViewPagerLayout;
-
-    private Handler mHandler;
-
-    private ViewPageAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +136,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                                 protected void convert(BaseAdapterHelper helper, Benefits item) {
                                     SimpleDraweeView mSimpleDraweeView = (SimpleDraweeView) helper.getView().findViewById(R.id.itemImage);
                                     mSimpleDraweeView.setImageURI(Uri.parse(item.getBenThumb()));
-                                   // AutoUtils.autoSize(helper.getView());
                                 }
                             };
                             mGvGoods.setAdapter(mAdpter);
@@ -218,13 +206,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         findViewById(R.id.iv_message).setOnClickListener(this);
         findViewById(R.id.search).setOnClickListener(this);
         findViewById(R.id.iv_message).setOnClickListener(this);
-        mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
         notice_vf = (ViewFlipper) findViewById(R.id.homepage_notice_vf);
         findViewById(R.id.iv_more).setOnClickListener(this);
         mGvGoods = (GridView) findViewById(R.id.mGridView);
         mIvTicket = (ImageView) findViewById(R.id.iv_ticket);
         mIvRed = (ImageView) findViewById(R.id.iv_red);
-        mViewPagerLayout = (RelativeLayout) findViewById(R.id.mLayoutViewPage);
         mIvTicket.setOnClickListener(this);
         mIvRed.setOnClickListener(this);
         findViewById(R.id.lee_culture).setOnClickListener(this);
@@ -402,8 +388,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     @Override
     protected void onResume() {
-//        mHandler.removeMessages(1);
-//        mHandler.sendEmptyMessageDelayed(1,10000);
         //开始自动翻页
         mConvenientBanner.startTurning(5000);
 
